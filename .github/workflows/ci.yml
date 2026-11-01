@@ -50,19 +50,23 @@ jobs:
       run: |
         python mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
 
-    - name: Verify Carbon Spar Structural FEA (+3.5g Ultimate Load)
+    - name: Verify Carbon Spar Structural FEA (+3.5g Ultimate Load) & Flutter
       run: |
         python mekanik_ve_yapisal/scripts/spar_stress_fea.py
+        python mekanik_ve_yapisal/scripts/flutter_and_divergence_analyzer.py
 
-    - name: Run BEMT Propeller & Thermal Simulations
+    - name: Run BEMT Propeller, Thermal & Dual-RC Battery SOH Simulations
       run: |
         python itki_ve_guc_sistemleri/scripts/bemt_propeller_optimizer.py
         python itki_ve_guc_sistemleri/scripts/motor_thermal_simulator.py
+        python itki_ve_guc_sistemleri/scripts/battery_soh_estimator.py
 
     - name: Verify CNC Laser Cut DXF Generation
       run: |
         python uretim_ve_test/scripts/generate_wing_rib_dxf.py
 
-    - name: Run Mission 3 Flight Dynamics & Adaptive PID Simulation
+    - name: Run Full 6-DOF Nonlinear Dynamics & L1 Guidance
       run: |
+        python simulasyon/scripts/six_dof_flight_dynamics.py
+        python aviyonik_ve_otonom/src/ucus_kontrol/src/l1_path_follower.py
         python simulasyon/scripts/simulate_flight_test.py

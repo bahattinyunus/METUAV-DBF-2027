@@ -207,11 +207,11 @@ METUAV-DBF-2027/
 │   ├── scripts/                # 3D kanat dönüşümü, L/D ve TOGW analiz araçları
 │   └── CFD_ANALYSIS_REPORT.md  # Kapsamlı AIAA DBF formatında aerodinamik rapor
 ├── 📁 mekanik_ve_yapisal/       # SolidWorks CAD dataları, kompozit katman analizleri (FEA)
-│   ├── scripts/                # Kütle/CG bütçesi ve karbon spar gerilme hesaplayıcı
+│   ├── scripts/                # Kütle/CG bütçesi, karbon spar gerilme ve aeroelastik flutter/diverjans analiz aracı
 │   ├── ASSEMBLY_5MIN_GUIDE.md  # 5 Dakika montaj ve hızlı kilit yönergesi
 │   └── cad_specifications.md   # Malzeme, bağlantı ve CAD standartları
 ├── 📁 itki_ve_guc_sistemleri/   # Elektrik itki motoru, pervane ve batarya analizleri
-│   ├── scripts/                # BEMT pervane optimizasyonu ve motor/batarya termal simülatörü
+│   ├── scripts/                # BEMT pervane optimizasyonu, motor termal ve Dual-RC Thevenin batarya SOH modeli
 │   └── propulsion_trade_study.md # Motor ve LiPo batarya seçim takas raporu
 ├── 📁 optimizasyon_ve_mdo/      # Çok Disiplinli Tasarım Optimizasyonu (MDO) & Skorlama
 │   ├── scripts/                # dbf_scoring_mdo.py (Duyarlılık & Monte Carlo simülasyonu)
@@ -219,20 +219,20 @@ METUAV-DBF-2027/
 ├── 📁 aviyonik_ve_otonom/       # Ana ROS2 & PX4 Otonom Uçuş Yazılımı ve SITL Prototipi
 │   ├── scripts/                # full_mission_sitl_runner.py (Uçtan uca tam otonom görev uçuş simülatörü)
 │   ├── src/
-│   │   ├── ucus_kontrol/       # C++20 Adaptif TECS, Adaptif PID, Genişletilmiş Kalman (EKF), Enerji Yöneticisi
+│   │   ├── ucus_kontrol/       # C++20 Adaptif TECS, L1 Path Follower, Adaptif PID, 15-Durumlu EKF, Enerji Yöneticisi
 │   │   │   ├── include/ucus_kontrol/ # adaptive_tecs.hpp, adaptive_pid_controller.hpp, vb.
-│   │   │   └── src/            # adaptive_tecs.cpp, adaptive_pid_controller.cpp, vb.
+│   │   │   └── src/            # adaptive_tecs.cpp, l1_path_follower.py, adaptive_pid_controller.cpp, vb.
 │   │   ├── edge_ai_vision/     # Hedef tespiti, Kalman hedef takip filtresi ve sentetik vizyon akışlayıcı
 │   │   │   └── edge_ai_vision/ # target_detector_node.py, target_tracker_filter.py, synthetic_camera_streamer.py
 │   │   └── telemetri/          # MAVLink köprüsü, Micro-XRCE-DDS / PX4 uORB köprüsü ve Modern Web GCS
 │   │       ├── telemetri/      # micro_xrce_bridge.py, mavlink_bridge_node.py, gcs_server.py
 │   │       └── telemetri/web_gcs/ # index.html (HTML5 Canvas PFD, Radar Haritası ve Göstergeler)
 │   └── setup_workspace.sh      # ROS2 çalışma alanı otomatik kurulum betiği
-├── 📁 simulasyon/               # Gazebo ve PX4 SITL test senaryoları, dünya (world) modelleri
+├── 📁 simulasyon/               # Gazebo, PX4 SITL ve 6-DOF Uçuş Dinamiği Simülasyonu
 │   ├── models/dbf_aircraft/    # Ayrılabilir faydalı yüke sahip DBF uçak modeli (.sdf)
 │   ├── worlds/dbf_airfield.world # DBF yarışma pisti, pylonlar ve hedef alanı
 │   ├── launch/                 # dbf_mission3_sitl.launch.py
-│   └── scripts/                # simulate_flight_test.py (3-DOF uçuş doğrulama)
+│   └── scripts/                # six_dof_flight_dynamics.py (12-durumlu 6-DOF simülatör) & simulate_flight_test.py
 ├── 📁 uretim_ve_test/           # Lazer kesim vektörleri, 3D baskı (STL/G-code) ve rüzgar tüneli verileri
 │   ├── dxf_outputs/            # CNC lazer kesim kanat nervür vektörleri (selig1223_root_rib_320mm.dxf)
 │   ├── scripts/                # generate_wing_rib_dxf.py (Parametrik DXF üretici)
@@ -267,6 +267,7 @@ METUAV-DBF-2027/
     *   Flanş normal gerilmesi: $\sigma_{max} = 62.3\text{ MPa}$ (Akma sınırı: $950\text{ MPa}$) $\to$ **Eğilme Emniyet Katsayısı = 15.24**
     *   Kayma gerilmesi: $\tau_{max} = 6.3\text{ MPa}$ (Akma sınırı: $65\text{ MPa}$) $\to$ **Kayma Emniyet Katsayısı = 10.24**
     *   Kanat ucu sehimi: Yalnızca **$9.1\text{ mm}$** (Yarı açıklığın $\%0.8$'i).
+*   **Kanat Aeroelastik Flutter ve Diverjans Analizi:** 2-DOF (eğilme-burulma) serbest titreşim analizinde 1. eğilme frekansı $11.22\text{ Hz}$, 1. burulma frekansı $58.80\text{ Hz}$ olarak hesaplanmıştır. Frekans oranı $\omega_h / \omega_\alpha = 0.191 < 0.60$ olup statik diverjans hızı $306.4\text{ m/s}$ ile maksimum dalış hızının ($35.0\text{ m/s}$) çok üzerindedir (Emniyet Katsayısı: $28.5$).
 
 <div align="center">
   <img src="docs/images/gokdogan_cad_exploded_view.png" alt="METUAV Gökdoğan 3D CAD ve Yapısal Mimari Planı" width="100%"/>
@@ -277,10 +278,11 @@ METUAV-DBF-2027/
 *   **Pala Elemanları Momentum Teorisi (BEMT):** Yarıçap boyunca 12 istasyonda hava akış hız üçgenleri ve Prandtl uç kaybı düzeltmeleri entegre edildi.
 *   **19x12E Pervane:** 6S LiPo geriliminde 6800 RPM devir altında **$122.4\text{ N}$ ($12.5\text{ kgf}$)** statik kalkış itkisi ve $\%79.8$ seyir verimliliği sağlandı.
 *   **Motor/Batarya 1-D Termal Modeli:** 5 dakikalık uçuş profilinde bakır sargı sıcaklığı maksimum $57.6^\circ\text{C}$ seviyesinde kalarak $105^\circ\text{C}$ Curie emniyet sınırının çok altında tutuldu.
+*   **Dual-RC Thevenin Batarya ve SOH Modeli:** 6S 16,000 mAh LiPo bataryanın elektrokimyasal dinamikleri ($R_0 = 7.2\text{ m}\Omega$, $\tau_1 = 0.57\text{ s}$, $\tau_2 = 15.0\text{ s}$) modellenerek $85\text{ A}$ tam gaz pilon virajlarında voltaj çökmesinin hücre başı $3.30\text{ V}$ ($19.8\text{ V}$ cutoff) eşiğinin altına düşmesi kesin olarak önlenmiştir.
 
 ### 4. Aviyonik, C++20 Adaptif PID ve 15-Durumlu EKF
+*   **L1 Adaptif Doğrusal Olmayan Kılavuzluk (NLGL):** Park-Deyst-How L1 yanal kılavuzluk algoritması; yer hızına göre adaptif $L_1$ mesafesi hesaplayarak pylon parkuru dönüşlerinde $45^\circ$ limitli koordineli yatış açısı ve milimetrik cross-track hatası sönümlemesi sağlar.
 *   **Adaptif Toplam Enerji Kontrol Sistemi (TECS):** Gaz ve elevatör komutlarını potansiyel (irtifa) ve kinetik (hava hızı) enerji dengesini gözeterek eşgüdümlü yönetir. Virajlarda yatış açısı lift kaybı kompanzasyonu ve faydalı yük atımı sonrasındaki kütle şokunu anında absorbe eder.
-*   **Adaptif PID Algoritması:** Dinamik basınca ($q = \frac{1}{2}\rho V^2$) ve anlık tahmini kütleye göre kontrol kazançlarını dinamik olarak ölçekler.
 *   **Görev 3 CG Kompanzasyonu:** Faydalı yük bırakıldığı anda $+44.1\text{ mm}$ geriye kayan ağırlık merkezine karşı elevatöre eşzamanlı **$-3.5^\circ$ burun-aşağı trim** uygulayarak uçağın stall olmasını önler.
 *   **Genişletilmiş Kalman Filtresi (EKF):** 50 Hz IMU, 10 Hz GPS ve 20 Hz Pitot verilerini kaynaştırarak GPS kaybı durumunda dahi güvenli dead-reckoning sağlar.
 *   **Hızlı Başlatma Kalibratörü:** 100 IMU örneğini analiz ederek sensör sıfır kayıklıklarını **$12\text{ saniyede}$** tamamlar ve 5 dakika kuralında zaman kazandırır.
@@ -300,9 +302,9 @@ METUAV-DBF-2027/
 *   **Micro-XRCE-DDS & PX4 uORB Köprüsü:** ROS 2 DDS mesajlarını PX4 uORB ara katmanına mikrosaniye mertebesinde çevirir; düşük gecikmeli offboard kontrol ve faydalı yük servo tetikleme komutlarını iletir.
 *   **HTML5 Canvas Tabanlı Web GCS:** Dahili HTTP/REST sunucusu üzerinden modern Birincil Uçuş Ekranı (PFD / Yapay Ufuk), taktik radar haritası, 6S batarya göstergeleri ve görev kontrol arayüzü sunar (`http://localhost:8080`).
 
-### 7. Çok Disiplinli Tasarım Optimizasyonu (MDO)
-*   AIAA DBF Master Puanlama fonksiyonu üzerinde gradyan tabanlı optimizasyon ve duyarlılık analizi yürütüldü.
-*   1000 iterasyonlu Monte Carlo stokastik analizinde rastgele atmosferik türbülans altında **$\%97.8$ görev tamamlama başarısı** ve **$9.06 / 10.0$ toplam yarışma puanı** modellendi.
+### 7. Çok Disiplinli Tasarım Optimizasyonu (MDO) ve 6-DOF Uçuş Dinamiği
+*   **AIAA DBF Master Puanlama MDO:** Master puanlama fonksiyonu üzerinde gradyan tabanlı optimizasyon ve duyarlılık analizi yürütüldü. 1000 iterasyonlu Monte Carlo stokastik analizinde rastgele atmosferik türbülans altında **$\%97.8$ görev tamamlama başarısı** ve **$9.06 / 10.0$ toplam yarışma puanı** modellendi.
+*   **6-DOF Doğrusal Olmayan Uçuş Dinamiği:** Kuaterniyon yönelimli 12-durumlu katı cisim simülatörü; rüzgar tüneli stabilite ve kontrol türevleri ($C_{L_\alpha}, C_{m_\alpha}, C_{l_p}, C_{n_r}$) ile $24.5\text{ m/s}$ seviye uçuş trim çözümünü ($\alpha = 3.22^\circ$, $\delta_e = -0.36^\circ$, gaz $\%33.1$) ve 4. mertebe Runge-Kutta (RK4) sayısal integrasyonunu doğrular.
 
 ---
 
@@ -376,7 +378,7 @@ ros2 launch metuav_simulation dbf_mission3_sitl.launch.py
 ### 4. Bütüncül Test ve Doğrulama Bataryası
 Tüm mühendislik alt sistemlerini ve otonom uçuş prototipini tek komutla test etmek için:
 ```bash
-# 1. 24 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
+# 1. 35 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
 pytest
 
 # 2. Uçtan Uca Tam Otonom Görev Simülasyonu (Fast-Boot, Pylon, Görsel Tespit, Bırakma, İniş)
@@ -385,12 +387,16 @@ python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
 # 3. Web Yer İstasyonu Sunucusu Doğrulaması
 python aviyonik_ve_otonom/src/telemetri/telemetri/gcs_server.py --test
 
-# 4. Sayısal analiz ve disiplinlerarası simülasyon araçları
+# 4. Sayısal analiz, aeroelastisite, 6-DOF ve disiplinlerarası simülasyon araçları
 python aerodinamik/scripts/polar_analysis.py
 python mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
 python mekanik_ve_yapisal/scripts/spar_stress_fea.py
+python mekanik_ve_yapisal/scripts/flutter_and_divergence_analyzer.py
 python itki_ve_guc_sistemleri/scripts/bemt_propeller_optimizer.py
 python itki_ve_guc_sistemleri/scripts/motor_thermal_simulator.py
+python itki_ve_guc_sistemleri/scripts/battery_soh_estimator.py
+python aviyonik_ve_otonom/src/ucus_kontrol/src/l1_path_follower.py
+python simulasyon/scripts/six_dof_flight_dynamics.py
 python uretim_ve_test/scripts/generate_wing_rib_dxf.py
 python simulasyon/scripts/simulate_flight_test.py
 python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
