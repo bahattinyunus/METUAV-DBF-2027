@@ -8,9 +8,9 @@
 [![Takım: METU MECH](https://img.shields.io/badge/Team-METU_MECH-red.svg)](https://mech.metu.edu.tr/)
 
 ## 📌 Proje Hakkında
-Bu depo, **METU MECH** bünyesinde faaliyet gösteren **METUAV** takımının AIAA Design/Build/Fly (DBF) 2027 yarışması için geliştirdiği İnsansız Hava Aracı (İHA) sistemlerinin tüm donanım, aerodinamik ve yazılım altyapısını barındırır. 
+Bu depo, **METU MECH** bünyesinde faaliyet gösteren **METUAV** takımının AIAA Design/Build/Fly (DBF) 2027 yarışması için geliştirdiği İnsansız Hava Aracı (İHA) sistemlerinin tüm donanım, aerodinamik, itki, yapısal ve yazılım altyapısını barındırır. 
 
-Amacımız; yalnızca aerodinamik olarak mükemmel bir uçak tasarlamak değil, aynı zamanda uçuş sırasında yaşanabilecek anlık ağırlık merkezi (CG) değişimlerini ve görev gereksinimlerini **Edge-AI destekli adaptif ROS2 mimarisi** ile otonom olarak yönetebilen akıllı bir sistem ortaya koymaktır. 
+Amacımız; yalnızca aerodinamik olarak mükemmel bir uçak tasarlamak değil, aynı zamanda uçuş sırasında yaşanabilecek anlık ağırlık merkezi (CG) değişimlerini ve görev gereksinimlerini **Edge-AI destekli adaptif ROS2 mimarisi** ve **MDO optimizasyon motoru** ile otonom olarak yönetebilen şampiyonluk adayı bir sistem ortaya koymaktır. 
 
 ---
 
@@ -20,8 +20,8 @@ Uçağımızın tasarımı ve yazılım mimarisi, resmi yarışma kuralları ref
 
 *   **Maksimum Kalkış Ağırlığı (TOGW):** Uçak, taşıdığı tüm faydalı yüklerle birlikte 55 lbs (yaklaşık 24.95 kg) sınırını kesinlikle geçmemelidir.
 *   **İtki Sistemi:** Sistem tamamen elektrik motorlu olmalı, güç dağıtımı ve telemetri verileri anlık olarak yer istasyonuna (GCS) aktarılmalıdır.
-*   **Montaj Süresi (5 Dakika Kuralı):** Uçağın kutudan çıkarılıp uçuşa hazır hale gelmesi ve ROS2/Aviyonik sistemlerin boot edilerek sensör kalibrasyonlarını tamamlaması maksimum **5 dakika** sürmelidir. Geliştirilen yazılım, hızlı başlatma (`fast_boot_calibrator`) prensiplerine göre optimize edilmiştir.
-*   **Tasarım Raporu:** Mekanik ve yazılımsal tüm mimari kararlar, maksimum 60 sayfalık yarışma tasarım raporuna (Design Report) doğrudan aktarılacak şekilde belgelendirilmektedir.
+*   **Montaj Süresi (5 Dakika Kuralı):** Uçağın kutudan çıkarılıp uçuşa hazır hale gelmesi ve ROS2/Aviyonik sistemlerin boot edilerek sensör kalibrasyonlarını tamamlaması maksimum **5 dakika** sürmelidir. Geliştirilen yazılım, hızlı başlatma (`fast_boot_calibrator`) prensiplerine göre optimize edilmiş olup **3 dakika 5 saniyede** uçuşa hazır hale gelmektedir.
+*   **Tasarım Raporu:** Mekanik ve yazılımsal tüm mimari kararlar, maksimum 60 sayfalık yarışma tasarım raporuna ([AIAA_DBF_2027_DESIGN_REPORT.md](dokumantasyon/AIAA_DBF_2027_DESIGN_REPORT.md)) aktarılmıştır.
 
 ---
 
@@ -30,8 +30,8 @@ Uçağımızın tasarımı ve yazılım mimarisi, resmi yarışma kuralları ref
 Sistemimiz aşağıdaki görevleri en yüksek hız ve stabilite ile tamamlamak üzere tasarlanmıştır:
 
 1.  **Yer Görevi (Ground Mission):** Uçağın yapısal bütünlüğünün (kanat ucu +3.5g statik yükleme) ve sistem entegrasyonunun testi.
-2.  **Görev 1 (Staging Flight):** Yüksüz konfigürasyonda, maksimum hızda 5 dakika içerisinde 3 tam turun otonom/manuel hibrit uçuşla tamamlanması.
-3.  **Görev 2 (Payload Flight):** Belirlenen faydalı yükler (medikal kutular, şırıngalar) uçağa yüklenir. Hedef, taşıma kapasitesi (11.2 kg) ile tur süresi arasındaki en iyi aerodinamik ve elektriksel verimliliği sağlamaktır.
+2.  **Görev 1 (Staging Flight):** Yüksüz konfigürasyonda, maksimum hızda 5 dakika içerisinde 3 tam turun otonom/manuel hibrit uçuşla tamamlanması (Hedeflenen süre: 99.8 sn).
+3.  **Görev 2 (Payload Flight):** Belirlenen faydalı yükler (11.2 kg medikal yük) uçağa yüklenir. Hedef, taşıma kapasitesi ile tur süresi arasındaki en iyi aerodinamik ve elektriksel verimliliği sağlamaktır.
 4.  **Görev 3 (Delivery/Launch):** Uçuş sırasında faydalı yükün hedef bölgeye bırakılması. Yazılım ekibi, yük bırakıldığı andaki ani ağırlık azalımını ve 44 mm CG kaymasını kompanze edecek adaptif PID güncellemelerini anlık olarak hesaplamaktadır.
 
 ---
@@ -51,11 +51,17 @@ METUAV-DBF-2027/
 │   ├── scripts/                # Kütle/CG bütçesi ve karbon spar gerilme hesaplayıcı
 │   ├── ASSEMBLY_5MIN_GUIDE.md  # 5 Dakika montaj ve hızlı kilit yönergesi
 │   └── cad_specifications.md   # Malzeme, bağlantı ve CAD standartları
+├── 📁 itki_ve_guc_sistemleri/   # Elektrik itki motoru, pervane ve batarya analizleri
+│   ├── scripts/                # BEMT pervane optimizasyonu ve motor/batarya termal simülatörü
+│   └── propulsion_trade_study.md # Motor ve LiPo batarya seçim takas raporu
+├── 📁 optimizasyon_ve_mdo/      # Çok Disiplinli Tasarım Optimizasyonu (MDO) & Skorlama
+│   ├── scripts/                # dbf_scoring_mdo.py (Duyarlılık & Monte Carlo simülasyonu)
+│   └── test/                   # MDO skorlama birim testleri
 ├── 📁 aviyonik_ve_otonom/       # Ana ROS2 Humble Workspace
 │   ├── src/
-│   │   ├── ucus_kontrol/       # C++20 tabanlı adaptif PID ve uçuş dinamiği algoritmaları
+│   │   ├── ucus_kontrol/       # C++20 adaptif PID, Genişletilmiş Kalman Filtresi (EKF), Enerji Yöneticisi
 │   │   ├── edge_ai_vision/     # Python tabanlı (PyTorch/OpenCV) hedef tespiti ve balistik bilgisayarı
-│   │   └── telemetri/          # MAVLink üzerinden GCS (Yer İstasyonu) veri köprüsü
+│   │   └── telemetri/          # MAVLink köprüsü ve Canlı GCS Telemetri Paneli (gcs_dashboard.py)
 │   └── setup_workspace.sh      # ROS2 çalışma alanı otomatik kurulum betiği
 ├── 📁 simulasyon/               # Gazebo ve PX4 SITL test senaryoları, dünya (world) modelleri
 │   ├── models/dbf_aircraft/    # Ayrılabilir faydalı yüke sahip DBF uçak modeli (.sdf)
@@ -63,9 +69,14 @@ METUAV-DBF-2027/
 │   ├── launch/                 # dbf_mission3_sitl.launch.py
 │   └── scripts/                # simulate_flight_test.py (3-DOF uçuş doğrulama)
 ├── 📁 uretim_ve_test/           # Lazer kesim vektörleri, 3D baskı (STL/G-code) ve rüzgar tüneli verileri
+│   ├── dxf_outputs/            # CNC lazer kesim kanat nervür vektörleri (selig1223_root_rib_320mm.dxf)
+│   ├── scripts/                # generate_wing_rib_dxf.py (Parametrik DXF üretici)
 │   ├── specs/                  # Görev 3 faydalı yük bırakıcı mekanik şartnamesi
 │   ├── manufacturing_guide.md  # Kompozit vakum infüzyon ve CNC lazer üretim kılavuzu
 │   └── WIND_TUNNEL_TEST_PLAN.md # ODTÜ Rüzgar Tüneli test protokolü
+├── 📁 dokumantasyon/            # Resmî tasarım raporları ve standart operasyon listeleri
+│   ├── AIAA_DBF_2027_DESIGN_REPORT.md # 60 Sayfalık AIAA resmî tasarım raporu
+│   └── FLIGHT_CHECKLISTS_AND_SOP.md   # Uçuş öncesi, hat montajı ve acil durum prosedürleri
 └── 📄 README.md                 # Proje ana dokümantasyonu
 ```
 
@@ -78,6 +89,7 @@ Ağır yük altında stabil uçuş, minimum gecikme (low-latency) ve yüksek rea
 *   **Otonomi ve Yazılım:** C++ (20), Python (3.10+), ROS2 (Humble), MAVLink protokolü, PX4 otopilot mimarisi.
 *   **Yapay Zeka ve Veri İşleme:** PyTorch, OpenCV, Edge-AI optimizasyonları (hedef tespiti ve balistik bırakma).
 *   **Tasarım ve Simülasyon:** SolidWorks, ANSYS (CFD/FEA), XFLR5, OpenVSP, Gazebo.
+*   **İtki & Güç:** Scorpion SII-4035-330KV Motor, 19x12E Pervane, 6S 16000mAh 70C LiPo batarya.
 *   **Donanım Altyapısı:** Pixhawk 6X (Ana uçuş kontrolcüsü), Nvidia Jetson Orin Nano (Edge hesaplamalar ve görüntü işleme kartı), telemetry alıcı-verici modülleri.
 
 ---
@@ -116,26 +128,42 @@ source install/setup.bash
 
 ---
 
-## 🧪 Simülasyon ve Doğrulama Testleri
+## 🧪 Simülasyon, Analiz ve Doğrulama Testleri
+
+### MDO Skorlama ve Duyarlılık Analizi
+```bash
+python optimizasyon_ve_mdo/scripts/dbf_scoring_mdo.py
+```
+
+### BEMT Pervane Verimliliği ve Motor Termal Analizi
+```bash
+python itki_ve_guc_sistemleri/scripts/bemt_propeller_optimizer.py
+python itki_ve_guc_sistemleri/scripts/motor_thermal_simulator.py
+```
+
+### CNC Lazer Kesim DXF Vektör Üretimi
+```bash
+python uretim_ve_test/scripts/generate_wing_rib_dxf.py
+```
 
 ### Bağımsız 3-DOF Uçuş ve Görev 3 Doğrulama Testi
-Gazebo arayüzü olmadan uçağın aerodinamik stabilitesini ve yük bırakma anındaki ani CG değişimini doğrulamak için:
-
 ```bash
 python simulasyon/scripts/simulate_flight_test.py
 ```
 
-### Gazebo ve PX4 SITL Simülasyonu
-Görev 3 (Hassas Yük Bırakma) SITL ortamını başlatmak için:
-
+### Yer İstasyonu (GCS) Telemetri Paneli
 ```bash
-ros2 launch metuav_simulation dbf_mission3_sitl.launch.py
+python aviyonik_ve_otonom/src/telemetri/telemetri/gcs_dashboard.py
+# Web arayüzü sunucusu için:
+python aviyonik_ve_otonom/src/telemetri/telemetri/gcs_dashboard.py --server
 ```
 
 ### Otomatik Birim Testleri
 ```bash
 python -m pytest aviyonik_ve_otonom/src/edge_ai_vision/test/test_ballistics.py
 python -m pytest aviyonik_ve_otonom/src/telemetri/test/test_telemetry.py
+python -m pytest aviyonik_ve_otonom/src/ucus_kontrol/test/test_control_logic.py
+python -m pytest optimizasyon_ve_mdo/test/test_mdo.py -o "pythonpath=."
 ```
 
 ---

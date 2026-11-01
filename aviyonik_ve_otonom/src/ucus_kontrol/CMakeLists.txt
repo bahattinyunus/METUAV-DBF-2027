@@ -24,6 +24,8 @@ add_library(ucus_kontrol_core
   src/adaptive_pid_controller.cpp
   src/mission_manager.cpp
   src/fast_boot_calibrator.cpp
+  src/extended_kalman_filter.cpp
+  src/energy_manager.cpp
 )
 ament_target_dependencies(ucus_kontrol_core
   rclcpp

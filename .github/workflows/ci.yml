@@ -22,7 +22,7 @@ jobs:
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest numpy scipy
+        pip install pytest numpy scipy matplotlib
         pip install -r aviyonik_ve_otonom/src/edge_ai_vision/requirements.txt || true
         pip install -r aviyonik_ve_otonom/src/telemetri/requirements.txt || true
 
@@ -33,6 +33,14 @@ jobs:
     - name: Run Telemetry Packet Unit Tests
       run: |
         python -m pytest aviyonik_ve_otonom/src/telemetri/test/test_telemetry.py -o "pythonpath=aviyonik_ve_otonom/src/telemetri"
+
+    - name: Run Control & Energy Logic Tests
+      run: |
+        python -m pytest aviyonik_ve_otonom/src/ucus_kontrol/test/test_control_logic.py
+
+    - name: Run MDO Scoring & Sensitivity Tests
+      run: |
+        python -m pytest optimizasyon_ve_mdo/test/test_mdo.py -o "pythonpath=."
 
     - name: Verify Aerodynamic Sizing and TOGW Compliance
       run: |
@@ -45,6 +53,15 @@ jobs:
     - name: Verify Carbon Spar Structural FEA (+3.5g Ultimate Load)
       run: |
         python mekanik_ve_yapisal/scripts/spar_stress_fea.py
+
+    - name: Run BEMT Propeller & Thermal Simulations
+      run: |
+        python itki_ve_guc_sistemleri/scripts/bemt_propeller_optimizer.py
+        python itki_ve_guc_sistemleri/scripts/motor_thermal_simulator.py
+
+    - name: Verify CNC Laser Cut DXF Generation
+      run: |
+        python uretim_ve_test/scripts/generate_wing_rib_dxf.py
 
     - name: Run Mission 3 Flight Dynamics & Adaptive PID Simulation
       run: |
