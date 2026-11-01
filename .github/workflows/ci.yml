@@ -42,6 +42,11 @@ jobs:
       run: |
         python -m pytest optimizasyon_ve_mdo/test/test_mdo.py -o "pythonpath=."
 
+    - name: Run Competitor Benchmark & Gap Analysis
+      run: |
+        python -m pytest rakip_analizi_ve_benchmark/test/test_benchmark.py -o "pythonpath=."
+        python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
+
     - name: Verify Aerodynamic Sizing and TOGW Compliance
       run: |
         python aerodinamik/scripts/polar_analysis.py

@@ -77,6 +77,12 @@ METUAV-DBF-2027/
 ├── 📁 dokumantasyon/            # Resmî tasarım raporları ve standart operasyon listeleri
 │   ├── AIAA_DBF_2027_DESIGN_REPORT.md # 60 Sayfalık AIAA resmî tasarım raporu
 │   └── FLIGHT_CHECKLISTS_AND_SOP.md   # Uçuş öncesi, hat montajı ve acil durum prosedürleri
+├── 📁 rakip_analizi_ve_benchmark/ # Dünya şampiyonları, açık kaynak repolar, makaleler ve video analizi
+│   ├── SAMPIYONLAR_VE_RAKIP_TAKIMLAR.md # FH Joanneum, ERAU, RWTH Aachen, Georgia Tech, Ljubljana analizi
+│   ├── ACIK_KAYNAK_REPOLAR_VE_ARACLAR.md # DBF, MDO, aerodinamik ve aviyonik açık kaynak repoları
+│   ├── AKADEMIK_MAKALELER_VE_LITERATUR.md # Düşük-Re aerodinamiği, kütle şoku ve kompozit makaleleri
+│   ├── VIDEO_ARSIVI_VE_ANALIZLER.md   # Uçuş hattı videoları ve rakiplerin kaza/kırım kök neden analizleri
+│   └── scripts/competitor_benchmark_matrix.py # Karşılaştırmalı benchmark matrisi ve gap analizi
 └── 📄 README.md                 # Proje ana dokümantasyonu
 ```
 
@@ -158,12 +164,18 @@ python aviyonik_ve_otonom/src/telemetri/telemetri/gcs_dashboard.py
 python aviyonik_ve_otonom/src/telemetri/telemetri/gcs_dashboard.py --server
 ```
 
+### Rakip Analizi ve Uluslararası Şampiyonlar Benchmark Matrisi
+```bash
+python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
+```
+
 ### Otomatik Birim Testleri
 ```bash
 python -m pytest aviyonik_ve_otonom/src/edge_ai_vision/test/test_ballistics.py
 python -m pytest aviyonik_ve_otonom/src/telemetri/test/test_telemetry.py
 python -m pytest aviyonik_ve_otonom/src/ucus_kontrol/test/test_control_logic.py
 python -m pytest optimizasyon_ve_mdo/test/test_mdo.py -o "pythonpath=."
+python -m pytest rakip_analizi_ve_benchmark/test/test_benchmark.py -o "pythonpath=."
 ```
 
 ---
