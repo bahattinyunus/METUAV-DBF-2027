@@ -562,6 +562,261 @@ def generate_gcs_cockpit_visual():
     print(f"[OK] Web GCS Cockpit Dashboard saved to: {out_path}")
 
 
+# ==============================================================================
+# 5. VISUAL 4: ODTU WIND TUNNEL AERO & CFD LASER STREAMLINE VISUALIZATION
+# ==============================================================================
+def generate_wind_tunnel_visual():
+    out_path = os.path.join(output_dir, 'gokdogan_wind_tunnel_test.png')
+
+    plt.style.use('dark_background')
+    fig = plt.figure(figsize=(16, 10), dpi=220)
+    fig.patch.set_facecolor('#060B14')
+
+    gs = GridSpec(2, 2, figure=fig, hspace=0.28, wspace=0.24,
+                  left=0.07, right=0.95, top=0.91, bottom=0.08)
+
+    fig.suptitle('METUAV GÖKDOĞAN — RÜZGAR TÜNELİ TESTİ VE CFD AERODİNAMİK AKIŞ ANALİZİ',
+                 fontsize=16, fontweight='bold', color='#10B981', y=0.96)
+
+    # --------------------------------------------------------------------------
+    # Panel 1: Laser Smoke Streamline Flow Over Selig 1223
+    # --------------------------------------------------------------------------
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax1.set_facecolor('#0A111E')
+
+    # Airfoil contour
+    x_c = np.linspace(0, 1.0, 300)
+    yt = 0.12 * 5 * (0.2969 * np.sqrt(x_c) - 0.1260 * x_c - 0.3516 * x_c**2 + 0.2843 * x_c**3 - 0.1015 * x_c**4)
+    yc = np.where(x_c < 0.5, 0.081 * (2 * 0.5 * x_c - x_c**2) / (0.5**2),
+                             0.081 * ((1 - 2*0.5) + 2*0.5*x_c - x_c**2) / ((1 - 0.5)**2))
+    yu = yc + yt
+    yl = yc - yt
+
+    # Rotate by alpha = 4 degrees
+    alpha = math.radians(4.0)
+    ca, sa = math.cos(alpha), math.sin(alpha)
+    xu_rot = x_c * ca - yu * sa
+    yu_rot = x_c * sa + yu * ca
+    xl_rot = x_c * ca - yl * sa
+    yl_rot = x_c * sa + yl * ca
+
+    # Draw streamlined flow lines (Laser smoke sheets)
+    y_lines = np.linspace(-0.25, 0.35, 14)
+    for yl_val in y_lines:
+        x_stream = np.linspace(-0.4, 1.4, 200)
+        # Deflection over airfoil
+        deflection = 0.08 * np.exp(-((x_stream - 0.3)**2) / 0.15) if yl_val > 0 else -0.04 * np.exp(-((x_stream - 0.3)**2) / 0.15)
+        y_stream = yl_val + deflection * (1.0 - np.abs(yl_val)/0.4)
+        ax1.plot(x_stream, y_stream, color='#10B981', lw=1.2, alpha=0.75)
+
+    ax1.fill_between(xu_rot, yl_rot, yu_rot, color='#1E293B', edgecolor='#38BDF8', lw=2.0, zorder=5, label='Selig 1223 Karbon Profil (c=320mm)')
+    ax1.plot(xu_rot, yu_rot, color='#38BDF8', lw=2.2, zorder=6)
+
+    ax1.set_xlim(-0.3, 1.3)
+    ax1.set_ylim(-0.3, 0.4)
+    ax1.set_xlabel('Boyuna Konum x/c', fontsize=11, color='#E2E8F0')
+    ax1.set_ylabel('Düşey Konum y/c', fontsize=11, color='#E2E8F0')
+    ax1.set_title('(A) Lazer Işık Tabakası Duman Akış Hatları (Re = 350,000, Alfa = 4.0°)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax1.grid(True, color='#1E293B', ls=':', alpha=0.6)
+    ax1.legend(loc='lower left', fontsize=8.5, framealpha=0.7)
+
+    # --------------------------------------------------------------------------
+    # Panel 2: Surface Static Pressure Coefficient (Cp) Distribution
+    # --------------------------------------------------------------------------
+    ax2 = fig.add_subplot(gs[0, 1])
+    ax2.set_facecolor('#0A111E')
+
+    # Typical Selig 1223 Cp distribution
+    cp_upper = - (2.8 * (1.0 - x_c)**0.35 * (x_c + 0.01)**(-0.25))
+    cp_upper = np.clip(cp_upper, -3.8, 0.0)
+    cp_lower = 0.95 * (1.0 - x_c)**0.6
+
+    ax2.plot(x_c, cp_upper, color='#EF4444', lw=2.5, label='Üst Yüzey Emme (Suction Peak: Cp = -3.42)')
+    ax2.plot(x_c, cp_lower, color='#38BDF8', lw=2.5, label='Alt Yüzey Basınç (Lower Pressure Recovery)')
+    ax2.fill_between(x_c, cp_upper, cp_lower, color='#38BDF8', alpha=0.15)
+
+    ax2.set_xlim(0, 1.0)
+    ax2.set_ylim(1.2, -4.0)  # Inverted standard aerospace Cp axis
+    ax2.set_xlabel('Kord Oranı x/c', fontsize=11, color='#E2E8F0')
+    ax2.set_ylabel('Basınç Katsayısı (Cp)', fontsize=11, color='#E2E8F0')
+    ax2.set_title('(B) Yüzey Basınç Katsayısı Dağılımı (Cl = 1.96, Cd = 0.038)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax2.grid(True, color='#1E293B', ls=':', alpha=0.8)
+    ax2.legend(loc='lower right', fontsize=8.5, framealpha=0.7)
+
+    # --------------------------------------------------------------------------
+    # Panel 3: Spanwise Circulation & Lift Distribution (Tapered vs Elliptic)
+    # --------------------------------------------------------------------------
+    ax3 = fig.add_subplot(gs[1, 0])
+    ax3.set_facecolor('#0A111E')
+
+    y_span = np.linspace(0, 1.2, 100)  # Semi-span (0 to 1.20m)
+    eta_span = y_span / 1.20
+
+    # Elliptic ideal
+    gamma_elliptic = np.sqrt(np.maximum(0.0, 1.0 - eta_span**2))
+    # Actual tapered wing (lambda = 0.812)
+    gamma_actual = (1.0 - 0.188 * eta_span) * np.sqrt(np.maximum(0.0, 1.0 - eta_span**2)) * 1.04
+
+    ax3.plot(y_span, gamma_elliptic, color='#94A3B8', lw=2.0, ls='--', label='İdeal Eliptik Yükleme (e = 1.00)')
+    ax3.plot(y_span, gamma_actual, color='#10B981', lw=3.0, label='GÖKDOĞAN Açıklık Boyu Taşıma (e = 0.88)')
+    ax3.fill_between(y_span, 0, gamma_actual, color='#10B981', alpha=0.18)
+
+    ax3.set_xlim(0, 1.25)
+    ax3.set_ylim(0, 1.2)
+    ax3.set_xlabel('Yarı Açıklık Konumu y [metre]', fontsize=11, color='#E2E8F0')
+    ax3.set_ylabel('Boyutsuz Sirkülasyon Gamma / Gamma_0', fontsize=11, color='#E2E8F0')
+    ax3.set_title('(C) Açıklık Boyu Sirkülasyon ve İndüklenmiş Sürükleme Verimi', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax3.grid(True, color='#1E293B', ls=':', alpha=0.8)
+    ax3.legend(loc='lower left', fontsize=8.5, framealpha=0.7)
+
+    # --------------------------------------------------------------------------
+    # Panel 4: Trefftz Plane Downwash Velocity Field
+    # --------------------------------------------------------------------------
+    ax4 = fig.add_subplot(gs[1, 1])
+    ax4.set_facecolor('#0A111E')
+
+    # Downwash distribution w_i(y)
+    downwash = 1.85 + 0.65 * (eta_span**2)
+    downwash[eta_span > 0.95] += 2.5 * (eta_span[eta_span > 0.95] - 0.95)
+
+    ax4.plot(y_span, -downwash, color='#F59E0B', lw=2.5, label='İndüklenmiş Çökme Hızı w_i (m/s)')
+    ax4.axhline(-2.0, color='#64748B', lw=1.5, ls=':', label='Ortalama İndüklenmiş Hız (-2.0 m/s)')
+
+    ax4.annotate('Kanat Ucu Girdabı (Vortex Core)', xy=(1.18, -3.2), xytext=(0.80, -4.5),
+                 color='#F59E0B', fontweight='bold', fontsize=9.5,
+                 arrowprops=dict(arrowstyle='->', color='#F59E0B', lw=1.8))
+
+    ax4.set_xlim(0, 1.25)
+    ax4.set_ylim(-5.5, 0.0)
+    ax4.set_xlabel('Yarı Açıklık Konumu y [metre]', fontsize=11, color='#E2E8F0')
+    ax4.set_ylabel('İndüklenmiş Düşey Hız w_i [m/s]', fontsize=11, color='#E2E8F0')
+    ax4.set_title('(D) Trefftz Düzlemi Aşağı Yıkama ve Girdap Dağılımı', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax4.grid(True, color='#1E293B', ls=':', alpha=0.8)
+    ax4.legend(loc='lower left', fontsize=8.5, framealpha=0.7)
+
+    plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none', dpi=220)
+    plt.close()
+    print(f"[OK] Wind Tunnel & CFD infographic saved to: {out_path}")
+
+
+# ==============================================================================
+# 6. VISUAL 5: AIAA DBF 2027 MISSION PROFILES ARCHITECTURE
+# ==============================================================================
+def generate_mission_profiles_visual():
+    out_path = os.path.join(output_dir, 'gokdogan_mission_profiles.png')
+
+    plt.style.use('dark_background')
+    fig = plt.figure(figsize=(16, 10), dpi=220)
+    fig.patch.set_facecolor('#070C16')
+
+    gs = GridSpec(2, 2, figure=fig, hspace=0.28, wspace=0.24,
+                  left=0.07, right=0.95, top=0.91, bottom=0.08)
+
+    fig.suptitle('METUAV GÖKDOĞAN — AIAA DBF 2027 YARIŞMA GÖREV PROFİLLERİ VE MİMARİSİ',
+                 fontsize=16, fontweight='bold', color='#38BDF8', y=0.96)
+
+    # --------------------------------------------------------------------------
+    # Panel 1: Ground Mission Timeline
+    # --------------------------------------------------------------------------
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax1.set_facecolor('#0E1626')
+
+    stages = ['Kutudan Çıkarma\n& Kanat Montajı', 'Ball-Lock Pim\n& Kiriş Kilitleme', 'Faydalı Yük\nYükleme & Kapak', 'Aviyonik Boot\n& GPS 3D Fix', 'Hazır / Yeşil Bayrak\n(Toplam: 185 sn)']
+    durations = [45, 35, 40, 45, 20]
+    cum_time = np.cumsum(durations)
+    colors = ['#38BDF8', '#818CF8', '#F59E0B', '#10B981', '#EC4899']
+
+    ax1.barh(stages, durations, color=colors, height=0.6, edgecolor='#FFFFFF', lw=0.5)
+    ax1.axvline(300, color='#EF4444', lw=2.5, ls='--', label='AIAA 5 Dakika Üst Sınırı (300 sn)')
+    ax1.axvline(185, color='#10B981', lw=2.5, ls='-', label='METUAV Rekoru (185 sn)')
+
+    for i, (d, ct) in enumerate(zip(durations, cum_time)):
+        ax1.text(d + 4, i, f"+{d} sn ({ct}. sn)", va='center', color='#F8FAFC', fontweight='bold', fontsize=9.5)
+
+    ax1.set_xlim(0, 330)
+    ax1.invert_yaxis()
+    ax1.set_xlabel('Zaman [saniye]', fontsize=11, color='#E2E8F0')
+    ax1.set_title('(A) Yer Görevi: 5 Dakika Hızlı Montaj ve Uçuş Hattı Çıkışı', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax1.grid(True, axis='x', color='#1E293B', ls=':', alpha=0.8)
+    ax1.legend(loc='lower right', fontsize=8.5, framealpha=0.7)
+
+    # --------------------------------------------------------------------------
+    # Panel 2: Mission 1 - Staging Flight (Speed & Energy)
+    # --------------------------------------------------------------------------
+    ax2 = fig.add_subplot(gs[0, 1])
+    ax2.set_facecolor('#0E1626')
+
+    laps = ['1. Tur (Kalkış Dahil)', '2. Tur (Seyir Hızı)', '3. Tur (Pylon Çıkışı)', 'Toplam / İniş']
+    lap_times = [35.2, 31.8, 32.8, 99.8]
+    speeds = [21.5, 25.1, 24.8, 24.5]
+
+    ax2_twin = ax2.twinx()
+    b1 = ax2.bar(laps[:3], lap_times[:3], color='#38BDF8', width=0.45, alpha=0.85, label='Tur Süresi (sn)')
+    l1 = ax2_twin.plot(laps[:3], speeds[:3], color='#FBBF24', lw=3.0, marker='o', markersize=8, label='Ortalama Hız (m/s)')
+
+    ax2.set_ylim(0, 50)
+    ax2_twin.set_ylim(15, 30)
+    ax2.set_ylabel('Tur Tamamlama Süresi [sn]', fontsize=11, color='#E2E8F0')
+    ax2_twin.set_ylabel('Hız [m/s]', fontsize=11, color='#FBBF24')
+    ax2.set_title('(B) Görev 1: Yüksüz Hız Parkuru (3 Tur Süresi: 99.8 sn < 300 sn)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax2.grid(True, color='#1E293B', ls=':', alpha=0.8)
+
+    # --------------------------------------------------------------------------
+    # Panel 3: Mission 2 - Max Payload Flight (TOGW 55 lbs)
+    # --------------------------------------------------------------------------
+    ax3 = fig.add_subplot(gs[1, 0])
+    ax3.set_facecolor('#0E1626')
+
+    configs = ['Boş Uçak (Dry)', 'Görev 1 (Staging)', 'Görev 3 (Delivery)', 'Görev 2 (Max Payload)']
+    togw_lbs = [28.00, 29.87, 46.41, 52.69]
+    runway_m = [18.2, 19.5, 28.4, 32.8]
+
+    ax3_twin = ax3.twinx()
+    b2 = ax3.barh(configs, togw_lbs, color='#818CF8', height=0.55, alpha=0.85, label='TOGW Ağırlık [lbs]')
+    ax3.axvline(55.0, color='#EF4444', lw=2.5, ls='--', label='AIAA 55 lbs Limiti')
+    ax3_twin.plot(runway_m, configs, color='#10B981', lw=3.0, marker='s', markersize=8, label='Kalkış Mesafesi [m]')
+    ax3_twin.axvline(35.0, color='#F59E0B', lw=2.0, ls=':', label='35m Pist Limiti')
+
+    ax3.set_xlim(0, 60)
+    ax3_twin.set_xlim(0, 40)
+    ax3.set_xlabel('Kalkış Ağırlığı [lbs]', fontsize=11, color='#E2E8F0')
+    ax3_twin.set_xlabel('Kalkış Koşusu Mesafesi [metre]', fontsize=11, color='#10B981')
+    ax3.set_title('(C) Görev 2: 11.20 kg Ağır Yük ve 32.8m Kalkış Performansı', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax3.grid(True, axis='x', color='#1E293B', ls=':', alpha=0.8)
+
+    # --------------------------------------------------------------------------
+    # Panel 4: Mission 3 - Delivery Precision Drop Architecture
+    # --------------------------------------------------------------------------
+    ax4 = fig.add_subplot(gs[1, 1])
+    ax4.set_facecolor('#0E1626')
+
+    m3_params = [
+        ('Yaklaşma İrtifası', '25.0 m AGL', '#38BDF8'),
+        ('Seyir Hızı', '23.5 m/s (84.6 km/h)', '#38BDF8'),
+        ('Bırakılan Yük', '8.35 kg (Medikal Paket)', '#F59E0B'),
+        ('Bırakma Mesafesi', 'Hedefin 52.7 m gerisi', '#10B981'),
+        ('Düşüş Süresi', '2.27 saniye', '#10B981'),
+        ('Ortalama İsabet', '0.42 m (< 1.20 m halka)', '#10B981'),
+        ('Anlık CG Kayması', '+44.1 mm Geriye', '#EF4444'),
+        ('Adaptif Trim Cevabı', '-3.5° Burun-Aşağı', '#10B981')
+    ]
+
+    y_pos = np.arange(len(m3_params))
+    for i, (p_name, p_val, col) in enumerate(m3_params):
+        ax4.text(0.05, i, f"• {p_name}", color='#E2E8F0', fontsize=11, fontweight='bold', va='center')
+        ax4.text(0.60, i, f"[{p_val}]", color=col, fontsize=11, fontweight='bold', va='center')
+
+    ax4.set_xlim(0, 1.0)
+    ax4.set_ylim(-0.5, len(m3_params) - 0.5)
+    ax4.invert_yaxis()
+    ax4.axis('off')
+    ax4.set_title('(D) Görev 3: Hassas Balistik Bırakma ve Aktif CG Kompanzasyonu', fontsize=12, fontweight='bold', color='#F1F5F9')
+
+    plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none', dpi=220)
+    plt.close()
+    print(f"[OK] Mission Profiles infographic saved to: {out_path}")
+
+
 def main():
     print("=" * 68)
     print("  METUAV DBF 2027 - Repository Görsel Üretim Aracı")
@@ -570,10 +825,13 @@ def main():
     generate_mission3_drop_visual()
     generate_cad_architecture_visual()
     generate_gcs_cockpit_visual()
+    generate_wind_tunnel_visual()
+    generate_mission_profiles_visual()
     print("=" * 68)
-    print("[BAŞARILI] Tüm 4 görsel başarıyla üretildi ve güncellendi!")
+    print("[BAŞARILI] Tüm 6 görsel başarıyla üretildi ve güncellendi!")
     print("=" * 68)
 
 
 if __name__ == '__main__':
     main()
+

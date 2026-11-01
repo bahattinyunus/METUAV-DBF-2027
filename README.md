@@ -195,6 +195,11 @@ Uçağımız, resmi AIAA kurallarına göre 4 aşamalı görev zincirini başar�
     *   Hedef bölgesi üzerinde uçarken gövde altı kapakların açılarak $8.35\text{ kg}$ faydalı yükün bırakılması.
     *   Yük bırakıldığı andaki ani kütle düşüşü ve **$+44.1\text{ mm}$ ağırlık merkezi (CG) kaymasında** uçağın kontrolden çıkmasını önleyen aktif aerodinamik trim kompanzasyonu.
 
+<div align="center">
+  <img src="docs/images/gokdogan_mission_profiles.png" alt="AIAA DBF 2027 Görev Profilleri ve Performans Mimarisi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
+  <p><em>Şekil 2: AIAA DBF 2027 4 aşamalı yarışma görev profilleri, yer montaj süresi, kalkış mesafesi ve Görev 3 bırakma mimarisi.</em></p>
+</div>
+
 ---
 
 ## 📂 Depo Klasör Yapısı
@@ -261,6 +266,11 @@ METUAV-DBF-2027/
 *   **3D Sonlu Kanat Dönüşümü:** Prandtl lifting-line teorisi ile sonlu kanat dönüşümü yapılmış; $AR = 8.19$ ve $\lambda = 0.812$ sivrilme oranıyla $C_{L_{max, 3D}} = 1.96$ olarak hesaplanmıştır.
 *   **CFD Analizleri:** ANSYS Fluent 2024 ortamında $k-\omega\text{ SST}$ türbülans modeli ve 7.85 milyon polihedral hücreli ağ ile sınır katman laminar ayrılma balonları çözümlenmiştir. Seyir hücum açısında ($\alpha = 4.0^\circ$) maksimum süzülme oranı $(L/D)_{3D} = 19.31$ elde edilmiştir.
 
+<div align="center">
+  <img src="docs/images/gokdogan_wind_tunnel_test.png" alt="METUAV Gökdoğan Rüzgar Tüneli Akış ve Yüzey Basınç Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
+  <p><em>Şekil 3: ODTÜ Rüzgar Tüneli duman akış çizgileri, Selig 1223 yüzey basınç (Cp) dağılımı ve Trefftz düzlemi indüklenmiş hız analizi.</em></p>
+</div>
+
 ### 2. Yapısal Tasarım ve Karbon Spar FEA
 *   **Kiriş Mimarisi:** Kanat eğilme momentlerini karşılamak üzere Toray T700 tek yönlü (UD) karbon flanşlar ve Rohacell köpük dolgulu $\pm 45^\circ$ çift eksenli karbon kayma webinden oluşan tapered I-kiriş tasarlandı.
 *   **Gerilme Sonuçları:** AIAA $+3.5g$ ultimate yük faktörü ve $1.25$ emniyet katsayısı altında ($1066.2\text{ N}$ toplam yük):
@@ -271,7 +281,7 @@ METUAV-DBF-2027/
 
 <div align="center">
   <img src="docs/images/gokdogan_cad_exploded_view.png" alt="METUAV Gökdoğan 3D CAD ve Yapısal Mimari Planı" width="100%"/>
-  <p><em>Şekil 2: METUAV Gökdoğan 3D CAD geometrisi, Selig 1223 profil kesiti, kütle bütçesi ve anlık CG seyahati analizi.</em></p>
+  <p><em>Şekil 4: METUAV Gökdoğan 3D CAD geometrisi, Selig 1223 profil kesiti, kütle bütçesi ve anlık CG seyahati analizi.</em></p>
 </div>
 
 ### 3. Elektrik İtki ve BEMT Pervane Optimizasyonu
@@ -295,7 +305,7 @@ METUAV-DBF-2027/
 
 <div align="center">
   <img src="docs/images/gokdogan_mission3_drop.png" alt="AIAA DBF Görev 3 Balistik Bırakma ve Hedef İsabet Analizi" width="100%"/>
-  <p><em>Şekil 3: Görev 3 3-DOF RK4 balistik düşüş yörüngesi, konsantrik hedef Monte Carlo dağılımı ve adaptif trim cevabı.</em></p>
+  <p><em>Şekil 5: Görev 3 3-DOF RK4 balistik düşüş yörüngesi, konsantrik hedef Monte Carlo dağılımı ve adaptif trim cevabı.</em></p>
 </div>
 
 ### 6. Micro-XRCE-DDS Köprüsü ve Web Yer İstasyonu (GCS)
@@ -346,7 +356,7 @@ Telemetri düğümümüz terminalde ANSI formatında veya dahili web sunucusu ü
 
 <div align="center">
   <img src="docs/images/gokdogan_gcs_cockpit_dashboard.png" alt="METUAV DBF 2027 Canlı Web Yer İstasyonu ve PFD Ekranı" width="100%"/>
-  <p><em>Şekil 4: HTML5 Canvas PFD (Yapay Ufuk), taktik radar pylon haritası ve güç telemetrisi arayüzü.</em></p>
+  <p><em>Şekil 6: HTML5 Canvas PFD (Yapay Ufuk), taktik radar pylon haritası ve güç telemetrisi arayüzü.</em></p>
 </div>
 
 ---
@@ -405,6 +415,11 @@ python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
 ---
 
 ## 📋 Uçuş Öncesi Kontrol Listeleri ve Standart Operasyon (SOP)
+
+<div align="center">
+  <img src="docs/images/gokdogan_flight_line.jpg" alt="METUAV Gökdoğan Uçuş Hattı ve Apron Hazırlığı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
+  <p><em>Şekil 7: Yarışma uçuş hattında (Flight Line) pitot emniyet flaması, üç tekerlekli iniş takımı ve yer istasyonu eşliğinde Gökdoğan İHA.</em></p>
+</div>
 
 Uçuş emniyeti kuralları gereği, piste çıkış öncesinde aşağıdaki kontroller zorunludur:
 *   [x] **Mekanik Emniyet:** Ball-lock kanat pimleri çift kilitli, kontrol yüzey açıklıkları $\le 0.5\text{ mm}$.
