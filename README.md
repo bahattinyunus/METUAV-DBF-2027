@@ -1,5 +1,11 @@
 <div align="center">
 
+<p align="center">
+  <img src="docs/images/gokdogan_aircraft_banner.jpg" alt="METUAV DBF 2027 GÖKDOĞAN İHA" width="100%" style="border-radius: 14px; box-shadow: 0 10px 35px rgba(0,0,0,0.65);" />
+  <br>
+  <em>Şekil 1: METUAV Gökdoğan İHA — 2.40m Açıklık, Yüksek Taşıyıcılı Karbon Kompozit Gövde ve Canlı Aviyonik HUD Telemetrisi.</em>
+</p>
+
 # 🦅 METUAV DBF 2027 | GÖKDOĞAN
 ### AIAA Design/Build/Fly Resmî İHA Geliştirme, Otonomi ve Mühendislik Deposu
 
@@ -19,12 +25,6 @@
  |_|  |_|_____| |_|  \___/ /_/   \_\_/     |____/|____/|_|     |_____|\___/_____/_/   
                     🦅 O D T Ü   H A V A C I L I K   T A K I M I 🦅
 ```
-
-<p align="center">
-  <img src="docs/images/gokdogan_aircraft_banner.jpg" alt="METUAV DBF 2027 GÖKDOĞAN İHA" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.6);" />
-  <br>
-  <em>Şekil 1: METUAV Gökdoğan İHA — 2.40m Açıklık, Yüksek Taşıyıcılı Karbon Kompozit Gövde ve Canlı Aviyonik HUD Telemetrisi.</em>
-</p>
 
 *Orta Doğu Teknik Üniversitesi (ODTÜ) Makina ve Havacılık & Uzay Mühendisliği bünyesindeki **METUAV** takımının AIAA DBF 2027 için geliştirdiği yüksek taşıma kapasiteli, Edge-AI vizyon destekli ve adaptif uçuş kontrol mimarisine sahip İnsansız Hava Aracı sistemi.*
 
