@@ -20,6 +20,10 @@
                     🦅 O D T Ü   H A V A C I L I K   T A K I M I 🦅
 ```
 
+<p align="center">
+  <img src="docs/images/gokdogan_aircraft_banner.jpg" alt="METUAV DBF 2027 GÖKDOĞAN İHA" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.6);" />
+</p>
+
 *Orta Doğu Teknik Üniversitesi (ODTÜ) Makina ve Havacılık & Uzay Mühendisliği bünyesindeki **METUAV** takımının AIAA DBF 2027 için geliştirdiği yüksek taşıma kapasiteli, Edge-AI vizyon destekli ve adaptif uçuş kontrol mimarisine sahip İnsansız Hava Aracı sistemi.*
 
 </div>
