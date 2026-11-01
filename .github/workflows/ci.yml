@@ -42,18 +42,17 @@ jobs:
       run: |
         python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
 
-    - name: Verify Aerodynamic Sizing and TOGW Compliance
+    - name: Verify Aerodynamic Sizing and TOGW Compliance & 3D VLM Aerodynamics
       run: |
         python aerodinamik/scripts/polar_analysis.py
+        python aerodinamik/scripts/vlm_aerodynamics_solver.py
 
-    - name: Verify Mass and CG Budget (55 lbs Limit)
+    - name: Verify Mass, CG, FEA, Flutter & Landing Gear Drop Dynamics
       run: |
         python mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
-
-    - name: Verify Carbon Spar Structural FEA (+3.5g Ultimate Load) & Flutter
-      run: |
         python mekanik_ve_yapisal/scripts/spar_stress_fea.py
         python mekanik_ve_yapisal/scripts/flutter_and_divergence_analyzer.py
+        python mekanik_ve_yapisal/scripts/landing_gear_drop_simulator.py
 
     - name: Run BEMT Propeller, Thermal & Dual-RC Battery SOH Simulations
       run: |
@@ -65,8 +64,9 @@ jobs:
       run: |
         python uretim_ve_test/scripts/generate_wing_rib_dxf.py
 
-    - name: Run Full 6-DOF Nonlinear Dynamics & L1 Guidance
+    - name: Run Full 6-DOF Nonlinear Dynamics, L1 Guidance & FDIR Failsafe
       run: |
         python simulasyon/scripts/six_dof_flight_dynamics.py
         python aviyonik_ve_otonom/src/ucus_kontrol/src/l1_path_follower.py
+        python aviyonik_ve_otonom/src/ucus_kontrol/src/fdir_manager.py
         python simulasyon/scripts/simulate_flight_test.py
