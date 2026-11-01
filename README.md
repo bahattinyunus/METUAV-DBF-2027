@@ -22,6 +22,8 @@
 
 <p align="center">
   <img src="docs/images/gokdogan_aircraft_banner.jpg" alt="METUAV DBF 2027 GÖKDOĞAN İHA" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.6);" />
+  <br>
+  <em>Şekil 1: METUAV Gökdoğan İHA — 2.40m Açıklık, Yüksek Taşıyıcılı Karbon Kompozit Gövde ve Canlı Aviyonik HUD Telemetrisi.</em>
 </p>
 
 *Orta Doğu Teknik Üniversitesi (ODTÜ) Makina ve Havacılık & Uzay Mühendisliği bünyesindeki **METUAV** takımının AIAA DBF 2027 için geliştirdiği yüksek taşıma kapasiteli, Edge-AI vizyon destekli ve adaptif uçuş kontrol mimarisine sahip İnsansız Hava Aracı sistemi.*
@@ -266,6 +268,11 @@ METUAV-DBF-2027/
     *   Kayma gerilmesi: $\tau_{max} = 6.3\text{ MPa}$ (Akma sınırı: $65\text{ MPa}$) $\to$ **Kayma Emniyet Katsayısı = 10.24**
     *   Kanat ucu sehimi: Yalnızca **$9.1\text{ mm}$** (Yarı açıklığın $\%0.8$'i).
 
+<div align="center">
+  <img src="docs/images/gokdogan_cad_exploded_view.png" alt="METUAV Gökdoğan 3D CAD ve Yapısal Mimari Planı" width="100%"/>
+  <p><em>Şekil 2: METUAV Gökdoğan 3D CAD geometrisi, Selig 1223 profil kesiti, kütle bütçesi ve anlık CG seyahati analizi.</em></p>
+</div>
+
 ### 3. Elektrik İtki ve BEMT Pervane Optimizasyonu
 *   **Pala Elemanları Momentum Teorisi (BEMT):** Yarıçap boyunca 12 istasyonda hava akış hız üçgenleri ve Prandtl uç kaybı düzeltmeleri entegre edildi.
 *   **19x12E Pervane:** 6S LiPo geriliminde 6800 RPM devir altında **$122.4\text{ N}$ ($12.5\text{ kgf}$)** statik kalkış itkisi ve $\%79.8$ seyir verimliliği sağlandı.
@@ -283,6 +290,11 @@ METUAV-DBF-2027/
 *   **Hedef Kalman Takip Filtresi:** Kamera projeksiyon gürültüsünü filtreler, Mahalanobis $\chi^2$ kapılama testiyle hatalı algılamaları (outlier) eler ve yüksek yatış açılı dönüşlerde hedef koordinatlarını kararlı tutar.
 *   **Sentetik Vizyon Simülatörü:** 6-DOF uçak koordinatlarına göre 80° FOV optik kamera görüntüsü ve DBF dairesel hedefini gerçek zamanlı sentezleyerek harici simülatör gerektirmeden tam otonom görev doğrulaması sağlar.
 *   **3-DOF RK4 Balistik Yörünge Çözücü:** Runge-Kutta 4. mertebe sayısal integratörü; yerçekimi, hava yoğunluğu, sürükleme katsayısı ($C_d A$) ve rüzgar hızını hesaba katarak en uygun bırakma anını belirler. Ortalama hedef sapması **$0.42\text{ metre}$** ile dünya standardındadır.
+
+<div align="center">
+  <img src="docs/images/gokdogan_mission3_drop.png" alt="AIAA DBF Görev 3 Balistik Bırakma ve Hedef İsabet Analizi" width="100%"/>
+  <p><em>Şekil 3: Görev 3 3-DOF RK4 balistik düşüş yörüngesi, konsantrik hedef Monte Carlo dağılımı ve adaptif trim cevabı.</em></p>
+</div>
 
 ### 6. Micro-XRCE-DDS Köprüsü ve Web Yer İstasyonu (GCS)
 *   **Micro-XRCE-DDS & PX4 uORB Köprüsü:** ROS 2 DDS mesajlarını PX4 uORB ara katmanına mikrosaniye mertebesinde çevirir; düşük gecikmeli offboard kontrol ve faydalı yük servo tetikleme komutlarını iletir.
@@ -329,6 +341,11 @@ Telemetri düğümümüz terminalde ANSI formatında veya dahili web sunucusu ü
   HEDEF HATA PAYI:  0.42 m (Tolerans: < 1.20 m)
 =================================================================
 ```
+
+<div align="center">
+  <img src="docs/images/gokdogan_gcs_cockpit_dashboard.png" alt="METUAV DBF 2027 Canlı Web Yer İstasyonu ve PFD Ekranı" width="100%"/>
+  <p><em>Şekil 4: HTML5 Canvas PFD (Yapay Ufuk), taktik radar pylon haritası ve güç telemetrisi arayüzü.</em></p>
+</div>
 
 ---
 
