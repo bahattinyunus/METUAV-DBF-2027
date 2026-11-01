@@ -1,0 +1,25 @@
+flight_control_node:
+  ros__parameters:
+    # PID parameters for roll (ailerons)
+    roll_kp: 1.85
+    roll_ki: 0.12
+    roll_kd: 0.28
+
+    # PID parameters for pitch (elevator)
+    pitch_kp: 2.30
+    pitch_ki: 0.20
+    pitch_kd: 0.38
+
+    # Mission 3 Payload Drop Compensation
+    # When 11.2 kg payload is dropped, CG shifts aft by 38 mm.
+    # We apply proactive nose-down elevator trim offset to prevent stall.
+    payload_pitch_trim_deg: -3.5
+
+    # Aircraft Weight Limits (AIAA DBF 55 lbs TOGW limit)
+    nominal_mass_kg: 24.85
+    empty_mass_kg: 13.65
+
+    # Operational Speeds
+    cruise_airspeed_ms: 24.0
+    stall_speed_ms: 13.8
+    max_safe_speed_ms: 38.0

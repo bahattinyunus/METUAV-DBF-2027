@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="dbf_airfield">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Airfield Runway Surface -->
+    <model name="airfield_runway">
+      <static>true</static>
+      <pose>0 0 0.005 0 0 0</pose>
+      <link name="runway_link">
+        <collision name="runway_col">
+          <geometry>
+            <box>
+              <size>200.0 25.0 0.01</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="runway_vis">
+          <geometry>
+            <box>
+              <size>200.0 25.0 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1.0</ambient>
+            <diffuse>0.25 0.25 0.25 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Mission 3 Ground Target (Concentric Target Bullseye) -->
+    <model name="mission3_target">
+      <static>true</static>
+      <pose>75.0 30.0 0.01 0 0 0</pose>
+      <link name="target_link">
+        <visual name="outer_ring">
+          <geometry>
+            <cylinder>
+              <radius>4.0</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.9 0.1 0.1 1.0</ambient>
+          </material>
+        </visual>
+        <visual name="middle_ring">
+          <pose>0 0 0.005 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>2.5</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 1.0 1.0 1.0</ambient>
+          </material>
+        </visual>
+        <visual name="bullseye">
+          <pose>0 0 0.01 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1.0</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.9 0.1 0.1 1.0</ambient>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Mission Circuit Pylons -->
+    <model name="north_pylon">
+      <static>true</static>
+      <pose>150.0 0 5.0 0 0 0</pose>
+      <link name="pylon_link">
+        <visual name="vis">
+          <geometry>
+            <cylinder>
+              <radius>0.4</radius>
+              <length>10.0</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.5 0.0 1.0</ambient>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="south_pylon">
+      <static>true</static>
+      <pose>-150.0 0 5.0 0 0 0</pose>
+      <link name="pylon_link">
+        <visual name="vis">
+          <geometry>
+            <cylinder>
+              <radius>0.4</radius>
+              <length>10.0</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.5 0.0 1.0</ambient>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+  </world>
+</sdf>

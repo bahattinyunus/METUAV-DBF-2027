@@ -1,0 +1,54 @@
+// OpenVSP Parametric Model Generator for METUAV DBF 2027
+// AIAA Design/Build/Fly Competition Aircraft
+
+void main()
+{
+    // Clear existing model
+    ClearVSP();
+
+    // 1. Fuselage
+    string fuse_id = AddGeom("FUSELAGE", "Fuselage");
+    SetParmVal(fuse_id, "Length", "Design", 1.65);
+    SetParmVal(fuse_id, "Width", "Design", 0.22);
+    SetParmVal(fuse_id, "Height", "Design", 0.24);
+    SetParmVal(fuse_id, "X_Rel_Location", "XForm", 0.0);
+    SetParmVal(fuse_id, "Y_Rel_Location", "XForm", 0.0);
+    SetParmVal(fuse_id, "Z_Rel_Location", "XForm", 0.0);
+
+    // 2. Main Wing (High-Lift S1223)
+    string wing_id = AddGeom("WING", "MainWing");
+    SetParmVal(wing_id, "Span", "Design", 2.40);
+    SetParmVal(wing_id, "TotalArea", "Design", 0.7032);
+    SetParmVal(wing_id, "TotalAR", "Design", 8.19);
+    SetParmVal(wing_id, "Root_Chord", "Design", 0.32);
+    SetParmVal(wing_id, "Tip_Chord", "Design", 0.26);
+    SetParmVal(wing_id, "Sweep", "Design", 1.5);
+    SetParmVal(wing_id, "Dihedral", "Design", 2.0);
+    SetParmVal(wing_id, "X_Rel_Location", "XForm", 0.38);
+    SetParmVal(wing_id, "Z_Rel_Location", "XForm", 0.12);
+
+    // 3. Horizontal Stabilizer
+    string htail_id = AddGeom("WING", "HTail");
+    SetParmVal(htail_id, "Span", "Design", 0.70);
+    SetParmVal(htail_id, "TotalArea", "Design", 0.126);
+    SetParmVal(htail_id, "TotalAR", "Design", 3.89);
+    SetParmVal(htail_id, "Root_Chord", "Design", 0.20);
+    SetParmVal(htail_id, "Tip_Chord", "Design", 0.16);
+    SetParmVal(htail_id, "X_Rel_Location", "XForm", 1.35);
+    SetParmVal(htail_id, "Z_Rel_Location", "XForm", 0.08);
+
+    // 4. Vertical Stabilizer
+    string vtail_id = AddGeom("WING", "VTail");
+    SetParmVal(vtail_id, "Span", "Design", 0.28);
+    SetParmVal(vtail_id, "TotalArea", "Design", 0.056);
+    SetParmVal(vtail_id, "Root_Chord", "Design", 0.24);
+    SetParmVal(vtail_id, "Tip_Chord", "Design", 0.16);
+    SetParmVal(vtail_id, "X_Rel_Location", "XForm", 1.30);
+    SetParmVal(vtail_id, "Z_Rel_Location", "XForm", 0.10);
+    SetParmVal(vtail_id, "X_Rel_Rotation", "XForm", 90.0);
+
+    // Update and Save Model
+    Update();
+    WriteVSPFile("METUAV_DBF_2027_Geometry.vsp3");
+    Print("METUAV DBF 2027 OpenVSP modeli basariyla olusturuldu!");
+}

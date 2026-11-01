@@ -1,0 +1,27 @@
+{
+  "project": "METUAV-DBF-2027",
+  "part_name": "modular_servo_and_battery_tray",
+  "material": "PA12-CF (Carbon Fiber Reinforced Nylon)",
+  "manufacturing": {
+    "process": "FDM / SLS",
+    "layer_height_mm": 0.20,
+    "infill_percentage": 40,
+    "infill_pattern": "gyroid",
+    "wall_loops": 4,
+    "top_bottom_layers": 5,
+    "extrusion_temp_c": 275,
+    "bed_temp_c": 90
+  },
+  "dimensions_mm": {
+    "length": 180.0,
+    "width": 85.0,
+    "height": 45.0,
+    "wall_thickness": 3.0
+  },
+  "weight_estimate_grams": 78.5,
+  "mounting_hardware": {
+    "chassis_fasteners": "M3x10 Titanium Button Head Socket Screws",
+    "servo_fasteners": "M2.5x8 Stainless Socket Head Screws",
+    "threaded_inserts": "M3 Brass Heat-Set Inserts (Length: 5.7mm)"
+  }
+}

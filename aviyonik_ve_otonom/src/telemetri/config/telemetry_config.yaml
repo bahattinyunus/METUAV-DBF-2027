@@ -1,0 +1,8 @@
+mavlink_bridge_node:
+  ros__parameters:
+    connection_url: "udp:127.0.0.1:14550"
+    baudrate: 57600
+    telemetry_rate_hz: 10.0
+    heartbeat_rate_hz: 1.0
+    failsafe_timeout_sec: 2.0
+    enable_packet_logging: true

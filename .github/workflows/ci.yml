@@ -1,0 +1,51 @@
+name: METUAV DBF 2027 CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-and-verify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest numpy scipy
+        pip install -r aviyonik_ve_otonom/src/edge_ai_vision/requirements.txt || true
+        pip install -r aviyonik_ve_otonom/src/telemetri/requirements.txt || true
+
+    - name: Run Edge-AI & Ballistics Unit Tests
+      run: |
+        python -m pytest aviyonik_ve_otonom/src/edge_ai_vision/test/test_ballistics.py -o "pythonpath=aviyonik_ve_otonom/src/edge_ai_vision"
+
+    - name: Run Telemetry Packet Unit Tests
+      run: |
+        python -m pytest aviyonik_ve_otonom/src/telemetri/test/test_telemetry.py -o "pythonpath=aviyonik_ve_otonom/src/telemetri"
+
+    - name: Verify Aerodynamic Sizing and TOGW Compliance
+      run: |
+        python aerodinamik/scripts/polar_analysis.py
+
+    - name: Verify Mass and CG Budget (55 lbs Limit)
+      run: |
+        python mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
+
+    - name: Verify Carbon Spar Structural FEA (+3.5g Ultimate Load)
+      run: |
+        python mekanik_ve_yapisal/scripts/spar_stress_fea.py
+
+    - name: Run Mission 3 Flight Dynamics & Adaptive PID Simulation
+      run: |
+        python simulasyon/scripts/simulate_flight_test.py
