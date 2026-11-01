@@ -26,25 +26,20 @@ jobs:
         pip install -r aviyonik_ve_otonom/src/edge_ai_vision/requirements.txt || true
         pip install -r aviyonik_ve_otonom/src/telemetri/requirements.txt || true
 
-    - name: Run Edge-AI & Ballistics Unit Tests
+    - name: Run Complete Pytest Suite (TECS, Kalman Tracker, Telemetry, MDO, Benchmark)
       run: |
-        python -m pytest aviyonik_ve_otonom/src/edge_ai_vision/test/test_ballistics.py -o "pythonpath=aviyonik_ve_otonom/src/edge_ai_vision"
+        python -m pytest
 
-    - name: Run Telemetry Packet Unit Tests
+    - name: Run Full Mission SITL Autonomous Prototype
       run: |
-        python -m pytest aviyonik_ve_otonom/src/telemetri/test/test_telemetry.py -o "pythonpath=aviyonik_ve_otonom/src/telemetri"
+        python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
 
-    - name: Run Control & Energy Logic Tests
+    - name: Verify Web GCS Telemetry Server
       run: |
-        python -m pytest aviyonik_ve_otonom/src/ucus_kontrol/test/test_control_logic.py
-
-    - name: Run MDO Scoring & Sensitivity Tests
-      run: |
-        python -m pytest optimizasyon_ve_mdo/test/test_mdo.py -o "pythonpath=."
+        python aviyonik_ve_otonom/src/telemetri/telemetri/gcs_server.py --test
 
     - name: Run Competitor Benchmark & Gap Analysis
       run: |
-        python -m pytest rakip_analizi_ve_benchmark/test/test_benchmark.py -o "pythonpath=."
         python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
 
     - name: Verify Aerodynamic Sizing and TOGW Compliance

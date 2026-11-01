@@ -21,9 +21,9 @@ except ImportError:
 
 
 class GroundProjector:
-    """Projects image pixel coordinates onto flat ground using aircraft pose and altitude."""
+    """Projects image pixel coordinates onto flat ground using camera model and aircraft pose."""
 
-    def __init__(self, fx: float = 650.0, fy: float = 650.0, cx: float = 320.0, cy: float = 240.0):
+    def __init__(self, fx: float = 381.3, fy: float = 381.3, cx: float = 320.0, cy: float = 240.0):
         self.fx = fx
         self.fy = fy
         self.cx = cx
@@ -39,18 +39,13 @@ class GroundProjector:
         if altitude_m <= 0.1:
             return 0.0, 0.0
 
-        # Normalized camera ray vector
-        x_norm = (u - self.cx) / self.fx
-        y_norm = (v - self.cy) / self.fy
-        ray_cam = np.array([y_norm, x_norm, 1.0])  # Camera frame: Z forward/down
+        # Normalized coordinates (v inverted because image y points down)
+        cam_x = (u - self.cx) / self.fx
+        cam_y = (self.cy - v) / self.fy
 
-        # Small angle rotation correction for roll and pitch
-        cr, sr = math.cos(roll_rad), math.sin(roll_rad)
-        cp, sp = math.cos(pitch_rad), math.sin(pitch_rad)
-        
-        # Simple body-to-ground projection
-        dx_forward = altitude_m * (ray_cam[0] + math.tan(pitch_rad))
-        dy_right = altitude_m * (ray_cam[1] - math.tan(roll_rad))
+        # Project rays to ground plane considering small body attitude
+        dx_forward = altitude_m * (cam_y - math.tan(pitch_rad))
+        dy_right = altitude_m * (cam_x + math.tan(roll_rad))
 
         return float(dx_forward), float(dy_right)
 

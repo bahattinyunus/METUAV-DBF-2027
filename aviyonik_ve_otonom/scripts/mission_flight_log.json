@@ -1,0 +1,842 @@
+{
+  "summary": {
+    "total_flight_time_sec": 82.9,
+    "laps_completed": 2,
+    "payload_dropped": true,
+    "drop_error_distance_m": 0.98,
+    "final_battery_soc_pct": 95.5,
+    "status": "MISSION_SUCCESS"
+  },
+  "log_samples": [
+    {
+      "time": 0.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 0.0
+    },
+    {
+      "time": 1.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 0.7
+    },
+    {
+      "time": 2.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 1.4
+    },
+    {
+      "time": 3.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 2.1
+    },
+    {
+      "time": 4.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 2.8
+    },
+    {
+      "time": 5.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 3.5
+    },
+    {
+      "time": 6.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 4.2
+    },
+    {
+      "time": 7.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 4.9
+    },
+    {
+      "time": 8.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 5.6
+    },
+    {
+      "time": 9.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 6.3
+    },
+    {
+      "time": 10.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 7.0
+    },
+    {
+      "time": 11.0,
+      "phase": "FAST_BOOT",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 7.7
+    },
+    {
+      "time": 12.0,
+      "phase": "TAKEOFF_RUN",
+      "altitude_m": -0.0,
+      "airspeed_ms": 0.0,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.2,
+      "consumed_mah": 9.5
+    },
+    {
+      "time": 13.0,
+      "phase": "TAKEOFF_RUN",
+      "altitude_m": -0.0,
+      "airspeed_ms": 4.53,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.19,
+      "consumed_mah": 32.3
+    },
+    {
+      "time": 14.0,
+      "phase": "TAKEOFF_RUN",
+      "altitude_m": -0.0,
+      "airspeed_ms": 9.04,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.19,
+      "consumed_mah": 55.1
+    },
+    {
+      "time": 15.0,
+      "phase": "TAKEOFF_RUN",
+      "altitude_m": -0.0,
+      "airspeed_ms": 13.49,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.18,
+      "consumed_mah": 77.8
+    },
+    {
+      "time": 16.0,
+      "phase": "TAKEOFF_RUN",
+      "altitude_m": -0.0,
+      "airspeed_ms": 17.88,
+      "mass_kg": 24.85,
+      "pitch_deg": 0.0,
+      "battery_voltage": 25.18,
+      "consumed_mah": 100.6
+    },
+    {
+      "time": 17.0,
+      "phase": "CLIMBOUT",
+      "altitude_m": 1.93,
+      "airspeed_ms": 19.61,
+      "mass_kg": 24.85,
+      "pitch_deg": 8.5,
+      "battery_voltage": 25.17,
+      "consumed_mah": 122.2
+    },
+    {
+      "time": 18.0,
+      "phase": "CLIMBOUT",
+      "altitude_m": 5.42,
+      "airspeed_ms": 19.61,
+      "mass_kg": 24.85,
+      "pitch_deg": 8.5,
+      "battery_voltage": 25.17,
+      "consumed_mah": 143.1
+    },
+    {
+      "time": 19.0,
+      "phase": "CLIMBOUT",
+      "altitude_m": 8.92,
+      "airspeed_ms": 19.61,
+      "mass_kg": 24.85,
+      "pitch_deg": 8.5,
+      "battery_voltage": 25.16,
+      "consumed_mah": 163.9
+    },
+    {
+      "time": 20.0,
+      "phase": "CLIMBOUT",
+      "altitude_m": 12.43,
+      "airspeed_ms": 19.61,
+      "mass_kg": 24.85,
+      "pitch_deg": 8.5,
+      "battery_voltage": 25.16,
+      "consumed_mah": 184.7
+    },
+    {
+      "time": 21.0,
+      "phase": "CLIMBOUT",
+      "altitude_m": 15.93,
+      "airspeed_ms": 19.61,
+      "mass_kg": 24.85,
+      "pitch_deg": 8.5,
+      "battery_voltage": 25.15,
+      "consumed_mah": 205.6
+    },
+    {
+      "time": 22.0,
+      "phase": "CLIMBOUT",
+      "altitude_m": 19.43,
+      "airspeed_ms": 19.61,
+      "mass_kg": 24.85,
+      "pitch_deg": 8.5,
+      "battery_voltage": 25.15,
+      "consumed_mah": 226.4
+    },
+    {
+      "time": 23.0,
+      "phase": "CLIMBOUT",
+      "altitude_m": 22.93,
+      "airspeed_ms": 19.61,
+      "mass_kg": 24.85,
+      "pitch_deg": 8.5,
+      "battery_voltage": 25.14,
+      "consumed_mah": 247.2
+    },
+    {
+      "time": 24.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.14,
+      "consumed_mah": 262.9
+    },
+    {
+      "time": 25.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.14,
+      "consumed_mah": 272.2
+    },
+    {
+      "time": 26.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.14,
+      "consumed_mah": 281.5
+    },
+    {
+      "time": 27.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.13,
+      "consumed_mah": 290.8
+    },
+    {
+      "time": 28.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.13,
+      "consumed_mah": 300.1
+    },
+    {
+      "time": 29.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.13,
+      "consumed_mah": 309.4
+    },
+    {
+      "time": 30.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.13,
+      "consumed_mah": 318.7
+    },
+    {
+      "time": 31.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.13,
+      "consumed_mah": 328.0
+    },
+    {
+      "time": 32.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.12,
+      "consumed_mah": 337.3
+    },
+    {
+      "time": 33.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.12,
+      "consumed_mah": 346.6
+    },
+    {
+      "time": 34.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.12,
+      "consumed_mah": 355.9
+    },
+    {
+      "time": 35.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.12,
+      "consumed_mah": 365.2
+    },
+    {
+      "time": 36.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.12,
+      "consumed_mah": 374.5
+    },
+    {
+      "time": 37.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.11,
+      "consumed_mah": 383.9
+    },
+    {
+      "time": 38.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.11,
+      "consumed_mah": 393.2
+    },
+    {
+      "time": 39.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.11,
+      "consumed_mah": 402.5
+    },
+    {
+      "time": 40.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.11,
+      "consumed_mah": 411.8
+    },
+    {
+      "time": 41.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.11,
+      "consumed_mah": 421.1
+    },
+    {
+      "time": 42.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.1,
+      "consumed_mah": 430.4
+    },
+    {
+      "time": 43.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.1,
+      "consumed_mah": 439.7
+    },
+    {
+      "time": 44.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.1,
+      "consumed_mah": 449.0
+    },
+    {
+      "time": 45.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.1,
+      "consumed_mah": 458.3
+    },
+    {
+      "time": 46.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.09,
+      "consumed_mah": 467.6
+    },
+    {
+      "time": 47.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.09,
+      "consumed_mah": 476.9
+    },
+    {
+      "time": 48.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.09,
+      "consumed_mah": 486.2
+    },
+    {
+      "time": 49.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.09,
+      "consumed_mah": 495.5
+    },
+    {
+      "time": 50.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.09,
+      "consumed_mah": 504.8
+    },
+    {
+      "time": 51.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.08,
+      "consumed_mah": 514.1
+    },
+    {
+      "time": 52.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.08,
+      "consumed_mah": 523.4
+    },
+    {
+      "time": 53.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.08,
+      "consumed_mah": 532.7
+    },
+    {
+      "time": 54.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.08,
+      "consumed_mah": 542.0
+    },
+    {
+      "time": 55.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.08,
+      "consumed_mah": 551.4
+    },
+    {
+      "time": 56.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.07,
+      "consumed_mah": 560.7
+    },
+    {
+      "time": 57.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.07,
+      "consumed_mah": 570.0
+    },
+    {
+      "time": 58.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.07,
+      "consumed_mah": 579.3
+    },
+    {
+      "time": 59.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.07,
+      "consumed_mah": 588.6
+    },
+    {
+      "time": 60.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.07,
+      "consumed_mah": 597.9
+    },
+    {
+      "time": 61.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.06,
+      "consumed_mah": 607.2
+    },
+    {
+      "time": 62.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.06,
+      "consumed_mah": 616.5
+    },
+    {
+      "time": 63.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.06,
+      "consumed_mah": 625.8
+    },
+    {
+      "time": 64.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.06,
+      "consumed_mah": 635.1
+    },
+    {
+      "time": 65.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.06,
+      "consumed_mah": 644.4
+    },
+    {
+      "time": 66.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.05,
+      "consumed_mah": 653.7
+    },
+    {
+      "time": 67.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.05,
+      "consumed_mah": 663.0
+    },
+    {
+      "time": 68.0,
+      "phase": "PYLON_CIRCUIT",
+      "altitude_m": 25.0,
+      "airspeed_ms": 24.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.05,
+      "consumed_mah": 672.3
+    },
+    {
+      "time": 69.0,
+      "phase": "MISSION_3_APPROACH",
+      "altitude_m": 25.0,
+      "airspeed_ms": 23.5,
+      "mass_kg": 24.85,
+      "pitch_deg": 2.4,
+      "battery_voltage": 25.05,
+      "consumed_mah": 681.0
+    },
+    {
+      "time": 70.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 23.38,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.05,
+      "consumed_mah": 684.6
+    },
+    {
+      "time": 71.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 21.58,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.05,
+      "consumed_mah": 688.0
+    },
+    {
+      "time": 72.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 19.78,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 691.3
+    },
+    {
+      "time": 73.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 17.98,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 694.6
+    },
+    {
+      "time": 74.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 16.18,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 698.0
+    },
+    {
+      "time": 75.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 14.38,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 701.3
+    },
+    {
+      "time": 76.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 12.58,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 704.6
+    },
+    {
+      "time": 77.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 10.78,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 708.0
+    },
+    {
+      "time": 78.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 8.98,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 711.3
+    },
+    {
+      "time": 79.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 7.18,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 714.6
+    },
+    {
+      "time": 80.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 5.38,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 718.0
+    },
+    {
+      "time": 81.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 3.58,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 721.3
+    },
+    {
+      "time": 82.0,
+      "phase": "RETURN_AND_LAND",
+      "altitude_m": 1.78,
+      "airspeed_ms": 23.5,
+      "mass_kg": 13.65,
+      "pitch_deg": 5.2,
+      "battery_voltage": 25.04,
+      "consumed_mah": 724.6
+    }
+  ]
+}

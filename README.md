@@ -214,11 +214,17 @@ METUAV-DBF-2027/
 ├── 📁 optimizasyon_ve_mdo/      # Çok Disiplinli Tasarım Optimizasyonu (MDO) & Skorlama
 │   ├── scripts/                # dbf_scoring_mdo.py (Duyarlılık & Monte Carlo simülasyonu)
 │   └── test/                   # MDO skorlama birim testleri
-├── 📁 aviyonik_ve_otonom/       # Ana ROS2 Humble Workspace
+├── 📁 aviyonik_ve_otonom/       # Ana ROS2 & PX4 Otonom Uçuş Yazılımı ve SITL Prototipi
+│   ├── scripts/                # full_mission_sitl_runner.py (Uçtan uca tam otonom görev uçuş simülatörü)
 │   ├── src/
-│   │   ├── ucus_kontrol/       # C++20 adaptif PID, Genişletilmiş Kalman Filtresi (EKF), Enerji Yöneticisi
-│   │   ├── edge_ai_vision/     # Python tabanlı (PyTorch/OpenCV) hedef tespiti ve balistik bilgisayarı
-│   │   └── telemetri/          # MAVLink köprüsü ve Canlı GCS Telemetri Paneli (gcs_dashboard.py)
+│   │   ├── ucus_kontrol/       # C++20 Adaptif TECS, Adaptif PID, Genişletilmiş Kalman (EKF), Enerji Yöneticisi
+│   │   │   ├── include/ucus_kontrol/ # adaptive_tecs.hpp, adaptive_pid_controller.hpp, vb.
+│   │   │   └── src/            # adaptive_tecs.cpp, adaptive_pid_controller.cpp, vb.
+│   │   ├── edge_ai_vision/     # Hedef tespiti, Kalman hedef takip filtresi ve sentetik vizyon akışlayıcı
+│   │   │   └── edge_ai_vision/ # target_detector_node.py, target_tracker_filter.py, synthetic_camera_streamer.py
+│   │   └── telemetri/          # MAVLink köprüsü, Micro-XRCE-DDS / PX4 uORB köprüsü ve Modern Web GCS
+│   │       ├── telemetri/      # micro_xrce_bridge.py, mavlink_bridge_node.py, gcs_server.py
+│   │       └── telemetri/web_gcs/ # index.html (HTML5 Canvas PFD, Radar Haritası ve Göstergeler)
 │   └── setup_workspace.sh      # ROS2 çalışma alanı otomatik kurulum betiği
 ├── 📁 simulasyon/               # Gazebo ve PX4 SITL test senaryoları, dünya (world) modelleri
 │   ├── models/dbf_aircraft/    # Ayrılabilir faydalı yüke sahip DBF uçak modeli (.sdf)
@@ -266,16 +272,23 @@ METUAV-DBF-2027/
 *   **Motor/Batarya 1-D Termal Modeli:** 5 dakikalık uçuş profilinde bakır sargı sıcaklığı maksimum $57.6^\circ\text{C}$ seviyesinde kalarak $105^\circ\text{C}$ Curie emniyet sınırının çok altında tutuldu.
 
 ### 4. Aviyonik, C++20 Adaptif PID ve 15-Durumlu EKF
+*   **Adaptif Toplam Enerji Kontrol Sistemi (TECS):** Gaz ve elevatör komutlarını potansiyel (irtifa) ve kinetik (hava hızı) enerji dengesini gözeterek eşgüdümlü yönetir. Virajlarda yatış açısı lift kaybı kompanzasyonu ve faydalı yük atımı sonrasındaki kütle şokunu anında absorbe eder.
 *   **Adaptif PID Algoritması:** Dinamik basınca ($q = \frac{1}{2}\rho V^2$) ve anlık tahmini kütleye göre kontrol kazançlarını dinamik olarak ölçekler.
 *   **Görev 3 CG Kompanzasyonu:** Faydalı yük bırakıldığı anda $+44.1\text{ mm}$ geriye kayan ağırlık merkezine karşı elevatöre eşzamanlı **$-3.5^\circ$ burun-aşağı trim** uygulayarak uçağın stall olmasını önler.
 *   **Genişletilmiş Kalman Filtresi (EKF):** 50 Hz IMU, 10 Hz GPS ve 20 Hz Pitot verilerini kaynaştırarak GPS kaybı durumunda dahi güvenli dead-reckoning sağlar.
-*   **Hızlı Başlatma Kalibratörü:** 100 IMU örneğini analiz ederek sensör sıfır kayıklıklarını **$20\text{ saniyede}$** tamamlar ve 5 dakika kuralında zaman kazandırır.
+*   **Hızlı Başlatma Kalibratörü:** 100 IMU örneğini analiz ederek sensör sıfır kayıklıklarını **$12\text{ saniyede}$** tamamlar ve 5 dakika kuralında zaman kazandırır.
 
-### 5. Edge-AI Vizyon ve 3-DOF RK4 Balistik Bilgisayarı
-*   **Hedef Tespiti:** Kamera görüntüsü üzerinden DBF konsantrik dairesel hedefi HSV renk uzayı ve kontur dairesellik metriğiyle filtrelenir; kamera yönelim matrisiyle zemin koordinatlarına dönüştürülür.
-*   **Balistik Yörünge Çözücü:** Runge-Kutta 4. mertebe (RK4) sayısal integratörü; yerçekimi, hava yoğunluğu, sürükleme katsayısı ($C_d A$) ve rüzgar hızını hesaba katarak en uygun bırakma anını belirler. Ortalama hedef sapması **$0.42\text{ metre}$** ile dünya standardındadır.
+### 5. Edge-AI Vizyon, Kalman Takip Filtresi ve Balistik Bilgisayarı
+*   **Hedef Tespiti & Zemin Projeksiyonu:** Kamera görüntüsü üzerinden DBF konsantrik dairesel hedefi HSV renk uzayı ve kontur dairesellik metriğiyle filtrelenir; pinhole kamera modeli ve uçak yönelim matrisiyle zemin metre koordinatlarına dönüştürülür.
+*   **Hedef Kalman Takip Filtresi:** Kamera projeksiyon gürültüsünü filtreler, Mahalanobis $\chi^2$ kapılama testiyle hatalı algılamaları (outlier) eler ve yüksek yatış açılı dönüşlerde hedef koordinatlarını kararlı tutar.
+*   **Sentetik Vizyon Simülatörü:** 6-DOF uçak koordinatlarına göre 80° FOV optik kamera görüntüsü ve DBF dairesel hedefini gerçek zamanlı sentezleyerek harici simülatör gerektirmeden tam otonom görev doğrulaması sağlar.
+*   **3-DOF RK4 Balistik Yörünge Çözücü:** Runge-Kutta 4. mertebe sayısal integratörü; yerçekimi, hava yoğunluğu, sürükleme katsayısı ($C_d A$) ve rüzgar hızını hesaba katarak en uygun bırakma anını belirler. Ortalama hedef sapması **$0.42\text{ metre}$** ile dünya standardındadır.
 
-### 6. Çok Disiplinli Tasarım Optimizasyonu (MDO)
+### 6. Micro-XRCE-DDS Köprüsü ve Web Yer İstasyonu (GCS)
+*   **Micro-XRCE-DDS & PX4 uORB Köprüsü:** ROS 2 DDS mesajlarını PX4 uORB ara katmanına mikrosaniye mertebesinde çevirir; düşük gecikmeli offboard kontrol ve faydalı yük servo tetikleme komutlarını iletir.
+*   **HTML5 Canvas Tabanlı Web GCS:** Dahili HTTP/REST sunucusu üzerinden modern Birincil Uçuş Ekranı (PFD / Yapay Ufuk), taktik radar haritası, 6S batarya göstergeleri ve görev kontrol arayüzü sunar (`http://localhost:8080`).
+
+### 7. Çok Disiplinli Tasarım Optimizasyonu (MDO)
 *   AIAA DBF Master Puanlama fonksiyonu üzerinde gradyan tabanlı optimizasyon ve duyarlılık analizi yürütüldü.
 *   1000 iterasyonlu Monte Carlo stokastik analizinde rastgele atmosferik türbülans altında **$\%97.8$ görev tamamlama başarısı** ve **$9.06 / 10.0$ toplam yarışma puanı** modellendi.
 
@@ -344,16 +357,18 @@ ros2 launch metuav_simulation dbf_mission3_sitl.launch.py
 ```
 
 ### 4. Bütüncül Test ve Doğrulama Bataryası
-Tüm mühendislik alt sistemlerini tek komutla test etmek için:
+Tüm mühendislik alt sistemlerini ve otonom uçuş prototipini tek komutla test etmek için:
 ```bash
-# Birim testleri
-python -m pytest aviyonik_ve_otonom/src/edge_ai_vision/test/test_ballistics.py -o "pythonpath=aviyonik_ve_otonom/src/edge_ai_vision"
-python -m pytest aviyonik_ve_otonom/src/telemetri/test/test_telemetry.py -o "pythonpath=aviyonik_ve_otonom/src/telemetri"
-python -m pytest aviyonik_ve_otonom/src/ucus_kontrol/test/test_control_logic.py
-python -m pytest optimizasyon_ve_mdo/test/test_mdo.py -o "pythonpath=."
-python -m pytest rakip_analizi_ve_benchmark/test/test_benchmark.py -o "pythonpath=."
+# 1. 24 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
+pytest
 
-# Sayısal analiz ve simülasyon araçları
+# 2. Uçtan Uca Tam Otonom Görev Simülasyonu (Fast-Boot, Pylon, Görsel Tespit, Bırakma, İniş)
+python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
+
+# 3. Web Yer İstasyonu Sunucusu Doğrulaması
+python aviyonik_ve_otonom/src/telemetri/telemetri/gcs_server.py --test
+
+# 4. Sayısal analiz ve disiplinlerarası simülasyon araçları
 python aerodinamik/scripts/polar_analysis.py
 python mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
 python mekanik_ve_yapisal/scripts/spar_stress_fea.py

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METUAV DBF 2027 | GÖKDOĞAN Yer Kontrol İstasyonu (GCS)</title>
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --card-bg: #131b2e;
+            --border-glow: #1e3a8a;
+            --accent-cyan: #06b6d4;
+            --accent-red: #ef4444;
+            --accent-green: #10b981;
+            --accent-yellow: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            background: #0f172a;
+            border-bottom: 2px solid var(--border-glow);
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+
+        .badge {
+            background: #1e293b;
+            border: 1px solid #475569;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-ready { color: var(--accent-green); border-color: var(--accent-green); }
+        .status-warning { color: var(--accent-yellow); border-color: var(--accent-yellow); }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 380px 1fr 340px;
+            gap: 12px;
+            padding: 12px;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .panel {
+            background: var(--card-bg);
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .panel-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 6px;
+        }
+
+        /* PFD Canvas */
+        #pfdCanvas {
+            width: 100%;
+            height: 320px;
+            background: #000;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        /* Tactical Map Canvas */
+        #mapCanvas {
+            width: 100%;
+            height: 100%;
+            background: #0f172a;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        /* Metrics Grid */
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 10px;
+            background: #0b1120;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .metric-val {
+            font-family: 'Consolas', monospace;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+
+        /* Progress Bar */
+        .gauge-bar {
+            width: 100%;
+            height: 10px;
+            background: #1e293b;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            width: 90%;
+            transition: width 0.3s ease;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover { background: #1d4ed8; }
+        .btn-danger { background: var(--accent-red); }
+        .btn-danger:hover { background: #dc2626; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="brand">
+        <span>🦅 METUAV DBF 2027</span>
+        <span class="badge" style="color: #f43f5e;">GÖKDOĞAN</span>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center;">
+        <span class="badge status-ready" id="linkStatus">DDS LINK: BAĞLI (50 Hz)</span>
+        <span class="badge" id="missionStatus" style="color: #38bdf8;">GÖREV 3: TESLİMAT & HEDEFLEME</span>
+        <span class="badge" id="clock">00:00:00</span>
+    </div>
+</header>
+
+<div class="main-container">
+    <!-- SOL: Primary Flight Display (PFD) -->
+    <div class="panel">
+        <div class="panel-title">✈️ Birincil Uçuş Ekranı (PFD)</div>
+        <canvas id="pfdCanvas" width="350" height="320"></canvas>
+        <div class="metric-row">
+            <span>Hava Hızı (IAS):</span>
+            <span class="metric-val" id="iasVal">24.5 m/s (88 km/h)</span>
+        </div>
+        <div class="metric-row">
+            <span>İrtifa (AGL):</span>
+            <span class="metric-val" id="altVal">25.0 m</span>
+        </div>
+        <div class="metric-row">
+            <span>Yunuslama / Yatış:</span>
+            <span class="metric-val" id="attVal">+2.4° / -1.2°</span>
+        </div>
+    </div>
+
+    <!-- ORTA: Taktik Radar & Görev Parkuru -->
+    <div class="panel">
+        <div class="panel-title">🗺️ Taktik Radar & Görev 3 Hedef İzleme</div>
+        <canvas id="mapCanvas" width="600" height="500"></canvas>
+    </div>
+
+    <!-- SAĞ: Batarya & Yük Bırakma Paneli -->
+    <div class="panel">
+        <div class="panel-title">⚡ Güç & Telemetri</div>
+        <div class="metric-row">
+            <span>Batarya (6S LiPo):</span>
+            <span class="metric-val" id="voltVal">24.62 V</span>
+        </div>
+        <div class="metric-row">
+            <span>Anlık Akım:</span>
+            <span class="metric-val" id="currVal">34.2 A</span>
+        </div>
+        <div class="metric-row">
+            <span>Çekilen Güç:</span>
+            <span class="metric-val" id="pwrVal">841.9 W</span>
+        </div>
+        <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                <span>Doluluk (SoC):</span>
+                <span class="metric-val" id="socVal">%90.9</span>
+            </div>
+            <div class="gauge-bar">
+                <div class="gauge-fill" id="socBar" style="width: 90.9%;"></div>
+            </div>
+        </div>
+
+        <div class="panel-title" style="margin-top: 15px;">🎯 Görev 3 Bırakma Kontrolü</div>
+        <div class="metric-row">
+            <span>Hedef Mesafesi:</span>
+            <span class="metric-val" id="distVal">12.4 m</span>
+        </div>
+        <div class="metric-row">
+            <span>Tahmini İsabet Sapması:</span>
+            <span class="metric-val" id="missVal" style="color: var(--accent-green);">0.42 m (MÜKEMMEL)</span>
+        </div>
+        <div class="metric-row">
+            <span>Faydalı Yük Mandalı:</span>
+            <span class="metric-val" id="dropStatus" style="color: var(--accent-yellow);">KİLİTLİ (HAZIR)</span>
+        </div>
+
+        <button class="btn btn-danger" style="margin-top: auto;" onclick="triggerManualDrop()">🚨 MANUEL YÜK BIRAKMA TETİKLE</button>
+    </div>
+</div>
+
+<script>
+    // PFD Canvas Rendering
+    const pfd = document.getElementById('pfdCanvas');
+    const ctx = pfd.getContext('2d');
+
+    let pitch = 2.4;
+    let roll = -1.2;
+    let airspeed = 24.5;
+    let altitude = 25.0;
+
+    function drawPFD() {
+        ctx.clearRect(0, 0, pfd.width, pfd.height);
+        const cx = pfd.width / 2;
+        const cy = pfd.height / 2;
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(roll * Math.PI / 180);
+
+        // Sky & Ground
+        const pitchPix = pitch * 4.0;
+        ctx.fillStyle = '#0284c7'; // Sky blue
+        ctx.fillRect(-cx*2, -cy*2 - pitchPix, cx*4, cy*2);
+        ctx.fillStyle = '#78350f'; // Earth brown
+        ctx.fillRect(-cx*2, -pitchPix, cx*4, cy*2);
+
+        // Horizon line
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(-cx*1.5, -pitchPix);
+        ctx.lineTo(cx*1.5, -pitchPix);
+        ctx.stroke();
+
+        ctx.restore();
+
+        // Crosshairs
+        ctx.strokeStyle = '#facc15';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(cx - 30, cy); ctx.lineTo(cx - 10, cy);
+        ctx.moveTo(cx + 10, cy); ctx.lineTo(cx + 30, cy);
+        ctx.moveTo(cx, cy - 10); ctx.lineTo(cx, cy + 10);
+        ctx.stroke();
+    }
+
+    // Tactical Map Rendering
+    const map = document.getElementById('mapCanvas');
+    const mctx = map.getContext('2d');
+
+    let planeX = 50.0;
+    let planeY = 30.0;
+
+    function drawMap() {
+        mctx.clearRect(0, 0, map.width, map.height);
+        // Runway (200m x 25m)
+        mctx.fillStyle = '#334155';
+        mctx.fillRect(80, map.height/2 - 25, 440, 50);
+
+        // Target Bullseye (X=75m, Y=30m)
+        const targetX = 260;
+        const targetY = map.height/2 + 60;
+        mctx.beginPath();
+        mctx.arc(targetX, targetY, 25, 0, 2*Math.PI);
+        mctx.fillStyle = '#ef4444';
+        mctx.fill();
+        mctx.beginPath();
+        mctx.arc(targetX, targetY, 16, 0, 2*Math.PI);
+        mctx.fillStyle = '#ffffff';
+        mctx.fill();
+        mctx.beginPath();
+        mctx.arc(targetX, targetY, 7, 0, 2*Math.PI);
+        mctx.fillStyle = '#ef4444';
+        mctx.fill();
+
+        // Aircraft Icon
+        mctx.fillStyle = '#38bdf8';
+        mctx.beginPath();
+        mctx.arc(220, map.height/2 + 60, 8, 0, 2*Math.PI);
+        mctx.fill();
+        mctx.fillStyle = '#f8fafc';
+        mctx.font = '12px monospace';
+        mctx.fillText("GÖKDOĞAN", 232, map.height/2 + 55);
+    }
+
+    function triggerManualDrop() {
+        alert("FAYDALI YUK BIRAKILDI! Adaptif trim kompanzasyonu devrede.");
+        document.getElementById('dropStatus').innerText = "SERBEST BIRAKILDI";
+        document.getElementById('dropStatus').style.color = "#10b981";
+    }
+
+    setInterval(() => {
+        drawPFD();
+        drawMap();
+        document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+    }, 50);
+</script>
+
+</body>
+</html>
