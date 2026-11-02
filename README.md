@@ -394,14 +394,19 @@ ros2 launch metuav_simulation dbf_mission3_sitl.launch.py
 ### 4. Bütüncül Test ve Doğrulama Bataryası
 Tüm mühendislik alt sistemlerini ve otonom uçuş prototipini tek komutla test etmek için:
 ```bash
-# 1. 82 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
+# 1. 89 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
 pytest
 
 # 2. Uçtan Uca Tam Otonom Görev Simülasyonu (Fast-Boot, Pylon, Görsel Tespit, Bırakma, İniş)
 python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
 
-# 3. GCS Canlı Cam Kokpit & Yer İstasyonu Telemetri Sunucusu (PFD + EKF + 6S Telemetri)
+# 3. GCS Canlı Cam Kokpit & 50 Hz Kara Kutu Uçuş Kaydedicisi (Blackbox FDR)
 python aviyonik_ve_otonom/src/telemetri/gcs_server.py
+python aviyonik_ve_otonom/src/telemetri/flight_blackbox_recorder.py
+
+# 4. Pist Başı Otonom Donanım Öz-Testi (Pre-Flight BIST) ve Optik Akış Rüzgar Kestirimi
+python aviyonik_ve_otonom/src/ucus_kontrol/src/preflight_bist_engine.py
+python aviyonik_ve_otonom/src/edge_ai_vision/edge_ai_vision/optical_flow_wind_estimator.py
 
 # 4. Arıza Toleranslı Kontrol Tahsisatı ve Çevrimiçi Sistem Tanımlama (RLS)
 python aviyonik_ve_otonom/src/ucus_kontrol/src/control_allocation_reconfiguration.py
