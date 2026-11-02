@@ -34,9 +34,10 @@ jobs:
       run: |
         python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
 
-    - name: Verify Web GCS Telemetry Server
+    - name: Verify Web GCS & Smart Avionics PDB Telemetry
       run: |
         python aviyonik_ve_otonom/src/telemetri/telemetri/gcs_server.py --test
+        python aviyonik_ve_otonom/src/telemetri/telemetri/avionics_power_monitor.py
 
     - name: Run Competitor Benchmark & Gap Analysis
       run: |
@@ -64,9 +65,11 @@ jobs:
       run: |
         python uretim_ve_test/scripts/generate_wing_rib_dxf.py
 
-    - name: Run Full 6-DOF Nonlinear Dynamics, L1 Guidance & FDIR Failsafe
+    - name: Run Full 6-DOF Dynamics, Dryden Turbulence, L1 Guidance, Takeoff/Landing & FDIR
       run: |
         python simulasyon/scripts/six_dof_flight_dynamics.py
+        python simulasyon/scripts/dryden_wind_turbulence.py
         python aviyonik_ve_otonom/src/ucus_kontrol/src/l1_path_follower.py
+        python aviyonik_ve_otonom/src/ucus_kontrol/src/takeoff_landing_controller.py
         python aviyonik_ve_otonom/src/ucus_kontrol/src/fdir_manager.py
         python simulasyon/scripts/simulate_flight_test.py

@@ -224,20 +224,20 @@ METUAV-DBF-2027/
 ├── 📁 aviyonik_ve_otonom/       # Ana ROS2 & PX4 Otonom Uçuş Yazılımı ve SITL Prototipi
 │   ├── scripts/                # full_mission_sitl_runner.py (Uçtan uca tam otonom görev uçuş simülatörü)
 │   ├── src/
-│   │   ├── ucus_kontrol/       # C++20 Adaptif TECS, L1 Path Follower, Adaptif PID, 15-Durumlu EKF, FDIR Failsafe Yöneticisi
+│   │   ├── ucus_kontrol/       # C++20 Adaptif TECS, L1 Path Follower, Adaptif PID, 15-Durumlu EKF, FDIR ve Kalkış/İniş Yöneticisi
 │   │   │   ├── include/ucus_kontrol/ # adaptive_tecs.hpp, adaptive_pid_controller.hpp, vb.
-│   │   │   └── src/            # adaptive_tecs.cpp, l1_path_follower.py, fdir_manager.py, vb.
+│   │   │   └── src/            # adaptive_tecs.cpp, l1_path_follower.py, fdir_manager.py, takeoff_landing_controller.py
 │   │   ├── edge_ai_vision/     # Hedef tespiti, Kalman hedef takip filtresi ve sentetik vizyon akışlayıcı
 │   │   │   └── edge_ai_vision/ # target_detector_node.py, target_tracker_filter.py, synthetic_camera_streamer.py
-│   │   └── telemetri/          # MAVLink köprüsü, Micro-XRCE-DDS / PX4 uORB köprüsü ve Modern Web GCS
-│   │       ├── telemetri/      # micro_xrce_bridge.py, mavlink_bridge_node.py, gcs_server.py
+│   │   └── telemetri/          # MAVLink köprüsü, Micro-XRCE-DDS / PX4 uORB köprüsü, Akıllı PDB ve Modern Web GCS
+│   │       ├── telemetri/      # micro_xrce_bridge.py, mavlink_bridge_node.py, gcs_server.py, avionics_power_monitor.py
 │   │       └── telemetri/web_gcs/ # index.html (HTML5 Canvas PFD, Radar Haritası ve Göstergeler)
 │   └── setup_workspace.sh      # ROS2 çalışma alanı otomatik kurulum betiği
-├── 📁 simulasyon/               # Gazebo, PX4 SITL ve 6-DOF Uçuş Dinamiği Simülasyonu
+├── 📁 simulasyon/               # Gazebo, PX4 SITL, 6-DOF Dinamik ve Dryden Atmosferik Türbülans
 │   ├── models/dbf_aircraft/    # Ayrılabilir faydalı yüke sahip DBF uçak modeli (.sdf)
 │   ├── worlds/dbf_airfield.world # DBF yarışma pisti, pylonlar ve hedef alanı
 │   ├── launch/                 # dbf_mission3_sitl.launch.py
-│   └── scripts/                # six_dof_flight_dynamics.py (12-durumlu 6-DOF simülatör) & simulate_flight_test.py
+│   └── scripts/                # six_dof_flight_dynamics.py, dryden_wind_turbulence.py, simulate_flight_test.py
 ├── 📁 uretim_ve_test/           # Lazer kesim vektörleri, 3D baskı (STL/G-code) ve rüzgar tüneli verileri
 │   ├── dxf_outputs/            # CNC lazer kesim kanat nervür vektörleri (selig1223_root_rib_320mm.dxf)
 │   ├── scripts/                # generate_wing_rib_dxf.py (Parametrik DXF üretici)
@@ -294,6 +294,7 @@ METUAV-DBF-2027/
 
 ### 4. Aviyonik, C++20 Adaptif PID ve 15-Durumlu EKF
 *   **L1 Adaptif Doğrusal Olmayan Kılavuzluk (NLGL):** Park-Deyst-How L1 yanal kılavuzluk algoritması; yer hızına göre adaptif $L_1$ mesafesi hesaplayarak pylon parkuru dönüşlerinde $45^\circ$ limitli koordineli yatış açısı ve milimetrik cross-track hatası sönümlemesi sağlar.
+*   **Otonom Kalkış, Zemin Etkisi ve Flare Kontrolcüsü:** Kalkış mesafesi limitini ($< 200\text{ ft} / 61\text{ m}$) güvenceye alan sonlu durum makinesi (FSM); $V_r = 13.8\text{ m/s}$ rotasyon hızıyla $47.5\text{ m}$'de havalanır. İniş yaklaşmasında Wieselsberger zemin etkisi denklemi ($\sigma_{ge} = \frac{16(h/b)^2}{1+16(h/b)^2}$) ile indüklenmiş sürükleme düşüşünü kompanse eder ve çökme hızını $-0.4\text{ m/s}$'ye sönümleyerek yumuşak tekerlek koyuşu (flare) gerçekleştirir.
 *   **Sensör Arıza Tespiti, İzolasyonu ve Kurtarma (FDIR) / Failsafe Yöneticisi:** Pitot tüpü tıkanması/buzlanmasını GPS yer hızıyla çapraz doğrulayarak tespit eder; barometre vs GPS/LiDAR tutarsızlığında sensörü izole eder; hücre başı $3.30\text{ V}$ çökmesinde gazı kademeli kısarak bataryayı korur ve geofence dışına çıkılması durumunda otonom RTL (Eve Dönüş) / Motor Kesme emniyet protokolünü devreye alır.
 *   **Adaptif Toplam Enerji Kontrol Sistemi (TECS):** Gaz ve elevatör komutlarını potansiyel (irtifa) ve kinetik (hava hızı) enerji dengesini gözeterek eşgüdümlü yönetir. Virajlarda yatış açısı lift kaybı kompanzasyonu ve faydalı yük atımı sonrasındaki kütle şokunu anında absorbe eder.
 *   **Görev 3 CG Kompanzasyonu:** Faydalı yük bırakıldığı anda $+44.1\text{ mm}$ geriye kayan ağırlık merkezine karşı elevatöre eşzamanlı **$-3.5^\circ$ burun-aşağı trim** uygulayarak uçağın stall olmasını önler.
@@ -311,12 +312,14 @@ METUAV-DBF-2027/
   <p><em>Şekil 5: Görev 3 3-DOF RK4 balistik düşüş yörüngesi, konsantrik hedef Monte Carlo dağılımı ve adaptif trim cevabı.</em></p>
 </div>
 
-### 6. Micro-XRCE-DDS Köprüsü ve Web Yer İstasyonu (GCS)
+### 6. Micro-XRCE-DDS Köprüsü, Akıllı PDB ve Web Yer İstasyonu (GCS)
 *   **Micro-XRCE-DDS & PX4 uORB Köprüsü:** ROS 2 DDS mesajlarını PX4 uORB ara katmanına mikrosaniye mertebesinde çevirir; düşük gecikmeli offboard kontrol ve faydalı yük servo tetikleme komutlarını iletir.
+*   **Akıllı PDB & UAVCAN Telemetri Monitörü:** Çift yedekli $5.0\text{ V}$ ve $12.0\text{ V}$ regüle hatlarını brownout riskine karşı izler. Kontrol yüzeylerinde veya yük bırakma mekanizmasında menteşe sıkışması/aşırı aerodinamik yük durumunu $> 3.5\text{ A}$ servo stall akım eşiğiyle anında tespit eder; CAN veri yolu paket hata oranını ($E_{bus} < \%2$) gerçek zamanlı raporlar.
 *   **HTML5 Canvas Tabanlı Web GCS:** Dahili HTTP/REST sunucusu üzerinden modern Birincil Uçuş Ekranı (PFD / Yapay Ufuk), taktik radar haritası, 6S batarya göstergeleri ve görev kontrol arayüzü sunar (`http://localhost:8080`).
 
 ### 7. Çok Disiplinli Tasarım Optimizasyonu (MDO) ve 6-DOF Uçuş Dinamiği
 *   **AIAA DBF Master Puanlama MDO:** Master puanlama fonksiyonu üzerinde gradyan tabanlı optimizasyon ve duyarlılık analizi yürütüldü. 1000 iterasyonlu Monte Carlo stokastik analizinde rastgele atmosferik türbülans altında **$\%97.8$ görev tamamlama başarısı** ve **$9.06 / 10.0$ toplam yarışma puanı** modellendi.
+*   **MIL-F-8785C Dryden Rüzgar Türbülansı ve Pratt Gust Modeli:** Alçak irtifa ($h < 1000\text{ ft}$) Dryden sürekli türbülans spektrumu üzerinden $u_g, v_g, w_g$ stokastik hızları ile $p_g, q_g, r_g$ açısal rüzgar momentleri simüle edildi. FAR 23 $U_{ds} = 6.0\text{ m/s}$ 1-cosine diskret rüzgar hamlesinde Pratt sönümleme katsayısı ($K_g = 0.778$) ve $\Delta n_z = +0.98g$ dinamik ivme hesaplanarak $+1.98g$ zirve yük faktörünün $+3.5g$ yapısal sınır içinde kaldığı doğrulandı.
 *   **6-DOF Doğrusal Olmayan Uçuş Dinamiği:** Kuaterniyon yönelimli 12-durumlu katı cisim simülatörü; rüzgar tüneli stabilite ve kontrol türevleri ($C_{L_\alpha}, C_{m_\alpha}, C_{l_p}, C_{n_r}$) ile $24.5\text{ m/s}$ seviye uçuş trim çözümünü ($\alpha = 3.22^\circ$, $\delta_e = -0.36^\circ$, gaz $\%33.1$) ve 4. mertebe Runge-Kutta (RK4) sayısal integrasyonunu doğrular.
 
 ---
@@ -391,16 +394,17 @@ ros2 launch metuav_simulation dbf_mission3_sitl.launch.py
 ### 4. Bütüncül Test ve Doğrulama Bataryası
 Tüm mühendislik alt sistemlerini ve otonom uçuş prototipini tek komutla test etmek için:
 ```bash
-# 1. 43 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
+# 1. 52 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
 pytest
 
 # 2. Uçtan Uca Tam Otonom Görev Simülasyonu (Fast-Boot, Pylon, Görsel Tespit, Bırakma, İniş)
 python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
 
-# 3. Web Yer İstasyonu Sunucusu Doğrulaması
+# 3. Web Yer İstasyonu Sunucusu & Akıllı PDB Doğrulaması
 python aviyonik_ve_otonom/src/telemetri/telemetri/gcs_server.py --test
+python aviyonik_ve_otonom/src/telemetri/telemetri/avionics_power_monitor.py
 
-# 4. Sayısal analiz, aeroelastisite, 6-DOF ve disiplinlerarası simülasyon araçları
+# 4. Sayısal analiz, aeroelastisite, 6-DOF, türbülans ve disiplinlerarası simülasyon araçları
 python aerodinamik/scripts/polar_analysis.py
 python aerodinamik/scripts/vlm_aerodynamics_solver.py
 python mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
@@ -411,8 +415,10 @@ python itki_ve_guc_sistemleri/scripts/bemt_propeller_optimizer.py
 python itki_ve_guc_sistemleri/scripts/motor_thermal_simulator.py
 python itki_ve_guc_sistemleri/scripts/battery_soh_estimator.py
 python aviyonik_ve_otonom/src/ucus_kontrol/src/l1_path_follower.py
+python aviyonik_ve_otonom/src/ucus_kontrol/src/takeoff_landing_controller.py
 python aviyonik_ve_otonom/src/ucus_kontrol/src/fdir_manager.py
 python simulasyon/scripts/six_dof_flight_dynamics.py
+python simulasyon/scripts/dryden_wind_turbulence.py
 python uretim_ve_test/scripts/generate_wing_rib_dxf.py
 python simulasyon/scripts/simulate_flight_test.py
 python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
