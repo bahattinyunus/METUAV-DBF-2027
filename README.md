@@ -394,7 +394,7 @@ ros2 launch metuav_simulation dbf_mission3_sitl.launch.py
 ### 4. Bütüncül Test ve Doğrulama Bataryası
 Tüm mühendislik alt sistemlerini ve otonom uçuş prototipini tek komutla test etmek için:
 ```bash
-# 1. 72 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
+# 1. 82 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
 pytest
 
 # 2. Uçtan Uca Tam Otonom Görev Simülasyonu (Fast-Boot, Pylon, Görsel Tespit, Bırakma, İniş)
@@ -403,12 +403,22 @@ python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
 # 3. GCS Canlı Cam Kokpit & Yer İstasyonu Telemetri Sunucusu (PFD + EKF + 6S Telemetri)
 python aviyonik_ve_otonom/src/telemetri/gcs_server.py
 
-# 4. Rüzgar Kompanzasyonlu Pylon Parkuru ve Entegre Tahrik Eşleştiricisi
+# 4. Arıza Toleranslı Kontrol Tahsisatı ve Çevrimiçi Sistem Tanımlama (RLS)
+python aviyonik_ve_otonom/src/ucus_kontrol/src/control_allocation_reconfiguration.py
+python aviyonik_ve_otonom/src/ucus_kontrol/src/online_system_identification.py
+python aviyonik_ve_otonom/src/edge_ai_vision/cep_monte_carlo_analyzer.py
+
+# 5. Kompozit Kürleşme Simülatörü ve Aletsiz 5 Dakika Montaj Ergonomi Denetimi
+python uretim_ve_test/scripts/composite_cure_cycle_simulator.py
+python uretim_ve_test/scripts/assembly_ergonomics_optimizer.py
+python uretim_ve_test/scripts/generate_wing_rib_dxf.py
+
+# 6. Rüzgar Kompanzasyonlu Pylon Parkuru ve Entegre Tahrik Eşleştiricisi
 python aviyonik_ve_otonom/src/ucus_kontrol/src/pylon_path_planner.py
 python itki_ve_guc_sistemleri/scripts/powertrain_mission_simulator.py
 python aerodinamik/scripts/high_lift_ground_effect.py
 
-# 5. Sayısal analiz, aeroelastisite, 6-DOF, türbülans ve disiplinlerarası simülasyon araçları
+# 7. Sayısal analiz, aeroelastisite, 6-DOF, türbülans ve disiplinlerarası simülasyon araçları
 python aerodinamik/scripts/polar_analysis.py
 python aerodinamik/scripts/vlm_aerodynamics_solver.py
 python mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
