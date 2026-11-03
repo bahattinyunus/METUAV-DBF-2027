@@ -17,6 +17,7 @@
       --accent-cyan: #00f0ff;
       --accent-cyan-glow: rgba(0, 240, 255, 0.25);
       --accent-emerald: #10b981;
+      --accent-emerald-glow: rgba(16, 185, 129, 0.35);
       --accent-amber: #f59e0b;
       --accent-rose: #f43f5e;
       --accent-violet: #8b5cf6;
@@ -31,32 +32,30 @@
       color: var(--text-1);
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
-      padding: 16px;
+      padding: 14px;
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
-    /* Ambient background grid */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at 50% 0%, rgba(2, 132, 199, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 50% 0%, rgba(2, 132, 199, 0.14) 0%, transparent 60%),
         radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
       pointer-events: none;
       z-index: -1;
     }
 
-    /* Glass Surface utility */
     .glass {
       background: var(--surface-1);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--surface-border);
-      border-radius: 14px;
+      border-radius: 12px;
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
     }
 
@@ -65,7 +64,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
+      padding: 10px 18px;
       flex-wrap: wrap;
       gap: 12px;
     }
@@ -73,7 +72,7 @@
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
     .brand-mark {
       background: linear-gradient(135deg, #0284c7, #0369a1);
@@ -96,51 +95,52 @@
       font-weight: 400;
     }
 
-    .header-pills {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .pill {
+    /* Prominent Master Sim Button in Header */
+    .master-sim-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
+      gap: 8px;
+      padding: 8px 18px;
       border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--surface-border-subtle);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .pill-live {
-      background: rgba(16, 185, 129, 0.12);
-      border-color: rgba(16, 185, 129, 0.35);
-      color: var(--accent-emerald);
+    .master-sim-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.4));
+      border-color: var(--accent-emerald);
+      color: #fff;
+      box-shadow: 0 0 20px var(--accent-emerald-glow);
     }
-    .pill-pulse {
-      width: 7px;
-      height: 7px;
+    .master-sim-btn.paused {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.25), rgba(3, 105, 161, 0.4));
+      border-color: var(--accent-cyan);
+      color: #fff;
+      box-shadow: 0 0 16px var(--accent-cyan-glow);
+    }
+    .master-sim-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.15);
+    }
+    .sim-dot {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: currentColor;
-      box-shadow: 0 0 8px currentColor;
-      animation: pulse 1.5s infinite;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+      animation: pulse 1.2s infinite;
+    }
+    .sim-dot.paused {
+      background: var(--accent-amber);
+      box-shadow: 0 0 8px var(--accent-amber);
+      animation: none;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
-    .pill-mode {
-      background: rgba(139, 92, 246, 0.12);
-      border-color: rgba(139, 92, 246, 0.35);
-      color: var(--accent-violet);
-    }
-    .pill-fence {
-      background: rgba(0, 240, 255, 0.1);
-      border-color: rgba(0, 240, 255, 0.3);
-      color: var(--accent-cyan);
+      50% { opacity: 0.35; transform: scale(0.8); }
     }
 
     .header-actions {
@@ -160,9 +160,10 @@
       border: 1px solid var(--surface-border-subtle);
       color: var(--text-2);
       border-radius: 8px;
-      padding: 6px 10px;
+      padding: 6px 12px;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 11.5px;
+      font-weight: 600;
       transition: all 0.2s;
     }
     .icon-btn:hover {
@@ -171,11 +172,47 @@
       border-color: var(--accent-cyan);
     }
 
+    /* Live Mission Phase Stepper Bar */
+    .stepper-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      gap: 8px;
+      overflow-x: auto;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      white-space: nowrap;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .step-item.active {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: rgba(0, 240, 255, 0.35);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+    }
+    .step-item.done {
+      color: var(--accent-emerald);
+    }
+    .step-arrow {
+      color: var(--text-3);
+      font-size: 10px;
+    }
+
     /* Dual-Hero Panoramic Stage */
     .hero-stage {
       display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 14px;
+      grid-template-columns: 1.12fr 1fr;
+      gap: 12px;
     }
     @media (max-width: 1080px) {
       .hero-stage { grid-template-columns: 1fr; }
@@ -191,7 +228,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
+      padding: 10px 16px;
       border-bottom: 1px solid var(--surface-border-subtle);
     }
     .viewport-title {
@@ -205,7 +242,6 @@
       gap: 8px;
     }
 
-    /* Segmented switch for Right Viewport */
     .view-segmented {
       display: inline-flex;
       background: rgba(0, 0, 0, 0.35);
@@ -258,7 +294,7 @@
     }
 
     .kpi-card {
-      padding: 14px 16px;
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -288,17 +324,17 @@
       display: flex;
       align-items: baseline;
       gap: 6px;
-      margin: 6px 0;
+      margin: 4px 0;
     }
     .kpi-value {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 800;
       color: var(--text-1);
       letter-spacing: -0.5px;
     }
     .kpi-unit {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--text-2);
     }
@@ -340,15 +376,15 @@
       flex-wrap: wrap;
     }
     .action-btn {
-      padding: 9px 18px;
+      padding: 8px 16px;
       border-radius: 8px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
       border: 1px solid transparent;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       letter-spacing: 0.3px;
     }
@@ -382,11 +418,6 @@
       background: rgba(244, 63, 94, 0.15);
       border-color: rgba(244, 63, 94, 0.35);
       color: var(--accent-rose);
-    }
-    .btn-ghost {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--surface-border-subtle);
-      color: var(--text-2);
     }
 
     .preset-pill {
@@ -444,7 +475,7 @@
       background: #030508;
       border: 1px solid var(--surface-border-subtle);
       border-radius: 8px;
-      height: 120px;
+      height: 110px;
       overflow-y: auto;
       padding: 10px 12px;
       font-family: 'JetBrains Mono', monospace;
@@ -457,7 +488,6 @@
     .term-t { color: var(--accent-cyan); }
     .term-p { color: var(--accent-amber); margin: 0 6px; }
 
-    /* Keyboard help toast */
     .kbd-tag {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -472,25 +502,40 @@
 </head>
 <body>
 
-  <!-- Top Iconic Header -->
+  <!-- Top Iconic Header with Prominent Master Start/Pause Button -->
   <header class="glass">
     <div class="brand-group">
       <div class="brand-mark">METUAV</div>
       <div class="brand-title">GÖKDOĞAN <span>| GLASS COCKPIT</span></div>
     </div>
 
-    <div class="header-pills">
-      <div class="pill pill-live"><span class="pill-pulse"></span>MAVLINK v2 • 50Hz</div>
-      <div class="pill pill-fence" id="pill-fence">GEOFENCE: INSIDE SAFE</div>
-      <div class="pill pill-mode" id="pill-phase">M3 • AUTO RECON</div>
-    </div>
+    <!-- Master Simulation Trigger Button (Visible, Glowing, Interactive) -->
+    <button class="master-sim-btn active" id="master-sim-btn" onclick="togglePlayPause()" title="Simülasyonu Başlat / Duraklat (Space)">
+      <span class="sim-dot" id="master-dot"></span>
+      <span id="master-sim-text">SİMÜLASYON DEVREDE (DURAKLAT)</span>
+    </button>
 
     <div class="header-actions">
       <div class="timer-readout" id="clock-readout">00:00.0</div>
-      <button class="icon-btn" id="audio-toggle" onclick="toggleAudio()" title="Sesli İkazlar">🔊 SES: AÇIK</button>
-      <button class="icon-btn" onclick="resetSimulation()" title="Sıfırla">🔄 SIFIRLA</button>
+      <button class="icon-btn" id="audio-toggle" onclick="toggleAudio()" title="Sesli İkazlar">🔊 SES</button>
+      <button class="icon-btn" onclick="resetSimulation()" title="Simülasyonu Sıfırla ve Baştan Başlat">🔄 YENİDEN BAŞLAT</button>
     </div>
   </header>
+
+  <!-- Live Mission Phase Stepper (Shows exactly what the simulation is doing!) -->
+  <div class="glass stepper-bar">
+    <div class="step-item active" id="step-boot">● 1. Fast-Boot Kalibrasyon</div>
+    <div class="step-arrow">→</div>
+    <div class="step-item" id="step-takeoff">2. Kalkış Koşusu (19.5 m/s)</div>
+    <div class="step-arrow">→</div>
+    <div class="step-item" id="step-climb">3. Tırmanış (25m İrtifa)</div>
+    <div class="step-arrow">→</div>
+    <div class="step-item" id="step-pylon">4. Pilon Parkur Dönüşleri</div>
+    <div class="step-arrow">→</div>
+    <div class="step-item" id="step-drop">5. Hedef Kilit & Bırakma</div>
+    <div class="step-arrow">→</div>
+    <div class="step-item" id="step-land">6. Pist Yaklaşması & Flare</div>
+  </div>
 
   <!-- Dual-Hero Panoramic Stage -->
   <div class="hero-stage">
@@ -535,42 +580,42 @@
     <div class="glass kpi-card" style="--kpi-accent: var(--accent-cyan);">
       <div class="kpi-label">Hava Hızı (IAS)<span style="color: var(--accent-cyan);">ADC 20Hz</span></div>
       <div class="kpi-value-row">
-        <span class="kpi-value" id="kpi-spd">24.5</span>
+        <span class="kpi-value" id="kpi-spd">0.0</span>
         <span class="kpi-unit">m/s</span>
       </div>
       <div class="kpi-subtext">
-        <span>TAS: <strong id="kpi-tas" style="color:#fff;">25.0</strong> m/s</span>
-        <span id="kpi-kmh">88.2 km/h</span>
+        <span>TAS: <strong id="kpi-tas" style="color:#fff;">0.0</strong> m/s</span>
+        <span id="kpi-kmh">0.0 km/h</span>
       </div>
-      <div class="mini-bar"><div class="mini-fill" id="bar-spd" style="width: 70%;"></div></div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-spd" style="width: 0%;"></div></div>
     </div>
 
     <!-- 2. Altitude & Climb -->
     <div class="glass kpi-card" style="--kpi-accent: var(--accent-emerald);">
       <div class="kpi-label">İrtifa (Baro / GPS)<span style="color: var(--accent-emerald);">TECS</span></div>
       <div class="kpi-value-row">
-        <span class="kpi-value" id="kpi-alt">25.0</span>
+        <span class="kpi-value" id="kpi-alt">0.0</span>
         <span class="kpi-unit">m AGL</span>
       </div>
       <div class="kpi-subtext">
         <span>Hedef: 25.0 m</span>
         <span>VSI: <strong id="kpi-vsi" style="color: var(--accent-emerald);">+0.0</strong> m/s</span>
       </div>
-      <div class="mini-bar"><div class="mini-fill" id="bar-alt" style="width: 62.5%; background: var(--accent-emerald);"></div></div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-alt" style="width: 0%; background: var(--accent-emerald);"></div></div>
     </div>
 
     <!-- 3. Battery & Power -->
     <div class="glass kpi-card" style="--kpi-accent: var(--accent-amber);">
-      <div class="kpi-label">6S Batarya & Güç<span style="color: var(--accent-amber);" id="kpi-soc-badge">95.5%</span></div>
+      <div class="kpi-label">6S Batarya & Güç<span style="color: var(--accent-amber);" id="kpi-soc-badge">100%</span></div>
       <div class="kpi-value-row">
-        <span class="kpi-value" id="kpi-volt">24.60</span>
+        <span class="kpi-value" id="kpi-volt">25.20</span>
         <span class="kpi-unit">V</span>
       </div>
       <div class="kpi-subtext">
-        <span>Akım: <strong id="kpi-amp" style="color:#fff;">34.2</strong> A</span>
-        <span>Güç: <strong id="kpi-pwr" style="color: var(--accent-amber);">841</strong> W</span>
+        <span>Akım: <strong id="kpi-amp" style="color:#fff;">2.4</strong> A</span>
+        <span>Güç: <strong id="kpi-pwr" style="color: var(--accent-amber);">60</strong> W</span>
       </div>
-      <div class="mini-bar"><div class="mini-fill" id="bar-batt" style="width: 95.5%; background: var(--accent-amber);"></div></div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-batt" style="width: 100%; background: var(--accent-amber);"></div></div>
     </div>
 
     <!-- 4. Mission 3 Drop Precision -->
@@ -606,7 +651,7 @@
   <div class="glass action-dock">
     <div class="action-group">
       <button class="action-btn btn-play" id="btn-play-pause" onclick="togglePlayPause()">
-        <span id="play-icon">▶</span> <span id="play-text">BAŞLAT</span> <span class="kbd-tag">Space</span>
+        <span id="play-icon">⏸</span> <span id="play-text">DURAKLAT</span> <span class="kbd-tag">Space</span>
       </button>
       <button class="action-btn btn-drop" onclick="triggerManualDrop()">
         🎯 YÜKÜ BIRAK <span class="kbd-tag">D</span>
@@ -654,7 +699,7 @@
             MAVLink v2 Olay Günlüğü & Karar Mekanizması
           </div>
           <div class="terminal-box" id="term-box">
-            <div class="term-row"><span class="term-t">[00:00.0]</span><span class="term-p">SYSTEM</span><span>METUAV Gökdoğan Glass Cockpit Başlatıldı. 50Hz SITL Telemetrisi Hazır.</span></div>
+            <div class="term-row"><span class="term-t">[00:00.0]</span><span class="term-p">SYSTEM</span><span>METUAV Gökdoğan Glass Cockpit Başlatıldı. 50Hz SITL Simülasyonu Canlı Akıyor.</span></div>
           </div>
         </div>
         <div>
@@ -732,11 +777,11 @@
       document.getElementById('drawer-toggle-text').innerText = drawerOpen ? 'GİZLE ▲' : 'GÖSTER ▼';
     }
 
-    // Flight & Simulation State
-    let simActive = false;
+    // Flight & Simulation State - AUTO STARTS IMMEDIATELY!
+    let simActive = true;
     let simTime = 0.0;
     let timeScale = 1.0;
-    let phase = 'STANDBY';
+    let phase = 'FAST_BOOT';
     let currentScenario = 'M3';
     let trail = [];
     let dropMarker = null;
@@ -746,7 +791,7 @@
     let flight = {
       north: -100.0, east: 0.0, alt: 0.0, airspeed: 0.0,
       pitch: 0.0, roll: 0.0, yaw: 0.0,
-      mass: 24.85, voltage: 25.2, current: 0.0, consumed_mah: 0.0,
+      mass: 24.85, voltage: 25.2, current: 2.4, consumed_mah: 0.0,
       dropped: false, dropErr: 0.98, laps: 0, elevTrim: 0.0, regenW: 0.0
     };
 
@@ -755,8 +800,25 @@
     const rightCanvas = document.getElementById('right-canvas');
     const rightCtx = rightCanvas.getContext('2d');
 
+    function updateStepper(activeId) {
+      const ids = ['step-boot', 'step-takeoff', 'step-climb', 'step-pylon', 'step-drop', 'step-land'];
+      let foundActive = false;
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.remove('active', 'done');
+        if (id === activeId) {
+          el.classList.add('active');
+          foundActive = true;
+        } else if (!foundActive) {
+          el.classList.add('done');
+        }
+      });
+    }
+
     function logMessage(p, text) {
       const box = document.getElementById('term-box');
+      if (!box) return;
       const min = Math.floor(simTime / 60);
       const sec = (simTime % 60).toFixed(1);
       const timeStr = (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
@@ -769,52 +831,56 @@
 
     function togglePlayPause() {
       simActive = !simActive;
-      const btn = document.getElementById('btn-play-pause');
-      const icon = document.getElementById('play-icon');
-      const txt = document.getElementById('play-text');
+      const masterBtn = document.getElementById('master-sim-btn');
+      const masterText = document.getElementById('master-sim-text');
+      const masterDot = document.getElementById('master-dot');
+      const dockIcon = document.getElementById('play-icon');
+      const dockText = document.getElementById('play-text');
+
       if (simActive) {
-        btn.classList.remove('btn-play');
-        btn.classList.add('btn-pause');
-        icon.innerText = '⏸';
-        txt.innerText = 'DURAKLAT';
+        masterBtn.className = 'master-sim-btn active';
+        masterText.innerText = 'SİMÜLASYON DEVREDE (DURAKLAT)';
+        masterDot.className = 'sim-dot';
+        dockIcon.innerText = '⏸';
+        dockText.innerText = 'DURAKLAT';
         playBeep(880, 0.15);
-        if (phase === 'STANDBY') {
-          phase = 'FAST_BOOT';
-          logMessage('FAST_BOOT', 'IMU 50Hz, Çift Pusula ve GPS 3D Fix hızlı kalibrasyon başlatıldı.');
-        }
       } else {
-        btn.classList.add('btn-play');
-        btn.classList.remove('btn-pause');
-        icon.innerText = '▶';
-        txt.innerText = 'DEVAM ET';
+        masterBtn.className = 'master-sim-btn paused';
+        masterText.innerText = '▶ SİMÜLASYONU BAŞLAT';
+        masterDot.className = 'sim-dot paused';
+        dockIcon.innerText = '▶';
+        dockText.innerText = 'BAŞLAT';
         playBeep(440, 0.15);
       }
     }
 
     function resetSimulation() {
-      simActive = false;
+      simActive = true;
       simTime = 0.0;
-      phase = 'STANDBY';
+      phase = 'FAST_BOOT';
       trail = [];
       dropMarker = null;
       chartHistory = [];
       flameoutActive = false;
 
-      const btn = document.getElementById('btn-play-pause');
-      btn.classList.add('btn-play');
-      btn.classList.remove('btn-pause');
-      document.getElementById('play-icon').innerText = '▶';
-      document.getElementById('play-text').innerText = 'BAŞLAT';
+      const masterBtn = document.getElementById('master-sim-btn');
+      masterBtn.className = 'master-sim-btn active';
+      document.getElementById('master-sim-text').innerText = 'SİMÜLASYON DEVREDE (DURAKLAT)';
+      document.getElementById('master-dot').className = 'sim-dot';
+      document.getElementById('play-icon').innerText = '⏸';
+      document.getElementById('play-text').innerText = 'DURAKLAT';
 
       flight = {
         north: -100.0, east: 0.0, alt: 0.0, airspeed: 0.0,
         pitch: 0.0, roll: 0.0, yaw: 0.0,
         mass: currentScenario === 'M1' ? 12.70 : (currentScenario === 'M2' ? 24.85 : 21.05),
-        voltage: 25.2, current: 0.0, consumed_mah: 0.0,
+        voltage: 25.2, current: 2.4, consumed_mah: 0.0,
         dropped: false, dropErr: 0.98, laps: 0, elevTrim: 0.0, regenW: 0.0
       };
-      document.getElementById('term-box').innerHTML = '';
-      logMessage('RESET', 'Sistem sıfırlandı. Kalkış için nominal.');
+      const box = document.getElementById('term-box');
+      if (box) box.innerHTML = '';
+      logMessage('RESET', 'Simülasyon sıfırlandı. Otonom görev pistten canlı olarak yeniden başladı.');
+      updateStepper('step-boot');
       updateUI();
     }
 
@@ -823,10 +889,11 @@
         flight.dropped = true;
         flight.mass -= 8.35;
         flight.elevTrim = -3.5;
-        flight.pitch = 5.2; // Trim compensation
+        flight.pitch = 5.2;
         dropMarker = { north: flight.north + 14.2, east: flight.east };
         playBeep(1200, 0.3, 'triangle');
         logMessage('DROP_ACTION', 'FAYDALI YÜK BIRAKILDI! +44.1mm CG kaymasına karşı anlık -3.5° elevatör trim uygulandı.');
+        updateStepper('step-drop');
       }
     }
 
@@ -834,6 +901,7 @@
       phase = 'APPROACH_LAND';
       playBeep(650, 0.2);
       logMessage('RTL', 'Eve Dönüş (RTL) devrede. Pist yaklaşma süzülüşü ve flare başlatıldı.');
+      updateStepper('step-land');
     }
 
     function triggerFlameout() {
@@ -866,8 +934,12 @@
 
     function setSpeed(s) {
       timeScale = s;
-      ['spd-1x', 'spd-2x', 'spd-4x'].forEach(id => document.getElementById(id).classList.remove('active'));
-      document.getElementById(`spd-${s}x`).classList.add('active');
+      ['spd-1x', 'spd-2x', 'spd-4x'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+      });
+      const target = document.getElementById(`spd-${s}x`);
+      if (target) target.classList.add('active');
       playBeep(520, 0.08);
     }
     setSpeed(1);
@@ -882,14 +954,15 @@
       else if (e.code === 'Digit4') { setSpeed(4); }
     });
 
-    // Physics Update
+    // Physics Update - Smooth Autopilot Flight Dynamics
     function updatePhysics(dt) {
       if (!simActive) return;
       simTime += dt * timeScale;
 
       if (phase === 'FAST_BOOT') {
         flight.current = 2.4;
-        if (simTime >= 5.0) {
+        updateStepper('step-boot');
+        if (simTime >= 2.5) {
           phase = 'TAKEOFF_ROLL';
           playBeep(800, 0.2);
           logMessage('TAKEOFF', 'Hızlı kalibrasyon bitti. Motor tam gaz (85A) pist hızlanması başladı.');
@@ -897,8 +970,9 @@
       }
       else if (phase === 'TAKEOFF_ROLL') {
         flight.current = 85.0;
-        flight.airspeed += 4.0 * dt * timeScale;
+        flight.airspeed += 4.5 * dt * timeScale;
         flight.north += flight.airspeed * dt * timeScale;
+        updateStepper('step-takeoff');
         if (flight.airspeed >= 19.5) {
           phase = 'CLIMBOUT';
           flight.pitch = 8.5;
@@ -908,8 +982,9 @@
       }
       else if (phase === 'CLIMBOUT') {
         flight.current = 75.0;
-        flight.alt += 4.0 * dt * timeScale;
+        flight.alt += 4.2 * dt * timeScale;
         flight.north += flight.airspeed * dt * timeScale;
+        updateStepper('step-climb');
         if (flight.alt >= 25.0) {
           flight.alt = 25.0;
           flight.pitch = 2.8;
@@ -921,18 +996,13 @@
         flight.current = flameoutActive ? 0.0 : 34.0;
         flight.airspeed = flameoutActive ? Math.max(16.0, flight.airspeed - 0.5 * dt * timeScale) : 24.5;
         if (flameoutActive) flight.alt = Math.max(0.0, flight.alt - 1.2 * dt * timeScale);
+        updateStepper('step-pylon');
 
         const pylonNorth = 300.0;
         const pylonSouth = -50.0;
 
         if (currentScenario === 'GEOFENCE' && simTime > 16.0 && flight.east < 180.0) {
           flight.east += 32.0 * dt * timeScale;
-          if (flight.east > 150.0) {
-            const fb = document.getElementById('pill-fence');
-            fb.innerText = 'GEOFENCE: BREACH WARNING!';
-            fb.style.borderColor = 'var(--accent-rose)';
-            fb.style.color = 'var(--accent-rose)';
-          }
         } else {
           if (flight.north < pylonNorth && flight.east <= 10.0 && flight.yaw === 0.0) {
             flight.north += flight.airspeed * dt * timeScale;
@@ -968,6 +1038,7 @@
       else if (phase === 'TARGET_DROP_RUN') {
         flight.current = 32.0;
         flight.north += flight.airspeed * dt * timeScale;
+        updateStepper('step-drop');
         if (flight.north >= 65.0 && !flight.dropped) {
           triggerManualDrop();
           phase = 'APPROACH_LAND';
@@ -979,14 +1050,20 @@
         flight.airspeed = Math.max(16.5, flight.airspeed - 1.5 * dt * timeScale);
         flight.alt = Math.max(0.0, flight.alt - 1.8 * dt * timeScale);
         flight.north += flight.airspeed * dt * timeScale;
+        updateStepper('step-land');
         if (flight.alt <= 0.1) {
           flight.alt = 0.0;
           flight.airspeed = 0.0;
           flight.current = 0.0;
           phase = 'TOUCHDOWN';
-          simActive = false;
           playBeep(1200, 0.5, 'sine');
           logMessage('TOUCHDOWN', 'Pist eşiğine yumuşak teker kondu (Flare Touchdown). Görev Tamamlandı!');
+          // Graceful auto-restart after 4 seconds of touchdown so the simulation never stops demonstrating!
+          setTimeout(() => {
+            if (phase === 'TOUCHDOWN') {
+              resetSimulation();
+            }
+          }, 4000);
         }
       }
 
@@ -1022,7 +1099,6 @@
 
       const soc = Math.max(0.0, 100.0 * (1.0 - flight.consumed_mah / 16000.0)).toFixed(1);
       document.getElementById('kpi-soc-badge').innerText = soc + '%';
-      document.getElementById('pill-phase').innerText = `${phase} • LAP ${flight.laps}/3`;
 
       // KPIs
       document.getElementById('kpi-spd').innerText = flight.airspeed.toFixed(1);
@@ -1135,7 +1211,6 @@
           pfdCtx.fillText(s, 34, dy + 3.5);
         }
       }
-      // Speed bug box
       pfdCtx.fillStyle = '#0284c7';
       pfdCtx.fillRect(10, cy - 13, 54, 26);
       pfdCtx.fillStyle = '#fff';
@@ -1158,7 +1233,6 @@
           pfdCtx.fillText(a, w - 34, dy + 3.5);
         }
       }
-      // Alt bug box
       pfdCtx.fillStyle = '#059669';
       pfdCtx.fillRect(w - 64, cy - 13, 54, 26);
       pfdCtx.fillStyle = '#fff';
@@ -1186,7 +1260,7 @@
         const cy = h / 2 + 25;
         const scale = 0.65;
 
-        // Soft range circles
+        // Range circles
         rightCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
         for (let r = 50; r <= 250; r += 50) {
           rightCtx.beginPath(); rightCtx.arc(cx, cy, r * scale, 0, Math.PI * 2); rightCtx.stroke();
@@ -1256,7 +1330,6 @@
         rightCtx.closePath(); rightCtx.fill();
         rightCtx.restore();
 
-        // Label
         rightCtx.fillStyle = 'var(--accent-emerald)';
         rightCtx.font = '10px "JetBrains Mono", monospace';
         rightCtx.fillText(`GÖKDOĞAN [${flight.alt.toFixed(1)}m]`, ax + 10, ay - 4);
@@ -1270,11 +1343,9 @@
         }
       }
       else if (currentRightView === 'vision') {
-        // Downward Camera Simulation
         rightCtx.fillStyle = '#0f1712';
         rightCtx.fillRect(0, 0, w, h);
 
-        // Subtle grid lines
         rightCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
         for (let x = 0; x < w; x += 35) {
           rightCtx.beginPath(); rightCtx.moveTo(x, 0); rightCtx.lineTo(x, h); rightCtx.stroke();
@@ -1283,7 +1354,6 @@
           rightCtx.beginPath(); rightCtx.moveTo(0, y); rightCtx.lineTo(w, y); rightCtx.stroke();
         }
 
-        // Target Bullseye Ring
         const tX = w / 2 + Math.cos(simTime * 1.5) * 6;
         const tY = h / 2 + Math.sin(simTime * 2.0) * 6;
 
@@ -1296,7 +1366,6 @@
         rightCtx.fillStyle = '#f59e0b';
         rightCtx.beginPath(); rightCtx.arc(tX, tY, 7, 0, Math.PI * 2); rightCtx.fill();
 
-        // AI Bounding Box & Lock
         rightCtx.strokeStyle = 'var(--accent-cyan)';
         rightCtx.lineWidth = 1.5;
         rightCtx.strokeRect(tX - 60, tY - 60, 120, 120);
@@ -1305,7 +1374,6 @@
         rightCtx.font = '10px "JetBrains Mono", monospace';
         rightCtx.fillText('AI TARGET LOCK 99.4%', tX - 60, tY - 68);
 
-        // Crosshairs
         rightCtx.strokeStyle = 'rgba(244, 63, 94, 0.7)';
         rightCtx.setLineDash([3, 3]);
         rightCtx.beginPath();
@@ -1315,7 +1383,6 @@
         rightCtx.setLineDash([]);
       }
       else if (currentRightView === 'charts') {
-        // Strip Chart
         rightCtx.fillStyle = '#06090f';
         rightCtx.fillRect(0, 0, w, h);
 
@@ -1343,7 +1410,6 @@
           drawTrace(pt => pt.cur, 'var(--accent-amber)', 0, 90);
         }
 
-        // Legend
         rightCtx.font = '10px "JetBrains Mono", monospace';
         rightCtx.fillStyle = 'var(--accent-emerald)';
         rightCtx.fillText('■ İrtifa (m)', 15, 20);

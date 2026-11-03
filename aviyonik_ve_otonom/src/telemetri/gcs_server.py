@@ -115,15 +115,15 @@ class GCSServerHandler(http.server.SimpleHTTPRequestHandler):
 class GCSServer:
     def __init__(self, port: int = 8088):
         self.port = port
-        self.server: Optional[socketserver.TCPServer] = None
+        self.server: Optional[socketserver.ThreadingTCPServer] = None
         self.thread: Optional[threading.Thread] = None
 
     def update_telemetry(self, packet: GCSTelemetryPacket):
         GCSServerHandler.current_telemetry = packet
 
     def start(self):
-        socketserver.TCPServer.allow_reuse_address = True
-        self.server = socketserver.TCPServer(("", self.port), GCSServerHandler)
+        socketserver.ThreadingTCPServer.allow_reuse_address = True
+        self.server = socketserver.ThreadingTCPServer(("", self.port), GCSServerHandler)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
 
