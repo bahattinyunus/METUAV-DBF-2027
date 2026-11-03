@@ -209,14 +209,14 @@ METUAV-DBF-2027/
 │
 ├── 📁 aerodinamik/              # XFLR5, OpenVSP tasarımları, polar analizleri ve CFD analiz raporu
 │   ├── data/                   # Selig 1223 ve Clark Y polar veri setleri (.csv)
-│   ├── scripts/                # 3D kanat dönüşümü, 3D VLM kaldırıcı hat çözücü, downwash ve nötr nokta analiz araçları
+│   ├── scripts/                # 3D kanat dönüşümü, 3D VLM çözücü, winglet optimizer, downwash ve trim analiz araçları
 │   └── CFD_ANALYSIS_REPORT.md  # Kapsamlı AIAA DBF formatında aerodinamik rapor
 ├── 📁 mekanik_ve_yapisal/       # SolidWorks CAD dataları, kompozit katman analizleri (FEA)
-│   ├── scripts/                # Kütle/CG bütçesi, karbon spar gerilme, aeroelastik flutter/diverjans ve iniş takımı çökme simülatörü
+│   ├── scripts/                # Kütle/CG, gövde burkulması (buckling), spar gerilme, flutter ve iniş takımı simülatörü
 │   ├── ASSEMBLY_5MIN_GUIDE.md  # 5 Dakika montaj ve hızlı kilit yönergesi
 │   └── cad_specifications.md   # Malzeme, bağlantı ve CAD standartları
 ├── 📁 itki_ve_guc_sistemleri/   # Elektrik itki motoru, pervane ve batarya analizleri
-│   ├── scripts/                # BEMT pervane optimizasyonu, motor termal ve Dual-RC Thevenin batarya SOH modeli
+│   ├── scripts/                # BEMT pervane, Farassat aeroakustik & windmilling drag, motor termal ve LiPo SOH modeli
 │   └── propulsion_trade_study.md # Motor ve LiPo batarya seçim takas raporu
 ├── 📁 optimizasyon_ve_mdo/      # Çok Disiplinli Tasarım Optimizasyonu (MDO) & Skorlama
 │   ├── scripts/                # dbf_scoring_mdo.py (Duyarlılık & Monte Carlo simülasyonu)
@@ -266,6 +266,7 @@ METUAV-DBF-2027/
 *   **3D Sonlu Kanat Dönüşümü & VLM Çözücü:** Prandtl lifting-line teorisi ve Helmbold formülasyonu ile sonlu kanat sirkülasyonu modellenmiştir. $AR = 8.19$ ve $\lambda = 0.812$ sivrilme oranıyla $C_{L_{max, 3D}} = 1.96$, indüklenmiş sürükleme verimi $e = 0.88$ bulunmuştur.
 *   **4-Aşama DBF Görev Statik Kararlılık, Trim ve Aeroelastik Kontrol Tersinmesi:** Uçağın 4 farklı kütle ve yükleme konfigürasyonunda (Ferry $\%26.5\text{ MAC}$, M2 Kargo $\%27.8\text{ MAC}$, M3 Yük Taşınması $\%28.2\text{ MAC}$ ve M3 Yük Bırakımı Sonrası $\%34.5\text{ MAC}$) nötr nokta ($x_{np} = \%55.97\text{ MAC}$) ve pozitif statik marjin ($K_n \ge \%21.47$) korunmuştur. Karbon D-box kanat kutusunun burulma rijitliği ($GJ = 4850\text{ N}\cdot\text{m}^2$) ile kanatçık aeroelastik tersinme hızı ($V_R \gg 35\text{ m/s}$, $SF > 2.0$) güvenceye alınmış; MIL-F-8785C Seviye 1 Dutch-roll sönüm oranı ($\zeta = 0.238 > 0.08$) doğrulanmıştır.
 *   **Yatay Kuyruk Downwash & Nötr Nokta Analizi:** Kanat girdabının yatay stabilize üzerindeki yıkama açısı ($\epsilon = 3.33^\circ$) ve gradyanı ($d\epsilon/d\alpha = 0.208$) hesaplanarak tam uçak nötr noktası $x_{np} = \%73.4\text{ MAC}$ ve statik marjin $+\%46.4\text{ MAC}$ (aerodinamik olarak son derece kararlı) olarak doğrulanmıştır.
+*   **Kıvrık Kanat Ucu (Blended Winglet) ve Burnham-Hallock Girdap Zayıflatma Optimizasyonu:** Whitcomb ve Kroo Trefftz düzlemi lifting-line teorisi ile non-planar kanat ucu geometrisi ($h_w = 0.18\text{ m}$, $\theta_{cant} = 75^\circ$, $\Lambda = 35^\circ$) modellenmiştir. Efektif en-boy oranı $\%7.3$ artırılarak ($AR_{eff} = 7.57$) indüklenmiş sürükleme $\%6.8$ azaltılmış, net seyir $L/D$ değeri $\%3.1$ iyileştirilmiştir. Kök eğilme momenti artışı $\%2.6$ seviyesinde tutulmuş; Burnham-Hallock wake vortex modeliyle kanat ucu tepe teğetsel girdap hızı $\%36.5$ sönümlenerek kanat ucu ayrılması minimize edilmiştir.
 *   **CFD Analizleri:** ANSYS Fluent 2024 ortamında $k-\omega\text{ SST}$ türbülans modeli ve 7.85 milyon polihedral hücreli ağ ile sınır katman laminar ayrılma balonları çözümlenmiştir. Seyir hücum açısında ($\alpha = 4.0^\circ$) maksimum süzülme oranı $(L/D)_{3D} = 19.31$ elde edilmiştir.
 
 <div align="center">
@@ -291,6 +292,7 @@ METUAV-DBF-2027/
 ### 3. Elektrik İtki ve BEMT Pervane Optimizasyonu
 *   **Pala Elemanları Momentum Teorisi (BEMT):** Yarıçap boyunca 12 istasyonda hava akış hız üçgenleri ve Prandtl uç kaybı düzeltmeleri entegre edildi.
 *   **19x12E Pervane:** 6S LiPo geriliminde 6800 RPM devir altında **$122.4\text{ N}$ ($12.5\text{ kgf}$)** statik kalkış itkisi ve $\%79.8$ seyir verimliliği sağlandı.
+*   **Pervane Rotasyonel Aeroakustiği (Farassat & Gutin-Deming) ve Uçuş İçi Rüzgargülü (Windmilling) / Rejeneratif Frenleme Modeli:** Gutin-Deming akustik dipol/monopol ve IEC 61672 A-weighting denklemleriyle $6800\text{ RPM}$ tam gazda 100 ft sideline gürültü emisyonu modellenmiş ($BPF = 226.7\text{ Hz}$, $M_{tip} = 0.505$, $73.4\text{ dBA}$), AIAA DBF $< 85\text{ dBA}$ desibel kuralına tam uyum ($+11.6\text{ dBA}$ emniyet marjini) sağlanmıştır. Uçuş içi motor arızası veya dik dalış hallerinde ESC aktif DC fren kilitli pervane sürüklemesi ($C_{D,locked} \approx 0.10$), serbest rüzgargülü aktüatör disk sürüklemesi ($C_{D,wm} \approx 0.80$, $> 40\text{ N}$) ve 6S bataryaya aktif enerji geri kazanımlı rejeneratif frenleme ($P_{regen} = 288\text{ W}$, $\%72$ verim) modellenerek dalış hızı tahdidi ve enerji geri kazanımı çözülmüştür.
 *   **Motor/Batarya 1-D Termal Modeli:** 5 dakikalık uçuş profilinde bakır sargı sıcaklığı maksimum $57.6^\circ\text{C}$ seviyesinde kalarak $105^\circ\text{C}$ Curie emniyet sınırının çok altında tutuldu.
 *   **Dual-RC Thevenin Batarya ve SOH Modeli:** 6S 16,000 mAh LiPo bataryanın elektrokimyasal dinamikleri ($R_0 = 7.2\text{ m}\Omega$, $\tau_1 = 0.57\text{ s}$, $\tau_2 = 15.0\text{ s}$) modellenerek $85\text{ A}$ tam gaz pilon virajlarında voltaj çökmesinin hücre başı $3.30\text{ V}$ ($19.8\text{ V}$ cutoff) eşiğinin altına düşmesi kesin olarak önlenmiştir.
 
