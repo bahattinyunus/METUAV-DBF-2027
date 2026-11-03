@@ -16,7 +16,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 0.0
+      "consumed_mah": 0.0,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 1.0,
@@ -26,7 +27,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 0.7
+      "consumed_mah": 0.7,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 2.0,
@@ -36,7 +38,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 1.4
+      "consumed_mah": 1.4,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 3.0,
@@ -46,7 +49,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 2.1
+      "consumed_mah": 2.1,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 4.0,
@@ -56,7 +60,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 2.8
+      "consumed_mah": 2.8,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 5.0,
@@ -66,7 +71,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 3.5
+      "consumed_mah": 3.5,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 6.0,
@@ -76,7 +82,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 4.2
+      "consumed_mah": 4.2,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 7.0,
@@ -86,7 +93,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 4.9
+      "consumed_mah": 4.9,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 8.0,
@@ -96,7 +104,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 5.6
+      "consumed_mah": 5.6,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 9.0,
@@ -106,7 +115,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 6.3
+      "consumed_mah": 6.3,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 10.0,
@@ -116,7 +126,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 7.0
+      "consumed_mah": 7.0,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 11.0,
@@ -126,7 +137,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 7.7
+      "consumed_mah": 7.7,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 12.0,
@@ -136,7 +148,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.2,
-      "consumed_mah": 9.5
+      "consumed_mah": 9.5,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 13.0,
@@ -146,7 +159,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.19,
-      "consumed_mah": 32.3
+      "consumed_mah": 32.3,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 14.0,
@@ -156,7 +170,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.19,
-      "consumed_mah": 55.1
+      "consumed_mah": 55.1,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 15.0,
@@ -166,7 +181,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.18,
-      "consumed_mah": 77.8
+      "consumed_mah": 77.8,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 16.0,
@@ -176,7 +192,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 0.0,
       "battery_voltage": 25.18,
-      "consumed_mah": 100.6
+      "consumed_mah": 100.6,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 17.0,
@@ -186,7 +203,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 8.5,
       "battery_voltage": 25.17,
-      "consumed_mah": 122.2
+      "consumed_mah": 122.2,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 18.0,
@@ -196,7 +214,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 8.5,
       "battery_voltage": 25.17,
-      "consumed_mah": 143.1
+      "consumed_mah": 143.1,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 19.0,
@@ -206,7 +225,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 8.5,
       "battery_voltage": 25.16,
-      "consumed_mah": 163.9
+      "consumed_mah": 163.9,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 20.0,
@@ -216,7 +236,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 8.5,
       "battery_voltage": 25.16,
-      "consumed_mah": 184.7
+      "consumed_mah": 184.7,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 21.0,
@@ -226,7 +247,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 8.5,
       "battery_voltage": 25.15,
-      "consumed_mah": 205.6
+      "consumed_mah": 205.6,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 22.0,
@@ -236,7 +258,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 8.5,
       "battery_voltage": 25.15,
-      "consumed_mah": 226.4
+      "consumed_mah": 226.4,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 23.0,
@@ -246,7 +269,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 8.5,
       "battery_voltage": 25.14,
-      "consumed_mah": 247.2
+      "consumed_mah": 247.2,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 24.0,
@@ -256,7 +280,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.14,
-      "consumed_mah": 262.9
+      "consumed_mah": 262.9,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 25.0,
@@ -266,7 +291,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.14,
-      "consumed_mah": 272.2
+      "consumed_mah": 272.2,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 26.0,
@@ -276,7 +302,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.14,
-      "consumed_mah": 281.5
+      "consumed_mah": 281.5,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 27.0,
@@ -286,7 +313,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.13,
-      "consumed_mah": 290.8
+      "consumed_mah": 290.8,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 28.0,
@@ -296,7 +324,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.13,
-      "consumed_mah": 300.1
+      "consumed_mah": 300.1,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 29.0,
@@ -306,7 +335,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.13,
-      "consumed_mah": 309.4
+      "consumed_mah": 309.4,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 30.0,
@@ -316,7 +346,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.13,
-      "consumed_mah": 318.7
+      "consumed_mah": 318.7,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 31.0,
@@ -326,7 +357,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.13,
-      "consumed_mah": 328.0
+      "consumed_mah": 328.0,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 32.0,
@@ -336,7 +368,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.12,
-      "consumed_mah": 337.3
+      "consumed_mah": 337.3,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 33.0,
@@ -346,7 +379,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.12,
-      "consumed_mah": 346.6
+      "consumed_mah": 346.6,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 34.0,
@@ -356,7 +390,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.12,
-      "consumed_mah": 355.9
+      "consumed_mah": 355.9,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 35.0,
@@ -366,7 +401,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.12,
-      "consumed_mah": 365.2
+      "consumed_mah": 365.2,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 36.0,
@@ -376,7 +412,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.12,
-      "consumed_mah": 374.5
+      "consumed_mah": 374.5,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 37.0,
@@ -386,7 +423,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.11,
-      "consumed_mah": 383.9
+      "consumed_mah": 383.9,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 38.0,
@@ -396,7 +434,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.11,
-      "consumed_mah": 393.2
+      "consumed_mah": 393.2,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 39.0,
@@ -406,7 +445,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.11,
-      "consumed_mah": 402.5
+      "consumed_mah": 402.5,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 40.0,
@@ -416,7 +456,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.11,
-      "consumed_mah": 411.8
+      "consumed_mah": 411.8,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 41.0,
@@ -426,7 +467,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.11,
-      "consumed_mah": 421.1
+      "consumed_mah": 421.1,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 42.0,
@@ -436,7 +478,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.1,
-      "consumed_mah": 430.4
+      "consumed_mah": 430.4,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 43.0,
@@ -446,7 +489,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.1,
-      "consumed_mah": 439.7
+      "consumed_mah": 439.7,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 44.0,
@@ -456,7 +500,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.1,
-      "consumed_mah": 449.0
+      "consumed_mah": 449.0,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 45.0,
@@ -466,7 +511,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.1,
-      "consumed_mah": 458.3
+      "consumed_mah": 458.3,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 46.0,
@@ -476,7 +522,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.09,
-      "consumed_mah": 467.6
+      "consumed_mah": 467.6,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 47.0,
@@ -486,7 +533,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.09,
-      "consumed_mah": 476.9
+      "consumed_mah": 476.9,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 48.0,
@@ -496,7 +544,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.09,
-      "consumed_mah": 486.2
+      "consumed_mah": 486.2,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 49.0,
@@ -506,7 +555,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.09,
-      "consumed_mah": 495.5
+      "consumed_mah": 495.5,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 50.0,
@@ -516,7 +566,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.09,
-      "consumed_mah": 504.8
+      "consumed_mah": 504.8,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 51.0,
@@ -526,7 +577,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.08,
-      "consumed_mah": 514.1
+      "consumed_mah": 514.1,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 52.0,
@@ -536,7 +588,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.08,
-      "consumed_mah": 523.4
+      "consumed_mah": 523.4,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 53.0,
@@ -546,7 +599,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.08,
-      "consumed_mah": 532.7
+      "consumed_mah": 532.7,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 54.0,
@@ -556,7 +610,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.08,
-      "consumed_mah": 542.0
+      "consumed_mah": 542.0,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 55.0,
@@ -566,7 +621,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.08,
-      "consumed_mah": 551.4
+      "consumed_mah": 551.4,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 56.0,
@@ -576,7 +632,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.07,
-      "consumed_mah": 560.7
+      "consumed_mah": 560.7,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 57.0,
@@ -586,7 +643,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.07,
-      "consumed_mah": 570.0
+      "consumed_mah": 570.0,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 58.0,
@@ -596,7 +654,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.07,
-      "consumed_mah": 579.3
+      "consumed_mah": 579.3,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 59.0,
@@ -606,7 +665,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.07,
-      "consumed_mah": 588.6
+      "consumed_mah": 588.6,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 60.0,
@@ -616,7 +676,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.07,
-      "consumed_mah": 597.9
+      "consumed_mah": 597.9,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 61.0,
@@ -626,7 +687,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.06,
-      "consumed_mah": 607.2
+      "consumed_mah": 607.2,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 62.0,
@@ -636,7 +698,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.06,
-      "consumed_mah": 616.5
+      "consumed_mah": 616.5,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 63.0,
@@ -646,7 +709,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.06,
-      "consumed_mah": 625.8
+      "consumed_mah": 625.8,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 64.0,
@@ -656,7 +720,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.06,
-      "consumed_mah": 635.1
+      "consumed_mah": 635.1,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 65.0,
@@ -666,7 +731,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.06,
-      "consumed_mah": 644.4
+      "consumed_mah": 644.4,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 66.0,
@@ -676,7 +742,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.05,
-      "consumed_mah": 653.7
+      "consumed_mah": 653.7,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 67.0,
@@ -686,7 +753,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.05,
-      "consumed_mah": 663.0
+      "consumed_mah": 663.0,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 68.0,
@@ -696,7 +764,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.05,
-      "consumed_mah": 672.3
+      "consumed_mah": 672.3,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 69.0,
@@ -706,7 +775,8 @@
       "mass_kg": 24.85,
       "pitch_deg": 2.4,
       "battery_voltage": 25.05,
-      "consumed_mah": 681.0
+      "consumed_mah": 681.0,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 70.0,
@@ -716,7 +786,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.05,
-      "consumed_mah": 684.6
+      "consumed_mah": 684.6,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 71.0,
@@ -726,7 +797,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.05,
-      "consumed_mah": 688.0
+      "consumed_mah": 688.0,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 72.0,
@@ -736,7 +808,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 691.3
+      "consumed_mah": 691.3,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 73.0,
@@ -746,7 +819,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 694.6
+      "consumed_mah": 694.6,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 74.0,
@@ -756,7 +830,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 698.0
+      "consumed_mah": 698.0,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 75.0,
@@ -766,7 +841,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 701.3
+      "consumed_mah": 701.3,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 76.0,
@@ -776,7 +852,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 704.6
+      "consumed_mah": 704.6,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 77.0,
@@ -786,7 +863,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 708.0
+      "consumed_mah": 708.0,
+      "geofence_status": "INSIDE_SAFE"
     },
     {
       "time": 78.0,
@@ -796,7 +874,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 711.3
+      "consumed_mah": 711.3,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 79.0,
@@ -806,7 +885,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 714.6
+      "consumed_mah": 714.6,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 80.0,
@@ -816,7 +896,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 718.0
+      "consumed_mah": 718.0,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 81.0,
@@ -826,7 +907,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 721.3
+      "consumed_mah": 721.3,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     },
     {
       "time": 82.0,
@@ -836,7 +918,8 @@
       "mass_kg": 13.65,
       "pitch_deg": 5.2,
       "battery_voltage": 25.04,
-      "consumed_mah": 724.6
+      "consumed_mah": 724.6,
+      "geofence_status": "ALTITUDE_FLOOR_VIOLATION"
     }
   ]
 }

@@ -23,12 +23,24 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 aviyonik_src = os.path.join(os.path.dirname(current_dir), 'src')
 sys.path.insert(0, os.path.join(aviyonik_src, 'edge_ai_vision'))
 sys.path.insert(0, os.path.join(aviyonik_src, 'telemetri'))
+sys.path.insert(0, os.path.join(aviyonik_src, 'ucus_kontrol', 'src'))
 
 from edge_ai_vision.target_detector_node import TargetDetectorNode, GroundProjector
 from edge_ai_vision.drop_ballistics_computer import BallisticsSolver
 from edge_ai_vision.target_tracker_filter import TargetKalmanTracker
 from edge_ai_vision.synthetic_camera_streamer import SyntheticCameraStreamer
 from telemetri.micro_xrce_bridge import MicroXRCEBridge, VehicleCommand
+try:
+    from telemetri.mavlink_protocol_router import MAVLinkProtocolRouter
+except ImportError:
+    from mavlink_protocol_router import MAVLinkProtocolRouter
+
+try:
+    from ucus_kontrol.geofence_containment_manager import GeofenceContainmentManager
+    from ucus_kontrol.air_data_computer import AirDataComputer
+except ImportError:
+    from geofence_containment_manager import GeofenceContainmentManager
+    from air_data_computer import AirDataComputer
 
 class FullMissionPrototype:
     def __init__(self):
@@ -62,6 +74,10 @@ class FullMissionPrototype:
         self.streamer = SyntheticCameraStreamer(target_pos=(75.0, 0.0))
         self.tracker.initialize(75.0, 0.0)
         self.bridge = MicroXRCEBridge()
+        self.geofence = GeofenceContainmentManager()
+        self.adc = AirDataComputer(aircraft_mass_kg=self.mass)
+        self.mavlink = MAVLinkProtocolRouter(sys_id=1, comp_id=1)
+        self.mavlink_packets_sent = 0
 
         # Telemetry flight record
         self.flight_log = []
@@ -239,6 +255,38 @@ class FullMissionPrototype:
             self.consumed_mah += (self.current * dt / 3.6)
             self.voltage = max(21.6, 25.2 - (self.consumed_mah / 16000.0) * 3.6)
 
+            # Air Data & Geofence Containment evaluation
+            containment = self.geofence.evaluate_containment(
+                pos_north_m=self.pos_n,
+                pos_east_m=self.pos_e,
+                altitude_agl_m=altitude,
+                vel_north_ms=self.vel_n,
+                vel_east_ms=self.vel_e
+            )
+
+            # 1 Hz MAVLink v2 Telemetry encoding & stream dispatch
+            if int(sim_time / dt) % 20 == 0:
+                t_boot_ms = int(sim_time * 1000)
+                hb = self.mavlink.encode_heartbeat(system_status=4)
+                att = self.mavlink.encode_attitude(
+                    time_boot_ms=t_boot_ms,
+                    roll_rad=math.radians(self.roll_deg),
+                    pitch_rad=math.radians(self.pitch_deg),
+                    yaw_rad=math.radians(self.yaw_deg)
+                )
+                gps_pkt = self.mavlink.encode_global_position_int(
+                    time_boot_ms=t_boot_ms,
+                    lat_deg=39.8912 + (self.pos_n / 111139.0),
+                    lon_deg=32.7845 + (self.pos_e / (111139.0 * math.cos(math.radians(39.8912)))),
+                    alt_msl_m=950.0 + altitude,
+                    relative_alt_m=altitude,
+                    vx_ms=self.vel_n,
+                    vy_ms=self.vel_e,
+                    vz_ms=self.vel_d,
+                    heading_deg=self.yaw_deg
+                )
+                self.mavlink_packets_sent += 3
+
             self.flight_log.append({
                 "time": round(sim_time, 2),
                 "phase": phase,
@@ -247,7 +295,8 @@ class FullMissionPrototype:
                 "mass_kg": round(self.mass, 2),
                 "pitch_deg": round(self.pitch_deg, 2),
                 "battery_voltage": round(self.voltage, 2),
-                "consumed_mah": round(self.consumed_mah, 1)
+                "consumed_mah": round(self.consumed_mah, 1),
+                "geofence_status": containment.status.value
             })
 
             sim_time += dt
