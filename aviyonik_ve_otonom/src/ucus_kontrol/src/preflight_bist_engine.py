@@ -119,6 +119,23 @@ class PreFlightBISTEngine:
             message=msg
         )
 
+    def verify_compass(self, mag_samples_ut: np.ndarray, expected_norm_ut: float = 48.5) -> SubsystemBISTResult:
+        norms = np.linalg.norm(mag_samples_ut, axis=1) if mag_samples_ut.ndim > 1 else np.array([np.linalg.norm(mag_samples_ut)])
+        mean_field = float(np.mean(norms))
+        min_bound = 0.75 * expected_norm_ut
+        max_bound = 1.25 * expected_norm_ut
+        passed = (min_bound <= mean_field <= max_bound)
+        msg = f"Compass magnetic field nominal ({mean_field:.1f} uT)" if passed else f"Compass anomaly/distortion detected ({mean_field:.1f} uT)"
+
+        return SubsystemBISTResult(
+            subsystem_name="MAGNETOMETER_COMPASS_HEALTH",
+            passed=passed,
+            measured_value=mean_field,
+            nominal_range=(min_bound, max_bound),
+            unit="uT",
+            message=msg
+        )
+
     def run_complete_preflight_bist(
         self,
         accel_z_samples: np.ndarray,
@@ -130,7 +147,8 @@ class PreFlightBISTEngine:
         battery_voltage: float,
         cell_delta_v: float,
         payload_locked: bool,
-        payload_pin_v: float
+        payload_pin_v: float,
+        mag_samples: Optional[np.ndarray] = None
     ) -> BISTCertificate:
         self.results.clear()
         self.results.append(self.verify_imu(accel_z_samples, gyro_norm_samples))
@@ -139,6 +157,8 @@ class PreFlightBISTEngine:
         self.results.append(self.verify_servos_sweep(servo_currents))
         self.results.append(self.verify_battery_pack(battery_voltage, cell_delta_v))
         self.results.append(self.verify_payload_drop_lock(payload_locked, payload_pin_v))
+        if mag_samples is not None:
+            self.results.append(self.verify_compass(mag_samples))
 
         total = len(self.results)
         passed = sum(1 for r in self.results if r.passed)

@@ -150,5 +150,52 @@ void ExtendedKalmanFilter::updateAirspeed(double measured_ias)
   state_.airspeed = (1.0 - k_air) * v_horiz + k_air * measured_ias;
 }
 
+bool ExtendedKalmanFilter::updateCompass(
+  double mag_x, double mag_y, double mag_z,
+  double declination_rad,
+  double expected_norm_ut)
+{
+  if (!initialized_) {
+    return false;
+  }
+
+  // 1. Check magnitude sanity (magnetic anomaly rejection)
+  double field_norm = std::sqrt(mag_x * mag_x + mag_y * mag_y + mag_z * mag_z);
+  if (field_norm < 0.65 * expected_norm_ut || field_norm > 1.35 * expected_norm_ut) {
+    return false;  // Reject distorted magnetic measurement
+  }
+
+  // 2. Tilt compensation using current attitude estimates (roll and pitch)
+  double phi = state_.euler[0];
+  double theta = state_.euler[1];
+  double cos_th = std::cos(theta);
+  double sin_th = std::sin(theta);
+  double cos_phi = std::cos(phi);
+  double sin_phi = std::sin(phi);
+
+  double bxh = mag_x * cos_th + mag_y * sin_phi * sin_th + mag_z * cos_phi * sin_th;
+  double byh = mag_y * cos_phi - mag_z * sin_phi;
+
+  // 3. Azimuth in NED frame
+  constexpr double PI_VAL = 3.14159265358979323846;
+  double measured_psi = std::atan2(-byh, bxh) + declination_rad;
+
+  // 4. Innovation with wrap-to-pi
+  double psi_err = measured_psi - state_.euler[2];
+  while (psi_err > PI_VAL) psi_err -= 2.0 * PI_VAL;
+  while (psi_err < -PI_VAL) psi_err += 2.0 * PI_VAL;
+
+  // 5. Kalman gain update on yaw
+  double k_yaw = p_att_[2] / (p_att_[2] + r_compass_);
+  state_.euler[2] += k_yaw * psi_err;
+
+  // Wrap updated yaw to [-pi, pi]
+  while (state_.euler[2] > PI_VAL) state_.euler[2] -= 2.0 * PI_VAL;
+  while (state_.euler[2] < -PI_VAL) state_.euler[2] += 2.0 * PI_VAL;
+
+  p_att_[2] = (1.0 - k_yaw) * p_att_[2];
+  return true;
+}
+
 }  // namespace navigation
 }  // namespace metuav

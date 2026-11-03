@@ -25,6 +25,7 @@ add_library(ucus_kontrol_core
   src/mission_manager.cpp
   src/fast_boot_calibrator.cpp
   src/extended_kalman_filter.cpp
+  src/compass_navigation_calibrator.cpp
   src/energy_manager.cpp
   src/adaptive_tecs.cpp
 )

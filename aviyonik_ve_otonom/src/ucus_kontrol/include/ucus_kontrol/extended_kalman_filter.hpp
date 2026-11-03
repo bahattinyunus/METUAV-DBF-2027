@@ -40,6 +40,12 @@ public:
   // Pitot-static airspeed measurement update (20 Hz)
   void updateAirspeed(double measured_ias);
 
+  // Compass / Magnetometer heading update with tilt compensation & anomaly rejection
+  bool updateCompass(
+    double mag_x, double mag_y, double mag_z,
+    double declination_rad = 0.0,
+    double expected_norm_ut = 48.5);
+
   NavState getState() const { return state_; }
   bool isGpsHealthy() const { return gps_healthy_; }
 
@@ -63,6 +69,7 @@ private:
   double r_gps_pos_{1.2};
   double r_gps_vel_{0.3};
   double r_airspeed_{0.6};
+  double r_compass_{0.08};
 };
 
 }  // namespace navigation
