@@ -8,6 +8,8 @@ over HTTP/JSON for the mission flight-line operators.
 import json
 import math
 import os
+import sys
+import time
 import http.server
 import socketserver
 import threading
@@ -129,3 +131,21 @@ class GCSServer:
         if self.server:
             self.server.shutdown()
             self.server.server_close()
+
+
+if __name__ == '__main__':
+    port = 8088
+    if len(sys.argv) > 1 and sys.argv[1].isdigit():
+        port = int(sys.argv[1])
+    print(f"============================================================")
+    print(f"  METUAV DBF 2027 - GCS Cockpit & Telemetry Hub Web Sunucusu")
+    print(f"  Yer İstasyonu: http://localhost:{port}")
+    print(f"============================================================")
+    gcs = GCSServer(port=port)
+    gcs.start()
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("\nSunucu kapatılıyor...")
+        gcs.stop()
