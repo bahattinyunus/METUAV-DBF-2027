@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>METUAV DBF 2027 | GÖKDOĞAN GCS Cockpit & Telemetry Hub</title>
+  <title>METUAV DBF 2027 | GÖKDOĞAN GCS Glass Cockpit & Telemetry Hub</title>
   <style>
     :root {
-      --bg-dark: #080c14;
-      --panel-bg: #0f172a;
-      --card-bg: #141e33;
-      --card-border: #1e293b;
+      --bg-dark: #070b13;
+      --panel-bg: #0d1527;
+      --card-bg: #121c32;
+      --card-border: #1e2c4a;
       --accent-cyan: #00f0ff;
       --accent-green: #10b981;
       --accent-amber: #f59e0b;
@@ -19,16 +19,18 @@
       --ground-brown: #452c1e;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
+      --tab-active-bg: #1d2b4f;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    body { background: var(--bg-dark); color: var(--text-main); min-height: 100vh; padding: 14px; overflow-x: hidden; }
+    body { background: var(--bg-dark); color: var(--text-main); min-height: 100vh; padding: 12px; overflow-x: hidden; }
 
+    /* Top Glass Cockpit Header */
     header {
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-      padding: 12px 20px; background: var(--panel-bg); border: 1px solid var(--card-border);
-      border-radius: 12px; margin-bottom: 14px; box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+      padding: 10px 18px; background: var(--panel-bg); border: 1px solid var(--card-border);
+      border-radius: 12px; margin-bottom: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.65);
     }
-    .header-left { display: flex; align-items: center; gap: 12px; }
+    .header-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .logo-badge {
       background: linear-gradient(135deg, #0284c7, #0f172a); border: 1px solid #38bdf8;
       color: #fff; font-weight: 800; font-size: 13px; padding: 6px 12px; border-radius: 8px; letter-spacing: 1px;
@@ -41,30 +43,51 @@
     .badge-fence { background: rgba(0,240,255,0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
     .badge-mode { background: rgba(139,92,246,0.15); color: var(--accent-purple); border: 1px solid var(--accent-purple); }
 
-    /* Control Deck Toolbar */
+    .header-right { display: flex; gap: 16px; align-items: center; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+
+    /* Controls Bar */
     .controls-bar {
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
       padding: 10px 16px; background: var(--panel-bg); border: 1px solid var(--card-border);
-      border-radius: 10px; margin-bottom: 14px;
+      border-radius: 10px; margin-bottom: 12px;
     }
     .btn-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .btn {
-      padding: 8px 16px; border-radius: 6px; font-weight: 700; font-size: 12px;
+      padding: 7px 14px; border-radius: 6px; font-weight: 700; font-size: 11.5px;
       cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px;
       transition: all 0.15s ease-in-out; text-transform: uppercase; letter-spacing: 0.5px;
     }
-    .btn:hover { transform: translateY(-1px); filter: brightness(1.15); }
+    .btn:hover { transform: translateY(-1px); filter: brightness(1.2); }
     .btn:active { transform: translateY(1px); }
     .btn-primary { background: #0284c7; color: #fff; }
     .btn-success { background: #059669; color: #fff; }
     .btn-amber { background: #d97706; color: #fff; }
     .btn-purple { background: #7c3aed; color: #fff; }
     .btn-danger { background: #dc2626; color: #fff; }
-    .btn-slate { background: #334155; color: #e2e8f0; }
+    .btn-slate { background: #1e293b; color: #e2e8f0; border: 1px solid #334155; }
+    .btn-preset { background: #1e2c4a; color: #94a3b8; border: 1px solid #2d416b; }
+    .btn-preset.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
 
-    /* Main Split Grid */
+    /* Tabbed Navigation Bar */
+    .nav-tabs {
+      display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 2px solid #1e2c4a; padding-bottom: 4px;
+    }
+    .nav-tab {
+      padding: 8px 18px; border-radius: 8px 8px 0 0; background: #0f182c; border: 1px solid #1e2c4a;
+      border-bottom: none; color: var(--text-muted); font-size: 12px; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;
+    }
+    .nav-tab:hover { color: #fff; background: #172442; }
+    .nav-tab.active {
+      background: var(--tab-active-bg); color: var(--accent-cyan); border-color: #0284c7;
+      border-bottom: 2px solid var(--accent-cyan);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Layout Grids */
     .main-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;
     }
     @media(max-width: 1100px) { .main-grid { grid-template-columns: 1fr; } }
 
@@ -74,7 +97,7 @@
     }
     .card-header {
       display: flex; justify-content: space-between; align-items: center;
-      padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--card-border);
+      padding-bottom: 8px; margin-bottom: 10px; border-bottom: 1px solid var(--card-border);
     }
     .card-title {
       font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent-cyan);
@@ -82,105 +105,226 @@
 
     /* Displays Canvas */
     .display-canvas {
-      width: 100%; height: 360px; background: #000; border-radius: 8px;
-      border: 1px solid #1e293b; display: block;
+      width: 100%; height: 380px; background: #000; border-radius: 8px;
+      border: 1px solid #1e2c4a; display: block;
     }
 
     /* Telemetry Grid Bottom */
     .telemetry-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 14px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 12px;
     }
     @media(max-width: 1024px) { .telemetry-grid { grid-template-columns: repeat(2, 1fr); } }
     @media(max-width: 600px) { .telemetry-grid { grid-template-columns: 1fr; } }
 
     .gauge-cell {
-      background: #0d1424; border: 1px solid var(--card-border); border-radius: 8px;
-      padding: 10px 14px; position: relative;
+      background: #090f1e; border: 1px solid var(--card-border); border-radius: 8px;
+      padding: 8px 12px; position: relative;
     }
     .gauge-label {
       font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px;
     }
     .gauge-value {
-      font-size: 24px; font-weight: 800; margin: 4px 0; font-variant-numeric: tabular-nums;
+      font-size: 22px; font-weight: 800; margin: 3px 0; font-variant-numeric: tabular-nums;
     }
-    .gauge-unit { font-size: 12px; color: var(--text-muted); font-weight: 400; margin-left: 2px; }
+    .gauge-unit { font-size: 11px; color: var(--text-muted); font-weight: 400; margin-left: 2px; }
 
-    .bar-bg { width: 100%; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-top: 6px; }
+    .bar-bg { width: 100%; height: 5px; background: #1e2c4a; border-radius: 3px; overflow: hidden; margin-top: 5px; }
     .bar-fill { height: 100%; width: 0%; border-radius: 3px; transition: width 0.2s ease; }
 
     /* FDIR Status List */
     .status-item {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 6px 0; border-bottom: 1px solid #1e293b; font-size: 12px;
+      padding: 5px 0; border-bottom: 1px solid #1e2c4a; font-size: 11.5px;
     }
     .status-item:last-child { border-bottom: none; }
     .dot-ok { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green); display: inline-block; margin-right: 6px; }
+    .dot-warn { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-amber); display: inline-block; margin-right: 6px; }
 
     /* Event Log Terminal */
     .log-terminal {
-      background: #060911; border: 1px solid var(--card-border); border-radius: 8px;
-      height: 120px; overflow-y: auto; padding: 8px 12px; font-family: 'Consolas', monospace; font-size: 11px;
+      background: #050811; border: 1px solid var(--card-border); border-radius: 8px;
+      height: 110px; overflow-y: auto; padding: 8px 12px; font-family: 'Consolas', monospace; font-size: 11px;
     }
     .log-line { margin-bottom: 4px; line-height: 1.4; }
     .log-time { color: var(--accent-cyan); font-weight: 700; margin-right: 8px; }
     .log-phase { color: var(--accent-amber); margin-right: 6px; }
     .log-text { color: #e2e8f0; }
+
+    /* Lab Metric Cards */
+    .metric-box {
+      background: #090f1e; border: 1px solid #1e2c4a; border-radius: 8px; padding: 12px; margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Top Header -->
+  <!-- Top Glass Cockpit Header -->
   <header>
     <div class="header-left">
       <div class="logo-badge">METUAV DBF 2027</div>
-      <h1 style="font-size: 17px; font-weight: 800; letter-spacing: 0.5px; color: #fff;">
-        GÖKDOĞAN <span style="color: var(--accent-cyan); font-weight: 400;">| GCS COCKPIT</span>
+      <h1 style="font-size: 16px; font-weight: 800; letter-spacing: 0.5px; color: #fff;">
+        GÖKDOĞAN <span style="color: var(--accent-cyan); font-weight: 400;">| GCS GLASS COCKPIT</span>
       </h1>
-      <span class="badge badge-live" id="live-indicator">● TELEMETRY ONLINE</span>
+      <span class="badge badge-live" id="live-indicator">● MAVLINK v2 ONLINE (50Hz)</span>
       <span class="badge badge-fence" id="geofence-badge">GEOFENCE: INSIDE SAFE</span>
       <span class="badge badge-mode" id="mission-mode-badge">M3: AUTO RECON</span>
     </div>
-    <div style="display: flex; gap: 16px; align-items: center; font-size: 12px; color: var(--text-muted);">
-      <div>BATARYA (6S): <strong style="color: var(--accent-green);" id="top-soc">95.5%</strong></div>
-      <div>UÇUŞ SÜRESİ: <strong style="color: #fff;" id="top-time">00:00.0</strong></div>
+    <div class="header-right">
+      <div>BATARYA: <strong style="color: var(--accent-green);" id="top-soc">95.5%</strong></div>
+      <div>SÜRE: <strong style="color: #fff;" id="top-time">00:00.0</strong></div>
+      <button class="btn btn-slate" style="padding: 4px 8px; font-size: 11px;" id="audio-toggle" onclick="toggleAudio()">🔊 SES: AÇIK</button>
     </div>
   </header>
 
-  <!-- Interactive Controls Toolbar -->
+  <!-- Interactive Controls Toolbar & Scenarios -->
   <div class="controls-bar">
     <div class="btn-group">
-      <button class="btn btn-success" id="btn-start" onclick="startSimulation()">▶ Uçuşu Başlat</button>
+      <button class="btn btn-success" id="btn-start" onclick="startSimulation()">▶ Başlat</button>
       <button class="btn btn-amber" id="btn-pause" onclick="pauseSimulation()">⏸ Duraklat</button>
-      <button class="btn btn-purple" id="btn-drop" onclick="triggerManualDrop()">🎯 Faydalı Yük Bırak</button>
+      <button class="btn btn-purple" id="btn-drop" onclick="triggerManualDrop()">🎯 Yük Bırak</button>
       <button class="btn btn-primary" id="btn-rtl" onclick="triggerRTL()">🏠 Eve Dön (RTL)</button>
+      <button class="btn btn-danger" id="btn-flameout" onclick="triggerFlameout()">⚡ Motor Kes & Regen</button>
       <button class="btn btn-slate" id="btn-reset" onclick="resetSimulation()">🔄 Sıfırla</button>
     </div>
     <div class="btn-group">
-      <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Simülasyon Hızı:</span>
-      <button class="btn btn-slate" style="padding: 6px 10px;" onclick="setSpeed(1)">1x</button>
-      <button class="btn btn-slate" style="padding: 6px 10px;" onclick="setSpeed(2)">2x</button>
-      <button class="btn btn-slate" style="padding: 6px 10px;" onclick="setSpeed(4)">4x</button>
+      <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Senaryo:</span>
+      <button class="btn btn-preset active" id="scen-m3" onclick="setScenario('M3')">M3: Hedef & Bırakma</button>
+      <button class="btn btn-preset" id="scen-m1" onclick="setScenario('M1')">M1: Hız Parkuru</button>
+      <button class="btn btn-preset" id="scen-m2" onclick="setScenario('M2')">M2: Ağır Yük</button>
+      <button class="btn btn-preset" id="scen-geo" onclick="setScenario('GEOFENCE')">Geofence İhlali</button>
+    </div>
+    <div class="btn-group">
+      <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Hız:</span>
+      <button class="btn btn-slate" style="padding: 5px 8px;" onclick="setSpeed(1)">1x</button>
+      <button class="btn btn-slate" style="padding: 5px 8px;" onclick="setSpeed(2)">2x</button>
+      <button class="btn btn-slate" style="padding: 5px 8px;" onclick="setSpeed(4)">4x</button>
     </div>
   </div>
 
-  <!-- Main Split Display -->
-  <div class="main-grid">
-    <!-- LEFT: Primary Flight Display (PFD) -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">PRIMARY FLIGHT DISPLAY (PFD)</span>
-        <span style="font-size: 11px; color: var(--text-muted);">50 HZ EKF3 + AIR DATA</span>
-      </div>
-      <canvas id="pfd-canvas" class="display-canvas" width="600" height="380"></canvas>
-    </div>
+  <!-- Tabbed Navigation Bar -->
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="switchTab('tab-cockpit')">✈️ PFD & Taktik Radar</div>
+    <div class="nav-tab" onclick="switchTab('tab-vision')">🎯 Görev 3 Edge-AI Vizyon & Balistik</div>
+    <div class="nav-tab" onclick="switchTab('tab-charts')">📊 Telemetri Osiloskop Grafikleri</div>
+    <div class="nav-tab" onclick="switchTab('tab-aero')">🔬 Aerodinamik & İtki Laboratuvarı</div>
+  </div>
 
-    <!-- RIGHT: 2D Tactical Radar & 3D Geofence Map -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">TAKTIK RADAR & GEOFENCE PİST HARİTASI</span>
-        <span style="font-size: 11px; color: var(--accent-green);" id="radar-status">POLİGON: TAM İÇERİDE</span>
+  <!-- TAB 1: PFD & TACTICAL RADAR -->
+  <div id="tab-cockpit" class="tab-content active">
+    <div class="main-grid">
+      <!-- LEFT: Primary Flight Display (PFD) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">PRIMARY FLIGHT DISPLAY (PFD)</span>
+          <span style="font-size: 11px; color: var(--accent-cyan);" id="fma-indicator">FMA: AUTO_TECS | L1_NAV | CRUISE_24.5</span>
+        </div>
+        <canvas id="pfd-canvas" class="display-canvas" width="600" height="380"></canvas>
       </div>
-      <canvas id="radar-canvas" class="display-canvas" width="600" height="380"></canvas>
+
+      <!-- RIGHT: 2D Tactical Radar & 3D Geofence Map -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">TAKTIK RADAR & GEOFENCE PİST HARİTASI</span>
+          <span style="font-size: 11px; color: var(--accent-green);" id="radar-status">POLİGON: TAM İÇERİDE (TTB: >15s)</span>
+        </div>
+        <canvas id="radar-canvas" class="display-canvas" width="600" height="380"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: VISION & BALLISTICS -->
+  <div id="tab-vision" class="tab-content">
+    <div class="main-grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">AŞAĞI AÇILI OPTİK KAMERA AKIŞI & AI HEDEF TESPİTİ</span>
+          <span style="font-size: 11px; color: var(--accent-green);" id="vision-status">AI CONFIDENCE: 99.4% (CIRCULAR RING)</span>
+        </div>
+        <canvas id="vision-canvas" class="display-canvas" width="600" height="380"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">3-DOF RK4 BALİSTİK DÜŞÜŞ & SAÇILMA ANALİZİ (CEP)</span>
+          <span style="font-size: 11px; color: var(--accent-purple);" id="ballistics-lead">LEAD: 14.2m | TTD: 1.18s</span>
+        </div>
+        <canvas id="cep-canvas" class="display-canvas" width="600" height="380"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: TELEMETRY OSCILLOSCOPE STRIP CHARTS -->
+  <div id="tab-charts" class="tab-content">
+    <div class="card" style="margin-bottom: 12px;">
+      <div class="card-header">
+        <span class="card-title">ÇOK KANALLI GERÇEK ZAMANLI TELEMETRİ GRAFİĞİ</span>
+        <div style="font-size: 11px; display: flex; gap: 14px;">
+          <span style="color: var(--accent-cyan);">■ İrtifa (m)</span>
+          <span style="color: var(--accent-green);">■ Hava Hızı (m/s)</span>
+          <span style="color: var(--accent-amber);">■ Batarya Akımı (A)</span>
+          <span style="color: var(--accent-purple);">■ Elevatör Trim (°)</span>
+        </div>
+      </div>
+      <canvas id="chart-canvas" class="display-canvas" width="1200" height="340" style="height: 320px;"></canvas>
+    </div>
+  </div>
+
+  <!-- TAB 4: AERO & PROPULSION LAB -->
+  <div id="tab-aero" class="tab-content">
+    <div class="main-grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">PERVANE AEROAKUSTİĞİ & GÜRÜLTÜ SEVİYESİ</span>
+          <span style="font-size: 11px; color: var(--accent-green);">FARASSAT & GUTIN-DEMING</span>
+        </div>
+        <div class="metric-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-size: 12px; color: var(--text-muted);">100 FT SIDELINE SES BASINÇ SEVİYESİ (dBA)</span>
+            <strong style="font-size: 18px; color: var(--accent-cyan);" id="noise-dba-val">73.4 dBA</strong>
+          </div>
+          <div class="bar-bg" style="height: 10px;">
+            <div class="bar-fill" id="noise-bar" style="width: 73.4%; background: linear-gradient(90deg, #10b981 0%, #f59e0b 80%, #ef4444 100%);"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 4px;">
+            <span>0 dBA</span>
+            <span style="color: var(--accent-green);">Maks DBF Limiti: 85.0 dBA (Emniyet Marjini: +11.6 dBA)</span>
+            <span>100 dBA</span>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="gauge-cell">
+            <div class="gauge-label">Blade Passing Freq (BPF)</div>
+            <div class="gauge-value" style="color: #fff;" id="bpf-val">226.7<span class="gauge-unit">Hz</span></div>
+          </div>
+          <div class="gauge-cell">
+            <div class="gauge-label">Helisel Uç Mach (M_tip)</div>
+            <div class="gauge-value" style="color: #fff;" id="tip-mach-val">0.505</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">BLENDED WINGLET & REJENERASYON MODU</span>
+          <span style="font-size: 11px; color: var(--accent-purple);">TREFFTZ DÜZLEMİ ANALİZİ</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+          <div class="gauge-cell">
+            <div class="gauge-label">Efektif AR Kazancı</div>
+            <div class="gauge-value" style="color: var(--accent-green);">7.57<span class="gauge-unit">(+%7.3)</span></div>
+          </div>
+          <div class="gauge-cell">
+            <div class="gauge-label">İndüklenmiş Sürükleme Düşüşü</div>
+            <div class="gauge-value" style="color: var(--accent-cyan);">-6.8<span class="gauge-unit">%</span></div>
+          </div>
+        </div>
+        <div class="metric-box">
+          <div class="gauge-label" style="margin-bottom: 4px;">İNİŞ REJENERASYON MODU</div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong style="color: #fff;" id="regen-mode-label">STANDBY (NORMAL İTKİ)</strong>
+            <span style="font-size: 14px; font-weight: 800; color: var(--accent-amber);" id="regen-power-label">0 W</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -204,7 +348,7 @@
           <div class="bar-bg"><div class="bar-fill" id="bar-a" style="width: 40%; background: var(--accent-amber);"></div></div>
         </div>
       </div>
-      <div style="margin-top: 10px; font-size: 12px; display: flex; justify-content: space-between; color: var(--text-muted);">
+      <div style="margin-top: 8px; font-size: 11.5px; display: flex; justify-content: space-between; color: var(--text-muted);">
         <span>Tüketilen Kapasite:</span>
         <strong style="color: #fff;" id="cell-mah">681.0 mAh</strong>
       </div>
@@ -226,7 +370,7 @@
           <div class="gauge-value" style="color: #fff;" id="wind-spd">4.2<span class="gauge-unit">m/s</span></div>
         </div>
       </div>
-      <div style="margin-top: 10px; font-size: 12px; display: flex; justify-content: space-between; color: var(--text-muted);">
+      <div style="margin-top: 8px; font-size: 11.5px; display: flex; justify-content: space-between; color: var(--text-muted);">
         <span>Dinamik Basınç (q):</span>
         <strong style="color: #fff;" id="q-dyn">367.7 Pa</strong>
       </div>
@@ -236,22 +380,22 @@
     <div class="card">
       <div class="card-header">
         <span class="card-title">AVİYONİK VE FDIR SAĞLIK</span>
-        <span style="font-size: 11px; color: var(--accent-green);">TÜMÜ NOMİNAL</span>
+        <span style="font-size: 11px; color: var(--accent-green);" id="fdir-overall">TÜMÜ NOMİNAL</span>
       </div>
       <div class="status-item">
-        <span><span class="dot-ok"></span>15-Durumlu EKF & IMU</span>
+        <span><span class="dot-ok" id="dot-ekf"></span>15-Durumlu EKF & IMU</span>
         <strong style="color: var(--accent-green);">SAĞLIKLI</strong>
       </div>
       <div class="status-item">
-        <span><span class="dot-ok"></span>Çift Manyetometre (Pusula)</span>
+        <span><span class="dot-ok" id="dot-comp"></span>Çift Manyetometre (Pusula)</span>
         <strong style="color: var(--accent-cyan);" id="comp-status">ID 1 (0.4° SAPMA)</strong>
       </div>
       <div class="status-item">
-        <span><span class="dot-ok"></span>GPS 3D Fix</span>
+        <span><span class="dot-ok" id="dot-gps"></span>GPS 3D Fix</span>
         <strong style="color: var(--accent-green);">14 SATS (HDOP 0.85)</strong>
       </div>
       <div class="status-item">
-        <span><span class="dot-ok"></span>MAVLink v2 Akışı</span>
+        <span><span class="dot-ok" id="dot-mav"></span>MAVLink v2 Akışı</span>
         <strong style="color: var(--accent-purple);" id="mav-count">50 PKTS/S</strong>
       </div>
     </div>
@@ -272,7 +416,7 @@
           <div class="gauge-value" style="color: #fff;" id="lap-num">2<span class="gauge-unit">/3</span></div>
         </div>
       </div>
-      <div style="margin-top: 10px; font-size: 12px; display: flex; justify-content: space-between; color: var(--text-muted);">
+      <div style="margin-top: 8px; font-size: 11.5px; display: flex; justify-content: space-between; color: var(--text-muted);">
         <span>Boş Kütle Dönüşümü:</span>
         <strong style="color: #fff;" id="mass-state">24.85 kg</strong>
       </div>
@@ -283,27 +427,72 @@
   <div class="card">
     <div class="card-header">
       <span class="card-title">CANLI GÖREV KONSOLU & OTONOM KARAR GÜNLÜĞÜ</span>
-      <span style="font-size: 11px; color: var(--text-muted);">MİCRO-XRCE DDS + MAVLINK STREAM</span>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-slate" style="padding: 2px 8px; font-size: 10px;" onclick="clearLogs()">Temizle</button>
+        <span style="font-size: 11px; color: var(--text-muted);">MİCRO-XRCE DDS + MAVLINK</span>
+      </div>
     </div>
     <div class="log-terminal" id="log-console">
-      <div class="log-line"><span class="log-time">[00:00.0]</span><span class="log-phase">INIT</span><span class="log-text">METUAV Gökdoğan Uçuş Kontrolcüsü Başlatıldı. Telemetri Dinleniyor...</span></div>
+      <div class="log-line"><span class="log-time">[00:00.0]</span><span class="log-phase">INIT</span><span class="log-text">METUAV Gökdoğan Glass Cockpit Başlatıldı. 50Hz SITL Telemetrisi Dinleniyor...</span></div>
     </div>
   </div>
 
   <script>
-    // State machine and flight data
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    // Audio synthesizer
+    let audioEnabled = true;
+    let audioCtx = null;
+    function playBeep(freq = 600, duration = 0.12, type = 'sine') {
+      if (!audioEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById('audio-toggle').innerText = audioEnabled ? '🔊 SES: AÇIK' : '🔇 SES: KAPALI';
+    }
+
+    // Canvas contexts
     const pfdCanvas = document.getElementById('pfd-canvas');
     const pfdCtx = pfdCanvas.getContext('2d');
     const radCanvas = document.getElementById('radar-canvas');
     const radCtx = radCanvas.getContext('2d');
+    const visCanvas = document.getElementById('vision-canvas');
+    const visCtx = visCanvas ? visCanvas.getContext('2d') : null;
+    const cepCanvas = document.getElementById('cep-canvas');
+    const cepCtx = cepCanvas ? cepCanvas.getContext('2d') : null;
+    const chartCanvas = document.getElementById('chart-canvas');
+    const chartCtx = chartCanvas ? chartCanvas.getContext('2d') : null;
 
     let simActive = false;
     let simTime = 0.0;
     let timeScale = 1.0;
     let phase = 'STANDBY';
+    let currentScenario = 'M3';
     let trail = [];
     let dropMarker = null;
     let mavPackets = 0;
+    let chartHistory = [];
+    let flameoutActive = false;
 
     let flight = {
       north: -100.0,
@@ -319,7 +508,9 @@
       consumed_mah: 0.0,
       dropped: false,
       dropErr: 0.98,
-      laps: 0
+      laps: 0,
+      elevTrim: 0.0,
+      regenW: 0.0
     };
 
     function addLog(t, ph, text) {
@@ -334,18 +525,24 @@
       consoleBox.scrollTop = consoleBox.scrollHeight;
     }
 
+    function clearLogs() {
+      document.getElementById('log-console').innerHTML = '';
+    }
+
     function startSimulation() {
       if (!simActive) {
         simActive = true;
+        playBeep(880, 0.15);
         if (phase === 'STANDBY') {
           phase = 'FAST_BOOT';
-          addLog(simTime, 'FAST_BOOT', 'IMU 50Hz ve GPS 3D Fix hızlı kalibrasyon başlatıldı.');
+          addLog(simTime, 'FAST_BOOT', 'IMU 50Hz, Çift Pusula ve GPS 3D Fix hızlı kalibrasyon başlatıldı.');
         }
       }
     }
 
     function pauseSimulation() {
       simActive = false;
+      playBeep(440, 0.15);
     }
 
     function resetSimulation() {
@@ -354,37 +551,66 @@
       phase = 'STANDBY';
       trail = [];
       dropMarker = null;
+      chartHistory = [];
+      flameoutActive = false;
       flight = {
         north: -100.0, east: 0.0, alt: 0.0, airspeed: 0.0,
-        pitch: 0.0, roll: 0.0, yaw: 0.0, mass: 24.85,
+        pitch: 0.0, roll: 0.0, yaw: 0.0, mass: currentScenario === 'M1' ? 12.70 : (currentScenario === 'M2' ? 24.85 : 21.05),
         voltage: 25.2, current: 0.0, consumed_mah: 0.0,
-        dropped: false, dropErr: 0.98, laps: 0
+        dropped: false, dropErr: 0.98, laps: 0, elevTrim: 0.0, regenW: 0.0
       };
-      document.getElementById('log-console').innerHTML = '';
-      addLog(0.0, 'RESET', 'Sistem sıfırlandı. Kalkış için hazır.');
+      clearLogs();
+      addLog(0.0, 'RESET', 'Sistem sıfırlandı. Kalkış için nominal.');
       updateUI();
     }
 
     function triggerManualDrop() {
       if (!flight.dropped && flight.alt > 15.0) {
         flight.dropped = true;
-        flight.mass = 13.65;
+        flight.mass -= 8.35;
+        flight.elevTrim = -3.5;
         flight.pitch = 5.2; // Adaptive trim to prevent stall
-        dropMarker = { north: flight.north + 12.0, east: flight.east };
-        addLog(simTime, 'DROP_ACTION', 'MANUEL YÜK BIRAKILDI! Kütle 13.65 kg oldu, -3.5° elevatör trim uygulandı.');
+        dropMarker = { north: flight.north + 14.2, east: flight.east };
+        playBeep(1200, 0.3, 'triangle');
+        addLog(simTime, 'DROP_ACTION', 'FAYDALIK YÜK BIRAKILDI! +44.1mm CG kaymasına karşı anlık -3.5° elevatör trim uygulandı.');
       }
     }
 
     function triggerRTL() {
       phase = 'APPROACH_LAND';
-      addLog(simTime, 'RTL', 'Eve Dönüş (RTL) devrede. Pist yaklaşma süzülüşü başlatıldı.');
+      playBeep(650, 0.2);
+      addLog(simTime, 'RTL', 'Eve Dönüş (RTL) devrede. Pist yaklaşma süzülüşü ve flare başlatıldı.');
+    }
+
+    function triggerFlameout() {
+      flameoutActive = !flameoutActive;
+      if (flameoutActive) {
+        playBeep(300, 0.4, 'sawtooth');
+        flight.regenW = 288.0;
+        addLog(simTime, 'FLAMEOUT', 'ACİL DURUM: Motor kesildi! Pervane rüzgargülü rejeneratif frenleme (288W) devrede.');
+      } else {
+        flight.regenW = 0.0;
+        addLog(simTime, 'RESTART', 'Motor yeniden çalıştırıldı.');
+      }
+    }
+
+    function setScenario(scen) {
+      currentScenario = scen;
+      document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+      if (scen === 'M3') document.getElementById('scen-m3').classList.add('active');
+      if (scen === 'M1') document.getElementById('scen-m1').classList.add('active');
+      if (scen === 'M2') document.getElementById('scen-m2').classList.add('active');
+      if (scen === 'GEOFENCE') document.getElementById('scen-geo').classList.add('active');
+      resetSimulation();
+      addLog(0.0, 'SCENARIO', `Aktif Senaryo Seçildi: ${scen}`);
     }
 
     function setSpeed(s) {
       timeScale = s;
+      playBeep(520, 0.08);
     }
 
-    // Step Physics Simulation
+    // Physics Step
     function updatePhysics(dt) {
       if (!simActive) return;
       simTime += dt * timeScale;
@@ -392,8 +618,9 @@
 
       if (phase === 'FAST_BOOT') {
         flight.current = 2.4;
-        if (simTime >= 8.0) {
+        if (simTime >= 6.0) {
           phase = 'TAKEOFF_ROLL';
+          playBeep(800, 0.2);
           addLog(simTime, 'TAKEOFF', 'Hızlı kalibrasyon bitti. Motor tam gaz (85A) pist hızlanması başladı.');
         }
       }
@@ -404,12 +631,13 @@
         if (flight.airspeed >= 19.5) {
           phase = 'CLIMBOUT';
           flight.pitch = 8.5;
-          addLog(simTime, 'ROTATION', 'V_rot=19.5 m/s ulaşıldı. 44m pist mesafesinde teker kesildi (Liftoff)!');
+          playBeep(1000, 0.15);
+          addLog(simTime, 'ROTATION', 'V_rot=19.5 m/s ulaşıldı. 44m mesafede teker kesildi (Liftoff)!');
         }
       }
       else if (phase === 'CLIMBOUT') {
         flight.current = 75.0;
-        flight.alt += 3.5 * dt * timeScale;
+        flight.alt += 3.8 * dt * timeScale;
         flight.north += flight.airspeed * dt * timeScale;
         if (flight.alt >= 25.0) {
           flight.alt = 25.0;
@@ -419,36 +647,49 @@
         }
       }
       else if (phase === 'PYLON_CIRCUIT') {
-        flight.current = 34.0;
-        flight.airspeed = 24.5;
+        flight.current = flameoutActive ? 0.0 : 34.0;
+        flight.airspeed = flameoutActive ? Math.max(16.0, flight.airspeed - 0.5 * dt * timeScale) : 24.5;
+        if (flameoutActive) flight.alt = Math.max(0.0, flight.alt - 1.2 * dt * timeScale);
 
-        // Circular racing course path around North and South pylons
         const pylonNorth = 300.0;
         const pylonSouth = -50.0;
 
-        if (flight.north < pylonNorth && flight.east <= 10.0 && flight.yaw === 0.0) {
-          flight.north += flight.airspeed * dt * timeScale;
-        } else if (flight.north >= pylonNorth && flight.east < 80.0) {
-          flight.roll = 45.0;
-          flight.yaw += 45.0 * dt * timeScale;
-          flight.east += 18.0 * dt * timeScale;
-        } else if (flight.east >= 80.0 && flight.north > pylonSouth) {
-          flight.roll = 0.0;
-          flight.yaw = 180.0;
-          flight.north -= flight.airspeed * dt * timeScale;
-        } else if (flight.north <= pylonSouth && flight.east > 0.0) {
-          flight.roll = -45.0;
-          flight.yaw -= 45.0 * dt * timeScale;
-          flight.east -= 18.0 * dt * timeScale;
-          if (flight.east <= 0.0) {
-            flight.east = 0.0;
-            flight.yaw = 0.0;
+        if (currentScenario === 'GEOFENCE' && simTime > 18.0 && flight.east < 180.0) {
+          // Drive towards border to test breach escape
+          flight.east += 30.0 * dt * timeScale;
+          if (flight.east > 150.0) {
+            document.getElementById('geofence-badge').innerText = 'GEOFENCE: BREACH WARNING!';
+            document.getElementById('geofence-badge').style.background = 'rgba(239,68,68,0.2)';
+            document.getElementById('geofence-badge').style.color = '#ef4444';
+          }
+        } else {
+          if (flight.north < pylonNorth && flight.east <= 10.0 && flight.yaw === 0.0) {
+            flight.north += flight.airspeed * dt * timeScale;
+          } else if (flight.north >= pylonNorth && flight.east < 80.0) {
+            flight.roll = 45.0;
+            flight.yaw += 45.0 * dt * timeScale;
+            flight.east += 18.0 * dt * timeScale;
+          } else if (flight.east >= 80.0 && flight.north > pylonSouth) {
             flight.roll = 0.0;
-            flight.laps += 1;
-            addLog(simTime, 'LAP_COMPLETE', `Pilon Tur ${flight.laps}/3 tamamlandı.`);
-            if (flight.laps >= 2) {
-              phase = 'TARGET_DROP_RUN';
-              addLog(simTime, 'M3_RUN', 'Görev 3 dairesel hedef tespit edildi. Balistik yaklaşma başlatıldı.');
+            flight.yaw = 180.0;
+            flight.north -= flight.airspeed * dt * timeScale;
+          } else if (flight.north <= pylonSouth && flight.east > 0.0) {
+            flight.roll = -45.0;
+            flight.yaw -= 45.0 * dt * timeScale;
+            flight.east -= 18.0 * dt * timeScale;
+            if (flight.east <= 0.0) {
+              flight.east = 0.0;
+              flight.yaw = 0.0;
+              flight.roll = 0.0;
+              flight.laps += 1;
+              playBeep(900, 0.1);
+              addLog(simTime, 'LAP_COMPLETE', `Pilon Tur ${flight.laps}/3 tamamlandı.`);
+              if (flight.laps >= 2 && currentScenario === 'M3') {
+                phase = 'TARGET_DROP_RUN';
+                addLog(simTime, 'M3_RUN', 'Görev 3 konsantrik hedef tespit edildi. Balistik yaklaşma başlatıldı.');
+              } else if (flight.laps >= 3) {
+                triggerRTL();
+              }
             }
           }
         }
@@ -456,7 +697,6 @@
       else if (phase === 'TARGET_DROP_RUN') {
         flight.current = 32.0;
         flight.north += flight.airspeed * dt * timeScale;
-        // Fly directly towards bullseye at (75m, 0m)
         if (flight.north >= 65.0 && !flight.dropped) {
           triggerManualDrop();
           phase = 'APPROACH_LAND';
@@ -464,7 +704,7 @@
         }
       }
       else if (phase === 'APPROACH_LAND') {
-        flight.current = 14.0;
+        flight.current = 12.0;
         flight.airspeed = Math.max(16.5, flight.airspeed - 1.5 * dt * timeScale);
         flight.alt = Math.max(0.0, flight.alt - 1.8 * dt * timeScale);
         flight.north += flight.airspeed * dt * timeScale;
@@ -474,25 +714,38 @@
           flight.current = 0.0;
           phase = 'TOUCHDOWN';
           simActive = false;
-          addLog(simTime, 'TOUCHDOWN', 'Pist eşiğine yumuşak teker kondu (Flare Touchdown). Görev Başarılı!');
+          playBeep(1200, 0.5, 'sine');
+          addLog(simTime, 'TOUCHDOWN', 'Pist eşiğine yumuşak teker kondu (Flare Touchdown). Görev Tamamlandı!');
         }
       }
 
-      // Record flight trail
+      // Trail
       if (trail.length === 0 || Math.hypot(trail[trail.length-1].n - flight.north, trail[trail.length-1].e - flight.east) > 4.0) {
         trail.push({ n: flight.north, e: flight.east, ph: phase });
-        if (trail.length > 300) trail.shift();
+        if (trail.length > 350) trail.shift();
       }
 
-      // Energy consumption
+      // Battery
       flight.consumed_mah += (flight.current * (dt * timeScale) / 3.6);
-      flight.voltage = Math.max(21.6, 25.2 - (flight.consumed_mah / 16000.0) * 3.6);
+      if (flameoutActive && flight.regenW > 0) {
+        flight.consumed_mah -= (12.0 * (dt * timeScale) / 3.6); // Harvest back
+      }
+      flight.voltage = Math.max(21.4, 25.2 - (flight.consumed_mah / 16000.0) * 3.6);
+
+      // Record strip chart
+      chartHistory.push({
+        t: simTime,
+        alt: flight.alt,
+        spd: flight.airspeed,
+        cur: flight.current,
+        trim: flight.elevTrim
+      });
+      if (chartHistory.length > 180) chartHistory.shift();
 
       updateUI();
     }
 
     function updateUI() {
-      // Top header
       const min = Math.floor(simTime / 60);
       const sec = (simTime % 60).toFixed(1);
       document.getElementById('top-time').innerText = (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
@@ -500,7 +753,6 @@
       document.getElementById('top-soc').innerText = soc + '%';
       document.getElementById('mission-mode-badge').innerText = phase;
 
-      // Telemetry grid
       const pwr = (flight.voltage * flight.current).toFixed(0);
       document.getElementById('power-w').innerText = pwr + ' W';
       document.getElementById('cell-v').innerHTML = flight.voltage.toFixed(2) + '<span class="gauge-unit">V</span>';
@@ -518,6 +770,16 @@
       if (flight.dropped) {
         document.getElementById('drop-badge').innerText = 'BIRAKILDI (0.98m)';
         document.getElementById('drop-badge').style.color = 'var(--accent-green)';
+      }
+
+      if (flameoutActive) {
+        document.getElementById('regen-mode-label').innerText = 'REJENERATİF FRENLEME AKTİF';
+        document.getElementById('regen-mode-label').style.color = 'var(--accent-amber)';
+        document.getElementById('regen-power-label').innerText = '288 W';
+      } else {
+        document.getElementById('regen-mode-label').innerText = 'STANDBY (NORMAL İTKİ)';
+        document.getElementById('regen-mode-label').style.color = '#fff';
+        document.getElementById('regen-power-label').innerText = '0 W';
       }
     }
 
@@ -548,223 +810,421 @@
 
       // Horizon line
       pfdCtx.strokeStyle = '#fff';
-      pfdCtx.lineWidth = 2.5;
+      pfdCtx.lineWidth = 2;
       pfdCtx.beginPath();
       pfdCtx.moveTo(-w, pitchPix);
       pfdCtx.lineTo(w, pitchPix);
       pfdCtx.stroke();
 
       // Pitch Ladder
-      pfdCtx.strokeStyle = '#ffffffaa';
-      pfdCtx.fillStyle = '#ffffffdd';
-      pfdCtx.font = '11px sans-serif';
+      pfdCtx.strokeStyle = 'rgba(255,255,255,0.7)';
+      pfdCtx.fillStyle = '#fff';
+      pfdCtx.font = '10px sans-serif';
       pfdCtx.textAlign = 'right';
       for (let p = -30; p <= 30; p += 10) {
         if (p === 0) continue;
         const y = pitchPix - p * 6.5;
-        const barW = (p % 20 === 0) ? 55 : 30;
+        const lineLen = Math.abs(p) % 10 === 0 ? 30 : 15;
         pfdCtx.beginPath();
-        pfdCtx.moveTo(-barW, y); pfdCtx.lineTo(barW, y);
+        pfdCtx.moveTo(-lineLen, y);
+        pfdCtx.lineTo(lineLen, y);
         pfdCtx.stroke();
-        pfdCtx.fillText(p + '°', -barW - 6, y + 4);
+        pfdCtx.fillText(p + '°', -lineLen - 4, y + 4);
       }
       pfdCtx.restore();
 
-      // Fixed Aircraft Waterline Symbol
+      // Center Aircraft Reticle
       pfdCtx.strokeStyle = '#00f0ff';
-      pfdCtx.fillStyle = '#00f0ff';
       pfdCtx.lineWidth = 3;
       pfdCtx.beginPath();
-      pfdCtx.moveTo(cx - 60, cy); pfdCtx.lineTo(cx - 20, cy);
-      pfdCtx.lineTo(cx - 20, cy + 10);
-      pfdCtx.moveTo(cx + 60, cy); pfdCtx.lineTo(cx + 20, cy);
-      pfdCtx.lineTo(cx + 20, cy + 10);
+      pfdCtx.moveTo(cx - 35, cy);
+      pfdCtx.lineTo(cx - 12, cy);
+      pfdCtx.lineTo(cx - 12, cy + 8);
       pfdCtx.stroke();
+      pfdCtx.beginPath();
+      pfdCtx.moveTo(cx + 35, cy);
+      pfdCtx.lineTo(cx + 12, cy);
+      pfdCtx.lineTo(cx + 12, cy + 8);
+      pfdCtx.stroke();
+      pfdCtx.fillStyle = '#00f0ff';
       pfdCtx.beginPath();
       pfdCtx.arc(cx, cy, 3, 0, Math.PI * 2);
       pfdCtx.fill();
 
-      // Left: Airspeed Tape
-      pfdCtx.fillStyle = '#0a0f1dcc';
-      pfdCtx.fillRect(10, 20, 65, h - 60);
-      pfdCtx.strokeStyle = '#334155';
-      pfdCtx.strokeRect(10, 20, 65, h - 60);
+      // Dynamic Bomb Drop Reticle (Target Pipper)
+      if (phase === 'TARGET_DROP_RUN' || flight.dropped) {
+        const dropY = cy + 45;
+        pfdCtx.strokeStyle = '#ef4444';
+        pfdCtx.lineWidth = 2;
+        pfdCtx.beginPath();
+        pfdCtx.arc(cx, dropY, 14, 0, Math.PI * 2);
+        pfdCtx.moveTo(cx - 20, dropY); pfdCtx.lineTo(cx + 20, dropY);
+        pfdCtx.moveTo(cx, dropY - 20); pfdCtx.lineTo(cx, dropY + 20);
+        pfdCtx.stroke();
+        pfdCtx.fillStyle = '#ef4444';
+        pfdCtx.font = 'bold 10px sans-serif';
+        pfdCtx.fillText('BOMB PIPPER 3-DOF', cx + 22, dropY + 4);
+      }
 
-      // Center Airspeed Pointer
+      // Airspeed Tape (Left)
+      pfdCtx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      pfdCtx.fillRect(10, 30, 65, h - 60);
+      pfdCtx.strokeStyle = '#334155';
+      pfdCtx.strokeRect(10, 30, 65, h - 60);
+
+      pfdCtx.fillStyle = '#f8fafc';
+      pfdCtx.font = 'bold 11px sans-serif';
+      pfdCtx.textAlign = 'center';
+      pfdCtx.fillText('SPD m/s', 42, 45);
+
+      const spd = flight.airspeed;
+      for (let s = Math.floor(spd - 15); s <= Math.ceil(spd + 15); s += 5) {
+        if (s < 0) continue;
+        const dy = cy - (s - spd) * 8;
+        if (dy > 45 && dy < h - 40) {
+          pfdCtx.strokeStyle = '#64748b';
+          pfdCtx.beginPath();
+          pfdCtx.moveTo(60, dy); pfdCtx.lineTo(75, dy);
+          pfdCtx.stroke();
+          pfdCtx.fillText(s, 38, dy + 4);
+        }
+      }
+      // Speed readout box
       pfdCtx.fillStyle = '#0284c7';
-      pfdCtx.fillRect(8, cy - 14, 70, 28);
+      pfdCtx.fillRect(12, cy - 14, 60, 28);
       pfdCtx.fillStyle = '#fff';
-      pfdCtx.font = 'bold 16px sans-serif';
-      pfdCtx.textAlign = 'center';
-      pfdCtx.fillText(flight.airspeed.toFixed(1), 42, cy + 6);
+      pfdCtx.font = 'bold 14px sans-serif';
+      pfdCtx.fillText(spd.toFixed(1), 42, cy + 5);
 
-      // Top Airspeed Label
-      pfdCtx.fillStyle = '#94a3b8';
-      pfdCtx.font = '10px sans-serif';
-      pfdCtx.fillText('IAS m/s', 42, 34);
-
-      // Right: Altitude Tape
-      pfdCtx.fillStyle = '#0a0f1dcc';
-      pfdCtx.fillRect(w - 75, 20, 65, h - 60);
+      // Altitude Tape (Right)
+      pfdCtx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      pfdCtx.fillRect(w - 75, 30, 65, h - 60);
       pfdCtx.strokeStyle = '#334155';
-      pfdCtx.strokeRect(w - 75, 20, 65, h - 60);
+      pfdCtx.strokeRect(w - 75, 30, 65, h - 60);
 
-      // Center Altitude Pointer
-      pfdCtx.fillStyle = '#059669';
-      pfdCtx.fillRect(w - 78, cy - 14, 70, 28);
-      pfdCtx.fillStyle = '#fff';
-      pfdCtx.font = 'bold 16px sans-serif';
+      pfdCtx.fillStyle = '#f8fafc';
+      pfdCtx.font = 'bold 11px sans-serif';
       pfdCtx.textAlign = 'center';
-      pfdCtx.fillText(flight.alt.toFixed(1), w - 42, cy + 6);
+      pfdCtx.fillText('ALT m', w - 42, 45);
 
-      // Top Altitude Label
-      pfdCtx.fillStyle = '#94a3b8';
-      pfdCtx.font = '10px sans-serif';
-      pfdCtx.fillText('ALT m', w - 42, 34);
+      const alt = flight.alt;
+      for (let a = Math.floor(alt - 15); a <= Math.ceil(alt + 15); a += 5) {
+        if (a < 0) continue;
+        const dy = cy - (a - alt) * 8;
+        if (dy > 45 && dy < h - 40) {
+          pfdCtx.strokeStyle = '#64748b';
+          pfdCtx.beginPath();
+          pfdCtx.moveTo(w - 75, dy); pfdCtx.lineTo(w - 60, dy);
+          pfdCtx.stroke();
+          pfdCtx.fillText(a, w - 38, dy + 4);
+        }
+      }
+      // Alt readout box
+      pfdCtx.fillStyle = '#059669';
+      pfdCtx.fillRect(w - 73, cy - 14, 60, 28);
+      pfdCtx.fillStyle = '#fff';
+      pfdCtx.font = 'bold 14px sans-serif';
+      pfdCtx.fillText(alt.toFixed(1), w - 42, cy + 5);
 
-      // Bottom Heading Compass Tape
-      pfdCtx.fillStyle = '#0a0f1dcc';
+      // Bottom Heading Ribbon
+      pfdCtx.fillStyle = 'rgba(15, 23, 42, 0.85)';
       pfdCtx.fillRect(80, h - 35, w - 160, 28);
       pfdCtx.strokeStyle = '#334155';
       pfdCtx.strokeRect(80, h - 35, w - 160, 28);
-      pfdCtx.fillStyle = '#00f0ff';
-      pfdCtx.font = 'bold 14px sans-serif';
-      pfdCtx.textAlign = 'center';
-      const hdg = (flight.yaw % 360 + 360) % 360;
-      pfdCtx.fillText('HDG: ' + hdg.toFixed(0) + '°', cx, h - 16);
+      pfdCtx.fillStyle = '#38bdf8';
+      pfdCtx.font = 'bold 13px sans-serif';
+      pfdCtx.fillText('HDG: ' + Math.round(flight.yaw % 360) + '°  |  TRIM: ' + flight.elevTrim.toFixed(1) + '°', cx, h - 17);
 
       pfdCtx.restore();
     }
 
-    // DRAW TACTICAL RADAR & GEOFENCE MAP
+    // DRAW RADAR
     function drawRadar() {
       const w = radCanvas.width;
       const h = radCanvas.height;
       const cx = w / 2;
       const cy = h / 2 + 30;
-      const scale = 0.55; // pixels per meter
+      const scale = 0.65; // meters to pixels
 
       radCtx.save();
       radCtx.clearRect(0, 0, w, h);
 
-      // Radar Range Rings
+      // Grid circles
       radCtx.strokeStyle = '#1e293b';
       radCtx.lineWidth = 1;
-      [100, 200, 300, 400].forEach(r => {
+      for (let r = 50; r <= 250; r += 50) {
         radCtx.beginPath();
         radCtx.arc(cx, cy, r * scale, 0, Math.PI * 2);
         radCtx.stroke();
-      });
+      }
 
-      // Airfield Boundary Geofence Polygon
-      const fenceNED = [
-        [-150.0, -200.0], [450.0, -200.0], [600.0, 150.0],
-        [450.0, 450.0], [-150.0, 450.0], [-300.0, 150.0]
+      // Geofence Boundary Polygon (AIAA DBF Airfield)
+      const fence = [
+        { n: -140, e: -70 }, { n: 380, e: -70 },
+        { n: 380, e: 160 }, { n: -140, e: 160 }
       ];
-      radCtx.strokeStyle = '#00f0ff88';
-      radCtx.lineWidth = 1.5;
+      radCtx.strokeStyle = 'rgba(0, 240, 255, 0.6)';
+      radCtx.lineWidth = 2;
       radCtx.beginPath();
-      fenceNED.forEach((pt, i) => {
-        const px = cx + pt[1] * scale;
-        const py = cy - pt[0] * scale;
-        if (i === 0) radCtx.moveTo(px, py); else radCtx.lineTo(px, py);
+      fence.forEach((pt, i) => {
+        const x = cx + pt.e * scale;
+        const y = cy - pt.n * scale;
+        if (i === 0) radCtx.moveTo(x, y); else radCtx.lineTo(x, y);
       });
       radCtx.closePath();
       radCtx.stroke();
 
-      // Runway Strip
-      radCtx.fillStyle = '#1e293b88';
-      radCtx.fillRect(cx - 10, cy - 304.8 * scale, 20, 304.8 * scale);
-      radCtx.strokeStyle = '#475569';
-      radCtx.strokeRect(cx - 10, cy - 304.8 * scale, 20, 304.8 * scale);
-
-      // Pylon 1 & 2
-      const p1 = { n: 300.0, e: 40.0 };
-      const p2 = { n: -50.0, e: 40.0 };
+      // Pylons (North & South)
+      const p1 = { n: 300, e: 40 };
+      const p2 = { n: -50, e: 40 };
       [p1, p2].forEach((p, idx) => {
         const px = cx + p.e * scale;
         const py = cy - p.n * scale;
         radCtx.fillStyle = '#f59e0b';
-        radCtx.beginPath(); radCtx.arc(px, py, 6, 0, Math.PI * 2); radCtx.fill();
+        radCtx.beginPath();
+        radCtx.arc(px, py, 6, 0, Math.PI * 2);
+        radCtx.fill();
         radCtx.fillStyle = '#fff';
         radCtx.font = '10px sans-serif';
         radCtx.fillText(`PYLON ${idx+1}`, px + 8, py + 3);
       });
 
-      // Mission 3 Drop Target Bullseye at (75m, 0m)
-      const tgtX = cx + 0.0 * scale;
-      const tgtY = cy - 75.0 * scale;
+      // Target Bullseye (Drop Target)
+      const tgt = { n: 75, e: 0 };
+      const tx = cx + tgt.e * scale;
+      const ty = cy - tgt.n * scale;
       radCtx.strokeStyle = '#ef4444';
       radCtx.lineWidth = 2;
-      radCtx.beginPath(); radCtx.arc(tgtX, tgtY, 15, 0, Math.PI * 2); radCtx.stroke();
-      radCtx.beginPath(); radCtx.arc(tgtX, tgtY, 6, 0, Math.PI * 2); radCtx.stroke();
-      radCtx.fillStyle = '#ef4444';
-      radCtx.fillText('TARGET (CEP 1.2m)', tgtX + 18, tgtY + 3);
-
-      // Flight Trail Breadcrumbs
-      if (trail.length > 1) {
-        radCtx.lineWidth = 2;
-        for (let i = 1; i < trail.length; i++) {
-          radCtx.strokeStyle = (trail[i].ph === 'TARGET_DROP_RUN') ? '#8b5cf6' :
-                              ((trail[i].ph === 'TAKEOFF_ROLL' || trail[i].ph === 'CLIMBOUT') ? '#10b981' : '#00f0ff');
-          radCtx.beginPath();
-          radCtx.moveTo(cx + trail[i-1].e * scale, cy - trail[i-1].n * scale);
-          radCtx.lineTo(cx + trail[i].e * scale, cy - trail[i].n * scale);
-          radCtx.stroke();
-        }
-      }
-
-      // Dropped Payload Impact Marker
-      if (dropMarker) {
-        const mx = cx + dropMarker.e * scale;
-        const my = cy - dropMarker.n * scale;
-        radCtx.fillStyle = '#10b981';
-        radCtx.beginPath(); radCtx.arc(mx, my, 5, 0, Math.PI * 2); radCtx.fill();
-        radCtx.fillText('IMPACT: 0.98m', mx + 8, my + 3);
-      }
-
-      // Current Aircraft Glyph
-      const acX = cx + flight.east * scale;
-      const acY = cy - flight.north * scale;
-      radCtx.save();
-      radCtx.translate(acX, acY);
-      radCtx.rotate(flight.yaw * Math.PI / 180);
-
-      radCtx.fillStyle = '#00f0ff';
       radCtx.beginPath();
-      radCtx.moveTo(0, -12);
-      radCtx.lineTo(8, 8);
-      radCtx.lineTo(0, 4);
-      radCtx.lineTo(-8, 8);
+      radCtx.arc(tx, ty, 10, 0, Math.PI * 2);
+      radCtx.arc(tx, ty, 4, 0, Math.PI * 2);
+      radCtx.stroke();
+      radCtx.fillStyle = '#ef4444';
+      radCtx.fillText('HEDEF ÇEMBERİ', tx + 12, ty + 3);
+
+      // Flight Trail
+      if (trail.length > 1) {
+        radCtx.strokeStyle = 'rgba(56, 189, 248, 0.7)';
+        radCtx.lineWidth = 2;
+        radCtx.beginPath();
+        trail.forEach((pt, i) => {
+          const x = cx + pt.e * scale;
+          const y = cy - pt.n * scale;
+          if (i === 0) radCtx.moveTo(x, y); else radCtx.lineTo(x, y);
+        });
+        radCtx.stroke();
+      }
+
+      // Airplane Current Position
+      const ax = cx + flight.east * scale;
+      const ay = cy - flight.north * scale;
+      radCtx.save();
+      radCtx.translate(ax, ay);
+      radCtx.rotate(flight.yaw * Math.PI / 180);
+      radCtx.fillStyle = '#10b981';
+      radCtx.beginPath();
+      radCtx.moveTo(0, -10);
+      radCtx.lineTo(8, 10);
+      radCtx.lineTo(0, 6);
+      radCtx.lineTo(-8, 10);
       radCtx.closePath();
       radCtx.fill();
-
-      // Heading vector line
-      radCtx.strokeStyle = '#00f0ff88';
-      radCtx.lineWidth = 1.5;
-      radCtx.beginPath();
-      radCtx.moveTo(0, -12);
-      radCtx.lineTo(0, -35);
-      radCtx.stroke();
-
       radCtx.restore();
+
+      // Heading indicator vector
+      radCtx.fillStyle = '#10b981';
+      radCtx.font = 'bold 11px sans-serif';
+      radCtx.fillText(`GÖKDOĞAN (${flight.alt.toFixed(1)}m)`, ax + 12, ay - 4);
+
+      // Drop marker if dropped
+      if (dropMarker) {
+        const mx = cx + dropMarker.east * scale;
+        const my = cy - dropMarker.north * scale;
+        radCtx.fillStyle = '#8b5cf6';
+        radCtx.beginPath();
+        radCtx.arc(mx, my, 5, 0, Math.PI * 2);
+        radCtx.fill();
+        radCtx.fillText('İSABET: 0.98m', mx + 8, my + 3);
+      }
 
       radCtx.restore();
     }
 
-    // Main Animation Loop (50 Hz)
-    let lastT = performance.now();
-    function loop(now) {
-      const dt = Math.min(0.05, (now - lastT) / 1000.0);
-      lastT = now;
+    // DRAW SYNTHETIC VISION
+    function drawVision() {
+      if (!visCtx) return;
+      const w = visCanvas.width;
+      const h = visCanvas.height;
+      visCtx.clearRect(0, 0, w, h);
+
+      // Downward Ground Background
+      visCtx.fillStyle = '#1b2a1a';
+      visCtx.fillRect(0, 0, w, h);
+
+      // Airfield texture grid
+      visCtx.strokeStyle = 'rgba(255,255,255,0.06)';
+      visCtx.lineWidth = 1;
+      for (let x = 0; x < w; x += 40) {
+        visCtx.beginPath(); visCtx.moveTo(x, 0); visCtx.lineTo(x, h); visCtx.stroke();
+      }
+      for (let y = 0; y < h; y += 40) {
+        visCtx.beginPath(); visCtx.moveTo(0, y); visCtx.lineTo(w, y); visCtx.stroke();
+      }
+
+      // Concentric Target Circle
+      const tY = h / 2 + Math.sin(simTime * 2) * 8;
+      const tX = w / 2 + Math.cos(simTime * 1.5) * 8;
+
+      // Outer Red
+      visCtx.fillStyle = '#dc2626';
+      visCtx.beginPath(); visCtx.arc(tX, tY, 55, 0, Math.PI * 2); visCtx.fill();
+      // White ring
+      visCtx.fillStyle = '#ffffff';
+      visCtx.beginPath(); visCtx.arc(tX, tY, 38, 0, Math.PI * 2); visCtx.fill();
+      // Inner Red
+      visCtx.fillStyle = '#dc2626';
+      visCtx.beginPath(); visCtx.arc(tX, tY, 20, 0, Math.PI * 2); visCtx.fill();
+      // Bullseye Yellow
+      visCtx.fillStyle = '#f59e0b';
+      visCtx.beginPath(); visCtx.arc(tX, tY, 8, 0, Math.PI * 2); visCtx.fill();
+
+      // AI Bounding Box
+      visCtx.strokeStyle = '#00f0ff';
+      visCtx.lineWidth = 2;
+      visCtx.strokeRect(tX - 65, tY - 65, 130, 130);
+      visCtx.fillStyle = '#00f0ff';
+      visCtx.font = 'bold 11px sans-serif';
+      visCtx.fillText('TARGET LOCKED: 99.4%', tX - 65, tY - 72);
+
+      // Crosshairs & Lead Drop Vector
+      visCtx.strokeStyle = '#ef4444';
+      visCtx.setLineDash([4, 4]);
+      visCtx.beginPath();
+      visCtx.moveTo(w / 2, 0); visCtx.lineTo(w / 2, h);
+      visCtx.moveTo(0, h / 2); visCtx.lineTo(w, h / 2);
+      visCtx.stroke();
+      visCtx.setLineDash([]);
+
+      // Drop reticle
+      visCtx.strokeStyle = '#10b981';
+      visCtx.lineWidth = 2;
+      visCtx.strokeRect(w / 2 - 18, h / 2 - 18, 36, 36);
+    }
+
+    // DRAW CEP BALLISTICS
+    function drawCEP() {
+      if (!cepCtx) return;
+      const w = cepCanvas.width;
+      const h = cepCanvas.height;
+      cepCtx.clearRect(0, 0, w, h);
+
+      cepCtx.fillStyle = '#070b13';
+      cepCtx.fillRect(0, 0, w, h);
+
+      const cx = w / 2;
+      const cy = h / 2;
+
+      // 50% and 95% CEP Ellipses
+      cepCtx.strokeStyle = 'rgba(16, 185, 129, 0.8)';
+      cepCtx.lineWidth = 2;
+      cepCtx.beginPath();
+      cepCtx.ellipse(cx, cy, 55, 45, 0, 0, Math.PI * 2);
+      cepCtx.stroke();
+      cepCtx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+      cepCtx.fill();
+
+      cepCtx.strokeStyle = 'rgba(245, 158, 11, 0.8)';
+      cepCtx.lineWidth = 1.5;
+      cepCtx.beginPath();
+      cepCtx.ellipse(cx, cy, 110, 90, 0, 0, Math.PI * 2);
+      cepCtx.stroke();
+
+      // Axis crosshairs
+      cepCtx.strokeStyle = '#1e2c4a';
+      cepCtx.beginPath();
+      cepCtx.moveTo(cx, 10); cepCtx.lineTo(cx, h - 10);
+      cepCtx.moveTo(10, cy); cepCtx.lineTo(w - 10, cy);
+      cepCtx.stroke();
+
+      // Labels
+      cepCtx.fillStyle = '#10b981';
+      cepCtx.font = '11px sans-serif';
+      cepCtx.fillText('CEP 50% = 1.06 m', cx + 60, cy - 35);
+      cepCtx.fillStyle = '#f59e0b';
+      cepCtx.fillText('CEP 95% = 2.68 m', cx + 90, cy + 65);
+
+      // Simulated Monte Carlo drop dispersion points
+      for (let i = 0; i < 35; i++) {
+        const ang = (i * 137.5) * Math.PI / 180;
+        const rad = Math.sqrt(i / 35) * 50;
+        const px = cx + Math.cos(ang) * rad;
+        const py = cy + Math.sin(ang) * (rad * 0.82);
+        cepCtx.fillStyle = i === 0 ? '#00f0ff' : '#94a3b8';
+        cepCtx.beginPath();
+        cepCtx.arc(px, py, i === 0 ? 4 : 2, 0, Math.PI * 2);
+        cepCtx.fill();
+      }
+      cepCtx.fillStyle = '#00f0ff';
+      cepCtx.fillText('M3 ANLIK İSABET (0.98m)', cx - 60, cy - 55);
+    }
+
+    // DRAW TELEMETRY OSCILLOSCOPE STRIP CHART
+    function drawCharts() {
+      if (!chartCtx || chartHistory.length < 2) return;
+      const w = chartCanvas.width;
+      const h = chartCanvas.height;
+      chartCtx.clearRect(0, 0, w, h);
+
+      chartCtx.fillStyle = '#070b13';
+      chartCtx.fillRect(0, 0, w, h);
+
+      // Grid
+      chartCtx.strokeStyle = '#162035';
+      chartCtx.lineWidth = 1;
+      for (let y = 30; y < h; y += 40) {
+        chartCtx.beginPath(); chartCtx.moveTo(0, y); chartCtx.lineTo(w, y); chartCtx.stroke();
+      }
+
+      function drawTrace(getter, color, minV, maxV) {
+        chartCtx.strokeStyle = color;
+        chartCtx.lineWidth = 2;
+        chartCtx.beginPath();
+        chartHistory.forEach((pt, i) => {
+          const x = (i / (chartHistory.length - 1)) * w;
+          const val = getter(pt);
+          const y = h - 20 - ((val - minV) / (maxV - minV)) * (h - 50);
+          if (i === 0) chartCtx.moveTo(x, y); else chartCtx.lineTo(x, y);
+        });
+        chartCtx.stroke();
+      }
+
+      // Trace 1: Alt (0 to 40m)
+      drawTrace(pt => pt.alt, '#00f0ff', 0, 40);
+      // Trace 2: Speed (0 to 35 m/s)
+      drawTrace(pt => pt.spd, '#10b981', 0, 35);
+      // Trace 3: Current (0 to 90 A)
+      drawTrace(pt => pt.cur, '#f59e0b', 0, 90);
+      // Trace 4: Elev Trim (-5 to +5 deg)
+      drawTrace(pt => pt.trim, '#8b5cf6', -5, 5);
+    }
+
+    // Animation Loop
+    let lastTime = performance.now();
+    function animate(now) {
+      const dt = Math.min(0.1, (now - lastTime) / 1000.0);
+      lastTime = now;
 
       updatePhysics(dt);
       drawPFD();
       drawRadar();
+      drawVision();
+      drawCEP();
+      drawCharts();
 
-      requestAnimationFrame(loop);
+      requestAnimationFrame(animate);
     }
-    requestAnimationFrame(loop);
+
+    requestAnimationFrame(animate);
   </script>
 </body>
 </html>
