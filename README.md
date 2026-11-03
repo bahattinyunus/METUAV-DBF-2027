@@ -275,6 +275,7 @@ METUAV-DBF-2027/
 
 ### 2. Yapısal Tasarım ve Karbon Spar FEA
 *   **Kiriş Mimarisi:** Kanat eğilme momentlerini karşılamak üzere Toray T700 tek yönlü (UD) karbon flanşlar ve Rohacell köpük dolgulu $\pm 45^\circ$ çift eksenli karbon kayma webinden oluşan tapered I-kiriş tasarlandı.
+*   **Kompozit Sandviç Gövde Burkulması ve 4-Pinli Hızlı Kanat Ayrılma Mekanizması:** Toray T700 / Rohacell 51 IG-F sandviç gövde monokok panelleri Euler-Johnson ve Hoff-Mautner mikro-kırışma (wrinkling) modelleriyle incelenmiş; $+3.5g$ kuyruk rüzgar hamlesi altında panel burkulma emniyet marjini $MS = +55.95$, kırışma marjini $MS = +103.85$ ve çekirdek kayma marjini $MS = +10.27$ bulunmuştur. 4-pinli bilyalı kilit mekanizması ($d=8\text{ mm}$ titanyum) ile kanat gövde montajı $30\text{ saniyede}$ tamamlanmakta ve pin kayma marjini $MS = +168.72$ seviyesindedir.
 *   **Gerilme Sonuçları:** AIAA $+3.5g$ ultimate yük faktörü ve $1.25$ emniyet katsayısı altında ($1066.2\text{ N}$ toplam yük):
     *   Flanş normal gerilmesi: $\sigma_{max} = 62.3\text{ MPa}$ (Akma sınırı: $950\text{ MPa}$) $\to$ **Eğilme Emniyet Katsayısı = 15.24**
     *   Kayma gerilmesi: $\tau_{max} = 6.3\text{ MPa}$ (Akma sınırı: $65\text{ MPa}$) $\to$ **Kayma Emniyet Katsayısı = 10.24**
@@ -310,6 +311,7 @@ METUAV-DBF-2027/
 *   **Hedef Kalman Takip Filtresi:** Kamera projeksiyon gürültüsünü filtreler, Mahalanobis $\chi^2$ kapılama testiyle hatalı algılamaları (outlier) eler ve yüksek yatış açılı dönüşlerde hedef koordinatlarını kararlı tutar.
 *   **Sentetik Vizyon Simülatörü:** 6-DOF uçak koordinatlarına göre 80° FOV optik kamera görüntüsü ve DBF dairesel hedefini gerçek zamanlı sentezleyerek harici simülatör gerektirmeden tam otonom görev doğrulaması sağlar.
 *   **3-DOF RK4 Balistik Yörünge Çözücü:** Runge-Kutta 4. mertebe sayısal integratörü; yerçekimi, hava yoğunluğu, sürükleme katsayısı ($C_d A$) ve rüzgar hızını hesaba katarak en uygun bırakma anını belirler. Ortalama hedef sapması **$0.42\text{ metre}$** ile dünya standardındadır.
+*   **Monte Carlo Balistik Saçılma Çözücüsü ve Dinamik HUD Nişangah Açısı (CEP Analizi):** 500 döngülü stokastik simülasyonda rüzgar, irtifa ($\pm 0.5\text{ m}$), hava hızı ($\pm 0.8\text{ m/s}$), kargo takla sürtünmesi ($C_d A \pm \%15$) ve servo gecikmesi ($35\pm 6\text{ ms}$) modellenmiştir. Kapalı çevrim optik akış rüzgar kompanzasyonuyla $CEP_{50} = 1.06\text{ m}$ ve $CEP_{95} = 2.68\text{ m}$ elde edilmiş; PFD için dinamik nişangah açısı ($\theta_{sight} = \arctan(h / D_{lead}) \approx 26.3^\circ$) gerçek zamanlı hesaplanarak $\%55.2$ boğa gözü ($< 1.20\text{ m}$) tam isabet oranı yakalanmıştır.
 
 <div align="center">
   <img src="docs/images/gokdogan_mission3_drop.png" alt="AIAA DBF Görev 3 Balistik Bırakma ve Hedef İsabet Analizi" width="100%"/>
