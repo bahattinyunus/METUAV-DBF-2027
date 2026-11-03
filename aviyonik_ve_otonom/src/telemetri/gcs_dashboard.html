@@ -3,449 +3,684 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>METUAV DBF 2027 | GÖKDOĞAN GCS Glass Cockpit & Telemetry Hub</title>
+  <title>METUAV DBF 2027 | GÖKDOĞAN Iconic Glass Cockpit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #070b13;
-      --panel-bg: #0d1527;
-      --card-bg: #121c32;
-      --card-border: #1e2c4a;
+      --bg: #06090f;
+      --surface-1: rgba(13, 20, 36, 0.75);
+      --surface-2: rgba(19, 29, 53, 0.85);
+      --surface-border: rgba(56, 189, 248, 0.14);
+      --surface-border-subtle: rgba(255, 255, 255, 0.06);
       --accent-cyan: #00f0ff;
-      --accent-green: #10b981;
+      --accent-cyan-glow: rgba(0, 240, 255, 0.25);
+      --accent-emerald: #10b981;
       --accent-amber: #f59e0b;
-      --accent-red: #ef4444;
-      --accent-purple: #8b5cf6;
-      --sky-blue: #1e3a5f;
-      --ground-brown: #452c1e;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --tab-active-bg: #1d2b4f;
+      --accent-rose: #f43f5e;
+      --accent-violet: #8b5cf6;
+      --text-1: #f8fafc;
+      --text-2: #94a3b8;
+      --text-3: #64748b;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    body { background: var(--bg-dark); color: var(--text-main); min-height: 100vh; padding: 12px; overflow-x: hidden; }
 
-    /* Top Glass Cockpit Header */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text-1);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Ambient background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(2, 132, 199, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Glass Surface utility */
+    .glass {
+      background: var(--surface-1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--surface-border);
+      border-radius: 14px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+    }
+
+    /* Top Iconic Header */
     header {
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-      padding: 10px 18px; background: var(--panel-bg); border: 1px solid var(--card-border);
-      border-radius: 12px; margin-bottom: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.65);
-    }
-    .header-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .logo-badge {
-      background: linear-gradient(135deg, #0284c7, #0f172a); border: 1px solid #38bdf8;
-      color: #fff; font-weight: 800; font-size: 13px; padding: 6px 12px; border-radius: 8px; letter-spacing: 1px;
-    }
-    .badge {
-      padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 11px;
-      text-transform: uppercase; letter-spacing: 0.8px; display: inline-flex; align-items: center; gap: 6px;
-    }
-    .badge-live { background: rgba(16,185,129,0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
-    .badge-fence { background: rgba(0,240,255,0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
-    .badge-mode { background: rgba(139,92,246,0.15); color: var(--accent-purple); border: 1px solid var(--accent-purple); }
-
-    .header-right { display: flex; gap: 16px; align-items: center; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
-
-    /* Controls Bar */
-    .controls-bar {
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-      padding: 10px 16px; background: var(--panel-bg); border: 1px solid var(--card-border);
-      border-radius: 10px; margin-bottom: 12px;
-    }
-    .btn-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .btn {
-      padding: 7px 14px; border-radius: 6px; font-weight: 700; font-size: 11.5px;
-      cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px;
-      transition: all 0.15s ease-in-out; text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .btn:hover { transform: translateY(-1px); filter: brightness(1.2); }
-    .btn:active { transform: translateY(1px); }
-    .btn-primary { background: #0284c7; color: #fff; }
-    .btn-success { background: #059669; color: #fff; }
-    .btn-amber { background: #d97706; color: #fff; }
-    .btn-purple { background: #7c3aed; color: #fff; }
-    .btn-danger { background: #dc2626; color: #fff; }
-    .btn-slate { background: #1e293b; color: #e2e8f0; border: 1px solid #334155; }
-    .btn-preset { background: #1e2c4a; color: #94a3b8; border: 1px solid #2d416b; }
-    .btn-preset.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
-
-    /* Tabbed Navigation Bar */
-    .nav-tabs {
-      display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 2px solid #1e2c4a; padding-bottom: 4px;
-    }
-    .nav-tab {
-      padding: 8px 18px; border-radius: 8px 8px 0 0; background: #0f182c; border: 1px solid #1e2c4a;
-      border-bottom: none; color: var(--text-muted); font-size: 12px; font-weight: 700; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;
-    }
-    .nav-tab:hover { color: #fff; background: #172442; }
-    .nav-tab.active {
-      background: var(--tab-active-bg); color: var(--accent-cyan); border-color: #0284c7;
-      border-bottom: 2px solid var(--accent-cyan);
-    }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    /* Layout Grids */
-    .main-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;
-    }
-    @media(max-width: 1100px) { .main-grid { grid-template-columns: 1fr; } }
-
-    .card {
-      background: var(--card-bg); border: 1px solid var(--card-border);
-      border-radius: 12px; padding: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-    .card-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-bottom: 8px; margin-bottom: 10px; border-bottom: 1px solid var(--card-border);
-    }
-    .card-title {
-      font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    /* Displays Canvas */
-    .display-canvas {
-      width: 100%; height: 380px; background: #000; border-radius: 8px;
-      border: 1px solid #1e2c4a; display: block;
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-mark {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      box-shadow: 0 0 16px rgba(2, 132, 199, 0.5);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+    .brand-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .brand-title span {
+      color: var(--accent-cyan);
+      font-weight: 400;
     }
 
-    /* Telemetry Grid Bottom */
-    .telemetry-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 12px;
+    .header-pills {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    @media(max-width: 1024px) { .telemetry-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media(max-width: 600px) { .telemetry-grid { grid-template-columns: 1fr; } }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--surface-border-subtle);
+    }
+    .pill-live {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: var(--accent-emerald);
+    }
+    .pill-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 8px currentColor;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
 
-    .gauge-cell {
-      background: #090f1e; border: 1px solid var(--card-border); border-radius: 8px;
-      padding: 8px 12px; position: relative;
+    .pill-mode {
+      background: rgba(139, 92, 246, 0.12);
+      border-color: rgba(139, 92, 246, 0.35);
+      color: var(--accent-violet);
     }
-    .gauge-label {
-      font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px;
+    .pill-fence {
+      background: rgba(0, 240, 255, 0.1);
+      border-color: rgba(0, 240, 255, 0.3);
+      color: var(--accent-cyan);
     }
-    .gauge-value {
-      font-size: 22px; font-weight: 800; margin: 3px 0; font-variant-numeric: tabular-nums;
-    }
-    .gauge-unit { font-size: 11px; color: var(--text-muted); font-weight: 400; margin-left: 2px; }
 
-    .bar-bg { width: 100%; height: 5px; background: #1e2c4a; border-radius: 3px; overflow: hidden; margin-top: 5px; }
-    .bar-fill { height: 100%; width: 0%; border-radius: 3px; transition: width 0.2s ease; }
-
-    /* FDIR Status List */
-    .status-item {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 5px 0; border-bottom: 1px solid #1e2c4a; font-size: 11.5px;
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    .status-item:last-child { border-bottom: none; }
-    .dot-ok { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green); display: inline-block; margin-right: 6px; }
-    .dot-warn { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-amber); display: inline-block; margin-right: 6px; }
-
-    /* Event Log Terminal */
-    .log-terminal {
-      background: #050811; border: 1px solid var(--card-border); border-radius: 8px;
-      height: 110px; overflow-y: auto; padding: 8px 12px; font-family: 'Consolas', monospace; font-size: 11px;
+    .timer-readout {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: 1px;
     }
-    .log-line { margin-bottom: 4px; line-height: 1.4; }
-    .log-time { color: var(--accent-cyan); font-weight: 700; margin-right: 8px; }
-    .log-phase { color: var(--accent-amber); margin-right: 6px; }
-    .log-text { color: #e2e8f0; }
+    .icon-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--surface-border-subtle);
+      color: var(--text-2);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-1);
+      border-color: var(--accent-cyan);
+    }
 
-    /* Lab Metric Cards */
-    .metric-box {
-      background: #090f1e; border: 1px solid #1e2c4a; border-radius: 8px; padding: 12px; margin-bottom: 10px;
+    /* Dual-Hero Panoramic Stage */
+    .hero-stage {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 1080px) {
+      .hero-stage { grid-template-columns: 1fr; }
+    }
+
+    .viewport-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .viewport-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--surface-border-subtle);
+    }
+    .viewport-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Segmented switch for Right Viewport */
+    .view-segmented {
+      display: inline-flex;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--surface-border-subtle);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 3px;
+    }
+    .view-seg-btn {
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      color: var(--text-2);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .view-seg-btn.active {
+      background: var(--surface-2);
+      color: var(--accent-cyan);
+      border: 1px solid var(--surface-border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      background: #04060a;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Minimalist KPI Metrics Bar (5 Iconic Cards) */
+    .kpi-bar {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 1100px) {
+      .kpi-bar { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .kpi-bar { grid-template-columns: 1fr; }
+    }
+
+    .kpi-card {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--kpi-accent, var(--accent-cyan)), transparent);
+    }
+    .kpi-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .kpi-value-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin: 6px 0;
+    }
+    .kpi-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-1);
+      letter-spacing: -0.5px;
+    }
+    .kpi-unit {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-2);
+    }
+    .kpi-subtext {
+      font-size: 11px;
+      color: var(--text-2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mini-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .mini-fill {
+      height: 100%;
+      background: var(--kpi-accent, var(--accent-cyan));
+      border-radius: 2px;
+      transition: width 0.25s ease;
+    }
+
+    /* Floating Action Dock */
+    .action-dock {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .action-btn {
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.3px;
+    }
+    .action-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.15);
+    }
+    .action-btn:active {
+      transform: translateY(1px);
+    }
+    .btn-play {
+      background: linear-gradient(135deg, #059669, #047857);
+      color: #fff;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.3);
+    }
+    .btn-pause {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: #fff;
+    }
+    .btn-drop {
+      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(139, 92, 246, 0.35);
+    }
+    .btn-rtl {
+      background: rgba(2, 132, 199, 0.2);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: var(--accent-cyan);
+    }
+    .btn-flameout {
+      background: rgba(244, 63, 94, 0.15);
+      border-color: rgba(244, 63, 94, 0.35);
+      color: var(--accent-rose);
+    }
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--surface-border-subtle);
+      color: var(--text-2);
+    }
+
+    .preset-pill {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--surface-border-subtle);
+      color: var(--text-2);
+      transition: all 0.15s;
+    }
+    .preset-pill.active {
+      background: rgba(2, 132, 199, 0.25);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+
+    /* Collapsible Telemetry & Diagnostics Drawer */
+    .drawer-card {
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .drawer-header {
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+    .drawer-header:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .drawer-body {
+      display: none;
+      padding: 14px 18px;
+      border-top: 1px solid var(--surface-border-subtle);
+    }
+    .drawer-body.open {
+      display: block;
+    }
+
+    .diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px) {
+      .diag-grid { grid-template-columns: 1fr; }
+    }
+
+    .terminal-box {
+      background: #030508;
+      border: 1px solid var(--surface-border-subtle);
+      border-radius: 8px;
+      height: 120px;
+      overflow-y: auto;
+      padding: 10px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+    .term-row {
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .term-t { color: var(--accent-cyan); }
+    .term-p { color: var(--accent-amber); margin: 0 6px; }
+
+    /* Keyboard help toast */
+    .kbd-tag {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-2);
+      margin-left: 4px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Glass Cockpit Header -->
-  <header>
-    <div class="header-left">
-      <div class="logo-badge">METUAV DBF 2027</div>
-      <h1 style="font-size: 16px; font-weight: 800; letter-spacing: 0.5px; color: #fff;">
-        GÖKDOĞAN <span style="color: var(--accent-cyan); font-weight: 400;">| GCS GLASS COCKPIT</span>
-      </h1>
-      <span class="badge badge-live" id="live-indicator">● MAVLINK v2 ONLINE (50Hz)</span>
-      <span class="badge badge-fence" id="geofence-badge">GEOFENCE: INSIDE SAFE</span>
-      <span class="badge badge-mode" id="mission-mode-badge">M3: AUTO RECON</span>
+  <!-- Top Iconic Header -->
+  <header class="glass">
+    <div class="brand-group">
+      <div class="brand-mark">METUAV</div>
+      <div class="brand-title">GÖKDOĞAN <span>| GLASS COCKPIT</span></div>
     </div>
-    <div class="header-right">
-      <div>BATARYA: <strong style="color: var(--accent-green);" id="top-soc">95.5%</strong></div>
-      <div>SÜRE: <strong style="color: #fff;" id="top-time">00:00.0</strong></div>
-      <button class="btn btn-slate" style="padding: 4px 8px; font-size: 11px;" id="audio-toggle" onclick="toggleAudio()">🔊 SES: AÇIK</button>
+
+    <div class="header-pills">
+      <div class="pill pill-live"><span class="pill-pulse"></span>MAVLINK v2 • 50Hz</div>
+      <div class="pill pill-fence" id="pill-fence">GEOFENCE: INSIDE SAFE</div>
+      <div class="pill pill-mode" id="pill-phase">M3 • AUTO RECON</div>
+    </div>
+
+    <div class="header-actions">
+      <div class="timer-readout" id="clock-readout">00:00.0</div>
+      <button class="icon-btn" id="audio-toggle" onclick="toggleAudio()" title="Sesli İkazlar">🔊 SES: AÇIK</button>
+      <button class="icon-btn" onclick="resetSimulation()" title="Sıfırla">🔄 SIFIRLA</button>
     </div>
   </header>
 
-  <!-- Interactive Controls Toolbar & Scenarios -->
-  <div class="controls-bar">
-    <div class="btn-group">
-      <button class="btn btn-success" id="btn-start" onclick="startSimulation()">▶ Başlat</button>
-      <button class="btn btn-amber" id="btn-pause" onclick="pauseSimulation()">⏸ Duraklat</button>
-      <button class="btn btn-purple" id="btn-drop" onclick="triggerManualDrop()">🎯 Yük Bırak</button>
-      <button class="btn btn-primary" id="btn-rtl" onclick="triggerRTL()">🏠 Eve Dön (RTL)</button>
-      <button class="btn btn-danger" id="btn-flameout" onclick="triggerFlameout()">⚡ Motor Kes & Regen</button>
-      <button class="btn btn-slate" id="btn-reset" onclick="resetSimulation()">🔄 Sıfırla</button>
-    </div>
-    <div class="btn-group">
-      <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Senaryo:</span>
-      <button class="btn btn-preset active" id="scen-m3" onclick="setScenario('M3')">M3: Hedef & Bırakma</button>
-      <button class="btn btn-preset" id="scen-m1" onclick="setScenario('M1')">M1: Hız Parkuru</button>
-      <button class="btn btn-preset" id="scen-m2" onclick="setScenario('M2')">M2: Ağır Yük</button>
-      <button class="btn btn-preset" id="scen-geo" onclick="setScenario('GEOFENCE')">Geofence İhlali</button>
-    </div>
-    <div class="btn-group">
-      <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Hız:</span>
-      <button class="btn btn-slate" style="padding: 5px 8px;" onclick="setSpeed(1)">1x</button>
-      <button class="btn btn-slate" style="padding: 5px 8px;" onclick="setSpeed(2)">2x</button>
-      <button class="btn btn-slate" style="padding: 5px 8px;" onclick="setSpeed(4)">4x</button>
-    </div>
-  </div>
-
-  <!-- Tabbed Navigation Bar -->
-  <div class="nav-tabs">
-    <div class="nav-tab active" onclick="switchTab('tab-cockpit')">✈️ PFD & Taktik Radar</div>
-    <div class="nav-tab" onclick="switchTab('tab-vision')">🎯 Görev 3 Edge-AI Vizyon & Balistik</div>
-    <div class="nav-tab" onclick="switchTab('tab-charts')">📊 Telemetri Osiloskop Grafikleri</div>
-    <div class="nav-tab" onclick="switchTab('tab-aero')">🔬 Aerodinamik & İtki Laboratuvarı</div>
-  </div>
-
-  <!-- TAB 1: PFD & TACTICAL RADAR -->
-  <div id="tab-cockpit" class="tab-content active">
-    <div class="main-grid">
-      <!-- LEFT: Primary Flight Display (PFD) -->
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">PRIMARY FLIGHT DISPLAY (PFD)</span>
-          <span style="font-size: 11px; color: var(--accent-cyan);" id="fma-indicator">FMA: AUTO_TECS | L1_NAV | CRUISE_24.5</span>
+  <!-- Dual-Hero Panoramic Stage -->
+  <div class="hero-stage">
+    <!-- LEFT HERO: Primary Flight Display (PFD) -->
+    <div class="glass viewport-card">
+      <div class="viewport-topbar">
+        <div class="viewport-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 22 12 17 22 22 12 2"/></svg>
+          PRIMARY FLIGHT DISPLAY
         </div>
-        <canvas id="pfd-canvas" class="display-canvas" width="600" height="380"></canvas>
+        <div style="font-size: 11px; font-weight: 700; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace;" id="fma-text">
+          AUTO_TECS | L1_NAV | 24.5 m/s
+        </div>
       </div>
+      <div class="canvas-container">
+        <canvas id="pfd-canvas" width="640" height="380"></canvas>
+      </div>
+    </div>
 
-      <!-- RIGHT: 2D Tactical Radar & 3D Geofence Map -->
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">TAKTIK RADAR & GEOFENCE PİST HARİTASI</span>
-          <span style="font-size: 11px; color: var(--accent-green);" id="radar-status">POLİGON: TAM İÇERİDE (TTB: >15s)</span>
+    <!-- RIGHT HERO: Multi-View (Tactical Radar / Synthetic Vision) -->
+    <div class="glass viewport-card">
+      <div class="viewport-topbar">
+        <div class="viewport-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          <span id="right-view-title">TAKTIK RADAR & GEOFENCE</span>
         </div>
-        <canvas id="radar-canvas" class="display-canvas" width="600" height="380"></canvas>
+        <div class="view-segmented">
+          <button class="view-seg-btn active" id="btn-view-radar" onclick="switchRightView('radar')">Radar Haritası</button>
+          <button class="view-seg-btn" id="btn-view-vision" onclick="switchRightView('vision')">Aşağı Kamera (AI)</button>
+          <button class="view-seg-btn" id="btn-view-charts" onclick="switchRightView('charts')">Telemetri Grafiği</button>
+        </div>
+      </div>
+      <div class="canvas-container">
+        <canvas id="right-canvas" width="600" height="380"></canvas>
       </div>
     </div>
   </div>
 
-  <!-- TAB 2: VISION & BALLISTICS -->
-  <div id="tab-vision" class="tab-content">
-    <div class="main-grid">
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">AŞAĞI AÇILI OPTİK KAMERA AKIŞI & AI HEDEF TESPİTİ</span>
-          <span style="font-size: 11px; color: var(--accent-green);" id="vision-status">AI CONFIDENCE: 99.4% (CIRCULAR RING)</span>
-        </div>
-        <canvas id="vision-canvas" class="display-canvas" width="600" height="380"></canvas>
+  <!-- Minimalist KPI Metrics Bar (5 Iconic Cards) -->
+  <div class="kpi-bar">
+    <!-- 1. Airspeed -->
+    <div class="glass kpi-card" style="--kpi-accent: var(--accent-cyan);">
+      <div class="kpi-label">Hava Hızı (IAS)<span style="color: var(--accent-cyan);">ADC 20Hz</span></div>
+      <div class="kpi-value-row">
+        <span class="kpi-value" id="kpi-spd">24.5</span>
+        <span class="kpi-unit">m/s</span>
       </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">3-DOF RK4 BALİSTİK DÜŞÜŞ & SAÇILMA ANALİZİ (CEP)</span>
-          <span style="font-size: 11px; color: var(--accent-purple);" id="ballistics-lead">LEAD: 14.2m | TTD: 1.18s</span>
-        </div>
-        <canvas id="cep-canvas" class="display-canvas" width="600" height="380"></canvas>
+      <div class="kpi-subtext">
+        <span>TAS: <strong id="kpi-tas" style="color:#fff;">25.0</strong> m/s</span>
+        <span id="kpi-kmh">88.2 km/h</span>
       </div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-spd" style="width: 70%;"></div></div>
+    </div>
+
+    <!-- 2. Altitude & Climb -->
+    <div class="glass kpi-card" style="--kpi-accent: var(--accent-emerald);">
+      <div class="kpi-label">İrtifa (Baro / GPS)<span style="color: var(--accent-emerald);">TECS</span></div>
+      <div class="kpi-value-row">
+        <span class="kpi-value" id="kpi-alt">25.0</span>
+        <span class="kpi-unit">m AGL</span>
+      </div>
+      <div class="kpi-subtext">
+        <span>Hedef: 25.0 m</span>
+        <span>VSI: <strong id="kpi-vsi" style="color: var(--accent-emerald);">+0.0</strong> m/s</span>
+      </div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-alt" style="width: 62.5%; background: var(--accent-emerald);"></div></div>
+    </div>
+
+    <!-- 3. Battery & Power -->
+    <div class="glass kpi-card" style="--kpi-accent: var(--accent-amber);">
+      <div class="kpi-label">6S Batarya & Güç<span style="color: var(--accent-amber);" id="kpi-soc-badge">95.5%</span></div>
+      <div class="kpi-value-row">
+        <span class="kpi-value" id="kpi-volt">24.60</span>
+        <span class="kpi-unit">V</span>
+      </div>
+      <div class="kpi-subtext">
+        <span>Akım: <strong id="kpi-amp" style="color:#fff;">34.2</strong> A</span>
+        <span>Güç: <strong id="kpi-pwr" style="color: var(--accent-amber);">841</strong> W</span>
+      </div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-batt" style="width: 95.5%; background: var(--accent-amber);"></div></div>
+    </div>
+
+    <!-- 4. Mission 3 Drop Precision -->
+    <div class="glass kpi-card" style="--kpi-accent: var(--accent-violet);">
+      <div class="kpi-label">Hedef İsabet (CEP)<span style="color: var(--accent-violet);" id="kpi-drop-status">KİLİTLENDİ</span></div>
+      <div class="kpi-value-row">
+        <span class="kpi-value" id="kpi-cep" style="color: var(--accent-violet);">0.98</span>
+        <span class="kpi-unit">m</span>
+      </div>
+      <div class="kpi-subtext">
+        <span>Kütle: <strong id="kpi-mass" style="color:#fff;">24.85</strong> kg</span>
+        <span>Elev Trim: <strong id="kpi-trim" style="color:#fff;">0.0°</strong></span>
+      </div>
+      <div class="mini-bar"><div class="mini-fill" style="width: 82%; background: var(--accent-violet);"></div></div>
+    </div>
+
+    <!-- 5. Noise & Aeroacoustics -->
+    <div class="glass kpi-card" style="--kpi-accent: #06b6d4;">
+      <div class="kpi-label">Aeroakustik Gürültü<span style="color: #06b6d4;">AIAA DBF</span></div>
+      <div class="kpi-value-row">
+        <span class="kpi-value" id="kpi-noise">73.4</span>
+        <span class="kpi-unit">dBA</span>
+      </div>
+      <div class="kpi-subtext">
+        <span>Limit: 85.0 dBA</span>
+        <span style="color: var(--accent-emerald);">Marjin: +11.6 dBA</span>
+      </div>
+      <div class="mini-bar"><div class="mini-fill" style="width: 73.4%; background: #06b6d4;"></div></div>
     </div>
   </div>
 
-  <!-- TAB 3: TELEMETRY OSCILLOSCOPE STRIP CHARTS -->
-  <div id="tab-charts" class="tab-content">
-    <div class="card" style="margin-bottom: 12px;">
-      <div class="card-header">
-        <span class="card-title">ÇOK KANALLI GERÇEK ZAMANLI TELEMETRİ GRAFİĞİ</span>
-        <div style="font-size: 11px; display: flex; gap: 14px;">
-          <span style="color: var(--accent-cyan);">■ İrtifa (m)</span>
-          <span style="color: var(--accent-green);">■ Hava Hızı (m/s)</span>
-          <span style="color: var(--accent-amber);">■ Batarya Akımı (A)</span>
-          <span style="color: var(--accent-purple);">■ Elevatör Trim (°)</span>
-        </div>
-      </div>
-      <canvas id="chart-canvas" class="display-canvas" width="1200" height="340" style="height: 320px;"></canvas>
+  <!-- Floating Action Dock -->
+  <div class="glass action-dock">
+    <div class="action-group">
+      <button class="action-btn btn-play" id="btn-play-pause" onclick="togglePlayPause()">
+        <span id="play-icon">▶</span> <span id="play-text">BAŞLAT</span> <span class="kbd-tag">Space</span>
+      </button>
+      <button class="action-btn btn-drop" onclick="triggerManualDrop()">
+        🎯 YÜKÜ BIRAK <span class="kbd-tag">D</span>
+      </button>
+      <button class="action-btn btn-rtl" onclick="triggerRTL()">
+        🏠 EVE DÖN (RTL) <span class="kbd-tag">R</span>
+      </button>
+      <button class="action-btn btn-flameout" id="btn-flameout" onclick="triggerFlameout()">
+        ⚡ MOTOR KES & REGEN
+      </button>
+    </div>
+
+    <div class="action-group">
+      <span style="font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase;">SENARYO:</span>
+      <button class="preset-pill active" id="preset-m3" onclick="setScenario('M3')">M3 Bırakma</button>
+      <button class="preset-pill" id="preset-m1" onclick="setScenario('M1')">M1 Hız</button>
+      <button class="preset-pill" id="preset-m2" onclick="setScenario('M2')">M2 Ağır Yük</button>
+      <button class="preset-pill" id="preset-geo" onclick="setScenario('GEOFENCE')">Geofence İhlal</button>
+    </div>
+
+    <div class="action-group">
+      <span style="font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase;">HIZ:</span>
+      <button class="preset-pill" id="spd-1x" onclick="setSpeed(1)">1x</button>
+      <button class="preset-pill" id="spd-2x" onclick="setSpeed(2)">2x</button>
+      <button class="preset-pill" id="spd-4x" onclick="setSpeed(4)">4x</button>
     </div>
   </div>
 
-  <!-- TAB 4: AERO & PROPULSION LAB -->
-  <div id="tab-aero" class="tab-content">
-    <div class="main-grid">
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">PERVANE AEROAKUSTİĞİ & GÜRÜLTÜ SEVİYESİ</span>
-          <span style="font-size: 11px; color: var(--accent-green);">FARASSAT & GUTIN-DEMING</span>
-        </div>
-        <div class="metric-box">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span style="font-size: 12px; color: var(--text-muted);">100 FT SIDELINE SES BASINÇ SEVİYESİ (dBA)</span>
-            <strong style="font-size: 18px; color: var(--accent-cyan);" id="noise-dba-val">73.4 dBA</strong>
-          </div>
-          <div class="bar-bg" style="height: 10px;">
-            <div class="bar-fill" id="noise-bar" style="width: 73.4%; background: linear-gradient(90deg, #10b981 0%, #f59e0b 80%, #ef4444 100%);"></div>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 4px;">
-            <span>0 dBA</span>
-            <span style="color: var(--accent-green);">Maks DBF Limiti: 85.0 dBA (Emniyet Marjini: +11.6 dBA)</span>
-            <span>100 dBA</span>
-          </div>
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-          <div class="gauge-cell">
-            <div class="gauge-label">Blade Passing Freq (BPF)</div>
-            <div class="gauge-value" style="color: #fff;" id="bpf-val">226.7<span class="gauge-unit">Hz</span></div>
-          </div>
-          <div class="gauge-cell">
-            <div class="gauge-label">Helisel Uç Mach (M_tip)</div>
-            <div class="gauge-value" style="color: #fff;" id="tip-mach-val">0.505</div>
-          </div>
-        </div>
+  <!-- Collapsible Telemetry & Diagnostics Drawer -->
+  <div class="glass drawer-card">
+    <div class="drawer-header" onclick="toggleDrawer()">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700;">
+        <span style="color: var(--accent-emerald);">●</span>
+        <span>SİSTEM SAĞLIĞI & CANLI GÖREV KONSOLU</span>
+        <span style="color: var(--text-3); font-weight: 400; font-size: 11px;">(15-Durumlu EKF • 14 GPS Sats • FDIR Nominal)</span>
       </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">BLENDED WINGLET & REJENERASYON MODU</span>
-          <span style="font-size: 11px; color: var(--accent-purple);">TREFFTZ DÜZLEMİ ANALİZİ</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
-          <div class="gauge-cell">
-            <div class="gauge-label">Efektif AR Kazancı</div>
-            <div class="gauge-value" style="color: var(--accent-green);">7.57<span class="gauge-unit">(+%7.3)</span></div>
-          </div>
-          <div class="gauge-cell">
-            <div class="gauge-label">İndüklenmiş Sürükleme Düşüşü</div>
-            <div class="gauge-value" style="color: var(--accent-cyan);">-6.8<span class="gauge-unit">%</span></div>
-          </div>
-        </div>
-        <div class="metric-box">
-          <div class="gauge-label" style="margin-bottom: 4px;">İNİŞ REJENERASYON MODU</div>
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <strong style="color: #fff;" id="regen-mode-label">STANDBY (NORMAL İTKİ)</strong>
-            <span style="font-size: 14px; font-weight: 800; color: var(--accent-amber);" id="regen-power-label">0 W</span>
-          </div>
-        </div>
+      <div style="font-size: 11px; color: var(--accent-cyan); font-weight: 700;" id="drawer-toggle-text">
+        GÖSTER ▼
       </div>
     </div>
-  </div>
-
-  <!-- Telemetry Grid -->
-  <div class="telemetry-grid">
-    <!-- 1. Batarya ve Güç -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">6S BATARYA & GÜÇ</span>
-        <span style="font-size: 11px; color: var(--accent-green);" id="power-w">841 W</span>
-      </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <div class="gauge-cell">
-          <div class="gauge-label">Gerilim</div>
-          <div class="gauge-value" style="color: var(--accent-green);" id="cell-v">24.60<span class="gauge-unit">V</span></div>
-          <div class="bar-bg"><div class="bar-fill" id="bar-v" style="width: 85%; background: var(--accent-green);"></div></div>
+    <div class="drawer-body" id="drawer-body">
+      <div class="diag-grid">
+        <div>
+          <div style="font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; margin-bottom: 6px;">
+            MAVLink v2 Olay Günlüğü & Karar Mekanizması
+          </div>
+          <div class="terminal-box" id="term-box">
+            <div class="term-row"><span class="term-t">[00:00.0]</span><span class="term-p">SYSTEM</span><span>METUAV Gökdoğan Glass Cockpit Başlatıldı. 50Hz SITL Telemetrisi Hazır.</span></div>
+          </div>
         </div>
-        <div class="gauge-cell">
-          <div class="gauge-label">Akım</div>
-          <div class="gauge-value" style="color: var(--accent-amber);" id="cell-a">34.2<span class="gauge-unit">A</span></div>
-          <div class="bar-bg"><div class="bar-fill" id="bar-a" style="width: 40%; background: var(--accent-amber);"></div></div>
-        </div>
-      </div>
-      <div style="margin-top: 8px; font-size: 11.5px; display: flex; justify-content: space-between; color: var(--text-muted);">
-        <span>Tüketilen Kapasite:</span>
-        <strong style="color: #fff;" id="cell-mah">681.0 mAh</strong>
-      </div>
-    </div>
-
-    <!-- 2. Hava Veri & Rüzgar (ADC) -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">HAVA VERİSİ & RÜZGAR</span>
-        <span style="font-size: 11px; color: var(--accent-cyan);" id="adc-tas">TAS: 24.5 m/s</span>
-      </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <div class="gauge-cell">
-          <div class="gauge-label">Sentetik AoA (α)</div>
-          <div class="gauge-value" style="color: var(--accent-cyan);" id="aoa-val">+3.4<span class="gauge-unit">°</span></div>
-        </div>
-        <div class="gauge-cell">
-          <div class="gauge-label">Rüzgar Hızı</div>
-          <div class="gauge-value" style="color: #fff;" id="wind-spd">4.2<span class="gauge-unit">m/s</span></div>
+        <div>
+          <div style="font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; margin-bottom: 6px;">
+            Alt Sistem ve Aviyonik Sağlık Durumu
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+            <div style="padding: 8px 12px; background: rgba(0,0,0,0.3); border-radius: 6px; border: 1px solid var(--surface-border-subtle);">
+              <span style="color: var(--text-3);">15-Durumlu EKF3:</span> <strong style="color: var(--accent-emerald);">SAĞLIKLI</strong>
+            </div>
+            <div style="padding: 8px 12px; background: rgba(0,0,0,0.3); border-radius: 6px; border: 1px solid var(--surface-border-subtle);">
+              <span style="color: var(--text-3);">Manyetik Pusula:</span> <strong style="color: var(--accent-cyan);">ID 1 (0.4° SAPMA)</strong>
+            </div>
+            <div style="padding: 8px 12px; background: rgba(0,0,0,0.3); border-radius: 6px; border: 1px solid var(--surface-border-subtle);">
+              <span style="color: var(--text-3);">Blended Winglet:</span> <strong style="color: var(--accent-cyan);">AR_eff: 7.57 (%-6.8 Drag)</strong>
+            </div>
+            <div style="padding: 8px 12px; background: rgba(0,0,0,0.3); border-radius: 6px; border: 1px solid var(--surface-border-subtle);">
+              <span style="color: var(--text-3);">Pervane Windmilling:</span> <strong style="color: #fff;" id="diag-regen">STANDBY (NORMAL)</strong>
+            </div>
+          </div>
         </div>
       </div>
-      <div style="margin-top: 8px; font-size: 11.5px; display: flex; justify-content: space-between; color: var(--text-muted);">
-        <span>Dinamik Basınç (q):</span>
-        <strong style="color: #fff;" id="q-dyn">367.7 Pa</strong>
-      </div>
-    </div>
-
-    <!-- 3. FDIR & Aviyonik Sağlık -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">AVİYONİK VE FDIR SAĞLIK</span>
-        <span style="font-size: 11px; color: var(--accent-green);" id="fdir-overall">TÜMÜ NOMİNAL</span>
-      </div>
-      <div class="status-item">
-        <span><span class="dot-ok" id="dot-ekf"></span>15-Durumlu EKF & IMU</span>
-        <strong style="color: var(--accent-green);">SAĞLIKLI</strong>
-      </div>
-      <div class="status-item">
-        <span><span class="dot-ok" id="dot-comp"></span>Çift Manyetometre (Pusula)</span>
-        <strong style="color: var(--accent-cyan);" id="comp-status">ID 1 (0.4° SAPMA)</strong>
-      </div>
-      <div class="status-item">
-        <span><span class="dot-ok" id="dot-gps"></span>GPS 3D Fix</span>
-        <strong style="color: var(--accent-green);">14 SATS (HDOP 0.85)</strong>
-      </div>
-      <div class="status-item">
-        <span><span class="dot-ok" id="dot-mav"></span>MAVLink v2 Akışı</span>
-        <strong style="color: var(--accent-purple);" id="mav-count">50 PKTS/S</strong>
-      </div>
-    </div>
-
-    <!-- 4. Görev 3 ve Pilon Skoru -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">GÖREV 3 & HEDEF İSABET</span>
-        <span style="font-size: 11px; color: var(--accent-purple);" id="drop-badge">KİLİTLENDİ</span>
-      </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <div class="gauge-cell">
-          <div class="gauge-label">İsabet Sapması</div>
-          <div class="gauge-value" style="color: var(--accent-green);" id="drop-err">0.98<span class="gauge-unit">m</span></div>
-        </div>
-        <div class="gauge-cell">
-          <div class="gauge-label">Pylon Turu</div>
-          <div class="gauge-value" style="color: #fff;" id="lap-num">2<span class="gauge-unit">/3</span></div>
-        </div>
-      </div>
-      <div style="margin-top: 8px; font-size: 11.5px; display: flex; justify-content: space-between; color: var(--text-muted);">
-        <span>Boş Kütle Dönüşümü:</span>
-        <strong style="color: #fff;" id="mass-state">24.85 kg</strong>
-      </div>
-    </div>
-  </div>
-
-  <!-- Event Log Console -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">CANLI GÖREV KONSOLU & OTONOM KARAR GÜNLÜĞÜ</span>
-      <div style="display: flex; gap: 10px;">
-        <button class="btn btn-slate" style="padding: 2px 8px; font-size: 10px;" onclick="clearLogs()">Temizle</button>
-        <span style="font-size: 11px; color: var(--text-muted);">MİCRO-XRCE DDS + MAVLINK</span>
-      </div>
-    </div>
-    <div class="log-terminal" id="log-console">
-      <div class="log-line"><span class="log-time">[00:00.0]</span><span class="log-phase">INIT</span><span class="log-text">METUAV Gökdoğan Glass Cockpit Başlatıldı. 50Hz SITL Telemetrisi Dinleniyor...</span></div>
     </div>
   </div>
 
   <script>
-    // Tab switching
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      event.currentTarget.classList.add('active');
-    }
-
     // Audio synthesizer
     let audioEnabled = true;
     let audioCtx = null;
@@ -457,7 +692,7 @@
         const gain = audioCtx.createGain();
         osc.type = type;
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
@@ -471,18 +706,33 @@
       document.getElementById('audio-toggle').innerText = audioEnabled ? '🔊 SES: AÇIK' : '🔇 SES: KAPALI';
     }
 
-    // Canvas contexts
-    const pfdCanvas = document.getElementById('pfd-canvas');
-    const pfdCtx = pfdCanvas.getContext('2d');
-    const radCanvas = document.getElementById('radar-canvas');
-    const radCtx = radCanvas.getContext('2d');
-    const visCanvas = document.getElementById('vision-canvas');
-    const visCtx = visCanvas ? visCanvas.getContext('2d') : null;
-    const cepCanvas = document.getElementById('cep-canvas');
-    const cepCtx = cepCanvas ? cepCanvas.getContext('2d') : null;
-    const chartCanvas = document.getElementById('chart-canvas');
-    const chartCtx = chartCanvas ? chartCanvas.getContext('2d') : null;
+    // View Switching
+    let currentRightView = 'radar';
+    function switchRightView(view) {
+      currentRightView = view;
+      document.querySelectorAll('.view-seg-btn').forEach(b => b.classList.remove('active'));
+      if (view === 'radar') {
+        document.getElementById('btn-view-radar').classList.add('active');
+        document.getElementById('right-view-title').innerText = 'TAKTIK RADAR & GEOFENCE';
+      } else if (view === 'vision') {
+        document.getElementById('btn-view-vision').classList.add('active');
+        document.getElementById('right-view-title').innerText = 'GÖVDE ALTI OPTİK KAMERA (AI HEDEF KİLİDİ)';
+      } else if (view === 'charts') {
+        document.getElementById('btn-view-charts').classList.add('active');
+        document.getElementById('right-view-title').innerText = 'GERÇEK ZAMANLI TELEMETRİ GRAFİĞİ';
+      }
+      playBeep(700, 0.05);
+    }
 
+    // Drawer toggle
+    let drawerOpen = false;
+    function toggleDrawer() {
+      drawerOpen = !drawerOpen;
+      document.getElementById('drawer-body').classList.toggle('open', drawerOpen);
+      document.getElementById('drawer-toggle-text').innerText = drawerOpen ? 'GİZLE ▲' : 'GÖSTER ▼';
+    }
+
+    // Flight & Simulation State
     let simActive = false;
     let simTime = 0.0;
     let timeScale = 1.0;
@@ -490,59 +740,55 @@
     let currentScenario = 'M3';
     let trail = [];
     let dropMarker = null;
-    let mavPackets = 0;
     let chartHistory = [];
     let flameoutActive = false;
 
     let flight = {
-      north: -100.0,
-      east: 0.0,
-      alt: 0.0,
-      airspeed: 0.0,
-      pitch: 0.0,
-      roll: 0.0,
-      yaw: 0.0,
-      mass: 24.85,
-      voltage: 25.2,
-      current: 0.0,
-      consumed_mah: 0.0,
-      dropped: false,
-      dropErr: 0.98,
-      laps: 0,
-      elevTrim: 0.0,
-      regenW: 0.0
+      north: -100.0, east: 0.0, alt: 0.0, airspeed: 0.0,
+      pitch: 0.0, roll: 0.0, yaw: 0.0,
+      mass: 24.85, voltage: 25.2, current: 0.0, consumed_mah: 0.0,
+      dropped: false, dropErr: 0.98, laps: 0, elevTrim: 0.0, regenW: 0.0
     };
 
-    function addLog(t, ph, text) {
-      const consoleBox = document.getElementById('log-console');
-      const min = Math.floor(t / 60);
-      const sec = (t % 60).toFixed(1);
+    const pfdCanvas = document.getElementById('pfd-canvas');
+    const pfdCtx = pfdCanvas.getContext('2d');
+    const rightCanvas = document.getElementById('right-canvas');
+    const rightCtx = rightCanvas.getContext('2d');
+
+    function logMessage(p, text) {
+      const box = document.getElementById('term-box');
+      const min = Math.floor(simTime / 60);
+      const sec = (simTime % 60).toFixed(1);
       const timeStr = (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
       const row = document.createElement('div');
-      row.className = 'log-line';
-      row.innerHTML = `<span class="log-time">[${timeStr}]</span><span class="log-phase">${ph}</span><span class="log-text">${text}</span>`;
-      consoleBox.appendChild(row);
-      consoleBox.scrollTop = consoleBox.scrollHeight;
+      row.className = 'term-row';
+      row.innerHTML = `<span class="term-t">[${timeStr}]</span><span class="term-p">${p}</span><span>${text}</span>`;
+      box.appendChild(row);
+      box.scrollTop = box.scrollHeight;
     }
 
-    function clearLogs() {
-      document.getElementById('log-console').innerHTML = '';
-    }
-
-    function startSimulation() {
-      if (!simActive) {
-        simActive = true;
+    function togglePlayPause() {
+      simActive = !simActive;
+      const btn = document.getElementById('btn-play-pause');
+      const icon = document.getElementById('play-icon');
+      const txt = document.getElementById('play-text');
+      if (simActive) {
+        btn.classList.remove('btn-play');
+        btn.classList.add('btn-pause');
+        icon.innerText = '⏸';
+        txt.innerText = 'DURAKLAT';
         playBeep(880, 0.15);
         if (phase === 'STANDBY') {
           phase = 'FAST_BOOT';
-          addLog(simTime, 'FAST_BOOT', 'IMU 50Hz, Çift Pusula ve GPS 3D Fix hızlı kalibrasyon başlatıldı.');
+          logMessage('FAST_BOOT', 'IMU 50Hz, Çift Pusula ve GPS 3D Fix hızlı kalibrasyon başlatıldı.');
         }
+      } else {
+        btn.classList.add('btn-play');
+        btn.classList.remove('btn-pause');
+        icon.innerText = '▶';
+        txt.innerText = 'DEVAM ET';
+        playBeep(440, 0.15);
       }
-    }
-
-    function pauseSimulation() {
-      simActive = false;
-      playBeep(440, 0.15);
     }
 
     function resetSimulation() {
@@ -553,14 +799,22 @@
       dropMarker = null;
       chartHistory = [];
       flameoutActive = false;
+
+      const btn = document.getElementById('btn-play-pause');
+      btn.classList.add('btn-play');
+      btn.classList.remove('btn-pause');
+      document.getElementById('play-icon').innerText = '▶';
+      document.getElementById('play-text').innerText = 'BAŞLAT';
+
       flight = {
         north: -100.0, east: 0.0, alt: 0.0, airspeed: 0.0,
-        pitch: 0.0, roll: 0.0, yaw: 0.0, mass: currentScenario === 'M1' ? 12.70 : (currentScenario === 'M2' ? 24.85 : 21.05),
+        pitch: 0.0, roll: 0.0, yaw: 0.0,
+        mass: currentScenario === 'M1' ? 12.70 : (currentScenario === 'M2' ? 24.85 : 21.05),
         voltage: 25.2, current: 0.0, consumed_mah: 0.0,
         dropped: false, dropErr: 0.98, laps: 0, elevTrim: 0.0, regenW: 0.0
       };
-      clearLogs();
-      addLog(0.0, 'RESET', 'Sistem sıfırlandı. Kalkış için nominal.');
+      document.getElementById('term-box').innerHTML = '';
+      logMessage('RESET', 'Sistem sıfırlandı. Kalkış için nominal.');
       updateUI();
     }
 
@@ -569,81 +823,98 @@
         flight.dropped = true;
         flight.mass -= 8.35;
         flight.elevTrim = -3.5;
-        flight.pitch = 5.2; // Adaptive trim to prevent stall
+        flight.pitch = 5.2; // Trim compensation
         dropMarker = { north: flight.north + 14.2, east: flight.east };
         playBeep(1200, 0.3, 'triangle');
-        addLog(simTime, 'DROP_ACTION', 'FAYDALIK YÜK BIRAKILDI! +44.1mm CG kaymasına karşı anlık -3.5° elevatör trim uygulandı.');
+        logMessage('DROP_ACTION', 'FAYDALI YÜK BIRAKILDI! +44.1mm CG kaymasına karşı anlık -3.5° elevatör trim uygulandı.');
       }
     }
 
     function triggerRTL() {
       phase = 'APPROACH_LAND';
       playBeep(650, 0.2);
-      addLog(simTime, 'RTL', 'Eve Dönüş (RTL) devrede. Pist yaklaşma süzülüşü ve flare başlatıldı.');
+      logMessage('RTL', 'Eve Dönüş (RTL) devrede. Pist yaklaşma süzülüşü ve flare başlatıldı.');
     }
 
     function triggerFlameout() {
       flameoutActive = !flameoutActive;
+      const btn = document.getElementById('btn-flameout');
       if (flameoutActive) {
-        playBeep(300, 0.4, 'sawtooth');
+        btn.style.background = 'rgba(244, 63, 94, 0.4)';
         flight.regenW = 288.0;
-        addLog(simTime, 'FLAMEOUT', 'ACİL DURUM: Motor kesildi! Pervane rüzgargülü rejeneratif frenleme (288W) devrede.');
+        playBeep(300, 0.4, 'sawtooth');
+        logMessage('FLAMEOUT', 'ACİL DURUM: Motor kesildi! Pervane rüzgargülü rejeneratif frenleme (288W) devrede.');
       } else {
+        btn.style.background = 'rgba(244, 63, 94, 0.15)';
         flight.regenW = 0.0;
-        addLog(simTime, 'RESTART', 'Motor yeniden çalıştırıldı.');
+        logMessage('RESTART', 'Motor yeniden çalıştırıldı.');
       }
     }
 
     function setScenario(scen) {
       currentScenario = scen;
-      document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
-      if (scen === 'M3') document.getElementById('scen-m3').classList.add('active');
-      if (scen === 'M1') document.getElementById('scen-m1').classList.add('active');
-      if (scen === 'M2') document.getElementById('scen-m2').classList.add('active');
-      if (scen === 'GEOFENCE') document.getElementById('scen-geo').classList.add('active');
+      document.querySelectorAll('.preset-pill').forEach(b => {
+        if (b.id && b.id.startsWith('preset-')) b.classList.remove('active');
+      });
+      if (scen === 'M3') document.getElementById('preset-m3').classList.add('active');
+      if (scen === 'M1') document.getElementById('preset-m1').classList.add('active');
+      if (scen === 'M2') document.getElementById('preset-m2').classList.add('active');
+      if (scen === 'GEOFENCE') document.getElementById('preset-geo').classList.add('active');
       resetSimulation();
-      addLog(0.0, 'SCENARIO', `Aktif Senaryo Seçildi: ${scen}`);
+      logMessage('SCENARIO', `Aktif Senaryo Seçildi: ${scen}`);
     }
 
     function setSpeed(s) {
       timeScale = s;
+      ['spd-1x', 'spd-2x', 'spd-4x'].forEach(id => document.getElementById(id).classList.remove('active'));
+      document.getElementById(`spd-${s}x`).classList.add('active');
       playBeep(520, 0.08);
     }
+    setSpeed(1);
 
-    // Physics Step
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') { e.preventDefault(); togglePlayPause(); }
+      else if (e.code === 'KeyD') { triggerManualDrop(); }
+      else if (e.code === 'KeyR') { triggerRTL(); }
+      else if (e.code === 'Digit1') { setSpeed(1); }
+      else if (e.code === 'Digit2') { setSpeed(2); }
+      else if (e.code === 'Digit4') { setSpeed(4); }
+    });
+
+    // Physics Update
     function updatePhysics(dt) {
       if (!simActive) return;
       simTime += dt * timeScale;
-      mavPackets += Math.floor(50 * dt * timeScale);
 
       if (phase === 'FAST_BOOT') {
         flight.current = 2.4;
-        if (simTime >= 6.0) {
+        if (simTime >= 5.0) {
           phase = 'TAKEOFF_ROLL';
           playBeep(800, 0.2);
-          addLog(simTime, 'TAKEOFF', 'Hızlı kalibrasyon bitti. Motor tam gaz (85A) pist hızlanması başladı.');
+          logMessage('TAKEOFF', 'Hızlı kalibrasyon bitti. Motor tam gaz (85A) pist hızlanması başladı.');
         }
       }
       else if (phase === 'TAKEOFF_ROLL') {
         flight.current = 85.0;
-        flight.airspeed += 3.8 * dt * timeScale;
+        flight.airspeed += 4.0 * dt * timeScale;
         flight.north += flight.airspeed * dt * timeScale;
         if (flight.airspeed >= 19.5) {
           phase = 'CLIMBOUT';
           flight.pitch = 8.5;
           playBeep(1000, 0.15);
-          addLog(simTime, 'ROTATION', 'V_rot=19.5 m/s ulaşıldı. 44m mesafede teker kesildi (Liftoff)!');
+          logMessage('ROTATION', 'V_rot=19.5 m/s ulaşıldı. 44m mesafede teker kesildi (Liftoff)!');
         }
       }
       else if (phase === 'CLIMBOUT') {
         flight.current = 75.0;
-        flight.alt += 3.8 * dt * timeScale;
+        flight.alt += 4.0 * dt * timeScale;
         flight.north += flight.airspeed * dt * timeScale;
         if (flight.alt >= 25.0) {
           flight.alt = 25.0;
           flight.pitch = 2.8;
           phase = 'PYLON_CIRCUIT';
-          addLog(simTime, 'CRUISE', '25.0m seyir irtifasına oturuldu. L1 pilon navigasyonu devrede.');
+          logMessage('CRUISE', '25.0m seyir irtifasına oturuldu. L1 pilon navigasyonu devrede.');
         }
       }
       else if (phase === 'PYLON_CIRCUIT') {
@@ -654,13 +925,13 @@
         const pylonNorth = 300.0;
         const pylonSouth = -50.0;
 
-        if (currentScenario === 'GEOFENCE' && simTime > 18.0 && flight.east < 180.0) {
-          // Drive towards border to test breach escape
-          flight.east += 30.0 * dt * timeScale;
+        if (currentScenario === 'GEOFENCE' && simTime > 16.0 && flight.east < 180.0) {
+          flight.east += 32.0 * dt * timeScale;
           if (flight.east > 150.0) {
-            document.getElementById('geofence-badge').innerText = 'GEOFENCE: BREACH WARNING!';
-            document.getElementById('geofence-badge').style.background = 'rgba(239,68,68,0.2)';
-            document.getElementById('geofence-badge').style.color = '#ef4444';
+            const fb = document.getElementById('pill-fence');
+            fb.innerText = 'GEOFENCE: BREACH WARNING!';
+            fb.style.borderColor = 'var(--accent-rose)';
+            fb.style.color = 'var(--accent-rose)';
           }
         } else {
           if (flight.north < pylonNorth && flight.east <= 10.0 && flight.yaw === 0.0) {
@@ -683,10 +954,10 @@
               flight.roll = 0.0;
               flight.laps += 1;
               playBeep(900, 0.1);
-              addLog(simTime, 'LAP_COMPLETE', `Pilon Tur ${flight.laps}/3 tamamlandı.`);
+              logMessage('LAP_COMPLETE', `Pilon Tur ${flight.laps}/3 tamamlandı.`);
               if (flight.laps >= 2 && currentScenario === 'M3') {
                 phase = 'TARGET_DROP_RUN';
-                addLog(simTime, 'M3_RUN', 'Görev 3 konsantrik hedef tespit edildi. Balistik yaklaşma başlatıldı.');
+                logMessage('M3_RUN', 'Görev 3 konsantrik hedef tespit edildi. Balistik yaklaşma devrede.');
               } else if (flight.laps >= 3) {
                 triggerRTL();
               }
@@ -700,7 +971,7 @@
         if (flight.north >= 65.0 && !flight.dropped) {
           triggerManualDrop();
           phase = 'APPROACH_LAND';
-          addLog(simTime, 'DROP_SUCCESS', 'Otomatik balistik kilitlenme: İsabet sapması 0.98m! İnişe geçiliyor.');
+          logMessage('DROP_SUCCESS', 'Otomatik balistik kilitlenme: İsabet sapması 0.98m! İnişe geçiliyor.');
         }
       }
       else if (phase === 'APPROACH_LAND') {
@@ -715,32 +986,31 @@
           phase = 'TOUCHDOWN';
           simActive = false;
           playBeep(1200, 0.5, 'sine');
-          addLog(simTime, 'TOUCHDOWN', 'Pist eşiğine yumuşak teker kondu (Flare Touchdown). Görev Tamamlandı!');
+          logMessage('TOUCHDOWN', 'Pist eşiğine yumuşak teker kondu (Flare Touchdown). Görev Tamamlandı!');
         }
       }
 
       // Trail
       if (trail.length === 0 || Math.hypot(trail[trail.length-1].n - flight.north, trail[trail.length-1].e - flight.east) > 4.0) {
-        trail.push({ n: flight.north, e: flight.east, ph: phase });
+        trail.push({ n: flight.north, e: flight.east });
         if (trail.length > 350) trail.shift();
       }
 
       // Battery
       flight.consumed_mah += (flight.current * (dt * timeScale) / 3.6);
       if (flameoutActive && flight.regenW > 0) {
-        flight.consumed_mah -= (12.0 * (dt * timeScale) / 3.6); // Harvest back
+        flight.consumed_mah -= (12.0 * (dt * timeScale) / 3.6);
       }
       flight.voltage = Math.max(21.4, 25.2 - (flight.consumed_mah / 16000.0) * 3.6);
 
-      // Record strip chart
+      // Strip chart recording
       chartHistory.push({
-        t: simTime,
         alt: flight.alt,
         spd: flight.airspeed,
         cur: flight.current,
         trim: flight.elevTrim
       });
-      if (chartHistory.length > 180) chartHistory.shift();
+      if (chartHistory.length > 200) chartHistory.shift();
 
       updateUI();
     }
@@ -748,39 +1018,36 @@
     function updateUI() {
       const min = Math.floor(simTime / 60);
       const sec = (simTime % 60).toFixed(1);
-      document.getElementById('top-time').innerText = (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
+      document.getElementById('clock-readout').innerText = (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
+
       const soc = Math.max(0.0, 100.0 * (1.0 - flight.consumed_mah / 16000.0)).toFixed(1);
-      document.getElementById('top-soc').innerText = soc + '%';
-      document.getElementById('mission-mode-badge').innerText = phase;
+      document.getElementById('kpi-soc-badge').innerText = soc + '%';
+      document.getElementById('pill-phase').innerText = `${phase} • LAP ${flight.laps}/3`;
 
-      const pwr = (flight.voltage * flight.current).toFixed(0);
-      document.getElementById('power-w').innerText = pwr + ' W';
-      document.getElementById('cell-v').innerHTML = flight.voltage.toFixed(2) + '<span class="gauge-unit">V</span>';
-      document.getElementById('cell-a').innerHTML = flight.current.toFixed(1) + '<span class="gauge-unit">A</span>';
-      document.getElementById('cell-mah').innerText = flight.consumed_mah.toFixed(1) + ' mAh';
-      document.getElementById('bar-v').style.width = ((flight.voltage - 21.0) / (25.2 - 21.0) * 100) + '%';
-      document.getElementById('bar-a').style.width = Math.min(100, (flight.current / 90.0) * 100) + '%';
+      // KPIs
+      document.getElementById('kpi-spd').innerText = flight.airspeed.toFixed(1);
+      document.getElementById('kpi-tas').innerText = (flight.airspeed * 1.02).toFixed(1);
+      document.getElementById('kpi-kmh').innerText = (flight.airspeed * 3.6).toFixed(1) + ' km/h';
+      document.getElementById('bar-spd').style.width = Math.min(100, (flight.airspeed / 35.0) * 100) + '%';
 
-      document.getElementById('adc-tas').innerText = 'TAS: ' + (flight.airspeed * 1.02).toFixed(1) + ' m/s';
-      document.getElementById('aoa-val').innerHTML = (flight.pitch > 0 ? '+' : '') + flight.pitch.toFixed(1) + '<span class="gauge-unit">°</span>';
-      document.getElementById('mav-count').innerText = (mavPackets % 500) + ' PKTS';
-      document.getElementById('lap-num').innerHTML = flight.laps + '<span class="gauge-unit">/3</span>';
-      document.getElementById('mass-state').innerText = flight.mass.toFixed(2) + ' kg';
+      document.getElementById('kpi-alt').innerText = flight.alt.toFixed(1);
+      document.getElementById('bar-alt').style.width = Math.min(100, (flight.alt / 40.0) * 100) + '%';
+
+      document.getElementById('kpi-volt').innerText = flight.voltage.toFixed(2);
+      document.getElementById('kpi-amp').innerText = flight.current.toFixed(1);
+      document.getElementById('kpi-pwr').innerText = (flight.voltage * flight.current).toFixed(0);
+      document.getElementById('bar-batt').style.width = soc + '%';
+
+      document.getElementById('kpi-mass').innerText = flight.mass.toFixed(2);
+      document.getElementById('kpi-trim').innerText = flight.elevTrim.toFixed(1) + '°';
 
       if (flight.dropped) {
-        document.getElementById('drop-badge').innerText = 'BIRAKILDI (0.98m)';
-        document.getElementById('drop-badge').style.color = 'var(--accent-green)';
+        document.getElementById('kpi-drop-status').innerText = 'BIRAKILDI (0.98m)';
+        document.getElementById('kpi-drop-status').style.color = 'var(--accent-emerald)';
       }
 
-      if (flameoutActive) {
-        document.getElementById('regen-mode-label').innerText = 'REJENERATİF FRENLEME AKTİF';
-        document.getElementById('regen-mode-label').style.color = 'var(--accent-amber)';
-        document.getElementById('regen-power-label').innerText = '288 W';
-      } else {
-        document.getElementById('regen-mode-label').innerText = 'STANDBY (NORMAL İTKİ)';
-        document.getElementById('regen-mode-label').style.color = '#fff';
-        document.getElementById('regen-power-label').innerText = '0 W';
-      }
+      document.getElementById('diag-regen').innerText = flameoutActive ? 'REJENERATİF (288W AKTİF)' : 'STANDBY (NORMAL)';
+      document.getElementById('diag-regen').style.color = flameoutActive ? 'var(--accent-amber)' : '#fff';
     }
 
     // DRAW PFD
@@ -790,7 +1057,6 @@
       const cx = w / 2;
       const cy = h / 2;
 
-      pfdCtx.save();
       pfdCtx.clearRect(0, 0, w, h);
 
       // Artificial Horizon
@@ -801,430 +1067,306 @@
       const pitchPix = flight.pitch * 6.5;
 
       // Sky
-      pfdCtx.fillStyle = '#1e3a5f';
+      const skyGrad = pfdCtx.createLinearGradient(0, -h * 2 + pitchPix, 0, pitchPix);
+      skyGrad.addColorStop(0, '#0f2744');
+      skyGrad.addColorStop(1, '#1e3d6b');
+      pfdCtx.fillStyle = skyGrad;
       pfdCtx.fillRect(-w, -h * 2 + pitchPix, w * 2, h * 2);
 
       // Ground
-      pfdCtx.fillStyle = '#452c1e';
+      const gndGrad = pfdCtx.createLinearGradient(0, pitchPix, 0, h * 2);
+      gndGrad.addColorStop(0, '#2d1e14');
+      gndGrad.addColorStop(1, '#19110b');
+      pfdCtx.fillStyle = gndGrad;
       pfdCtx.fillRect(-w, pitchPix, w * 2, h * 2);
 
-      // Horizon line
-      pfdCtx.strokeStyle = '#fff';
-      pfdCtx.lineWidth = 2;
+      // Crisp White Horizon Line
+      pfdCtx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+      pfdCtx.lineWidth = 1.5;
       pfdCtx.beginPath();
       pfdCtx.moveTo(-w, pitchPix);
       pfdCtx.lineTo(w, pitchPix);
       pfdCtx.stroke();
 
       // Pitch Ladder
-      pfdCtx.strokeStyle = 'rgba(255,255,255,0.7)';
+      pfdCtx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
       pfdCtx.fillStyle = '#fff';
-      pfdCtx.font = '10px sans-serif';
+      pfdCtx.font = '10px "JetBrains Mono", monospace';
       pfdCtx.textAlign = 'right';
+
       for (let p = -30; p <= 30; p += 10) {
         if (p === 0) continue;
         const y = pitchPix - p * 6.5;
-        const lineLen = Math.abs(p) % 10 === 0 ? 30 : 15;
+        const len = 25;
         pfdCtx.beginPath();
-        pfdCtx.moveTo(-lineLen, y);
-        pfdCtx.lineTo(lineLen, y);
+        pfdCtx.moveTo(-len, y);
+        pfdCtx.lineTo(len, y);
         pfdCtx.stroke();
-        pfdCtx.fillText(p + '°', -lineLen - 4, y + 4);
+        pfdCtx.fillText(p + '°', -len - 4, y + 3.5);
       }
       pfdCtx.restore();
 
-      // Center Aircraft Reticle
-      pfdCtx.strokeStyle = '#00f0ff';
-      pfdCtx.lineWidth = 3;
+      // Sleek Aircraft Symbol
+      pfdCtx.strokeStyle = 'var(--accent-cyan)';
+      pfdCtx.lineWidth = 2.5;
       pfdCtx.beginPath();
-      pfdCtx.moveTo(cx - 35, cy);
-      pfdCtx.lineTo(cx - 12, cy);
-      pfdCtx.lineTo(cx - 12, cy + 8);
-      pfdCtx.stroke();
-      pfdCtx.beginPath();
-      pfdCtx.moveTo(cx + 35, cy);
-      pfdCtx.lineTo(cx + 12, cy);
-      pfdCtx.lineTo(cx + 12, cy + 8);
+      pfdCtx.moveTo(cx - 36, cy); pfdCtx.lineTo(cx - 14, cy); pfdCtx.lineTo(cx - 14, cy + 7);
+      pfdCtx.moveTo(cx + 36, cy); pfdCtx.lineTo(cx + 14, cy); pfdCtx.lineTo(cx + 14, cy + 7);
       pfdCtx.stroke();
       pfdCtx.fillStyle = '#00f0ff';
-      pfdCtx.beginPath();
-      pfdCtx.arc(cx, cy, 3, 0, Math.PI * 2);
-      pfdCtx.fill();
-
-      // Dynamic Bomb Drop Reticle (Target Pipper)
-      if (phase === 'TARGET_DROP_RUN' || flight.dropped) {
-        const dropY = cy + 45;
-        pfdCtx.strokeStyle = '#ef4444';
-        pfdCtx.lineWidth = 2;
-        pfdCtx.beginPath();
-        pfdCtx.arc(cx, dropY, 14, 0, Math.PI * 2);
-        pfdCtx.moveTo(cx - 20, dropY); pfdCtx.lineTo(cx + 20, dropY);
-        pfdCtx.moveTo(cx, dropY - 20); pfdCtx.lineTo(cx, dropY + 20);
-        pfdCtx.stroke();
-        pfdCtx.fillStyle = '#ef4444';
-        pfdCtx.font = 'bold 10px sans-serif';
-        pfdCtx.fillText('BOMB PIPPER 3-DOF', cx + 22, dropY + 4);
-      }
+      pfdCtx.beginPath(); pfdCtx.arc(cx, cy, 3, 0, Math.PI * 2); pfdCtx.fill();
 
       // Airspeed Tape (Left)
-      pfdCtx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-      pfdCtx.fillRect(10, 30, 65, h - 60);
-      pfdCtx.strokeStyle = '#334155';
-      pfdCtx.strokeRect(10, 30, 65, h - 60);
-
-      pfdCtx.fillStyle = '#f8fafc';
-      pfdCtx.font = 'bold 11px sans-serif';
-      pfdCtx.textAlign = 'center';
-      pfdCtx.fillText('SPD m/s', 42, 45);
+      pfdCtx.fillStyle = 'rgba(6, 9, 15, 0.82)';
+      pfdCtx.fillRect(8, 25, 58, h - 50);
+      pfdCtx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      pfdCtx.strokeRect(8, 25, 58, h - 50);
 
       const spd = flight.airspeed;
-      for (let s = Math.floor(spd - 15); s <= Math.ceil(spd + 15); s += 5) {
+      pfdCtx.font = '10px "JetBrains Mono", monospace';
+      pfdCtx.fillStyle = '#94a3b8';
+      pfdCtx.textAlign = 'center';
+      for (let s = Math.floor(spd - 12); s <= Math.ceil(spd + 12); s += 4) {
         if (s < 0) continue;
-        const dy = cy - (s - spd) * 8;
-        if (dy > 45 && dy < h - 40) {
-          pfdCtx.strokeStyle = '#64748b';
-          pfdCtx.beginPath();
-          pfdCtx.moveTo(60, dy); pfdCtx.lineTo(75, dy);
-          pfdCtx.stroke();
-          pfdCtx.fillText(s, 38, dy + 4);
+        const dy = cy - (s - spd) * 8.5;
+        if (dy > 35 && dy < h - 35) {
+          pfdCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+          pfdCtx.beginPath(); pfdCtx.moveTo(52, dy); pfdCtx.lineTo(66, dy); pfdCtx.stroke();
+          pfdCtx.fillText(s, 34, dy + 3.5);
         }
       }
-      // Speed readout box
+      // Speed bug box
       pfdCtx.fillStyle = '#0284c7';
-      pfdCtx.fillRect(12, cy - 14, 60, 28);
+      pfdCtx.fillRect(10, cy - 13, 54, 26);
       pfdCtx.fillStyle = '#fff';
-      pfdCtx.font = 'bold 14px sans-serif';
-      pfdCtx.fillText(spd.toFixed(1), 42, cy + 5);
+      pfdCtx.font = 'bold 13px "JetBrains Mono", monospace';
+      pfdCtx.fillText(spd.toFixed(1), 37, cy + 5);
 
       // Altitude Tape (Right)
-      pfdCtx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-      pfdCtx.fillRect(w - 75, 30, 65, h - 60);
-      pfdCtx.strokeStyle = '#334155';
-      pfdCtx.strokeRect(w - 75, 30, 65, h - 60);
-
-      pfdCtx.fillStyle = '#f8fafc';
-      pfdCtx.font = 'bold 11px sans-serif';
-      pfdCtx.textAlign = 'center';
-      pfdCtx.fillText('ALT m', w - 42, 45);
+      pfdCtx.fillStyle = 'rgba(6, 9, 15, 0.82)';
+      pfdCtx.fillRect(w - 66, 25, 58, h - 50);
+      pfdCtx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      pfdCtx.strokeRect(w - 66, 25, 58, h - 50);
 
       const alt = flight.alt;
-      for (let a = Math.floor(alt - 15); a <= Math.ceil(alt + 15); a += 5) {
+      for (let a = Math.floor(alt - 12); a <= Math.ceil(alt + 12); a += 4) {
         if (a < 0) continue;
-        const dy = cy - (a - alt) * 8;
-        if (dy > 45 && dy < h - 40) {
-          pfdCtx.strokeStyle = '#64748b';
-          pfdCtx.beginPath();
-          pfdCtx.moveTo(w - 75, dy); pfdCtx.lineTo(w - 60, dy);
-          pfdCtx.stroke();
-          pfdCtx.fillText(a, w - 38, dy + 4);
+        const dy = cy - (a - alt) * 8.5;
+        if (dy > 35 && dy < h - 35) {
+          pfdCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+          pfdCtx.beginPath(); pfdCtx.moveTo(w - 66, dy); pfdCtx.lineTo(w - 52, dy); pfdCtx.stroke();
+          pfdCtx.fillText(a, w - 34, dy + 3.5);
         }
       }
-      // Alt readout box
+      // Alt bug box
       pfdCtx.fillStyle = '#059669';
-      pfdCtx.fillRect(w - 73, cy - 14, 60, 28);
+      pfdCtx.fillRect(w - 64, cy - 13, 54, 26);
       pfdCtx.fillStyle = '#fff';
-      pfdCtx.font = 'bold 14px sans-serif';
-      pfdCtx.fillText(alt.toFixed(1), w - 42, cy + 5);
+      pfdCtx.font = 'bold 13px "JetBrains Mono", monospace';
+      pfdCtx.fillText(alt.toFixed(1), w - 37, cy + 5);
 
       // Bottom Heading Ribbon
-      pfdCtx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-      pfdCtx.fillRect(80, h - 35, w - 160, 28);
-      pfdCtx.strokeStyle = '#334155';
-      pfdCtx.strokeRect(80, h - 35, w - 160, 28);
-      pfdCtx.fillStyle = '#38bdf8';
-      pfdCtx.font = 'bold 13px sans-serif';
-      pfdCtx.fillText('HDG: ' + Math.round(flight.yaw % 360) + '°  |  TRIM: ' + flight.elevTrim.toFixed(1) + '°', cx, h - 17);
-
-      pfdCtx.restore();
+      pfdCtx.fillStyle = 'rgba(6, 9, 15, 0.88)';
+      pfdCtx.fillRect(75, h - 30, w - 150, 24);
+      pfdCtx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      pfdCtx.strokeRect(75, h - 30, w - 150, 24);
+      pfdCtx.fillStyle = 'var(--accent-cyan)';
+      pfdCtx.font = 'bold 11px "JetBrains Mono", monospace';
+      pfdCtx.fillText(`HDG ${Math.round(flight.yaw % 360)}°  •  ELEV ${flight.elevTrim.toFixed(1)}°`, cx, h - 14);
     }
 
-    // DRAW RADAR
-    function drawRadar() {
-      const w = radCanvas.width;
-      const h = radCanvas.height;
-      const cx = w / 2;
-      const cy = h / 2 + 30;
-      const scale = 0.65; // meters to pixels
+    // DRAW RIGHT VIEWPORT (RADAR / VISION / CHARTS)
+    function drawRightView() {
+      const w = rightCanvas.width;
+      const h = rightCanvas.height;
+      rightCtx.clearRect(0, 0, w, h);
 
-      radCtx.save();
-      radCtx.clearRect(0, 0, w, h);
+      if (currentRightView === 'radar') {
+        const cx = w / 2;
+        const cy = h / 2 + 25;
+        const scale = 0.65;
 
-      // Grid circles
-      radCtx.strokeStyle = '#1e293b';
-      radCtx.lineWidth = 1;
-      for (let r = 50; r <= 250; r += 50) {
-        radCtx.beginPath();
-        radCtx.arc(cx, cy, r * scale, 0, Math.PI * 2);
-        radCtx.stroke();
-      }
+        // Soft range circles
+        rightCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        for (let r = 50; r <= 250; r += 50) {
+          rightCtx.beginPath(); rightCtx.arc(cx, cy, r * scale, 0, Math.PI * 2); rightCtx.stroke();
+        }
 
-      // Geofence Boundary Polygon (AIAA DBF Airfield)
-      const fence = [
-        { n: -140, e: -70 }, { n: 380, e: -70 },
-        { n: 380, e: 160 }, { n: -140, e: 160 }
-      ];
-      radCtx.strokeStyle = 'rgba(0, 240, 255, 0.6)';
-      radCtx.lineWidth = 2;
-      radCtx.beginPath();
-      fence.forEach((pt, i) => {
-        const x = cx + pt.e * scale;
-        const y = cy - pt.n * scale;
-        if (i === 0) radCtx.moveTo(x, y); else radCtx.lineTo(x, y);
-      });
-      radCtx.closePath();
-      radCtx.stroke();
-
-      // Pylons (North & South)
-      const p1 = { n: 300, e: 40 };
-      const p2 = { n: -50, e: 40 };
-      [p1, p2].forEach((p, idx) => {
-        const px = cx + p.e * scale;
-        const py = cy - p.n * scale;
-        radCtx.fillStyle = '#f59e0b';
-        radCtx.beginPath();
-        radCtx.arc(px, py, 6, 0, Math.PI * 2);
-        radCtx.fill();
-        radCtx.fillStyle = '#fff';
-        radCtx.font = '10px sans-serif';
-        radCtx.fillText(`PYLON ${idx+1}`, px + 8, py + 3);
-      });
-
-      // Target Bullseye (Drop Target)
-      const tgt = { n: 75, e: 0 };
-      const tx = cx + tgt.e * scale;
-      const ty = cy - tgt.n * scale;
-      radCtx.strokeStyle = '#ef4444';
-      radCtx.lineWidth = 2;
-      radCtx.beginPath();
-      radCtx.arc(tx, ty, 10, 0, Math.PI * 2);
-      radCtx.arc(tx, ty, 4, 0, Math.PI * 2);
-      radCtx.stroke();
-      radCtx.fillStyle = '#ef4444';
-      radCtx.fillText('HEDEF ÇEMBERİ', tx + 12, ty + 3);
-
-      // Flight Trail
-      if (trail.length > 1) {
-        radCtx.strokeStyle = 'rgba(56, 189, 248, 0.7)';
-        radCtx.lineWidth = 2;
-        radCtx.beginPath();
-        trail.forEach((pt, i) => {
+        // Geofence Boundary
+        const fence = [
+          { n: -140, e: -70 }, { n: 380, e: -70 },
+          { n: 380, e: 160 }, { n: -140, e: 160 }
+        ];
+        rightCtx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
+        rightCtx.lineWidth = 1.5;
+        rightCtx.beginPath();
+        fence.forEach((pt, i) => {
           const x = cx + pt.e * scale;
           const y = cy - pt.n * scale;
-          if (i === 0) radCtx.moveTo(x, y); else radCtx.lineTo(x, y);
+          if (i === 0) rightCtx.moveTo(x, y); else rightCtx.lineTo(x, y);
         });
-        radCtx.stroke();
-      }
+        rightCtx.closePath();
+        rightCtx.stroke();
 
-      // Airplane Current Position
-      const ax = cx + flight.east * scale;
-      const ay = cy - flight.north * scale;
-      radCtx.save();
-      radCtx.translate(ax, ay);
-      radCtx.rotate(flight.yaw * Math.PI / 180);
-      radCtx.fillStyle = '#10b981';
-      radCtx.beginPath();
-      radCtx.moveTo(0, -10);
-      radCtx.lineTo(8, 10);
-      radCtx.lineTo(0, 6);
-      radCtx.lineTo(-8, 10);
-      radCtx.closePath();
-      radCtx.fill();
-      radCtx.restore();
-
-      // Heading indicator vector
-      radCtx.fillStyle = '#10b981';
-      radCtx.font = 'bold 11px sans-serif';
-      radCtx.fillText(`GÖKDOĞAN (${flight.alt.toFixed(1)}m)`, ax + 12, ay - 4);
-
-      // Drop marker if dropped
-      if (dropMarker) {
-        const mx = cx + dropMarker.east * scale;
-        const my = cy - dropMarker.north * scale;
-        radCtx.fillStyle = '#8b5cf6';
-        radCtx.beginPath();
-        radCtx.arc(mx, my, 5, 0, Math.PI * 2);
-        radCtx.fill();
-        radCtx.fillText('İSABET: 0.98m', mx + 8, my + 3);
-      }
-
-      radCtx.restore();
-    }
-
-    // DRAW SYNTHETIC VISION
-    function drawVision() {
-      if (!visCtx) return;
-      const w = visCanvas.width;
-      const h = visCanvas.height;
-      visCtx.clearRect(0, 0, w, h);
-
-      // Downward Ground Background
-      visCtx.fillStyle = '#1b2a1a';
-      visCtx.fillRect(0, 0, w, h);
-
-      // Airfield texture grid
-      visCtx.strokeStyle = 'rgba(255,255,255,0.06)';
-      visCtx.lineWidth = 1;
-      for (let x = 0; x < w; x += 40) {
-        visCtx.beginPath(); visCtx.moveTo(x, 0); visCtx.lineTo(x, h); visCtx.stroke();
-      }
-      for (let y = 0; y < h; y += 40) {
-        visCtx.beginPath(); visCtx.moveTo(0, y); visCtx.lineTo(w, y); visCtx.stroke();
-      }
-
-      // Concentric Target Circle
-      const tY = h / 2 + Math.sin(simTime * 2) * 8;
-      const tX = w / 2 + Math.cos(simTime * 1.5) * 8;
-
-      // Outer Red
-      visCtx.fillStyle = '#dc2626';
-      visCtx.beginPath(); visCtx.arc(tX, tY, 55, 0, Math.PI * 2); visCtx.fill();
-      // White ring
-      visCtx.fillStyle = '#ffffff';
-      visCtx.beginPath(); visCtx.arc(tX, tY, 38, 0, Math.PI * 2); visCtx.fill();
-      // Inner Red
-      visCtx.fillStyle = '#dc2626';
-      visCtx.beginPath(); visCtx.arc(tX, tY, 20, 0, Math.PI * 2); visCtx.fill();
-      // Bullseye Yellow
-      visCtx.fillStyle = '#f59e0b';
-      visCtx.beginPath(); visCtx.arc(tX, tY, 8, 0, Math.PI * 2); visCtx.fill();
-
-      // AI Bounding Box
-      visCtx.strokeStyle = '#00f0ff';
-      visCtx.lineWidth = 2;
-      visCtx.strokeRect(tX - 65, tY - 65, 130, 130);
-      visCtx.fillStyle = '#00f0ff';
-      visCtx.font = 'bold 11px sans-serif';
-      visCtx.fillText('TARGET LOCKED: 99.4%', tX - 65, tY - 72);
-
-      // Crosshairs & Lead Drop Vector
-      visCtx.strokeStyle = '#ef4444';
-      visCtx.setLineDash([4, 4]);
-      visCtx.beginPath();
-      visCtx.moveTo(w / 2, 0); visCtx.lineTo(w / 2, h);
-      visCtx.moveTo(0, h / 2); visCtx.lineTo(w, h / 2);
-      visCtx.stroke();
-      visCtx.setLineDash([]);
-
-      // Drop reticle
-      visCtx.strokeStyle = '#10b981';
-      visCtx.lineWidth = 2;
-      visCtx.strokeRect(w / 2 - 18, h / 2 - 18, 36, 36);
-    }
-
-    // DRAW CEP BALLISTICS
-    function drawCEP() {
-      if (!cepCtx) return;
-      const w = cepCanvas.width;
-      const h = cepCanvas.height;
-      cepCtx.clearRect(0, 0, w, h);
-
-      cepCtx.fillStyle = '#070b13';
-      cepCtx.fillRect(0, 0, w, h);
-
-      const cx = w / 2;
-      const cy = h / 2;
-
-      // 50% and 95% CEP Ellipses
-      cepCtx.strokeStyle = 'rgba(16, 185, 129, 0.8)';
-      cepCtx.lineWidth = 2;
-      cepCtx.beginPath();
-      cepCtx.ellipse(cx, cy, 55, 45, 0, 0, Math.PI * 2);
-      cepCtx.stroke();
-      cepCtx.fillStyle = 'rgba(16, 185, 129, 0.15)';
-      cepCtx.fill();
-
-      cepCtx.strokeStyle = 'rgba(245, 158, 11, 0.8)';
-      cepCtx.lineWidth = 1.5;
-      cepCtx.beginPath();
-      cepCtx.ellipse(cx, cy, 110, 90, 0, 0, Math.PI * 2);
-      cepCtx.stroke();
-
-      // Axis crosshairs
-      cepCtx.strokeStyle = '#1e2c4a';
-      cepCtx.beginPath();
-      cepCtx.moveTo(cx, 10); cepCtx.lineTo(cx, h - 10);
-      cepCtx.moveTo(10, cy); cepCtx.lineTo(w - 10, cy);
-      cepCtx.stroke();
-
-      // Labels
-      cepCtx.fillStyle = '#10b981';
-      cepCtx.font = '11px sans-serif';
-      cepCtx.fillText('CEP 50% = 1.06 m', cx + 60, cy - 35);
-      cepCtx.fillStyle = '#f59e0b';
-      cepCtx.fillText('CEP 95% = 2.68 m', cx + 90, cy + 65);
-
-      // Simulated Monte Carlo drop dispersion points
-      for (let i = 0; i < 35; i++) {
-        const ang = (i * 137.5) * Math.PI / 180;
-        const rad = Math.sqrt(i / 35) * 50;
-        const px = cx + Math.cos(ang) * rad;
-        const py = cy + Math.sin(ang) * (rad * 0.82);
-        cepCtx.fillStyle = i === 0 ? '#00f0ff' : '#94a3b8';
-        cepCtx.beginPath();
-        cepCtx.arc(px, py, i === 0 ? 4 : 2, 0, Math.PI * 2);
-        cepCtx.fill();
-      }
-      cepCtx.fillStyle = '#00f0ff';
-      cepCtx.fillText('M3 ANLIK İSABET (0.98m)', cx - 60, cy - 55);
-    }
-
-    // DRAW TELEMETRY OSCILLOSCOPE STRIP CHART
-    function drawCharts() {
-      if (!chartCtx || chartHistory.length < 2) return;
-      const w = chartCanvas.width;
-      const h = chartCanvas.height;
-      chartCtx.clearRect(0, 0, w, h);
-
-      chartCtx.fillStyle = '#070b13';
-      chartCtx.fillRect(0, 0, w, h);
-
-      // Grid
-      chartCtx.strokeStyle = '#162035';
-      chartCtx.lineWidth = 1;
-      for (let y = 30; y < h; y += 40) {
-        chartCtx.beginPath(); chartCtx.moveTo(0, y); chartCtx.lineTo(w, y); chartCtx.stroke();
-      }
-
-      function drawTrace(getter, color, minV, maxV) {
-        chartCtx.strokeStyle = color;
-        chartCtx.lineWidth = 2;
-        chartCtx.beginPath();
-        chartHistory.forEach((pt, i) => {
-          const x = (i / (chartHistory.length - 1)) * w;
-          const val = getter(pt);
-          const y = h - 20 - ((val - minV) / (maxV - minV)) * (h - 50);
-          if (i === 0) chartCtx.moveTo(x, y); else chartCtx.lineTo(x, y);
+        // Pylons
+        [{ n: 300, e: 40, l: 'PYLON 1' }, { n: -50, e: 40, l: 'PYLON 2' }].forEach(p => {
+          const px = cx + p.e * scale;
+          const py = cy - p.n * scale;
+          rightCtx.fillStyle = 'var(--accent-amber)';
+          rightCtx.beginPath(); rightCtx.arc(px, py, 5, 0, Math.PI * 2); rightCtx.fill();
+          rightCtx.fillStyle = '#fff';
+          rightCtx.font = '9px "JetBrains Mono", monospace';
+          rightCtx.fillText(p.l, px + 8, py + 3);
         });
-        chartCtx.stroke();
-      }
 
-      // Trace 1: Alt (0 to 40m)
-      drawTrace(pt => pt.alt, '#00f0ff', 0, 40);
-      // Trace 2: Speed (0 to 35 m/s)
-      drawTrace(pt => pt.spd, '#10b981', 0, 35);
-      // Trace 3: Current (0 to 90 A)
-      drawTrace(pt => pt.cur, '#f59e0b', 0, 90);
-      // Trace 4: Elev Trim (-5 to +5 deg)
-      drawTrace(pt => pt.trim, '#8b5cf6', -5, 5);
+        // Target Bullseye
+        const tx = cx + 0 * scale;
+        const ty = cy - 75 * scale;
+        rightCtx.strokeStyle = 'var(--accent-rose)';
+        rightCtx.lineWidth = 1.5;
+        rightCtx.beginPath();
+        rightCtx.arc(tx, ty, 8, 0, Math.PI * 2);
+        rightCtx.arc(tx, ty, 3, 0, Math.PI * 2);
+        rightCtx.stroke();
+        rightCtx.fillStyle = 'var(--accent-rose)';
+        rightCtx.fillText('HEDEF (M3)', tx + 12, ty + 3);
+
+        // Flight Trail
+        if (trail.length > 1) {
+          rightCtx.strokeStyle = 'rgba(56, 189, 248, 0.6)';
+          rightCtx.lineWidth = 2;
+          rightCtx.beginPath();
+          trail.forEach((pt, i) => {
+            const x = cx + pt.e * scale;
+            const y = cy - pt.n * scale;
+            if (i === 0) rightCtx.moveTo(x, y); else rightCtx.lineTo(x, y);
+          });
+          rightCtx.stroke();
+        }
+
+        // Airplane
+        const ax = cx + flight.east * scale;
+        const ay = cy - flight.north * scale;
+        rightCtx.save();
+        rightCtx.translate(ax, ay);
+        rightCtx.rotate(flight.yaw * Math.PI / 180);
+        rightCtx.fillStyle = 'var(--accent-emerald)';
+        rightCtx.beginPath();
+        rightCtx.moveTo(0, -9); rightCtx.lineTo(7, 9); rightCtx.lineTo(0, 5); rightCtx.lineTo(-7, 9);
+        rightCtx.closePath(); rightCtx.fill();
+        rightCtx.restore();
+
+        // Label
+        rightCtx.fillStyle = 'var(--accent-emerald)';
+        rightCtx.font = '10px "JetBrains Mono", monospace';
+        rightCtx.fillText(`GÖKDOĞAN [${flight.alt.toFixed(1)}m]`, ax + 10, ay - 4);
+
+        if (dropMarker) {
+          const mx = cx + dropMarker.east * scale;
+          const my = cy - dropMarker.north * scale;
+          rightCtx.fillStyle = 'var(--accent-violet)';
+          rightCtx.beginPath(); rightCtx.arc(mx, my, 4, 0, Math.PI * 2); rightCtx.fill();
+          rightCtx.fillText('İSABET 0.98m', mx + 7, my + 3);
+        }
+      }
+      else if (currentRightView === 'vision') {
+        // Downward Camera Simulation
+        rightCtx.fillStyle = '#0f1712';
+        rightCtx.fillRect(0, 0, w, h);
+
+        // Subtle grid lines
+        rightCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+        for (let x = 0; x < w; x += 35) {
+          rightCtx.beginPath(); rightCtx.moveTo(x, 0); rightCtx.lineTo(x, h); rightCtx.stroke();
+        }
+        for (let y = 0; y < h; y += 35) {
+          rightCtx.beginPath(); rightCtx.moveTo(0, y); rightCtx.lineTo(w, y); rightCtx.stroke();
+        }
+
+        // Target Bullseye Ring
+        const tX = w / 2 + Math.cos(simTime * 1.5) * 6;
+        const tY = h / 2 + Math.sin(simTime * 2.0) * 6;
+
+        rightCtx.fillStyle = '#e11d48';
+        rightCtx.beginPath(); rightCtx.arc(tX, tY, 52, 0, Math.PI * 2); rightCtx.fill();
+        rightCtx.fillStyle = '#ffffff';
+        rightCtx.beginPath(); rightCtx.arc(tX, tY, 36, 0, Math.PI * 2); rightCtx.fill();
+        rightCtx.fillStyle = '#e11d48';
+        rightCtx.beginPath(); rightCtx.arc(tX, tY, 20, 0, Math.PI * 2); rightCtx.fill();
+        rightCtx.fillStyle = '#f59e0b';
+        rightCtx.beginPath(); rightCtx.arc(tX, tY, 7, 0, Math.PI * 2); rightCtx.fill();
+
+        // AI Bounding Box & Lock
+        rightCtx.strokeStyle = 'var(--accent-cyan)';
+        rightCtx.lineWidth = 1.5;
+        rightCtx.strokeRect(tX - 60, tY - 60, 120, 120);
+
+        rightCtx.fillStyle = 'var(--accent-cyan)';
+        rightCtx.font = '10px "JetBrains Mono", monospace';
+        rightCtx.fillText('AI TARGET LOCK 99.4%', tX - 60, tY - 68);
+
+        // Crosshairs
+        rightCtx.strokeStyle = 'rgba(244, 63, 94, 0.7)';
+        rightCtx.setLineDash([3, 3]);
+        rightCtx.beginPath();
+        rightCtx.moveTo(w / 2, 0); rightCtx.lineTo(w / 2, h);
+        rightCtx.moveTo(0, h / 2); rightCtx.lineTo(w, h / 2);
+        rightCtx.stroke();
+        rightCtx.setLineDash([]);
+      }
+      else if (currentRightView === 'charts') {
+        // Strip Chart
+        rightCtx.fillStyle = '#06090f';
+        rightCtx.fillRect(0, 0, w, h);
+
+        rightCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        for (let y = 30; y < h; y += 40) {
+          rightCtx.beginPath(); rightCtx.moveTo(0, y); rightCtx.lineTo(w, y); rightCtx.stroke();
+        }
+
+        if (chartHistory.length > 2) {
+          function drawTrace(getter, col, minV, maxV) {
+            rightCtx.strokeStyle = col;
+            rightCtx.lineWidth = 1.8;
+            rightCtx.beginPath();
+            chartHistory.forEach((pt, i) => {
+              const x = (i / (chartHistory.length - 1)) * w;
+              const val = getter(pt);
+              const y = h - 25 - ((val - minV) / (maxV - minV)) * (h - 60);
+              if (i === 0) rightCtx.moveTo(x, y); else rightCtx.lineTo(x, y);
+            });
+            rightCtx.stroke();
+          }
+
+          drawTrace(pt => pt.alt, 'var(--accent-emerald)', 0, 40);
+          drawTrace(pt => pt.spd, 'var(--accent-cyan)', 0, 35);
+          drawTrace(pt => pt.cur, 'var(--accent-amber)', 0, 90);
+        }
+
+        // Legend
+        rightCtx.font = '10px "JetBrains Mono", monospace';
+        rightCtx.fillStyle = 'var(--accent-emerald)';
+        rightCtx.fillText('■ İrtifa (m)', 15, 20);
+        rightCtx.fillStyle = 'var(--accent-cyan)';
+        rightCtx.fillText('■ Hız (m/s)', 100, 20);
+        rightCtx.fillStyle = 'var(--accent-amber)';
+        rightCtx.fillText('■ Akım (A)', 175, 20);
+      }
     }
 
     // Animation Loop
-    let lastTime = performance.now();
-    function animate(now) {
-      const dt = Math.min(0.1, (now - lastTime) / 1000.0);
-      lastTime = now;
+    let lastT = performance.now();
+    function render(now) {
+      const dt = Math.min(0.1, (now - lastT) / 1000.0);
+      lastT = now;
 
       updatePhysics(dt);
       drawPFD();
-      drawRadar();
-      drawVision();
-      drawCEP();
-      drawCharts();
+      drawRightView();
 
-      requestAnimationFrame(animate);
+      requestAnimationFrame(render);
     }
-
-    requestAnimationFrame(animate);
+    requestAnimationFrame(render);
   </script>
 </body>
 </html>
