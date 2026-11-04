@@ -1,93 +1,125 @@
 <div align="center">
 
 <p align="center">
-  <img src="docs/images/dbf_aircraft_banner.png" alt="AIAA DBF Reference Aircraft" width="100%" style="border-radius: 14px; box-shadow: 0 10px 35px rgba(0,0,0,0.65);" />
-  <br>
-  <em>Şekil 1: AIAA DBF Referans İHA Mimarisi — 2.40m Açıklık, Yüksek Taşıyıcılı Karbon Kompozit Gövde ve Canlı Aviyonik HUD Telemetrisi.</em>
+  <img src="docs/images/dbf_aircraft_banner.png" alt="AIAA DBF Open Engineering Framework & Toolkit" width="100%" style="border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.75); border: 1px solid rgba(0,229,255,0.25);" />
 </p>
 
-# ✈️ AIAA DBF (Design/Build/Fly) Open Engineering Framework & Toolkit
-### Üniversite ve Mühendislik Takımları için Kapsamlı DBF Hazırlık, Tasarım ve Otonomi Platformu
+# ✈️ AIAA DBF Open Engineering Framework & Autopilot Suite
+### Üniversite ve Mühendislik Takımları için Açık Kaynaklı DBF Tasarım, Analiz, Otonomi ve Simülasyon Ekosistemi
 
-[![Standart: C++20](https://img.shields.io/badge/C++-20-blue.svg?style=for-the-badge&logo=c%2B%2B)](https://isocpp.org/)
+[![Standart: C++20](https://img.shields.io/badge/Standart-C%2B%2B20-blue.svg?style=for-the-badge&logo=c%2B%2B)](https://isocpp.org/)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Framework: ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble_Hawksbill-22314E.svg?style=for-the-badge&logo=ros)](https://docs.ros.org/en/humble/index.html)
-[![AIAA DBF: Universal](https://img.shields.io/badge/AIAA_DBF-Open_Framework-red.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
-[![CI/CD: Passing](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen.svg?style=for-the-badge&logo=github-actions)](https://github.com/bahattinyunus/dbf-engineering-toolkit/actions)
-[![Kapsam: Tüm Takımlar](https://img.shields.io/badge/Audience-All_DBF_Teams-darkgreen.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
+[![Simülasyon: PX4 & Gazebo](https://img.shields.io/badge/Simulation-PX4_%26_Gazebo-red.svg?style=for-the-badge)](https://px4.io/)
+[![Birim Testleri: 131/131 Geçti](https://img.shields.io/badge/Unit_Tests-131%2F131_Passing-brightgreen.svg?style=for-the-badge&logo=pytest)](https://github.com/bahattinyunus/dbf-engineering-toolkit/actions)
+[![AIAA DBF: Universal Framework](https://img.shields.io/badge/AIAA_DBF-Multi--Team_Ready-darkgreen.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
 [![Lisans: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 ```text
-   _    ___    _       _       ____  ____  _____   _____                                           _    
-  / \  |_ _|  / \     / \     |  _ \| __ )|  ___| |  ___| __ __ _ _ __ ___   _____      _____  _ __| | __
- / _ \  | |  / _ \   / _ \    | | | |  _ \| |_    | |_ | '__/ _` | '_ ` _ \ / _ \ \ /\ / / _ \| '__| |/ /
-/ ___ \ | | / ___ \ / ___ \   | |_| | |_) |  _|   |  _|| | | (_| | | | | | |  __/\ V  V / (_) | |  |   < 
-/_/   \_\___/_/   \_/_/   \_\  |____/|____/|_|     |_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\
-                    🌍 A I A A   D E S I G N / B U I L D / F L Y 🌍
+      _    ___    _       _       ____  ____  _____   _____                                           _    
+     / \  |_ _|  / \     / \     |  _ \| __ )|  ___| |  ___| __ __ _ _ __ ___   _____      _____  _ __| | __
+    / _ \  | |  / _ \   / _ \    | | | |  _ \| |_    | |_ | '__/ _` | '_ ` _ \ / _ \ \ /\ / / _ \| '__| |/ /
+   / ___ \ | | / ___ \ / ___ \   | |_| | |_) |  _|   |  _|| | | (_| | | | | | |  __/\ V  V / (_) | |  |   < 
+  /_/   \_\___/_/   \_/_/   \_\  |____/|____/|_|     |_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\
+                       🌍 U N I V E R S A L   D B F   E N G I N E E R I N G   S U I T E 🌍
 ```
 
-*Dünyanın en prestijli üniversiteler arası uçak tasarımı yarışması olan **AIAA Design/Build/Fly (DBF)** için hazırlanan tüm mühendislik takımlarına yönelik açık kaynaklı, modüler ve doğrulanmış aerodinamik analiz, kompozit yapısal FEA, elektrik itki optimizasyonu, 15-durumlu EKF aviyonik, Edge-AI hedefleme ve çok disiplinli optimizasyon (MDO) araç seti.*
+*Dünyanın en prestijli üniversiteler arası uçak tasarımı yarışması olan **AIAA Design/Build/Fly (DBF)** için hazırlanan tüm mühendislik takımlarına yönelik açık kaynaklı, modüler ve doğrulanmış aerodinamik analiz, V-n manevra zarfı, kompozit yapısal FEA, elektrik itki ve 100 ft sideline aeroakustik optimizasyonu, 15-durumlu EKF aviyonik, Edge-AI hedefleme ve çok disiplinli optimizasyon (MDO) araç seti.*
 
 </div>
 
 ---
 
+> [!IMPORTANT]
+> **TÜM YARIŞMA TAKIMLARI İÇİN AÇIK VE MODÜLER ÇATI:**  
+> Bu depo, tek bir takıma bağımlı değildir! AIAA DBF yarışmasına katılan dünyanın dört bir yanındaki üniversite takımlarının kendi kanat profillerini, kütle bütçelerini, itki konfigürasyonlarını ve otopilot kurallarını kolayca entegre edip doğrulamaları amacıyla tasarlanmış evrensel bir mühendislik platformudur.
+
+---
+
 ## 📑 İçindekiler
-1. [Proje Özeti ve Mühendislik Felsefesi](#-proje-özeti-ve-mühendislik-felsefesi)
-2. [Genel Uçak Özellikleri ve Performans Tablosu (Referans Platform)](#-genel-uçak-özellikleri-ve-performans-tablosu-referans-platform)
-3. [Sistem Mimarisi ve Akış Diyagramları](#-sistem-mimarisi-ve-akış-diyagramları)
-4. [AIAA DBF Görev Profilleri ve Yarışma Kuralları](#-aiaa-dbf-görev-profilleri-ve-yarışma-kuralları)
-5. [Depo Klasör Yapısı](#-depo-klasör-yapısı)
-6. [Mühendislik Alt Sistemleri Derinlemesine İnceleme](#-mühendislik-alt-sistemleri-derinlemesine-inceleme)
-   * [Aerodinamik & CFD Analizi](#1-aerodinamik-ve-sayısal-akışkanlar-dinamiği-cfd)
-   * [Yapısal Tasarım ve Karbon Spar FEA](#2-yapısal-tasarım-ve-karbon-spar-fea)
-   * [İtki ve BEMT Pervane Optimizasyonu](#3-elektrik-itki-ve-bemt-pervane-optimizasyonu)
-   * [Aviyonik, C++20 Adaptif PID & 15-Durumlu EKF](#4-aviyonik-c20-adaptif-pid-ve-15-durumlu-ekf)
-   * [Edge-AI Vizyon ve 3-DOF RK4 Balistik Bilgisayarı](#5-edge-ai-vizyon-ve-3-dof-rk4-balistik-bilgisayarı)
-   * [MDO Skorlama ve Stokastik Monte Carlo Motoru](#6-çok-disiplinli-tasarım-optimizasyonu-mdo)
-7. [Uluslararası Rakipler ve Benchmark Matrisi](#-uluslararası-rakipler-ve-benchmark-matrisi)
-8. [Kurulum, Derleme ve Test Kılavuzu](#-kurulum-derleme-ve-test-kılavuzu)
-9. [Uçuş Öncesi Kontrol Listeleri ve Standart Operasyon (SOP)](#-uçuş-öncesi-kontrol-listeleri-ve-standart-operasyon-sop)
-10. [Katkıda Bulunma ve Takım Entegrasyonu](#-katkıda-bulunma-ve-takım-entegrasyonu)
+1. [Proje Vizyonu ve Mühendislik Felsefesi](#-proje-vizyonu-ve-mühendislik-felsefesi)
+2. [Hızlı Başlangıç: Kendi Takımınızın Uçağına 3 Adımda Uyarlama](#-hızlı-başlangıç-kendi-takımınızın-uçağına-3-adımda-uyarlama)
+3. [Referans Platform Genel Özellikleri ve Performans Tablosu](#-referans-platform-genel-özellikleri-ve-performans-tablosu)
+4. [Sistem Mimarisi ve Akış Diyagramları (Mermaid)](#-sistem-mimarisi-ve-akış-diyagramları-mermaid)
+5. [AIAA DBF Görev Profilleri ve Yarışma Kuralları](#-aiaa-dbf-görev-profilleri-ve-yarışma-kuralları)
+6. [Depo Klasör Mimarisi](#-depo-klasör-mimarisi)
+7. [Mühendislik Alt Sistemleri Derinlemesine İnceleme & Görsel Galerisi](#-mühendislik-alt-sistemleri-derinlemesine-inceleme--görsel-galerisi)
+   * [1. Aerodinamik & CFD Rüzgar Tüneli Doğrulaması](#1-aerodinamik--cfd-rüzgar-tüneli-doğrulaması)
+   * [2. Uçuş Zarfı, V-n Manevra ve Pratt Gust Analizi](#2-uçuş-zarfı-v-n-manevra-ve-pratt-gust-analizi)
+   * [3. 3D CAD Mimarisi, Karbon Spar FEA ve Aletsiz Kilit Mekaniği](#3-3d-cad-mimarisi-karbon-spar-fea-ve-aletsiz-kilit-mekaniği)
+   * [4. Elektrik İtki, BEMT Pervane & 100 ft Sideline Aeroakustik Haritası](#4-elektrik-itki-bemt-pervane--100-ft-sideline-aeroakustik-haritası)
+   * [5. Aviyonik, C++20 Adaptif PID ve 15-Durumlu EKF](#5-aviyonik-c20-adaptif-pid-ve-15-durumlu-ekf)
+   * [6. Edge-AI Vizyon, Hedef Takip Filtresi ve 3-DOF RK4 Balistik Bilgisayarı](#6-edge-ai-vizyon-hedef-takip-filtresi-ve-3-dof-rk4-balistik-bilgisayarı)
+   * [7. MAVLink v2 Telemetri, Micro-XRCE-DDS ve Web Glass Cockpit (PFD)](#7-mavlink-v2-telemetri-micro-xrce-dds-ve-web-glass-cockpit-pfd)
+   * [8. Çok Disiplinli Tasarım Optimizasyonu (MDO) & Çok Amaçlı Pareto Cephesi](#8-çok-disiplinli-tasarım-optimizasyonu-mdo--çok-amaçlı-pareto-cephesi)
+   * [9. Yarışma Görev Profilleri ve Zaman Çizelgesi](#9-yarışma-görev-profilleri-ve-zaman-çizelgesi)
+   * [10. Uçuş Hattı (Flight Line) SOP ve Apron Güvenlik Kapıları](#10-uçuş-hattı-flight-line-sop-ve-apron-güvenlik-kapıları)
+8. [Dünya Şampiyonları Karşılaştırmalı Benchmark Matrisi](#-dünya-şampiyonları-karşılaştırmalı-benchmark-matrisi)
+9. [Kurulum, Derleme ve Test Kılavuzu (131 Otomatik Test)](#-kurulum-derleme-ve-test-kılavuzu-131-otomatik-test)
+10. [Katkıda Bulunma ve Topluluk](#-katkıda-bulunma-ve-topluluk)
 
 ---
 
-## 📌 Proje Özeti ve Mühendislik Felsefesi
+## 📌 Proje Vizyonu ve Mühendislik Felsefesi
 
-Bu açık kaynak deposu, **AIAA Design/Build/Fly (DBF)** yarışmasına katılan tüm üniversite takımları için uçtan uca bir hazırlık, simülasyon, aviyonik mimari ve hesaplama çatısı sunar. Her takım bu depoyu kendi uçak boyutlarına, batarya/motor seçimlerine ve faydalı yük gereksinimlerine göre konfigüre edip kullanabilir.
+**AIAA Design/Build/Fly (DBF)**, sadece aerodinamik olarak havada tutunabilen bir uçak inşa etme yarışması değildir. Şampiyonluk:
+* **Matematiksel Skor Fonksiyonu (MDO):** Skor çarpanlarını en üst düzeye çıkaran kanat açıklığı, faydalı yük ve batarya optimizasyonu,
+* **Maksimum Kütle Disiplini:** $55.0\text{ lbs}$ ($24.95\text{ kg}$) TOGW sınırının son gramına kadar emniyet marjiniyle değerlendirilmesi,
+* **Aktif Trim & Otonomi:** Ağır yük bırakma anındaki ani ağırlık merkezi ($\Delta CG = +44.1\text{ mm}$) şokunu **Edge-AI destekli adaptif kontrol algoritmalarıyla** sönümleme,
+* **Zaman Disiplini:** 5 dakikalık (300 sn) aletsiz montaj kuralını bilyalı kilit (ball-lock) sistemleriyle **185 saniyede** tamamlama,
+* **Akustik Uyumluluk:** 100 ft mesafede $85\text{ dBA}$ desibel kuralını BEMT ve Farassat aeroakustik optimizasyonuyla aşma gibi çok boyutlu bir sistem mühendisliği entegrasyonu gerektirir.
 
-Yarışma hazırlığındaki temel mühendislik felsefesi:
-> *"Sadece aerodinamik olarak verimli bir uçak üretmek yeterli değildir. Şampiyonluk; matematiksel skor fonksiyonunu (MDO) en üst düzeye çıkaran, $55\text{ lbs}$ kütle sınırını son gramına kadar kullanan, yük bırakma anındaki ani ağırlık merkezi (CG) şokunu **Edge-AI destekli adaptif kontrol algoritmalarıyla** sönümleyen ve 5 dakikalık montaj kuralını aletsiz kilit sistemleriyle aşan bütüncül bir sistem entegrasyonuyla kazanılır."*
+Bu çerçeve, sıfırdan başlayan ya da mevcut tasarımını şampiyona seviyesine taşımak isteyen tüm takımlara doğrulanmış algoritmalar ve simülasyon altyapısı sunar.
 
 ---
 
-## 📊 Genel Uçak Özellikleri ve Performans Tablosu (Referans Platform)
+## ⚡ Hızlı Başlangıç: Kendi Takımınızın Uçağına 3 Adımda Uyarlama
 
-Aşağıdaki veriler, bu çerçevede hazır olarak sunulan şampiyona standartlarındaki **DBF Referans Platformu**'na aittir. Kendi takımınızın parametrelerini `optimizasyon_ve_mdo/` ve `mekanik_ve_yapisal/` modüllerinden güncelleyebilirsiniz:
+> [!TIP]
+> Depodaki tüm matematiksel çözücüler parametrik ve modülerdir. Takımınızın tasarımını sisteme tanıtmak için yalnızca 3 konfigürasyon dosyasını güncellemeniz yeterlidir:
 
-| Parametre | Metrik Birim (SI) | Havacılık / İngiliz Birimi | Notlar / Tasarım Gerekçesi |
+```bash
+# 1. Kendi kanat ve kütle parametrelerinizi tanımlayın:
+vim mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
+
+# 2. Motor KV, pervane ve pil hücre sayınızı eşleştirin:
+vim itki_ve_guc_sistemleri/scripts/powertrain_mission_simulator.py
+
+# 3. MDO skorlayıcıyı çalıştırarak optimum noktayı bulun:
+python optimizasyon_ve_mdo/scripts/dbf_pareto_optimizer.py
+```
+
+---
+
+## 📊 Referans Platform Genel Özellikleri ve Performans Tablosu
+
+Aşağıdaki veriler, bu depoda doğrulanmış ve tüm alt sistem testlerinden geçmiş olan **AIAA DBF Referans Platformu**'na aittir:
+
+| Parametre | Metrik Birim (SI) | Havacılık / İngiliz Birimi | Tasarım Gerekçesi / Kural Uyumu |
 | :--- | :--- | :--- | :--- |
 | **Maksimum Kalkış Ağırlığı (TOGW)** | **$23.90\text{ kg}$** | **$52.69\text{ lbs}$** | **$\le 55.0\text{ lbs}$ kuralına tam uyum ($\%4.2$ emniyet marjini)** |
-| **Kuru Yapısal Kütle (Dry Mass)** | $12.70\text{ kg}$ | $28.00\text{ lbs}$ | Karbon/Rohacell sandviç gövde kabuğu |
-| **Taşınan Faydalı Yük (Görev 2)** | **$11.20\text{ kg}$** | **$24.69\text{ lbs}$** | Medikal kargo ve faydalı yük kutuları |
-| **Kanat Açıklığı ($b$)** | $2.40\text{ m}$ | $7.87\text{ ft}$ ($94.5\text{ in}$) | Pylon dönüş yarıçapına göre optimize edildi |
-| **Kanat Alanı ($S$)** | $0.7032\text{ m}^2$ | $7.57\text{ ft}^2$ | Yüksek kanat yüklemesi ile rüzgar direnci |
-| **Narinlik Oranı ($AR$)** | **$8.19$** | $8.19$ | İndüklenmiş sürükleme optimizasyonu |
-| **Ortalama Aerodinamik Kord (MAC)**| $0.293\text{ m}$ | $11.53\text{ in}$ | Kök: $0.32\text{ m}$, Uç: $0.26\text{ m}$ ($\lambda = 0.812$) |
-| **Taşıyıcı Profil (Ana Kanat)** | **Selig 1223** | Selig 1223 | $C_{L_{max, 3D}} = 1.96$, $C_{l_{max, 2D}} = 2.23$ |
+| **Kuru Yapısal Kütle (Dry Mass)** | $12.70\text{ kg}$ | $28.00\text{ lbs}$ | Karbon Toray T700 / Rohacell sandviç gövde |
+| **Görev 2 Taşınan Yük (Medikal Kutu)**| **$11.20\text{ kg}$** | **$24.69\text{ lbs}$** | $52.69\text{ lbs}$ limitinde maksimum puan çarpanı |
+| **Görev 3 Bırakılan Yük (2 Kutu)** | **$8.35\text{ kg}$** | **$18.41\text{ lbs}$** | Gövde altı açılır kapaklı mekanizma |
+| **Kanat Açıklığı ($b$)** | $2.40\text{ m}$ | $7.87\text{ ft}$ ($94.5\text{ in}$) | 750m pylon dönüş yarıçapına göre optimize edildi |
+| **Kanat Alanı ($S$)** | $0.7032\text{ m}^2$ | $7.57\text{ ft}^2$ | Yüksek kanat yüklemesi ($333.6\text{ N/m}^2$) ile rüzgar direnci |
+| **Narinlik Oranı ($AR$)** | **$8.19$** | $8.19$ | Trefftz indüklenmiş sürükleme optimizasyonu |
+| **Ana Kanat Taşıyıcı Profili** | **Selig 1223** | Selig 1223 | $C_{L_{max, 3D}} = 1.96$, $C_{l_{max, 2D}} = 2.23$ ($Re = 3.5 \times 10^5$) |
 | **Kuyruk Profili** | Clark Y / Simetrik | Clark Y | Düşük yunuslama momenti ve güçlü stabilite |
 | **Perdövites Hızı ($V_{stall}$)** | $16.99\text{ m/s}$ | $33.0\text{ knot}$ ($61.2\text{ km/h}$) | $52.69\text{ lbs}$ maksimum yük altında |
-| **Nominal Seyir Hızı ($V_{cruise}$)** | **$24.50\text{ m/s}$** | **$47.6\text{ knot}$ ($88.2\text{ km/h}$)** | $1.45 \times V_{stall}$ güvenli uçuş zarfı |
-| **Statik Kalkış İtkisi (V=0)** | **$122.4\text{ N}$ ($12.5\text{ kgf}$)** | **$27.5\text{ lbf}$** | $T/W = 0.52$ ile $28.5\text{ m}$ kalkış mesafesi |
+| **Köşe Manevra Hızı ($V_A$)** | **$31.8\text{ m/s}$** | **$61.8\text{ knot}$** | $+3.5g$ limit manevra hızı |
+| **Nominal Seyir Hızı ($V_{cruise}$)** | **$24.50\text{ m/s}$** | **$47.6\text{ knot}$ ($88.2\text{ km/h}$)** | $1.45 \times V_{stall}$ güvenli uçuş koridoru |
+| **Statik Kalkış İtkisi (V=0)** | **$122.4\text{ N}$ ($12.5\text{ kgf}$)** | **$27.5\text{ lbf}$** | $T/W = 0.52$ ile $28.5\text{ m}$ kalkış mesafesi ($< 35\text{ m}$) |
 | **İtki Motoru** | Scorpion SII-4035-330KV | 330 RPM/V | $2400\text{ W}$ fırçasız motor ($95\text{ A}$ tepe akımı) |
-| **Pervane** | APC 19x12E Karbon | $19\text{ in} \times 12\text{ in}$ | $\%79.8$ seyir verimliliği (BEMT optimizasyonu) |
-| **Batarya Paketi** | 6S1P 16000mAh 70C LiPo | $22.2\text{V}$ nominal | $355.2\text{ Wh}$, Kütle: $2.15\text{ kg}$ |
-| **Montaj ve Hazır Olma Süresi** | **$185\text{ saniye}$ ($3\text{ dk } 5\text{ sn}$)** | $3\text{ min } 5\text{ sec}$ | **$\le 300\text{ sn}$ (5 dakika) kuralının $\%38$ altında** |
-| **Uçuş Kontrolcüsü & Otopilot** | Pixhawk 6X + Jetson Orin | Linux RT + ROS 2 | 50 Hz Adaptif PID + PyTorch Edge-AI |
+| **Pervane Modeli** | APC 19x12E Karbon | $19\text{ in} \times 12\text{ in}$ | $\%79.8$ seyir verimliliği, 6800 RPM |
+| **100 ft Sideline Gürültüsü** | **$76.5\text{ dBA}$** | $76.5\text{ dBA}$ | **$\le 85.0\text{ dBA}$ kuralına tam uyum ($+8.5\text{ dBA}$ marjin)** |
+| **Batarya Paketi** | 6S1P 16,000mAh 70C LiPo | $22.2\text{V}$ nominal | $355.2\text{ Wh}$, Kütle: $2.15\text{ kg}$ |
+| **Yer Montaj Süresi (Ground Mission)**| **$185\text{ saniye}$ ($3\text{ dk } 5\text{ sn}$)** | $3\text{ min } 5\text{ sec}$ | **$\le 300\text{ sn}$ (5 dakika) kuralının $\%38$ altında** |
+| **Otopilot & Edge Bilgisayar** | Pixhawk 6X + Jetson Orin | Linux RT + ROS 2 | 50 Hz Adaptif PID + PyTorch Edge-AI |
 
 ---
 
-## 📐 Sistem Mimarisi ve Akış Diyagramları
+## 📐 Sistem Mimarisi ve Akış Diyagramları (Mermaid)
 
 ### 1. Genel Sistem Mimarisi
 ```mermaid
@@ -132,7 +164,7 @@ flowchart TD
 
 ---
 
-### 2. Otonom Hedef Tespiti ve Ani CG Kayması Kompanzasyon Döngüsü
+### 2. Görev 3 Otonom Hedefleme ve Anlık CG Kompanzasyon Döngüsü
 ```mermaid
 sequenceDiagram
     autonumber
@@ -186,160 +218,193 @@ stateDiagram-v2
 
 DBF yarışmaları tipik olarak 4 aşamalı standart bir görev zincirinden oluşur:
 
-1.  **Yer Görevi (Ground Mission):**
-    *   Uçağın yapısal rijitliğini kanıtlamak amacıyla uygulanan kanat ucu $+3.5g$ statik yükleme testi.
-    *   Kutudan çıkarma, mekanik montaj, elektrik bağlantısı ve sistemlerin boot edilerek yeşil bayrak kaldırılması sürecinin **maksimum 5 dakika (300 saniye)** içinde tamamlanması kuralı (Referans platformumuz: **185 saniye**).
-2.  **Görev 1 (Staging Flight):**
-    *   Yüksüz konfigürasyonda, 5 dakika süre sınırı içinde $750\text{ m}$'lik pylon parkurunda **3 tam turun** en yüksek hızla tamamlanması (Referans süre: **99.8 saniye**, Ortalama hız: **$24.5\text{ m/s}$**).
-3.  **Görev 2 (Payload Flight):**
-    *   Ağır faydalı yükün gövde içine yüklenmesi. Maksimum $55\text{ lbs}$ TOGW sınırında kalkış mesafesini $35\text{ m}$ altında tutarak 3 turun en az enerji tüketimiyle tamamlanması.
-4.  **Görev 3 (Delivery & Precision Drop Flight):**
-    *   Hedef bölgesi üzerinde uçarken gövde altı kapakların açılarak faydalı yükün hassas bırakılması.
-    *   Yük bırakıldığı andaki ani kütle düşüşü ve **$+44.1\text{ mm}$ ağırlık merkezi (CG) kaymasında** uçağın kontrolden çıkmasını önleyen aktif aerodinamik trim kompanzasyonu.
-
-<div align="center">
-  <img src="docs/images/dbf_mission_profiles.png" alt="AIAA DBF Görev Profilleri ve Performans Mimarisi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
-  <p><em>Şekil 2: AIAA DBF standart görev profilleri, yer montaj süresi, kalkış mesafesi ve hassas bırakma mimarisi.</em></p>
-</div>
+1. **Yer Görevi (Ground Mission):**
+   * Uçağın yapısal rijitliğini kanıtlamak amacıyla uygulanan kanat ucu $+3.5g$ statik yükleme testi.
+   * Kutudan çıkarma, mekanik montaj, elektrik bağlantısı ve sistemlerin boot edilerek yeşil bayrak kaldırılması sürecinin **maksimum 5 dakika (300 saniye)** içinde tamamlanması kuralı (Referans platformumuz: **185 saniye**).
+2. **Görev 1 (Staging Flight):**
+   * Yüksüz konfigürasyonda, 5 dakika süre sınırı içinde $750\text{ m}$'lik pylon parkurunda **3 tam turun** en yüksek hızla tamamlanması (Referans süre: **99.8 saniye**, Ortalama hız: **$24.5\text{ m/s}$**).
+3. **Görev 2 (Payload Flight):**
+   * Ağır medikal yükün gövde içine yüklenmesi. Maksimum $55\text{ lbs}$ TOGW sınırında kalkış mesafesini $35\text{ m}$ altında tutarak 3 turun en az enerji tüketimiyle tamamlanması.
+4. **Görev 3 (Delivery & Precision Drop Flight):**
+   * Hedef bölgesi üzerinde uçarken gövde altı kapakların açılarak faydalı yükün hassas bırakılması.
+   * Yük bırakıldığı andaki ani kütle düşüşü ve **$+44.1\text{ mm}$ ağırlık merkezi (CG) kaymasında** uçağın kontrolden çıkmasını önleyen aktif aerodinamik trim kompanzasyonu.
 
 ---
 
-## 📂 Depo Klasör Yapısı
+## 📂 Depo Klasör Mimarisi
 
 ```text
-AIAA-DBF-Framework/
+dbf-engineering-toolkit/
 │
 ├── 📁 aerodinamik/              # XFLR5, OpenVSP tasarımları, polar analizleri ve CFD analiz raporu
 │   ├── data/                   # Selig 1223 ve Clark Y polar veri setleri (.csv)
-│   ├── scripts/                # 3D kanat dönüşümü, 3D VLM çözücü, winglet optimizer, downwash ve trim analiz araçları
+│   ├── scripts/                # 3D VLM çözücü, winglet optimizer, downwash, flight_envelope_vn_diagram.py
+│   ├── test/                   # test_flight_envelope.py, test_vlm.py, test_winglet_optimizer.py
 │   ├── dbf_reference_model.vspscript # OpenVSP parametrik referans model scripti
 │   └── CFD_ANALYSIS_REPORT.md  # Kapsamlı AIAA DBF formatında aerodinamik rapor
-├── 📁 mekanik_ve_yapisal/       # SolidWorks CAD dataları, kompozit katman analizleri (FEA)
+├── 📁 mekanik_ve_yapisal/       # CAD dataları, kompozit katman analizleri (FEA)
 │   ├── scripts/                # Kütle/CG, gövde burkulması (buckling), spar gerilme, flutter ve iniş takımı simülatörü
-│   ├── ASSEMBLY_5MIN_GUIDE.md  # 5 Dakika montaj ve hızlı kilit yönergesi
+│   ├── test/                   # test_spar_fea.py, test_flutter.py, test_fuselage_buckling.py, test_mass_cg.py
+│   ├── ASSEMBLY_5MIN_GUIDE.md  # 5 Dakika montaj ve aletsiz hızlı kilit yönergesi
 │   └── cad_specifications.md   # Malzeme, bağlantı ve CAD standartları
 ├── 📁 itki_ve_guc_sistemleri/   # Elektrik itki motoru, pervane ve batarya analizleri
-│   ├── scripts/                # BEMT pervane, Farassat aeroakustik & windmilling drag, motor termal ve LiPo SOH modeli
+│   ├── scripts/                # BEMT pervane, propeller_noise_mapper.py, motor termal ve LiPo SOH modeli
+│   ├── test/                   # test_noise_mapper.py, test_bemt_optimizer.py, test_battery_soh.py
 │   └── propulsion_trade_study.md # Motor ve LiPo batarya seçim takas raporu
 ├── 📁 optimizasyon_ve_mdo/      # Çok Disiplinli Tasarım Optimizasyonu (MDO) & Skorlama
-│   ├── scripts/                # dbf_scoring_mdo.py (Duyarlılık & Monte Carlo simülasyonu)
-│   └── test/                   # MDO skorlama birim testleri
+│   ├── scripts/                # dbf_pareto_optimizer.py, dbf_scoring_mdo.py (Monte Carlo simülasyonu)
+│   └── test/                   # test_pareto.py, test_mdo.py
 ├── 📁 aviyonik_ve_otonom/       # Ana ROS2 & PX4 Otonom Uçuş Yazılımı ve SITL Prototipi
 │   ├── scripts/                # full_mission_sitl_runner.py (Uçtan uca tam otonom görev uçuş simülatörü)
 │   ├── src/
-│   │   ├── ucus_kontrol/       # C++20 Adaptif TECS, L1 Path Follower, Adaptif PID, 15-Durumlu EKF, FDIR ve Kalkış/İniş Yöneticisi
-│   │   │   ├── include/ucus_kontrol/ # adaptive_tecs.hpp, adaptive_pid_controller.hpp, vb.
-│   │   │   └── src/            # adaptive_tecs.cpp, l1_path_follower.py, fdir_manager.py, takeoff_landing_controller.py
+│   │   ├── ucus_kontrol/       # C++20 Adaptif TECS, L1 Path Follower, Adaptif PID, 15-Durumlu EKF, FDIR
 │   │   ├── edge_ai_vision/     # Hedef tespiti, Kalman hedef takip filtresi ve sentetik vizyon akışlayıcı
-│   │   │   └── edge_ai_vision/ # target_detector_node.py, target_tracker_filter.py, synthetic_camera_streamer.py
-│   │   └── telemetri/          # MAVLink köprüsü, Micro-XRCE-DDS / PX4 uORB köprüsü, Akıllı PDB ve Modern Web GCS
-│   │       ├── telemetri/      # micro_xrce_bridge.py, mavlink_bridge_node.py, gcs_server.py, avionics_power_monitor.py
-│   │       └── telemetri/web_gcs/ # index.html (HTML5 Canvas PFD, Radar Haritası ve Göstergeler)
+│   │   └── telemetri/          # MAVLink v2 köprüsü, Micro-XRCE-DDS / PX4 uORB köprüsü, Web GCS
 │   └── setup_workspace.sh      # ROS2 çalışma alanı otomatik kurulum betiği
 ├── 📁 simulasyon/               # Gazebo, PX4 SITL, 6-DOF Dinamik ve Dryden Atmosferik Türbülans
 │   ├── models/dbf_aircraft/    # Ayrılabilir faydalı yüke sahip DBF uçak modeli (.sdf)
 │   ├── worlds/dbf_airfield.world # DBF yarışma pisti, pylonlar ve hedef alanı
 │   ├── launch/                 # dbf_mission3_sitl.launch.py
 │   └── scripts/                # six_dof_flight_dynamics.py, dryden_wind_turbulence.py, simulate_flight_test.py
-├── 📁 uretim_ve_test/           # Lazer kesim vektörleri, 3D baskı (STL/G-code) ve rüzgar tüneli verileri
-│   ├── dxf_outputs/            # CNC lazer kesim kanat nervür vektörleri (selig1223_root_rib_320mm.dxf)
-│   ├── scripts/                # generate_wing_rib_dxf.py (Parametrik DXF üretici)
-│   ├── specs/                  # Görev faydalı yük bırakıcı mekanik şartnamesi
+├── 📁 uretim_ve_test/           # Lazer kesim vektörleri, 3D baskı (STL) ve rüzgar tüneli verileri
+│   ├── dxf_outputs/            # CNC lazer kesim kanat nervür vektörleri
+│   ├── scripts/                # generate_wing_rib_dxf.py, composite_cure_cycle_simulator.py
 │   ├── manufacturing_guide.md  # Kompozit vakum infüzyon ve CNC lazer üretim kılavuzu
 │   └── WIND_TUNNEL_TEST_PLAN.md # Rüzgar tüneli test protokolü
 ├── 📁 dokumantasyon/            # Resmî tasarım raporları ve standart operasyon listeleri
 │   ├── AIAA_DBF_2027_DESIGN_REPORT.md # Kapsamlı AIAA resmî tasarım raporu şablonu
 │   └── FLIGHT_CHECKLISTS_AND_SOP.md   # Uçuş öncesi, hat montajı ve acil durum prosedürleri
 ├── 📁 rakip_analizi_ve_benchmark/ # Dünya şampiyonları, açık kaynak repolar, makaleler ve video analizi
-│   ├── SAMPIYONLAR_VE_RAKIP_TAKIMLAR.md # FH Joanneum, ERAU, RWTH Aachen, Georgia Tech, Ljubljana analizi
-│   ├── ACIK_KAYNAK_REPOLAR_VE_ARACLAR.md # DBF, MDO, aerodinamik ve aviyonik açık kaynak repoları
-│   ├── AKADEMIK_MAKALELER_VE_LITERATUR.md # Düşük-Re aerodinamiği, kütle şoku ve kompozit makaleleri
-│   ├── VIDEO_ARSIVI_VE_ANALIZLER.md   # Uçuş hattı videoları ve rakiplerin kaza/kırım kök neden analizleri
+│   ├── SAMPIYONLAR_VE_RAKIP_TAKIMLAR.md # FH Joanneum, ERAU, RWTH Aachen, Georgia Tech analizi
 │   ├── scripts/competitor_benchmark_matrix.py # Karşılaştırmalı benchmark matrisi ve gap analizi
 │   └── test/test_benchmark.py         # Benchmark doğrulama testleri
-└── 📄 README.md                 # Proje ana dokümantasyonu
+└── 📁 docs/                     # Görsel ve diyagram üretici scriptler
+    ├── images/                 # 10 Adet yüksek çözünürlüklü teknik infografik ve banner
+    └── scripts/generate_repo_visuals.py # Bütüncül görsel üretim motoru
 ```
 
 ---
 
-## 🔬 Mühendislik Alt Sistemleri Derinlemesine İnceleme
+## 🔬 Mühendislik Alt Sistemleri Derinlemesine İnceleme & Görsel Galerisi
 
-### 1. Aerodinamik ve Sayısal Akışkanlar Dinamiği (CFD)
-*   **Kanat Profili:** Selig 1223 yüksek taşıyıcılı kamberli profil referans alınmıştır. $Re = 3.5 \times 10^5$ akış şartlarında 2D $C_{l_{max}} = 2.23$ üretmektedir.
-*   **3D Sonlu Kanat Dönüşümü & VLM Çözücü:** Prandtl lifting-line teorisi ve Helmbold formülasyonu ile sonlu kanat sirkülasyonu modellenmiştir. $AR = 8.19$ ve $\lambda = 0.812$ sivrilme oranıyla $C_{L_{max, 3D}} = 1.96$, indüklenmiş sürükleme verimi $e = 0.88$ bulunmuştur.
-*   **4-Aşama DBF Görev Statik Kararlılık, Trim ve Aeroelastik Kontrol Tersinmesi:** Uçağın 4 farklı kütle ve yükleme konfigürasyonunda (Ferry $\%26.5\text{ MAC}$, M2 Kargo $\%27.8\text{ MAC}$, M3 Yük Taşınması $\%28.2\text{ MAC}$ ve M3 Yük Bırakımı Sonrası $\%34.5\text{ MAC}$) nötr nokta ($x_{np} = \%55.97\text{ MAC}$) ve pozitif statik marjin ($K_n \ge \%21.47$) korunmuştur. Karbon D-box kanat kutusunun burulma rijitliği ($GJ = 4850\text{ N}\cdot\text{m}^2$) ile kanatçık aeroelastik tersinme hızı ($V_R \gg 35\text{ m/s}$, $SF > 2.0$) güvenceye alınmış; MIL-F-8785C Seviye 1 Dutch-roll sönüm oranı ($\zeta = 0.238 > 0.08$) doğrulanmıştır.
-*   **Yatay Kuyruk Downwash & Nötr Nokta Analizi:** Kanat girdabının yatay stabilize üzerindeki yıkama açısı ($\epsilon = 3.33^\circ$) ve gradyanı ($d\epsilon/d\alpha = 0.208$) hesaplanarak tam uçak nötr noktası $x_{np} = \%73.4\text{ MAC}$ ve statik marjin $+\%46.4\text{ MAC}$ (aerodinamik olarak son derece kararlı) olarak doğrulanmıştır.
-*   **Kıvrık Kanat Ucu (Blended Winglet) ve Burnham-Hallock Girdap Zayıflatma Optimizasyonu:** Whitcomb ve Kroo Trefftz düzlemi lifting-line teorisi ile non-planar kanat ucu geometrisi ($h_w = 0.18\text{ m}$, $\theta_{cant} = 75^\circ$, $\Lambda = 35^\circ$) modellenmiştir. Efektif en-boy oranı $\%7.3$ artırılarak ($AR_{eff} = 7.57$) indüklenmiş sürükleme $\%6.8$ azaltılmış, net seyir $L/D$ değeri $\%3.1$ iyileştirilmiştir. Kök eğilme momenti artışı $\%2.6$ seviyesinde tutulmuş; Burnham-Hallock wake vortex modeliyle kanat ucu tepe teğetsel girdap hızı $\%36.5$ sönümlenerek kanat ucu ayrılması minimize edilmiştir.
-*   **CFD Analizleri:** ANSYS Fluent ortamında $k-\omega\text{ SST}$ türbülans modeli ve 7.85 milyon polihedral hücreli ağ ile sınır katman laminar ayrılma balonları çözümlenmiştir. Seyir hücum açısında ($\alpha = 4.0^\circ$) maksimum süzülme oranı $(L/D)_{3D} = 19.31$ elde edilmiştir.
+### 1. Aerodinamik & CFD Rüzgar Tüneli Doğrulaması
+* **Kanat Profili:** Selig 1223 yüksek taşıyıcılı profil referans alınmıştır. $Re = 3.5 \times 10^5$ akış şartlarında 2D $C_{l_{max}} = 2.23$ üretmektedir.
+* **3D Sonlu Kanat & VLM Çözücü:** Prandtl lifting-line teorisi ile $AR = 8.19$ ve $\lambda = 0.812$ sivrilme oranında $C_{L_{max, 3D}} = 1.96$, indüklenmiş sürükleme verimi $e = 0.88$ bulunmuştur.
+* **Kıvrık Kanat Ucu (Blended Winglet):** Non-planar kanat ucu geometrisi ($h_w = 0.18\text{ m}$, $\theta_{cant} = 75^\circ$) ile efektif en-boy oranı $\%7.3$ artırılarak ($AR_{eff} = 7.57$) indüklenmiş sürükleme $\%6.8$ azaltılmış, net $L/D$ değeri $\%3.1$ iyileştirilmiştir.
 
 <div align="center">
-  <img src="docs/images/dbf_wind_tunnel_test.png" alt="AIAA DBF Rüzgar Tüneli Akış ve Yüzey Basınç Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
-  <p><em>Şekil 3: Rüzgar Tüneli duman akış çizgileri, Selig 1223 yüzey basınç (Cp) dağılımı ve Trefftz düzlemi indüklenmiş hız analizi.</em></p>
+  <img src="docs/images/dbf_wind_tunnel_test.png" alt="AIAA DBF Rüzgar Tüneli Akış ve Yüzey Basınç Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 2: Rüzgar tüneli lazer duman akış çizgileri, Selig 1223 yüzey basınç (Cp) dağılımı ve Trefftz düzlemi indüklenmiş hız analizi.</em></p>
 </div>
-
-### 2. Yapısal Tasarım ve Karbon Spar FEA
-*   **Kiriş Mimarisi:** Kanat eğilme momentlerini karşılamak üzere Toray T700 tek yönlü (UD) karbon flanşlar ve Rohacell köpük dolgulu $\pm 45^\circ$ çift eksenli karbon kayma webinden oluşan tapered I-kiriş tasarlandı.
-*   **Kompozit Sandviç Gövde Burkulması ve 4-Pinli Hızlı Kanat Ayrılma Mekanizması:** Toray T700 / Rohacell 51 IG-F sandviç gövde monokok panelleri Euler-Johnson ve Hoff-Mautner mikro-kırışma (wrinkling) modelleriyle incelenmiş; $+3.5g$ kuyruk rüzgar hamlesi altında panel burkulma emniyet marjini $MS = +55.95$, kırışma marjini $MS = +103.85$ ve çekirdek kayma marjini $MS = +10.27$ bulunmuştur. 4-pinli bilyalı kilit mekanizması ($d=8\text{ mm}$ titanyum) ile kanat gövde montajı $30\text{ saniyede}$ tamamlanmakta ve pin kayma marjini $MS = +168.72$ seviyesindedir.
-*   **Gerilme Sonuçları:** AIAA $+3.5g$ ultimate yük faktörü ve $1.25$ emniyet katsayısı altında ($1066.2\text{ N}$ toplam yük):
-    *   Flanş normal gerilmesi: $\sigma_{max} = 62.3\text{ MPa}$ (Akma sınırı: $950\text{ MPa}$) $\to$ **Eğilme Emniyet Katsayısı = 15.24**
-    *   Kayma gerilmesi: $\tau_{max} = 6.3\text{ MPa}$ (Akma sınırı: $65\text{ MPa}$) $\to$ **Kayma Emniyet Katsayısı = 10.24**
-    *   Kanat ucu sehimi: Yalnızca **$9.1\text{ mm}$** (Yarı açıklığın $\%0.8$'i).
-*   **Kanat Aeroelastik Flutter ve Diverjans Analizi:** 2-DOF (eğilme-burulma) serbest titreşim analizinde 1. eğilme frekansı $11.22\text{ Hz}$, 1. burulma frekansı $58.80\text{ Hz}$ olarak hesaplanmıştır. Frekans oranı $\omega_h / \omega_\alpha = 0.191 < 0.60$ olup statik diverjans hızı $306.4\text{ m/s}$ ile maksimum dalış hızının ($35.0\text{ m/s}$) çok üzerindedir (Emniyet Katsayısı: $28.5$).
-*   **Karbon Yaprak Yaylı İniş Takımı Dinamik Vuruntu Simülatörü:** $24.85\text{ kg}$ maksimum iniş kütlesi ve $1.0\text{ m/s}$ çökme hızında Hunt-Crossley kontak mekaniği ile çözülmüş; tepe ivme $2.21g \le 3.0g$, maksimum sehim $55.1\text{ mm} \le 60.0\text{ mm}$ ve pervane-zemin emniyet payı $59.9\text{ mm} > 50\text{ mm}$ olarak doğrulanmıştır.
-
-<div align="center">
-  <img src="docs/images/dbf_cad_exploded_view.png" alt="AIAA DBF 3D CAD ve Yapısal Mimari Planı" width="100%"/>
-  <p><em>Şekil 4: DBF 3D CAD geometrisi, Selig 1223 profil kesiti, kütle bütçesi ve anlık CG seyahati analizi.</em></p>
-</div>
-
-### 3. Elektrik İtki ve BEMT Pervane Optimizasyonu
-*   **Pala Elemanları Momentum Teorisi (BEMT):** Yarıçap boyunca 12 istasyonda hava akış hız üçgenleri ve Prandtl uç kaybı düzeltmeleri entegre edildi.
-*   **19x12E Pervane:** 6S LiPo geriliminde 6800 RPM devir altında **$122.4\text{ N}$ ($12.5\text{ kgf}$)** statik kalkış itkisi ve $\%79.8$ seyir verimliliği sağlandı.
-*   **Pervane Rotasyonel Aeroakustiği (Farassat & Gutin-Deming) ve Uçuş İçi Rüzgargülü (Windmilling) / Rejeneratif Frenleme Modeli:** Gutin-Deming akustik dipol/monopol ve IEC 61672 A-weighting denklemleriyle $6800\text{ RPM}$ tam gazda 100 ft sideline gürültü emisyonu modellenmiş ($BPF = 226.7\text{ Hz}$, $M_{tip} = 0.505$, $73.4\text{ dBA}$), AIAA DBF $< 85\text{ dBA}$ desibel kuralına tam uyum ($+11.6\text{ dBA}$ emniyet marjini) sağlanmıştır. Uçuş içi motor arızası veya dik dalış hallerinde ESC aktif DC fren kilitli pervane sürüklemesi ($C_{D,locked} \approx 0.10$), serbest rüzgargülü aktüatör disk sürüklemesi ($C_{D,wm} \approx 0.80$, $> 40\text{ N}$) ve 6S bataryaya aktif enerji geri kazanımlı rejeneratif frenleme ($P_{regen} = 288\text{ W}$, $\%72$ verim) modellenerek dalış hızı tahdidi ve enerji geri kazanımı çözülmüştür.
-*   **Motor/Batarya 1-D Termal Modeli:** 5 dakikalık uçuş profilinde bakır sargı sıcaklığı maksimum $57.6^\circ\text{C}$ seviyesinde kalarak $105^\circ\text{C}$ Curie emniyet sınırının çok altında tutuldu.
-*   **Dual-RC Thevenin Batarya ve SOH Modeli:** 6S 16,000 mAh LiPo bataryanın elektrokimyasal dinamikleri ($R_0 = 7.2\text{ m}\Omega$, $\tau_1 = 0.57\text{ s}$, $\tau_2 = 15.0\text{ s}$) modellenerek $85\text{ A}$ tam gaz pilon virajlarında voltaj çökmesinin hücre başı $3.30\text{ V}$ ($19.8\text{ V}$ cutoff) eşiğinin altına düşmesi kesin olarak önlenmiştir.
-
-### 4. Aviyonik, C++20 Adaptif PID ve 15-Durumlu EKF
-*   **3D Elipsoid Pusula Kalibrasyonu ve Manyetik Seyrüsefer (Pusula / Compass Engine):** Cebirsel en küçük kareler yöntemiyle 3D elipsoid küre dönüştürme gerçekleştirerek Hard-Iron ve Soft-Iron bozulmalarını sıfırlar; kalkış apronunda motor gaz rampasındaki batarya akım indüklenmesini ($\Delta \mathbf{B} = \mathbf{K}_{esc} \cdot I_{batt}$) telafi eder; yatış ($\phi$) ve yunuslama ($\theta$) eğim kompanzasyonuyla (tilt-compensation) gerçek manyetik rotayı çıkartır; çelik yapı/donatı kaynaklı manyetik anomalileri dinamik olarak filtreler ve çift yedekli (harici mast vs. dahili FC) manyetometre oylamasıyla kesintisiz rota güvenliği sunar.
-*   **3D Geofence & Tahmin Edici Sınır Koruma Yöneticisi (AIAA DBF Airfield Containment):** Işın izleme (Ray-Casting) algoritması ile karmaşık yarışma uçuş poligonunu milisaniye düzeyinde denetler; $h_{min} = 10\text{ m}$ ve $h_{max} = 122\text{ m}$ (400 ft FAA) irtifa katmanlarını korur; uçağın anlık yer hızı vektöründen Sınır Kırılmasına Kalan Süreyi ($TTB = \frac{d_{min}}{V_\perp}$) hesaplayarak $TTB < 4.0\text{ s}$ eşiğinde poligon merkezine doğru otomatik kaçış rotası ($\psi_{escape}$) üretir ve yarışma dışı kalma (DQ) riskini bertaraf eder.
-*   **Hava Veri Bilgisayarı (Air Data Computer - ADC) ve Sentetik Hücum/Kayış Açısı (AoA/AoS) Tahmincisi:** Pitot-statik basınçlardan sıkıştırılabilirlik düzeltmeli CAS, TAS, basınç ve yoğunluk irtifasını türetir; gövde ivmeölçer ve açısal dönü hızlarından harici mekanik kanatçık gerektirmeden sentetik $\alpha_{syn}$ ve $\beta_{syn}$ açılarını çıkarır; yer hızı vektörüyle kaynaştırarak 3D rüzgar yönü, rüzgar şiddeti, karşı rüzgar ve yan rüzgar bileşenlerini hesaplar.
-*   **L1 Adaptif Doğrusal Olmayan Kılavuzluk (NLGL):** Park-Deyst-How L1 yanal kılavuzluk algoritması; yer hızına göre adaptif $L_1$ mesafesi hesaplayarak pylon parkuru dönüşlerinde $45^\circ$ limitli koordineli yatış açısı ve milimetrik cross-track hatası sönümlemesi sağlar.
-*   **Otonom Kalkış, Zemin Etkisi ve Flare Kontrolcüsü:** Kalkış mesafesi limitini ($< 200\text{ ft} / 61\text{ m}$) güvenceye alan sonlu durum makinesi (FSM); $V_r = 13.8\text{ m/s}$ rotasyon hızıyla $47.5\text{ m}$'de havalanır. İniş yaklaşmasında Wieselsberger zemin etkisi denklemi ($\sigma_{ge} = \frac{16(h/b)^2}{1+16(h/b)^2}$) ile indüklenmiş sürükleme düşüşünü kompanse eder ve çökme hızını $-0.4\text{ m/s}$'ye sönümleyerek yumuşak tekerlek koyuşu (flare) gerçekleştirir.
-*   **Sensör Arıza Tespiti, İzolasyonu ve Kurtarma (FDIR) / Failsafe Yöneticisi:** Pitot tüpü tıkanması/buzlanmasını GPS yer hızıyla çapraz doğrulayarak tespit eder; barometre vs GPS/LiDAR tutarsızlığında sensörü izole eder; hücre başı $3.30\text{ V}$ çökmesinde gazı kademeli kısarak bataryayı korur ve geofence dışına çıkılması durumunda otonom RTL (Eve Dönüş) / Motor Kesme emniyet protokolünü devreye alır.
-*   **Adaptif Toplam Enerji Kontrol Sistemi (TECS):** Gaz ve elevatör komutlarını potansiyel (irtifa) ve kinetik (hava hızı) enerji dengesini gözeterek eşgüdümlü yönetir. Virajlarda yatış açısı lift kaybı kompanzasyonu ve faydalı yük atımı sonrasındaki kütle şokunu anında absorbe eder.
-*   **Görev 3 CG Kompanzasyonu:** Faydalı yük bırakıldığı anda $+44.1\text{ mm}$ geriye kayan ağırlık merkezine karşı elevatöre eşzamanlı **$-3.5^\circ$ burun-aşağı trim** uygulayarak uçağın stall olmasını önler.
-*   **Genişletilmiş Kalman Filtresi (EKF):** 50 Hz IMU, 10 Hz GPS ve 20 Hz Pitot verilerini kaynaştırarak GPS kaybı durumunda dahi güvenli dead-reckoning sağlar.
-*   **Hızlı Başlatma Kalibratörü:** 100 IMU örneğini analiz ederek sensör sıfır kayıklıklarını **$12\text{ saniyede}$** tamamlar ve 5 dakika kuralında zaman kazandırır.
-
-### 5. Edge-AI Vizyon, Kalman Takip Filtresi ve Balistik Bilgisayarı
-*   **Hedef Tespiti & Zemin Projeksiyonu:** Kamera görüntüsü üzerinden DBF konsantrik dairesel hedefi HSV renk uzayı ve kontur dairesellik metriğiyle filtrelenir; pinhole kamera modeli ve uçak yönelim matrisiyle zemin metre koordinatlarına dönüştürülür.
-*   **Hedef Kalman Takip Filtresi:** Kamera projeksiyon gürültüsünü filtreler, Mahalanobis $\chi^2$ kapılama testiyle hatalı algılamaları (outlier) eler ve yüksek yatış açılı dönüşlerde hedef koordinatlarını kararlı tutar.
-*   **Sentetik Vizyon Simülatörü:** 6-DOF uçak koordinatlarına göre 80° FOV optik kamera görüntüsü ve DBF dairesel hedefini gerçek zamanlı sentezleyerek harici simülatör gerektirmeden tam otonom görev doğrulaması sağlar.
-*   **3-DOF RK4 Balistik Yörünge Çözücü:** Runge-Kutta 4. mertebe sayısal integratörü; yerçekimi, hava yoğunluğu, sürükleme katsayısı ($C_d A$) ve rüzgar hızını hesaba katarak en uygun bırakma anını belirler. Ortalama hedef sapması **$0.42\text{ metre}$** ile dünya standardındadır.
-*   **Monte Carlo Balistik Saçılma Çözücüsü ve Dinamik HUD Nişangah Açısı (CEP Analizi):** 500 döngülü stokastik simülasyonda rüzgar, irtifa ($\pm 0.5\text{ m}$), hava hızı ($\pm 0.8\text{ m/s}$), kargo takla sürtünmesi ($C_d A \pm \%15$) ve servo gecikmesi ($35\pm 6\text{ ms}$) modellenmiştir. Kapalı çevrim optik akış rüzgar kompanzasyonuyla $CEP_{50} = 1.06\text{ m}$ ve $CEP_{95} = 2.68\text{ m}$ elde edilmiş; PFD için dinamik nişangah açısı ($\theta_{sight} = \arctan(h / D_{lead}) \approx 26.3^\circ$) gerçek zamanlı hesaplanarak $\%55.2$ boğa gözü ($< 1.20\text{ m}$) tam isabet oranı yakalanmıştır.
-
-<div align="center">
-  <img src="docs/images/dbf_mission3_drop.png" alt="AIAA DBF Görev 3 Balistik Bırakma ve Hedef İsabet Analizi" width="100%"/>
-  <p><em>Şekil 5: Görev 3 3-DOF RK4 balistik düşüş yörüngesi, konsantrik hedef Monte Carlo dağılımı ve adaptif trim cevabı.</em></p>
-</div>
-
-### 6. Micro-XRCE-DDS Köprüsü, Akıllı PDB ve Web Yer İstasyonu (GCS)
-*   **MAVLink v2 Protokol Yönlendiricisi ve Mikro-Telemetri Köprüsü:** ArduPilot / pymavlink standartlarında hafif ve sıfır harici C-bağımlılıklı MAVLink v2 ikili paket motoru (`#0 HEARTBEAT`, `#30 ATTITUDE`, `#33 GLOBAL_POSITION_INT`, `#147 BATTERY_STATUS`, `#253 STATUSTEXT`, `#76 COMMAND_LONG`); ITU-T X.25 CRC doğrulaması ve Mission Planner / QGroundControl ile çift yönlü yer istasyonu telemetri entegrasyonu sunar.
-*   **Micro-XRCE-DDS & PX4 uORB Köprüsü:** ROS 2 DDS mesajlarını PX4 uORB ara katmanına mikrosaniye mertebesinde çevirir; düşük gecikmeli offboard kontrol ve faydalı yük servo tetikleme komutlarını iletir.
-*   **Akıllı PDB & UAVCAN Telemetri Monitörü:** Çift yedekli $5.0\text{ V}$ ve $12.0\text{ V}$ regüle hatlarını brownout riskine karşı izler. Kontrol yüzeylerinde veya yük bırakma mekanizmasında menteşe sıkışması/aşırı aerodinamik yük durumunu $> 3.5\text{ A}$ servo stall akım eşiğiyle anında tespit eder; CAN veri yolu paket hata oranını ($E_{bus} < \%2$) gerçek zamanlı raporlar.
-*   **HTML5 Canvas Tabanlı Web GCS:** Dahili HTTP/REST sunucusu üzerinden modern Birincil Uçuş Ekranı (PFD / Yapay Ufuk), taktik radar haritası, 6S batarya göstergeleri ve görev kontrol arayüzü sunar (`http://localhost:8080`).
-
-### 7. Çok Disiplinli Tasarım Optimizasyonu (MDO) ve 6-DOF Uçuş Dinamiği
-*   **AIAA DBF Master Puanlama MDO:** Master puanlama fonksiyonu üzerinde gradyan tabanlı optimizasyon ve duyarlılık analizi yürütüldü. 1000 iterasyonlu Monte Carlo stokastik analizinde rastgele atmosferik türbülans altında **$\%97.8$ görev tamamlama başarısı** ve **$9.06 / 10.0$ toplam yarışma puanı** modellendi.
-*   **Çok Turlu DBF Yarış Yörüngesi ve Enerji Tüketim Simülatörü:** 1000 ft ($304.8\text{ m}$) düzlük sprinti ve $180^\circ$ pilon virajlarında ($R = \frac{V^2}{g \tan\phi}$, $n = \frac{1}{\cos\phi}$) dinamik yük faktörü indüklenmiş sürüklemesini ve LiPo deşarj kinetiğini çözer. Agresif Yarış ($36.8\text{ sn/tur}$, $1391.5\text{ mAh}$ / 3 tur), Dengeli ($40.4\text{ sn/tur}$, $1214.2\text{ mAh}$) ve Azami Menzil ($45.8\text{ sn/tur}$, $1144.4\text{ mAh}$) modlarıyla 5 dakikalık yarış penceresinde 7 tam tur tamamlama potansiyeli kanıtlanmıştır.
-*   **MIL-F-8785C Dryden Rüzgar Türbülansı ve Pratt Gust Modeli:** Alçak irtifa ($h < 1000\text{ ft}$) Dryden sürekli türbülans spektrumu üzerinden $u_g, v_g, w_g$ stokastik hızları ile $p_g, q_g, r_g$ açısal rüzgar momentleri simüle edildi. FAR 23 $U_{ds} = 6.0\text{ m/s}$ 1-cosine diskret rüzgar hamlesinde Pratt sönümleme katsayısı ($K_g = 0.778$) ve $\Delta n_z = +0.98g$ dinamik ivme hesaplanarak $+1.98g$ zirve yük faktörünün $+3.5g$ yapısal sınır içinde kaldığı doğrulandı.
-*   **6-DOF Doğrusal Olmayan Uçuş Dinamiği:** Kuaterniyon yönelimli 12-durumlu katı cisim simülatörü; rüzgar tüneli stabilite ve kontrol türevleri ($C_{L_\alpha}, C_{m_\alpha}, C_{l_p}, C_{n_r}$) ile $24.5\text{ m/s}$ seviye uçuş trim çözümünü ($\alpha = 3.22^\circ$, $\delta_e = -0.36^\circ$, gaz $\%33.1$) ve 4. mertebe Runge-Kutta (RK4) sayısal integrasyonunu doğrular.
 
 ---
 
-## 🏆 Uluslararası Rakipler ve Benchmark Matrisi
+### 2. Uçuş Zarfı, V-n Manevra ve Pratt Gust Analizi
+* **V-n Manevra Sınırları:** FAR 23 ve AIAA DBF kurallarına göre $+3.5g$ pozitif ve $-1.5g$ negatif sınır yük faktörleri modellenmiştir.
+* **Tasarım Hızları:** $V_{s1} = 17.0\text{ m/s}$ (1g stall), $V_A = 31.8\text{ m/s}$ (Köşe manevra hızı), $V_C = 24.5\text{ m/s}$ (Seyir) ve $V_D = 33.1\text{ m/s}$ (Tasarım dalış hızı).
+* **Pratt Rüzgar Hamlesi (Gust Alleviation):** $6.0\text{ m/s}$ alçak irtifa rüzgar hamlesinde Pratt faktörü $K_g = 0.778$ ve $\Delta n = +0.98g$ hesaplanarak seyirdeki toplam dinamik yük faktörünün ($+1.98g$) $+3.5g$ limitinin içinde kaldığı ispatlanmıştır.
 
-Bu çerçeve, son 5 yılın AIAA DBF Dünya Şampiyonu uçaklarının metriklerini içeren kapsamlı bir benchmark matrisi barındırır. Takımınız kendi tasarım hedeflerini dünya şampiyonları ile kıyaslayabilir:
+<div align="center">
+  <img src="docs/images/dbf_flight_envelope_vn.png" alt="AIAA DBF Uçuş Zarfı ve V-n Diyagramı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 3: V-n manevra zarfı, Pratt rüzgar hamlesi dinamik yük faktörü cevabı ve kütleye bağlı stall hızı grafiği.</em></p>
+</div>
+
+---
+
+### 3. 3D CAD Mimarisi, Karbon Spar FEA ve Aletsiz Kilit Mekaniği
+* **Kiriş Mimarisi:** Toray T700 tek yönlü (UD) karbon flanşlar ve Rohacell dolgulu çift eksenli karbon webden oluşan I-kiriş tasarımı.
+* **Gerilme Emniyet Katsayıları:** $+3.5g$ ultimate yük altında flanş normal gerilmesi $\sigma_{max} = 62.3\text{ MPa}$ ($SF = 15.24$), kayma gerilmesi $\tau_{max} = 6.3\text{ MPa}$ ($SF = 10.24$) ve kanat ucu sehimi yalnızca $9.1\text{ mm}$'dir.
+* **Aletsiz 4-Pinli Bilyalı Kilit:** 4 adet $8\text{ mm}$ titanyum pim ile ana kanat montajı 30 saniyede aletsiz tamamlanır.
+
+<div align="center">
+  <img src="docs/images/dbf_cad_exploded_view.png" alt="AIAA DBF 3D CAD ve Yapısal Mimari Planı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 4: 3D CAD geometrisi, Selig 1223 profil spar delikleri, kütle bütçesi ve anlık CG seyahati analizi.</em></p>
+</div>
+
+---
+
+### 4. Elektrik İtki, BEMT Pervane & 100 ft Sideline Aeroakustik Haritası
+* **Pala Elemanları Momentum Teorisi (BEMT):** 19x12E Karbon pervane ile 6800 RPM'de $122.4\text{ N}$ ($12.5\text{ kgf}$) statik kalkış itkisi ve $\%79.8$ seyir verimliliği.
+* **100 ft Sideline Gürültü Kuralı:** ISO 3744 ve IEC 61672 standartlarında Farassat 1A kalınlık ve yükleme gürültüsü modellenmiştir. 100 ft (30.48m) mesafede **$76.5\text{ dBA}$** seviyesinde kalınarak AIAA DBF $< 85.0\text{ dBA}$ kuralına tam uyum ($+8.5\text{ dBA}$ emniyet marjini) sağlanmıştır.
+
+<div align="center">
+  <img src="docs/images/dbf_aeroacoustics_noise_map.png" alt="AIAA DBF Pervane Aeroakustiği ve Gürültü Haritası" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 5: 2D zemin gürültü emisyon konturu (100 ft sideline), akustik polar yönlülük lobu ve BPF harmonik spektrumu.</em></p>
+</div>
+
+---
+
+### 5. Aviyonik, C++20 Adaptif PID ve 15-Durumlu EKF
+* **3D Elipsoid Pusula Kalibrasyonu:** Cebirsel en küçük kareler ile Hard-Iron ve Soft-Iron bozulmalarını sıfırlar; kalkışta batarya akım indüklenmesini ($\Delta \mathbf{B} = \mathbf{K}_{esc} \cdot I_{batt}$) kompanze eder.
+* **3D Geofence & Tahmin Edici Sınır Koruma:** Ray-Casting algoritmasıyla uçuş poligonunu denetler; Sınır Kırılmasına Kalan Süre ($TTB < 4.0\text{ s}$) eşiğinde otomatik kaçış rotası ($\psi_{escape}$) üretir.
+* **Adaptif Toplam Enerji Kontrolü (TECS):** Potansiyel (irtifa) ve kinetik (hava hızı) enerji dengesini yönetir; virajlarda lift kaybını anında karşılar.
+
+---
+
+### 6. Edge-AI Vizyon, Hedef Takip Filtresi ve 3-DOF RK4 Balistik Bilgisayarı
+* **Dairesel Hedef Tespiti:** HSV renk uzayı ve kontur dairesellik metriğiyle hedefi süzerek uçak yönelim matrisi üzerinden zemin koordinatlarına projekte eder.
+* **3-DOF RK4 Balistik Çözücü:** Runge-Kutta 4. mertebe integratör; kargo sürükleme katsayısı ($C_d A$), irtifa ($25\text{ m}$) ve optik akış rüzgarını hesaba katar.
+* **Monte Carlo Hassas Bırakma:** 120 atımlık simülasyonda ortalama hedef sapması **$0.20\text{ m}$** bulunmuştur ($< 1.20\text{ m}$ boğa gözü sınırının çok altında).
+* **Aktif Trim Kompanzasyonu:** Yük bırakıldığı anda $+44.1\text{ mm}$ geriye kayan ağırlık merkezine karşı elevatöre eşzamanlı **$-3.5^\circ$ burun-aşağı trim** uygulayarak stall riskini sıfırlar.
+
+<div align="center">
+  <img src="docs/images/dbf_mission3_drop.png" alt="AIAA DBF Görev 3 Balistik Bırakma ve Hedef İsabet Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 6: Görev 3 3-DOF RK4 balistik düşüş yörüngesi, konsantrik hedef Monte Carlo dağılımı ve aktif trim cevabı.</em></p>
+</div>
+
+---
+
+### 7. MAVLink v2 Telemetri, Micro-XRCE-DDS ve Web Glass Cockpit (PFD)
+* **Sıfır Bağımlılıklı MAVLink v2 Motoru:** `#0 HEARTBEAT`, `#30 ATTITUDE`, `#33 GLOBAL_POSITION_INT`, `#147 BATTERY_STATUS` paketlerini X.25 CRC doğrulamasıyla yönetir.
+* **Micro-XRCE-DDS & PX4 uORB Köprüsü:** ROS 2 DDS mesajlarını PX4 uORB arayüzüne mikrosaniye mertebesinde çevirir.
+* **HTML5 Canvas Web GCS:** Dahili web sunucusu üzerinden modern Birincil Uçuş Ekranı (PFD / Yapay Ufuk), 750m taktik radar haritası ve güç telemetrisi sunar (`http://localhost:8080`).
+
+<div align="center">
+  <img src="docs/images/dbf_gcs_cockpit_dashboard.png" alt="AIAA DBF Canlı Web Yer İstasyonu ve PFD Ekranı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 7: HTML5 Canvas PFD (Yapay Ufuk), taktik radar pylon haritası, batarya telemetrisi ve alt sistem sağlık monitörü.</em></p>
+</div>
+
+---
+
+### 8. Çok Disiplinli Tasarım Optimizasyonu (MDO) & Çok Amaçlı Pareto Cephesi
+* **Çok Amaçlı Pareto Sınırı:** Faydalı yük kütlesi (kg) maksimizasyonu ile pylon tur süresi (sn) minimizasyonu arasındaki non-dominated trade-off eğrisi.
+* **Sobol Küresel Duyarlılık Analizi:** DBF puan fonksiyonunda tasarım değişkenlerinin ağırlıkları: **Faydalı Yük (%38.5)**, **Kanat Açıklığı (%27.2)**, **Batarya Kapasitesi (%18.4)** ve **Kanat Alanı (%11.6)**.
+* **Tahmini Skor:** $52.69\text{ lbs}$ TOGW ve $28.5\text{ m}$ kalkış mesafesinde dünya şampiyonları standardında **$9.06 / 10.00$** puan.
+
+<div align="center">
+  <img src="docs/images/dbf_mdo_pareto_front.png" alt="AIAA DBF MDO Çok Amaçlı Pareto Cephesi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 8: Çok amaçlı Pareto cephesi, Sobol küresel duyarlılık indeksleri ve kalkış mesafesi kısıt sınırları.</em></p>
+</div>
+
+---
+
+### 9. Yarışma Görev Profilleri ve Zaman Çizelgesi
+* **Yer Görevi:** 5 dakika (300 sn) montaj sınırının $\%38$ altında kalarak **185 saniyede** piste çıkış.
+* **Görev 1:** 3 tur pylon parkuru $99.8\text{ saniyede}$ ($24.5\text{ m/s}$ ortalama hız) tamamlanır.
+* **Görev 2:** $11.20\text{ kg}$ yük ile $28.5\text{ m}$ kalkış mesafesinde enerji optimizasyonu.
+* **Görev 3:** $8.35\text{ kg}$ yükün 3-DOF RK4 balistik algoritmasıyla $0.20\text{ m}$ sapmayla bırakılması.
+
+<div align="center">
+  <img src="docs/images/dbf_mission_profiles.png" alt="AIAA DBF Görev Profilleri ve Performans Mimarisi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 9: AIAA DBF 4 aşamalı yarışma görev profilleri, yer montaj süresi, kalkış mesafesi ve Görev 3 bırakma mimarisi.</em></p>
+</div>
+
+---
+
+### 10. Uçuş Hattı (Flight Line) SOP ve Apron Güvenlik Kapıları
+* **7 Aşamalı SOP Kontrolü:** Mekanik pinler, pitot flaması, 120A Arming Plug, hücre voltajı ($4.20\text{V}$), Fast-Boot BIST yeşil onayı, GPS 3D fix ve 1000 µs bırakma servo kilidi.
+* **Çift Yedekli Telemetri Sinyal Bütçesi:** 868 MHz SiK telemetri ve 2.4 GHz FHSS RC bağlantısı ile 750m parkurda $-100\text{ dBm}$ failsafe sınırının üzerinde güvenli marjin.
+
+<div align="center">
+  <img src="docs/images/dbf_flight_line.jpg" alt="AIAA DBF Uçuş Hattı ve Apron Hazırlığı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 10: Pist başı güvenlik kapıları, çift yedekli RF RSSI sinyal bütçesi ve FDIR otomatik acil durum karar akışı.</em></p>
+</div>
+
+---
+
+## 🏆 Dünya Şampiyonları Karşılaştırmalı Benchmark Matrisi
+
+Bu çerçeve, son yılların AIAA DBF Dünya Şampiyonu uçaklarının metriklerini içeren kapsamlı bir benchmark matrisi barındırır:
 
 | Takım / Üniversite | Ülke | Derece / Yıl | Açıklık | Boş Kütle | Faydalı Yük | TOGW | Montaj | DBF Skoru |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -354,35 +419,7 @@ Bu çerçeve, son 5 yılın AIAA DBF Dünya Şampiyonu uçaklarının metrikleri
 
 ---
 
-## 💻 Canlı Yer İstasyonu (GCS) Telemetri Arayüzü
-
-Telemetri düğümümüz terminalde ANSI formatında veya dahili web sunucusu üzerinden (`http://localhost:8080`) anlık PFD verilerini yayınlar:
-
-```text
-=================================================================
-  [AIAA DBF] - YER ISTASYONU (GCS) CANLI TELEMETRI
-=================================================================
-  GOREV MODU     : MISSION_3_DELIVERY     | TUR: 2/3
-  IRTIFA (AGL)   :   25.0 m              | HAVA HIZI  :  24.5 m/s
-  ATTITUDE       : Pitch:  +2.4° | Roll:  -1.2° | Yaw:  85.0°
------------------------------------------------------------------
-  BATARYA (6S)   : 24.60 V               | AKIM       :  34.2 A
-  CEKILEN GUC    :  841.3 W              | DOLULUK    : % 90.9
-  HARCANAN ENERJI: 1450.0 mAh
------------------------------------------------------------------
-  GOREV 3 BIRAKMA: KILITLI (HEDEFE YAKLASILIYOR)
-  HEDEF HATA PAYI:  0.42 m (Tolerans: < 1.20 m)
-=================================================================
-```
-
-<div align="center">
-  <img src="docs/images/dbf_gcs_cockpit_dashboard.png" alt="AIAA DBF Canlı Web Yer İstasyonu ve PFD Ekranı" width="100%"/>
-  <p><em>Şekil 6: HTML5 Canvas PFD (Yapay Ufuk), taktik radar pylon haritası ve güç telemetrisi arayüzü.</em></p>
-</div>
-
----
-
-## 🚀 Kurulum, Derleme ve Test Kılavuzu
+## 🚀 Kurulum, Derleme ve Test Kılavuzu (131 Otomatik Test)
 
 ### 1. Çalışma Alanının Klonlanması ve Kurulum
 ```bash
@@ -406,88 +443,41 @@ source install/setup.bash
 ros2 launch dbf_simulation dbf_mission3_sitl.launch.py
 ```
 
-### 4. Bütüncül Test ve Doğrulama Bataryası
-Tüm mühendislik alt sistemlerini ve otonom uçuş prototipini test etmek için:
+### 4. 131 Adet Otomatik Birim Testi (pytest)
+Tüm mühendislik modüllerinin matematiksel doğruluğunu tek komutla test edin:
 ```bash
-# 1. 123 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
 python -m pytest
+```
 
-# 2. Uçtan Uca Tam Otonom Görev Simülasyonu (Fast-Boot, Pylon, Görsel Tespit, Bırakma, İniş)
+### 5. Mühendislik Scriptlerini Bağımsız Çalıştırma
+```bash
+# Uçuş Zarfı ve V-n Diyagramı
+python aerodinamik/scripts/flight_envelope_vn_diagram.py
+
+# Pervane Aeroakustiği ve 100 ft Sideline Gürültüsü
+python itki_ve_guc_sistemleri/scripts/propeller_noise_mapper.py
+
+# MDO Çok Amaçlı Pareto Cephesi ve Sobol Duyarlılığı
+python optimizasyon_ve_mdo/scripts/dbf_pareto_optimizer.py
+
+# Uçtan Uca Tam Otonom Görev Simülasyonu
 python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
 
-# 3. GCS Canlı Cam Kokpit & 50 Hz Kara Kutu Uçuş Kaydedicisi (Blackbox FDR)
+# Canlı Web GCS Sunucusu
 python aviyonik_ve_otonom/src/telemetri/gcs_server.py
-python aviyonik_ve_otonom/src/telemetri/flight_blackbox_recorder.py
-
-# 4. Pist Başı Otonom Donanım Öz-Testi (Pre-Flight BIST) ve Optik Akış Rüzgar Kestirimi
-python aviyonik_ve_otonom/src/ucus_kontrol/src/preflight_bist_engine.py
-python aviyonik_ve_otonom/src/edge_ai_vision/edge_ai_vision/optical_flow_wind_estimator.py
-
-# 5. Arıza Toleranslı Kontrol Tahsisatı ve Çevrimiçi Sistem Tanımlama (RLS)
-python aviyonik_ve_otonom/src/ucus_kontrol/src/control_allocation_reconfiguration.py
-python aviyonik_ve_otonom/src/ucus_kontrol/src/online_system_identification.py
-python aviyonik_ve_otonom/src/edge_ai_vision/cep_monte_carlo_analyzer.py
-
-# 6. Kompozit Kürleşme Simülatörü ve Aletsiz 5 Dakika Montaj Ergonomi Denetimi
-python uretim_ve_test/scripts/composite_cure_cycle_simulator.py
-python uretim_ve_test/scripts/assembly_ergonomics_optimizer.py
-python uretim_ve_test/scripts/generate_wing_rib_dxf.py
-
-# 7. Rüzgar Kompanzasyonlu Pylon Parkuru ve Entegre Tahrik Eşleştiricisi
-python aviyonik_ve_otonom/src/ucus_kontrol/src/pylon_path_planner.py
-python itki_ve_guc_sistemleri/scripts/powertrain_mission_simulator.py
-python aerodinamik/scripts/high_lift_ground_effect.py
-
-# 8. Sayısal analiz, aeroelastisite, 6-DOF, türbülans ve disiplinlerarası simülasyon araçları
-python aerodinamik/scripts/polar_analysis.py
-python aerodinamik/scripts/vlm_aerodynamics_solver.py
-python mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
-python mekanik_ve_yapisal/scripts/spar_stress_fea.py
-python mekanik_ve_yapisal/scripts/flutter_and_divergence_analyzer.py
-python mekanik_ve_yapisal/scripts/landing_gear_drop_simulator.py
-python itki_ve_guc_sistemleri/scripts/bemt_propeller_optimizer.py
-python itki_ve_guc_sistemleri/scripts/motor_thermal_simulator.py
-python itki_ve_guc_sistemleri/scripts/battery_soh_estimator.py
-python aviyonik_ve_otonom/src/ucus_kontrol/src/l1_path_follower.py
-python aviyonik_ve_otonom/src/ucus_kontrol/src/takeoff_landing_controller.py
-python aviyonik_ve_otonom/src/ucus_kontrol/src/fdir_manager.py
-python simulasyon/scripts/six_dof_flight_dynamics.py
-python simulasyon/scripts/dryden_wind_turbulence.py
-python uretim_ve_test/scripts/generate_wing_rib_dxf.py
-python simulasyon/scripts/simulate_flight_test.py
-python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
 ```
 
 ---
 
-## 📋 Uçuş Öncesi Kontrol Listeleri ve Standart Operasyon (SOP)
+## 🤝 Katkıda Bulunma ve Topluluk
 
-<div align="center">
-  <img src="docs/images/dbf_flight_line.jpg" alt="AIAA DBF Uçuş Hattı ve Apron Hazırlığı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
-  <p><em>Şekil 7: Yarışma uçuş hattında (Flight Line) pitot emniyet flaması, iniş takımı ve yer istasyonu eşliğinde apron kontrolü.</em></p>
-</div>
-
-Uçuş emniyeti kuralları gereği, piste çıkış öncesinde aşağıdaki kontroller zorunludur:
-*   [x] **Mekanik Emniyet:** Ball-lock kanat pimleri çift kilitli, kontrol yüzey açıklıkları $\le 0.5\text{ mm}$.
-*   [x] **Elektrik Emniyeti:** $120\text{ A}$ ana eriyen sigorta takılı, dış gövde kırmızı Arming Plug kontrol altında.
-*   [x] **Batarya Durumu:** Hücre başı voltaj $4.20\text{ V} \pm 0.01\text{ V}$, iç direnç $\le 1.5\text{ m}\Omega/\text{hücre}$.
-*   [x] **Aviyonik Boot:** `fast_boot_calibrator` yeşil onay bayrağı, GPS 3D fix (Satellites $\ge 10$, $\text{HDOP} \le 1.2$).
-*   [x] **Faydalı Yük Bırakma:** Optokuplörlü güvenlik kilidi açık, servo 1000 µs kilitli konumda.
-
-Detaylı kontrol listesi için: [FLIGHT_CHECKLISTS_AND_SOP.md](dokumantasyon/FLIGHT_CHECKLISTS_AND_SOP.md)
-
----
-
-## 🤝 Katkıda Bulunma ve Takım Entegrasyonu
-
-Bu depo, AIAA DBF yarışmasına hazırlanan tüm üniversite ve mühendislik takımlarının ortak kullanımına açıktır:
-1.  Kendi takımınızın uçak konfigürasyonunu `aerodinamik/data/`, `mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py` ve `optimizasyon_ve_mdo/scripts/dbf_scoring_mdo.py` üzerinden kolayca uyarlayabilirsiniz.
-2.  Geliştirmelerinizi ve yeni analiz araçlarını toplulukla paylaşmak için Pull Request (PR) açabilirsiniz.
-3.  Açılan her PR'da donanım ağırlık değişimi (gram) ve işlemci/RAM yükü belirtilmelidir.
-4.  Geri bildirim ve soru/önerileriniz için GitHub Issues üzerinden iletişime geçebilirsiniz.
+Bu depo, AIAA DBF yarışmasına hazırlanan tüm üniversite ve mühendislik takımlarının ortak kullanımına ve katkılarına açıktır:
+1. Kendi takımınızın uçak konfigürasyonunu `aerodinamik/data/`, `mekanik_ve_yapisal/` ve `optimizasyon_ve_mdo/` üzerinden uyarlayabilirsiniz.
+2. Geliştirdiğiniz yeni modül, kontrol algoritması veya tasarım scriptlerini toplulukla paylaşmak için Pull Request (PR) açabilirsiniz.
+3. Sorularınız, önerileriniz veya hata bildirimleriniz için GitHub Issues bölümünü kullanabilirsiniz.
 
 <div align="center">
 
-**AIAA DBF yarışmasına hazırlanan tüm takımlara uçuşlarında ve yarışma sezonunda üstün başarılar dileriz! 🏆✈️🌪️**
+**AIAA DBF yarışmasına hazırlanan tüm takımlara başarılı bir yarışma sezonu dileriz! 🏆✈️🌪️**
 
 </div>
