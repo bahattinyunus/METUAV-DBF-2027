@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-AIAA DBF Open Engineering Framework & Toolkit - High-Resolution Repository Visuals Generator
-Generates publication-quality technical infographics, HUD overlays,
-CAD architectural layouts, and Mission 3 trajectory visualizations.
+AIAA DBF Open Engineering Framework & Toolkit - High-Resolution Visuals Suite
+Generates 7 publication-quality technical infographics, HUD hero banners,
+CAD architectural layouts, flight line checklists, and aerodynamic test figures.
 """
 
 import os
@@ -20,88 +20,98 @@ os.makedirs(output_dir, exist_ok=True)
 
 
 # ==============================================================================
-# 1. STANDALONE HIGH-TECH HERO BANNER (AEROSPACE CAD & HUD)
+# 1. STANDALONE HIGH-TECH HERO BANNER (1920x680 ULTRA-RES AEROSPACE HUD)
 # ==============================================================================
 def generate_enhanced_banner():
     banner_png = os.path.join(output_dir, 'dbf_aircraft_banner.png')
     banner_jpg = os.path.join(output_dir, 'dbf_aircraft_banner.jpg')
 
-    W, H = 1600, 600
+    W, H = 1920, 680
 
-    # 1. Create Base Image with Deep Aerospace Gradient
-    base_img = Image.new('RGB', (W, H), color=(7, 11, 20))
+    # 1. Base Gradient Canvas (Deep Night Obsidian to Aero Cobalt)
+    base_img = Image.new('RGB', (W, H), color=(6, 10, 18))
     draw = ImageDraw.Draw(base_img)
 
-    # Gradient fill from dark navy to deep space slate
     for y in range(H):
-        ratio = y / float(H)
-        r = int(7 + ratio * 8)
-        g = int(11 + ratio * 14)
-        b = int(20 + ratio * 28)
+        r_ratio = y / float(H)
+        r = int(6 + r_ratio * 10)
+        g = int(10 + r_ratio * 16)
+        b = int(18 + r_ratio * 34)
         draw.line([(0, y), (W, y)], fill=(r, g, b))
 
-    # 2. Draw Technical Grid & Isometric Aerospace Guidelines
-    grid_color = (18, 32, 54)
+    # 2. Tech Coordinate Grid & Tactical Reticles
+    grid_color = (16, 28, 48)
     for x in range(0, W, 40):
         draw.line([(x, 0), (x, H)], fill=grid_color, width=1)
     for y in range(0, H, 40):
         draw.line([(0, y), (W, y)], fill=grid_color, width=1)
 
-    # Diagonal isometric angle lines in right section
-    for d in range(600, W + 400, 80):
-        draw.line([(d, 0), (d - 400, H)], fill=(15, 28, 48), width=1)
+    # Diagonal Isometric Grid in Center-Right
+    for d in range(700, W + 500, 70):
+        draw.line([(d, 0), (d - 450, H)], fill=(14, 25, 42), width=1)
 
-    # 3. Concentric Radar Rings & Crosshairs in Center-Right
-    rc_x, rc_y = W - 420, H // 2
-    for radius in [80, 150, 220, 290]:
+    # 3. Concentric Radar & Flight Director Rings
+    rc_x, rc_y = W - 480, H // 2 + 10
+    for radius in [90, 160, 240, 320]:
         draw.ellipse([(rc_x - radius, rc_y - radius), (rc_x + radius, rc_y + radius)],
-                     outline=(20, 48, 80), width=1)
-    draw.line([(rc_x - 310, rc_y), (rc_x + 310, rc_y)], fill=(24, 60, 95), width=1)
-    draw.line([(rc_x, rc_y - 300), (rc_x, rc_y + 300)], fill=(24, 60, 95), width=1)
+                     outline=(22, 52, 85), width=1)
+    draw.line([(rc_x - 340, rc_y), (rc_x + 340, rc_y)], fill=(28, 68, 105), width=1)
+    draw.line([(rc_x, rc_y - 330), (rc_x, rc_y + 330)], fill=(28, 68, 105), width=1)
 
-    # 4. Schematic 3D Aircraft Wireframe in Right Half
-    # Wings
-    draw.line([(rc_x - 260, rc_y + 20), (rc_x + 260, rc_y + 20)], fill=(0, 229, 255), width=3)
-    draw.line([(rc_x - 260, rc_y + 20), (rc_x - 280, rc_y - 25)], fill=(0, 200, 255), width=2) # Winglet L
-    draw.line([(rc_x + 260, rc_y + 20), (rc_x + 280, rc_y - 25)], fill=(0, 200, 255), width=2) # Winglet R
-    # Fuselage
-    draw.line([(rc_x, rc_y - 140), (rc_x, rc_y + 160)], fill=(0, 255, 170), width=3)
-    draw.polygon([(rc_x, rc_y - 150), (rc_x - 18, rc_y - 100), (rc_x + 18, rc_y - 100)], outline=(0, 255, 170))
-    # Tail / V-Tail
-    draw.line([(rc_x - 90, rc_y + 140), (rc_x + 90, rc_y + 140)], fill=(0, 229, 255), width=2)
-    draw.line([(rc_x, rc_y + 140), (rc_x - 45, rc_y + 110)], fill=(0, 200, 255), width=2)
-    draw.line([(rc_x, rc_y + 140), (rc_x + 45, rc_y + 110)], fill=(0, 200, 255), width=2)
+    # Dynamic Degree Marks on Radar
+    for angle in range(0, 360, 30):
+        rad = math.radians(angle)
+        x1 = rc_x + int(310 * math.cos(rad))
+        y1 = rc_y + int(310 * math.sin(rad))
+        x2 = rc_x + int(325 * math.cos(rad))
+        y2 = rc_y + int(325 * math.sin(rad))
+        draw.line([(x1, y1), (x2, y2)], fill=(0, 210, 255), width=1)
 
-    # Streamline Airflow / Vortex Particles
-    for sy in range(-60, 80, 20):
+    # 4. Schematic 3D Aircraft Wireframe & Aerodynamic Streamlines
+    # Main Wing Box
+    draw.line([(rc_x - 320, rc_y + 35), (rc_x + 320, rc_y + 35)], fill=(0, 229, 255), width=4)
+    # Winglets (Blended Winglets)
+    draw.line([(rc_x - 320, rc_y + 35), (rc_x - 345, rc_y - 25)], fill=(0, 210, 255), width=3)
+    draw.line([(rc_x + 320, rc_y + 35), (rc_x + 345, rc_y - 25)], fill=(0, 210, 255), width=3)
+    # Fuselage Monocoque (Aerodynamic Fairing)
+    draw.line([(rc_x, rc_y - 170), (rc_x, rc_y + 190)], fill=(16, 185, 129), width=3)
+    draw.polygon([(rc_x, rc_y - 180), (rc_x - 24, rc_y - 120), (rc_x + 24, rc_y - 120)],
+                 outline=(16, 185, 129), fill=(10, 35, 30))
+    # Horizontal & Vertical Tail
+    draw.line([(rc_x - 110, rc_y + 165), (rc_x + 110, rc_y + 165)], fill=(0, 229, 255), width=2)
+    draw.line([(rc_x, rc_y + 165), (rc_x - 55, rc_y + 130)], fill=(0, 200, 255), width=2)
+    draw.line([(rc_x, rc_y + 165), (rc_x + 55, rc_y + 130)], fill=(0, 200, 255), width=2)
+
+    # Streamline Flow Particles
+    for sy in range(-80, 100, 25):
         curve_pts = []
-        for sx in range(rc_x - 300, rc_x + 350, 30):
-            amp = math.sin((sx - rc_x) * 0.02) * 15 * math.exp(-((sx - rc_x) / 180.0) ** 2)
+        for sx in range(rc_x - 380, rc_x + 420, 25):
+            amp = math.sin((sx - rc_x) * 0.018) * 18 * math.exp(-((sx - rc_x) / 220.0) ** 2)
             curve_pts.append((sx, rc_y + sy + int(amp)))
         for i in range(len(curve_pts) - 1):
-            draw.line([curve_pts[i], curve_pts[i+1]], fill=(0, 180, 255, 120), width=1)
+            draw.line([curve_pts[i], curve_pts[i+1]], fill=(0, 180, 255), width=1)
 
-    # 5. Top Header Bar
-    draw.rectangle([(0, 0), (W, 46)], fill=(10, 16, 28))
-    draw.line([(0, 46), (W, 46)], fill=(0, 210, 255), width=2)
-    draw.text((35, 14), "AIAA DESIGN / BUILD / FLY // OPEN ENGINEERING SUITE", fill=(255, 255, 255))
-    draw.text((560, 14), "|  PLATFORM: MULTI-TEAM UNIVERSAL  |  STANDARD: C++20 / ROS 2", fill=(0, 210, 255))
-    draw.text((W - 340, 14), "STATUS: FULLY OPERATIONAL [ONLINE]", fill=(52, 211, 153))
+    # 5. Top Aerospace HUD Header Bar
+    draw.rectangle([(0, 0), (W, 50)], fill=(10, 18, 30))
+    draw.line([(0, 50), (W, 50)], fill=(0, 229, 255), width=2)
+    draw.text((45, 16), "AIAA DESIGN / BUILD / FLY // OPEN ENGINEERING FRAMEWORK & TOOLKIT", fill=(255, 255, 255))
+    draw.text((720, 16), "|  STANDARD: C++20 / ROS 2 HUMBLE  |  MODEL: UNIVERSAL DBF BASELINE", fill=(0, 210, 255))
+    draw.text((W - 380, 16), "SYSTEM HEALTH: 100% NOMINAL [ARMED]", fill=(52, 211, 153))
 
-    # 6. Hero Typography on Left Half
+    # 6. Hero Typography (Left Half)
     # Category Tag
-    draw.rectangle([(70, 95), (285, 125)], fill=(16, 36, 68), outline=(0, 229, 255), width=1)
-    draw.text((82, 103), "AIAA DBF FRAMEWORK", fill=(0, 229, 255))
+    draw.rectangle([(80, 100), (330, 134)], fill=(16, 40, 72), outline=(0, 229, 255), width=1)
+    draw.text((95, 110), "AIAA DBF OPEN ARCHITECTURE", fill=(0, 229, 255))
 
     # Big Title
-    draw.text((70, 145), "DBF ENGINEERING", fill=(255, 255, 255))
-    draw.text((70, 215), "TOOLKIT & OTONOMI", fill=(0, 229, 255))
+    draw.text((80, 155), "DBF ENGINEERING", fill=(255, 255, 255))
+    draw.text((80, 235), "TOOLKIT & AUTOPILOT", fill=(0, 229, 255))
 
     # Subtitle / Description
-    desc_line1 = "AIAA Design/Build/Fly takimlari icin eksiksiz aerodinamik analiz, yapisal FEA,"
-    desc_line2 = "elektrik itki optimizasyonu, 15-durumlu EKF otopilot, Edge-AI hedefleme ve MDO mimarisi."
-    draw.text((70, 295), desc_line1, fill=(180, 200, 225))
-    draw.text((70, 320), desc_line2, fill=(180, 200, 225))
+    desc1 = "AIAA Design/Build/Fly takimlari icin eksiksiz acik kaynakli aerodinamik analiz, kompozit FEA,"
+    desc2 = "elektrik itki BEMT optimizasyonu, 15-durumlu EKF otopilot, Edge-AI hedefleme ve MDO skorlama mimarisi."
+    draw.text((80, 325), desc1, fill=(190, 210, 235))
+    draw.text((80, 352), desc2, fill=(190, 210, 235))
 
     # Feature Badges
     pills = [
@@ -111,53 +121,146 @@ def generate_enhanced_banner():
         ("ROS 2 / PX4 AUTOPILOT", (16, 185, 129)),
         ("MDO SCORING", (236, 72, 153)),
     ]
-    cur_x = 70
+    cur_x = 80
     for name, color in pills:
-        tw = len(name) * 8 + 20
-        draw.rectangle([(cur_x, 370), (cur_x + tw, 398)], fill=(15, 25, 45), outline=color, width=1)
-        draw.text((cur_x + 10, 377), name, fill=color)
-        cur_x += tw + 12
+        tw = len(name) * 8 + 22
+        draw.rectangle([(cur_x, 410), (cur_x + tw, 442)], fill=(15, 28, 48), outline=color, width=1)
+        draw.text((cur_x + 11, 419), name, fill=color)
+        cur_x += tw + 14
 
-    # Metric Cards on Left-Bottom
+    # Metric Spec Cards (Left-Bottom)
     cards = [
-        ("WAVELENGTH / WINGSPAN", "b = 2.40 m", (0, 229, 255)),
-        ("MAX WEIGHT (TOGW)", "52.69 lbs", (52, 211, 153)),
-        ("CRUISE AIRSPEED", "24.5 m/s", (245, 158, 11)),
-        ("ASSEMBLY BENCHMARK", "185 sec (<300s)", (236, 72, 153)),
+        ("WINGSPAN (b)", "2.40 m (94.5 in)", (0, 229, 255)),
+        ("MAX WEIGHT (TOGW)", "52.69 lbs (<=55 lbs)", (52, 211, 153)),
+        ("CRUISE AIRSPEED", "24.5 m/s (47.6 kts)", (245, 158, 11)),
+        ("ASSEMBLY BENCHMARK", "185 sec (<=300s)", (236, 72, 153)),
     ]
-    cx = 70
+    cx = 80
     for title, val, col in cards:
-        draw.rectangle([(cx, 430), (cx + 175, 510)], fill=(12, 22, 38), outline=(30, 50, 80), width=1)
-        draw.text((cx + 10, 442), title, fill=(140, 160, 190))
-        draw.text((cx + 10, 468), val, fill=col)
-        cx += 190
+        draw.rectangle([(cx, 480), (cx + 195, 570)], fill=(12, 24, 42), outline=(32, 54, 88), width=1)
+        draw.text((cx + 12, 494), title, fill=(140, 165, 195))
+        draw.text((cx + 12, 524), val, fill=col)
+        cx += 215
 
     # 7. Bottom Telemetry Bar
-    draw.rectangle([(0, H - 42), (W, H)], fill=(10, 16, 28))
-    draw.line([(0, H - 42), (W, H - 42)], fill=(0, 210, 255), width=2)
-    draw.text((35, H - 28), "AIRCRAFT: 3-SURFACE HIGH-LIFT | AIRFOIL: SELIG 1223 | L/D: 19.31 | EKF: 50Hz ACTIVE", fill=(170, 195, 225))
-    draw.text((W - 390, H - 28), "GLOBAL READY | OPEN FOR ALL DBF TEAMS", fill=(0, 240, 255))
+    draw.rectangle([(0, H - 46), (W, H)], fill=(10, 18, 30))
+    draw.line([(0, H - 46), (W, H - 46)], fill=(0, 229, 255), width=2)
+    draw.text((45, H - 30), "AIRFOIL: SELIG 1223 (Cl=2.23) | CRUISE L/D: 19.31 | STATIC THRUST: 122.4 N | EKF: 50Hz ACTIVE", fill=(175, 200, 230))
+    draw.text((W - 420, H - 30), "UNIVERSAL PREPARATION SUITE | MULTI-TEAM READY", fill=(0, 240, 255))
 
     # Corner framing brackets
-    c_len = 35
+    c_len = 40
     c_color = (0, 229, 255)
-    draw.line([(40, 55), (40 + c_len, 55)], fill=c_color, width=2)
-    draw.line([(40, 55), (40, 55 + c_len)], fill=c_color, width=2)
-    draw.line([(W - 40 - c_len, 55), (W - 40, 55)], fill=c_color, width=2)
-    draw.line([(W - 40, 55), (W - 40, 55 + c_len)], fill=c_color, width=2)
-    draw.line([(40, H - 50 - c_len), (40, H - 50)], fill=c_color, width=2)
-    draw.line([(40, H - 50), (40 + c_len, H - 50)], fill=c_color, width=2)
-    draw.line([(W - 40 - c_len, H - 50), (W - 40, H - 50)], fill=c_color, width=2)
-    draw.line([(W - 40, H - 50 - c_len), (W - 40, H - 50)], fill=c_color, width=2)
+    draw.line([(45, 65), (45 + c_len, 65)], fill=c_color, width=2)
+    draw.line([(45, 65), (45, 65 + c_len)], fill=c_color, width=2)
+    draw.line([(W - 45 - c_len, 65), (W - 45, 65)], fill=c_color, width=2)
+    draw.line([(W - 45, 65), (W - 45, 65 + c_len)], fill=c_color, width=2)
+    draw.line([(45, H - 60 - c_len), (45, H - 60)], fill=c_color, width=2)
+    draw.line([(45, H - 60), (45 + c_len, H - 60)], fill=c_color, width=2)
+    draw.line([(W - 45 - c_len, H - 60), (W - 45, H - 60)], fill=c_color, width=2)
+    draw.line([(W - 45, H - 60 - c_len), (W - 45, H - 60)], fill=c_color, width=2)
 
-    # Save PNG and JPG
     base_img.save(banner_png, 'PNG', quality=95)
     base_img.save(banner_jpg, 'JPEG', quality=95)
-    print(f"[OK] New high-tech hero banner saved to: {banner_png} and {banner_jpg}")
+    print(f"[OK] High-tech hero banner regenerated: {banner_png} & {banner_jpg}")
 
 
 # ==============================================================================
-# 2. MISSION 3 BALLISTIC DROP & TARGET ANALYSIS INFOGRAPHIC
+# 2. FLIGHT LINE & APRON OPERATIONS INFOGRAPHIC (REPLACES OLD STATIC PHOTO)
+# ==============================================================================
+def generate_flight_line_visual():
+    out_path = os.path.join(output_dir, 'dbf_flight_line.jpg')
+
+    fig = plt.figure(figsize=(16, 9), facecolor='#0B0F19', dpi=150)
+    gs = GridSpec(2, 2, figure=fig, hspace=0.35, wspace=0.25,
+                  left=0.08, right=0.95, top=0.90, bottom=0.08)
+
+    fig.suptitle('AIAA DBF OPEN FRAMEWORK - UÇUŞ HATTI (FLIGHT LINE) VE APRON OPERASYONLARI',
+                 fontsize=17, fontweight='bold', color='#00E5FF', y=0.96)
+
+    # Subplot 1: Pre-Flight Checklist Gates
+    ax1 = fig.add_subplot(gs[0, 0], facecolor='#111827')
+    gates = [
+        "1. Mekanik: Ball-Lock Pinleri Çift Kilitli",
+        "2. Pitot Kapağı & Emniyet Flaması Kaldırıldı",
+        "3. Elektrik: 120A Sigorta & Kırmızı Arming Plug",
+        "4. Batarya: 6S 4.20V/Hücre, IR <= 1.5 mOhm",
+        "5. Aviyonik: Fast-Boot BIST Yeşil (DBF-AIR-GO)",
+        "6. GPS: 3D Fix (Uydu >= 10, HDOP <= 1.2)",
+        "7. Görev 3 Bırakma: Kilitli 1000us PWM Onayı"
+    ]
+    ax1.set_xlim(0, 1)
+    ax1.set_ylim(-0.5, len(gates) - 0.5)
+    ax1.axis('off')
+    for i, item in enumerate(reversed(gates)):
+        ax1.text(0.05, i, f"✔  {item}", color='#F8FAFC', fontsize=11, fontweight='bold', va='center')
+        ax1.text(0.85, i, "[GEÇTİ]", color='#10B981', fontsize=11, fontweight='bold', va='center')
+        ax1.plot([0.02, 0.98], [i - 0.35, i - 0.35], color='#1E293B', lw=1)
+    ax1.set_title('(A) Pist Başı Güvenlik ve Emniyet Kapıları (SOP Onayı)', fontsize=12, fontweight='bold', color='#F1F5F9')
+
+    # Subplot 2: RF Telemetry & Dual-Link RSSI Signal Budget
+    ax2 = fig.add_subplot(gs[0, 1], facecolor='#111827')
+    dist_m = np.linspace(10, 1200, 200)
+    # Free-space path loss model at 868 MHz & 2.4 GHz
+    rssi_868 = -30 - 20 * np.log10(dist_m)
+    rssi_24 = -40 - 20 * np.log10(dist_m)
+
+    ax2.plot(dist_m, rssi_868, color='#00E5FF', lw=2.5, label='Birincil Telemetri (868 MHz Sik / -110 dBm Eşik)')
+    ax2.plot(dist_m, rssi_24, color='#F59E0B', lw=2.0, ls='--', label='Yedekli RC Link (2.4 GHz FHSS)')
+    ax2.axhline(-100, color='#EF4444', lw=1.5, ls=':', label='Kritik Failsafe Eşiği (-100 dBm)')
+    ax2.axvline(750, color='#10B981', lw=1.5, ls='-.', label='Parkur Maks Mesafe (750m)')
+    ax2.set_title('(B) Uçuş Hattı Çift Yedekli Telemetri Sinyal Bütçesi (RSSI)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax2.set_xlabel('Mesafe (m)', color='#94A3B8')
+    ax2.set_ylabel('Sinyal Gücü (dBm)', color='#94A3B8')
+    ax2.tick_params(colors='#94A3B8')
+    ax2.grid(True, color='#1E293B', ls=':')
+    ax2.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5)
+
+    # Subplot 3: 5-Minute Ready Timeline (Ground Mission)
+    ax3 = fig.add_subplot(gs[1, 0], facecolor='#111827')
+    timeline_items = ['Apron Girişi', 'Aletsiz Montaj', 'Sistem Boot', 'Sensör Öz-Test', 'Uçuş Hattı Yeşil']
+    cum_times = [0, 65, 95, 125, 185]
+    durations = [65, 30, 30, 60, 0]
+
+    ax3.plot(cum_times, [1, 2, 3, 4, 5], color='#00E5FF', marker='o', lw=2.5, markersize=8)
+    for t_val, y_pos, name in zip(cum_times, [1, 2, 3, 4, 5], timeline_items):
+        ax3.text(t_val + 5, y_pos - 0.1, f"{name}\n({t_val}. sn)", color='#F8FAFC', fontsize=9, fontweight='bold')
+    ax3.axvline(300, color='#EF4444', lw=2.0, ls='--', label='5 Dakika Kuralı (300 sn)')
+    ax3.set_xlim(-10, 330)
+    ax3.set_ylim(0.5, 5.8)
+    ax3.set_yticks([])
+    ax3.set_title('(C) Yer Görevi Hazırlık Süresi: 185 sn (%38 Emniyet Marjini)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax3.set_xlabel('Süre (sn)', color='#94A3B8')
+    ax3.tick_params(colors='#94A3B8')
+    ax3.grid(True, color='#1E293B', ls=':')
+    ax3.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=9)
+
+    # Subplot 4: Failsafe State Decision Flow
+    ax4 = fig.add_subplot(gs[1, 1], facecolor='#111827')
+    anomalies = [
+        ("Pitot Tüpü Tıkanması", "GPS/Sentetik AoA Yedekleme", '#10B981'),
+        ("Geofence İhlal Riski (<4s)", "Otomatik Escape Vektörü", '#10B981'),
+        ("Tek Hücre Çökmesi (<3.3V)", "Gaz Kademeli %50 Kısma", '#F59E0B'),
+        ("Telemetri Kaybı (>3 sn)", "Otonom Bekleme & RTL", '#F59E0B'),
+        ("Aktüatör Sıkışması (>3.5A)", "FDIR Kontrol Tahsisatı", '#10B981'),
+        ("Manuel Müdahale (CH5)", "Anında Pilot Devri", '#00E5FF')
+    ]
+    ax4.set_xlim(0, 1)
+    ax4.set_ylim(-0.5, len(anomalies) - 0.5)
+    ax4.axis('off')
+    for i, (hazard, mitigation, col) in enumerate(reversed(anomalies)):
+        ax4.text(0.05, i, f"⚠ {hazard}", color='#E2E8F0', fontsize=11, fontweight='bold', va='center')
+        ax4.text(0.55, i, f"-> [{mitigation}]", color=col, fontsize=11, fontweight='bold', va='center')
+        ax4.plot([0.02, 0.98], [i - 0.35, i - 0.35], color='#1E293B', lw=1)
+    ax4.set_title('(D) Uçuş Hattı Otomatik Acil Durum & FDIR Karar Matrisi', fontsize=12, fontweight='bold', color='#F1F5F9')
+
+    plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none', dpi=150)
+    plt.close()
+    print(f"[OK] Flight line operations visual regenerated: {out_path}")
+
+
+# ==============================================================================
+# 3. MISSION 3 BALLISTIC DROP & TARGET ANALYSIS INFOGRAPHIC
 # ==============================================================================
 def generate_mission3_drop_visual():
     out_path = os.path.join(output_dir, 'dbf_mission3_drop.png')
@@ -245,11 +348,11 @@ def generate_mission3_drop_visual():
 
     plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none')
     plt.close()
-    print(f"[OK] Mission 3 Drop infographic saved to: {out_path}")
+    print(f"[OK] Mission 3 Drop infographic regenerated: {out_path}")
 
 
 # ==============================================================================
-# 3. 3D CAD ARCHITECTURE & MASS BUDGET BLUEPRINT
+# 4. 3D CAD ARCHITECTURE & MASS BUDGET BLUEPRINT
 # ==============================================================================
 def generate_cad_architecture_visual():
     out_path = os.path.join(output_dir, 'dbf_cad_exploded_view.png')
@@ -292,7 +395,6 @@ def generate_cad_architecture_visual():
     ax2.plot(chord, yu, color='#00E5FF', lw=2.5, label='Selig 1223 Üst Yüzey (Cl_max = 2.23)')
     ax2.plot(chord, yl, color='#38BDF8', lw=2.5, label='Selig 1223 Alt Yüzey')
     ax2.fill_between(chord, yl, yu, color='#0284C7', alpha=0.25)
-    # Spar locations
     ax2.scatter([0.25, 0.65], [yc[25], yc[65]], color='#F59E0B', s=90, zorder=5, label='Ana & Yardımcı Spar Tüpleri')
     ax2.set_xlim(-0.05, 1.05)
     ax2.set_ylim(-0.15, 0.25)
@@ -347,11 +449,11 @@ def generate_cad_architecture_visual():
 
     plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none')
     plt.close()
-    print(f"[OK] CAD Architecture Blueprint saved to: {out_path}")
+    print(f"[OK] CAD Architecture Blueprint regenerated: {out_path}")
 
 
 # ==============================================================================
-# 4. GCS LIVE COCKPIT & PFD TELEMETRY DASHBOARD
+# 5. GCS LIVE COCKPIT & PFD TELEMETRY DASHBOARD
 # ==============================================================================
 def generate_gcs_cockpit_visual():
     out_path = os.path.join(output_dir, 'dbf_gcs_cockpit_dashboard.png')
@@ -398,7 +500,6 @@ def generate_gcs_cockpit_visual():
     rad_x = 152.4 * np.cos(t_rad)
     rad_y = 65.0 * np.sin(t_rad)
     ax2.plot(rad_x, rad_y, color='#00E5FF', lw=2.5, ls='-', label='750m Referans Yarış Rotası')
-    # Aircraft position
     ax2.scatter([60.0], [64.0], color='#10B981', s=140, marker='>', zorder=7, label='Anlık İHA Konumu')
     ax2.set_xlim(-220, 220)
     ax2.set_ylim(-120, 120)
@@ -450,11 +551,11 @@ def generate_gcs_cockpit_visual():
 
     plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none')
     plt.close()
-    print(f"[OK] Web GCS Cockpit Dashboard saved to: {out_path}")
+    print(f"[OK] Web GCS Cockpit Dashboard regenerated: {out_path}")
 
 
 # ==============================================================================
-# 5. WIND TUNNEL AERO & CFD LASER STREAMLINE VISUALIZATION
+# 6. WIND TUNNEL AERO & CFD LASER STREAMLINE VISUALIZATION
 # ==============================================================================
 def generate_wind_tunnel_visual():
     out_path = os.path.join(output_dir, 'dbf_wind_tunnel_test.png')
@@ -473,7 +574,6 @@ def generate_wind_tunnel_visual():
     v_flow = 0.15 * np.sin(x_grid * 3) * np.exp(-x_grid**2)
 
     ax1.streamplot(x_grid, y_grid, u_flow, v_flow, color='#00E5FF', density=1.2, linewidth=1.2, arrowsize=1.0)
-    # Airfoil profile
     chord = np.linspace(0, 1, 80)
     yt = 0.12 * (0.2969 * np.sqrt(chord) - 0.1260 * chord - 0.3516 * chord**2)
     ax1.fill_between(chord, -yt, yt, color='#F8FAFC', zorder=6, label='Selig 1223 Test Kesiti')
@@ -523,7 +623,6 @@ def generate_wind_tunnel_visual():
     y_trefftz = np.linspace(-1.5, 1.5, 80)
     z_trefftz = np.linspace(-0.6, 0.6, 60)
     Y, Z = np.meshgrid(y_trefftz, z_trefftz)
-    # Vortex pair
     v_downwash = -0.5 / (np.sqrt((Y - 1.1)**2 + Z**2 + 0.02) + np.sqrt((Y + 1.1)**2 + Z**2 + 0.02))
 
     cf = ax4.contourf(Y, Z, v_downwash, levels=20, cmap='plasma')
@@ -535,11 +634,11 @@ def generate_wind_tunnel_visual():
 
     plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none')
     plt.close()
-    print(f"[OK] Wind Tunnel & CFD infographic saved to: {out_path}")
+    print(f"[OK] Wind Tunnel & CFD infographic regenerated: {out_path}")
 
 
 # ==============================================================================
-# 6. COMPETITION MISSION PROFILES & ARCHITECTURE
+# 7. COMPETITION MISSION PROFILES & ARCHITECTURE
 # ==============================================================================
 def generate_mission_profiles_visual():
     out_path = os.path.join(output_dir, 'dbf_mission_profiles.png')
@@ -554,7 +653,7 @@ def generate_mission_profiles_visual():
     # Subplot 1: Ground Mission Assembly Time
     ax1 = fig.add_subplot(gs[0, 0], facecolor='#111827')
     steps = ['Kutudan Çıkarma', 'Kanat & Pin Montajı', 'Batarya & Sigorta', 'Sensör Fast-Boot', 'Uçuş Hattı Çıkış']
-    durations = [35, 30, 20, 12, 18] # Total 115 sn + marjin = 185s
+    durations = [35, 30, 20, 12, 18]
     colors = ['#38BDF8', '#0284C7', '#F59E0B', '#10B981', '#A855F7']
 
     cum_time = 0
@@ -631,22 +730,23 @@ def generate_mission_profiles_visual():
 
     plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none')
     plt.close()
-    print(f"[OK] Mission Profiles infographic saved to: {out_path}")
+    print(f"[OK] Mission Profiles infographic regenerated: {out_path}")
 
 
 def main():
-    print("=" * 68)
-    print("  AIAA DBF OPEN FRAMEWORK - Görsel Üretim ve Banner Yenileme")
-    print("=" * 68)
+    print("=" * 72)
+    print("  AIAA DBF OPEN FRAMEWORK - TÜM 7 GÖRSEL VE BANNER SETİNİ YENİLEME")
+    print("=" * 72)
     generate_enhanced_banner()
+    generate_flight_line_visual()
     generate_mission3_drop_visual()
     generate_cad_architecture_visual()
     generate_gcs_cockpit_visual()
     generate_wind_tunnel_visual()
     generate_mission_profiles_visual()
-    print("=" * 68)
-    print("[BAŞARILI] Tüm görseller ve bannerlar başarıyla yenilendi!")
-    print("=" * 68)
+    print("=" * 72)
+    print("[BAŞARILI] Tüm 7 görsel ve banner en yüksek kalitede üretildi!")
+    print("=" * 72)
 
 
 if __name__ == '__main__':
