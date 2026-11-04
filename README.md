@@ -11,7 +11,7 @@
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Framework: ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble_Hawksbill-22314E.svg?style=for-the-badge&logo=ros)](https://docs.ros.org/en/humble/index.html)
 [![Simülasyon: PX4 & Gazebo](https://img.shields.io/badge/Simulation-PX4_%26_Gazebo-red.svg?style=for-the-badge)](https://px4.io/)
-[![Birim Testleri: 131/131 Geçti](https://img.shields.io/badge/Unit_Tests-131%2F131_Passing-brightgreen.svg?style=for-the-badge&logo=pytest)](https://github.com/bahattinyunus/dbf-engineering-toolkit/actions)
+[![Birim Testleri: 136/136 Geçti](https://img.shields.io/badge/Unit_Tests-136%2F136_Passing-brightgreen.svg?style=for-the-badge&logo=pytest)](https://github.com/bahattinyunus/dbf-engineering-toolkit/actions)
 [![AIAA DBF: Universal Framework](https://img.shields.io/badge/AIAA_DBF-Multi--Team_Ready-darkgreen.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
 [![Lisans: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
@@ -443,28 +443,50 @@ source install/setup.bash
 ros2 launch dbf_simulation dbf_mission3_sitl.launch.py
 ```
 
-### 4. 131 Adet Otomatik Birim Testi (pytest)
+### 4. Tek Komutla Yönetim: `dbf_cli.py` Birleşik Konsol Aracı
+Tüm mühendislik hesaplamalarını, 136 birim testini, görsel üretimini ve yer istasyonunu tek bir komuttan çalıştırın:
+```bash
+# Referans uçak metriklerini ve kural kontrolünü listele:
+python dbf_cli.py info
+
+# Tüm 136 birim testini koştur:
+python dbf_cli.py test
+
+# Bütün aerodinamik, yapısal, BEMT, aeroakustik ve MDO analizlerini zincirleme çalıştır:
+python dbf_cli.py analyze --target all
+
+# 10 adet yüksek çözünürlüklü teknik infografiği yeniden render et:
+python dbf_cli.py visuals
+
+# Canlı HTML5 Glass Cockpit Web Yer İstasyonunu başlat (http://localhost:8080):
+python dbf_cli.py gcs
+```
+
+### 5. 136 Adet Otomatik Birim Testi (pytest)
 Tüm mühendislik modüllerinin matematiksel doğruluğunu tek komutla test edin:
 ```bash
 python -m pytest
 ```
 
-### 5. Mühendislik Scriptlerini Bağımsız Çalıştırma
+### 6. Mühendislik ve Aviyonik Scriptlerini Bağımsız Çalıştırma
 ```bash
-# Uçuş Zarfı ve V-n Diyagramı
+# Uçuş Zarfı ve V-n Manevra / Pratt Gust Diyagramı
 python aerodinamik/scripts/flight_envelope_vn_diagram.py
 
-# Pervane Aeroakustiği ve 100 ft Sideline Gürültüsü
+# Pervane Aeroakustiği ve 100 ft Sideline Gürültüsü (<85 dBA)
 python itki_ve_guc_sistemleri/scripts/propeller_noise_mapper.py
 
 # MDO Çok Amaçlı Pareto Cephesi ve Sobol Duyarlılığı
 python optimizasyon_ve_mdo/scripts/dbf_pareto_optimizer.py
 
+# Pylon Parkuru Rüzgar Altı/Üstü Optimum Yatış (Bank) ve Enerji Çözücü
+python simulasyon/scripts/pylon_racing_optimal_bank.py
+
+# DroneCAN / UAVCAN Telemetri ve ESC / BMS Bus Simülatörü
+python aviyonik_ve_otonom/scripts/dronecan_telemetry_simulator.py
+
 # Uçtan Uca Tam Otonom Görev Simülasyonu
 python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
-
-# Canlı Web GCS Sunucusu
-python aviyonik_ve_otonom/src/telemetri/gcs_server.py
 ```
 
 ---
