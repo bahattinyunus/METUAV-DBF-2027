@@ -13,7 +13,7 @@
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Framework: ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble_Hawksbill-22314E.svg?style=for-the-badge&logo=ros)](https://docs.ros.org/en/humble/index.html)
 [![AIAA DBF: Universal](https://img.shields.io/badge/AIAA_DBF-Open_Framework-red.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
-[![CI/CD: Passing](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen.svg?style=for-the-badge&logo=github-actions)](https://github.com/bahattinyunus/METUAV-DBF-2027/actions)
+[![CI/CD: Passing](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen.svg?style=for-the-badge&logo=github-actions)](https://github.com/bahattinyunus/dbf-engineering-toolkit/actions)
 [![Kapsam: Tüm Takımlar](https://img.shields.io/badge/Audience-All_DBF_Teams-darkgreen.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
 [![Lisans: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
@@ -386,8 +386,8 @@ Telemetri düğümümüz terminalde ANSI formatında veya dahili web sunucusu ü
 
 ### 1. Çalışma Alanının Klonlanması ve Kurulum
 ```bash
-git clone https://github.com/bahattinyunus/METUAV-DBF-2027.git
-cd METUAV-DBF-2027
+git clone https://github.com/bahattinyunus/dbf-engineering-toolkit.git
+cd dbf-engineering-toolkit
 
 # Otomatik kurulum betiğini çalıştırın (Linux)
 chmod +x aviyonik_ve_otonom/setup_workspace.sh
