@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - MAVLink Telemetry Bridge Node
+AIAA DBF 2027 - MAVLink Telemetry Bridge Node
 Transmits aircraft flight telemetry, battery power distribution, and receives GCS commands.
 Compatible with PX4 / ArduPilot autopilots and QGroundControl / Mission Planner GCS.
 """
@@ -79,12 +79,12 @@ if ROS2_AVAILABLE:
             self.payload_dropped = False
 
             # Publishers to internal ROS2 network
-            self.link_health_pub = self.create_publisher(Bool, 'metuav/telemetry/link_alive', 10)
-            self.gcs_cmd_pub = self.create_publisher(String, 'metuav/gcs/commands', 10)
+            self.link_health_pub = self.create_publisher(Bool, 'dbf/telemetry/link_alive', 10)
+            self.gcs_cmd_pub = self.create_publisher(String, 'dbf/gcs/commands', 10)
 
             # Subscribers
-            self.create_subscription(String, 'metuav/mission_state', self.mission_cb, 10)
-            self.create_subscription(Bool, 'metuav/payload_drop_trigger', self.drop_cb, 10)
+            self.create_subscription(String, 'dbf/mission_state', self.mission_cb, 10)
+            self.create_subscription(Bool, 'dbf/payload_drop_trigger', self.drop_cb, 10)
 
             # Telemetry broadcast timer (10 Hz)
             rate = self.get_parameter('telemetry_rate_hz').as_double()

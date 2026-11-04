@@ -1,6 +1,6 @@
 #include "ucus_kontrol/adaptive_tecs.hpp"
 
-namespace metuav
+namespace dbf
 {
 namespace flight_control
 {
@@ -100,4 +100,4 @@ void AdaptiveTECS::update(
 }
 
 }  // namespace flight_control
-}  // namespace metuav
+}  // namespace dbf

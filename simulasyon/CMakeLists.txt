@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(metuav_simulation)
+project(dbf_simulation)
 
 find_package(ament_cmake REQUIRED)
 

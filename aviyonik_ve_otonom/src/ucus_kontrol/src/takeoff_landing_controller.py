@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Autonomous Takeoff, Flare & Braking Sequence State Machine
+AIAA DBF 2027 - Autonomous Takeoff, Flare & Braking Sequence State Machine
 Controls ground roll, rotation (V_r), liftoff, climb-out, glide path approach,
 flare with Wieselsberger ground effect compensation, and rollout braking.
 """
@@ -181,7 +181,7 @@ class TakeoffLandingController:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - OTONOM KALKIS VE INIS FAZ YONETICISI")
+    print("  AIAA DBF 2027 - OTONOM KALKIS VE INIS FAZ YONETICISI")
     print("=" * 72)
     ctl = TakeoffLandingController()
     ctl.arm()

@@ -16,7 +16,7 @@ from aviyonik_ve_otonom.src.telemetri.mavlink_protocol_router import (
 
 def test_mavlink_crc_calculation():
     # Verify standard X.25 CRC check
-    test_bytes = b"METUAV_DBF_2027_AUTOPILOT"
+    test_bytes = b"DBF_2027_AUTOPILOT"
     crc = x25_crc(test_bytes)
     assert 0 <= crc <= 0xFFFF
     # Invertible consistency
@@ -88,7 +88,7 @@ def test_mavlink_stream_parsing_with_noise():
     router = MAVLinkProtocolRouter()
 
     p1 = router.encode_heartbeat()
-    p2 = router.encode_statustext(severity=6, text="METUAV: DBF TARGET LOCKED")
+    p2 = router.encode_statustext(severity=6, text="DBF: TARGET LOCKED")
 
     # Corrupt stream with leading garbage bytes and concatenated packets
     stream = b"\x00\xFF\xAA\x55" + p1 + b"\x12\x34" + p2

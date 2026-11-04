@@ -1,4 +1,4 @@
-# 🛠️ METUAV DBF 2027 Mekanik ve Yapısal Tasarım Özellikleri
+# 🛠️ AIAA DBF 2027 Mekanik ve Yapısal Tasarım Özellikleri
 
 ## 1. Malzeme ve Üretim Yöntemleri
 

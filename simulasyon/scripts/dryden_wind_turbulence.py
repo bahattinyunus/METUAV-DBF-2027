@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Dryden Wind Turbulence & MIL-F-8785C Discrete Gust Simulator
+AIAA DBF 2027 - Dryden Wind Turbulence & MIL-F-8785C Discrete Gust Simulator
 Models continuous low-altitude atmospheric turbulence (Dryden spectral density)
 and discrete 1-cosine gust response with Pratt alleviation factor.
 Simulates gust-induced load factors (delta n_z) and angular disturbance rates.
@@ -172,7 +172,7 @@ class DrydenWindTurbulence:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - DRYDEN RÜZGAR TÜRBÜLANSI VE PRATT GUST ANALİZİ")
+    print("  AIAA DBF 2027 - DRYDEN RÜZGAR TÜRBÜLANSI VE PRATT GUST ANALİZİ")
     print("=" * 72)
     sim = DrydenWindTurbulence(
         altitude_m=25.0,

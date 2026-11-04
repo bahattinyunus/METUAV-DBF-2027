@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Multidisciplinary Design Optimization (MDO) & Scoring Engine
+AIAA DBF 2027 - Multidisciplinary Design Optimization (MDO) & Scoring Engine
 Performs sensitivity analysis, parametric sweeps, and Monte Carlo simulations
 against the AIAA Design/Build/Fly Master Scoring Formula to maximize competition score.
 """
@@ -187,7 +187,7 @@ class DBFScoringEngine:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - Cok Disiplinli Tasarim Optimizasyonu (MDO) & Skorlama")
+    print("  AIAA DBF 2027 - Cok Disiplinli Tasarim Optimizasyonu (MDO) & Skorlama")
     print("=" * 72)
 
     engine = DBFScoringEngine()

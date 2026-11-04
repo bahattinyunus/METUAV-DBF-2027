@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Advanced Composite Autoclave & Vacuum Bagging Cure Cycle Simulator
+AIAA DBF 2027 - Advanced Composite Autoclave & Vacuum Bagging Cure Cycle Simulator
 Simulates resin cure degree alpha(t), gelation threshold, dynamic viscosity evolution,
 and exothermic peak temperature for Toray T700 / Epoxy aerospace wing skin and spar parts.
 """

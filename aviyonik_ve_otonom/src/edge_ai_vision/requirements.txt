@@ -1,4 +1,4 @@
-# Edge-AI Vision Dependencies for METUAV DBF 2027
+# Edge-AI Vision Dependencies for AIAA DBF 2027
 numpy>=1.23.0
 opencv-python>=4.8.0
 scipy>=1.10.0

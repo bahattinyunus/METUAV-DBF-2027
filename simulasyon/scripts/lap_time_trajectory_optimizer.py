@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Multi-Lap Racing Trajectory & Energy Optimizer
+AIAA DBF 2027 - Multi-Lap Racing Trajectory & Energy Optimizer
 Simulates and optimizes flight performance across the official AIAA DBF competition course:
 - 1000 ft (304.8m) straightaway sprint
 - High-G coordinated pylon turns (180° / 360°)

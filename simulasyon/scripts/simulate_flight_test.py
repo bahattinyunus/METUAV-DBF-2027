@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Flight Simulation & SITL Verification Script
+AIAA DBF 2027 - Flight Simulation & SITL Verification Script
 Simulates full 3-DOF longitudinal & lateral flight dynamics through Mission 1, 2, and 3.
 Validates adaptive PID pitch compensation during Mission 3 payload release shock.
 """
@@ -126,7 +126,7 @@ class DBFAircraftSimulator:
 
 def run_mission3_simulation():
     print("=" * 60)
-    print("  METUAV DBF 2027 - Görev 3 Faydalı Yük Bırakma Simülasyonu")
+    print("  AIAA DBF 2027 - Görev 3 Faydalı Yük Bırakma Simülasyonu")
     print("=" * 60)
     sim = DBFAircraftSimulator()
     dt = 0.01

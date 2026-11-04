@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Wing Aeroelastic Flutter & Divergence Analyzer
+AIAA DBF 2027 - Wing Aeroelastic Flutter & Divergence Analyzer
 Performs 2-DOF (Plunge-Pitch) aeroelastic stability analysis across flight speeds.
 Determines wing classical flutter speed (V_flutter) and static divergence speed (V_div)
 using the V-g-f eigenvalue method to ensure compliance with AIAA DBF structural margins.
@@ -177,7 +177,7 @@ def main():
     res = analyzer.analyze_flutter(v_start=10.0, v_end=80.0, v_step=1.0)
 
     print("=" * 72)
-    print("  METUAV DBF 2027 - KANAT AEROELASTIK FLUTTER VE DIVERJANS ANALIZI")
+    print("  AIAA DBF 2027 - KANAT AEROELASTIK FLUTTER VE DIVERJANS ANALIZI")
     print("=" * 72)
     print(f"[*] Dogal Frekanslar:")
     print(f"    - 1. Egilme Modu (Bending / Plunge): {res['omega_h_hz']:.2f} Hz")

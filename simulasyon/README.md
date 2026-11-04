@@ -1,4 +1,4 @@
-# 🛫 METUAV DBF 2027 Simülasyon ve SITL Paketi
+# 🛫 AIAA DBF 2027 Simülasyon ve SITL Paketi
 
 Bu dizin, Gazebo ve PX4 SITL (Software-In-The-Loop) tabanlı simülasyon dünyasını, İHA modelini ve uçuş test senaryolarını içerir.
 
@@ -23,6 +23,6 @@ python simulasyon/scripts/simulate_flight_test.py
 
 ### ROS 2 ve Gazebo SITL Ortamı
 ```bash
-ros2 launch metuav_simulation dbf_mission3_sitl.launch.py
+ros2 launch dbf_simulation dbf_mission3_sitl.launch.py
 ```
-*(Not: `README.md` içerisindeki yazım uyumluluğu için `metuvav_simulation` ve `metuav_simulation` paket tanımları desteklenmektedir).*
+*(Not: Simülasyon başlatma dosyası standart ROS 2 `dbf_simulation` paketi üzerinden yönetilmektedir).*

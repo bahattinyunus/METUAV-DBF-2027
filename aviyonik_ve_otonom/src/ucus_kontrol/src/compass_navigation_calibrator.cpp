@@ -1,6 +1,6 @@
 #include "ucus_kontrol/compass_navigation_calibrator.hpp"
 
-namespace metuav
+namespace dbf
 {
 namespace navigation
 {
@@ -155,4 +155,4 @@ DualCompassHealth CompassNavigationCalibrator::processDualCompass(
 }
 
 }  // namespace navigation
-}  // namespace metuav
+}  // namespace dbf

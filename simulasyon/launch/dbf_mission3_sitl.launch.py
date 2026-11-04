@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Mission 3 SITL Launch File
+AIAA DBF 2027 - Mission 3 SITL Launch File
 Launches Gazebo simulation with DBF airfield world, spawns dbf_aircraft,
 and initializes flight controller, vision node, and drop ballistics computer.
 """

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Blended Winglet Aerodynamic & Vortex Attenuation Optimizer
+AIAA DBF 2027 - Blended Winglet Aerodynamic & Vortex Attenuation Optimizer
 Computes effective aspect ratio improvement (AR_eff), induced drag reduction (CDi),
 Trefftz plane lift distribution, wing root bending moment impact, and
 Burnham-Hallock wingtip vortex tangential velocity field decay.

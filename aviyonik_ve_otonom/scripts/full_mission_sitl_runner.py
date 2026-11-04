@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Full Autonomous Mission Software Prototype & SITL Runner
+AIAA DBF 2027 - Full Autonomous Mission Software Prototype & SITL Runner
 Executes an end-to-end simulated competition flight:
 1. Fast-boot sensor calibration (<20s)
 2. Takeoff run & climbout to 25m
@@ -95,7 +95,7 @@ class FullMissionPrototype:
         drop_error_distance = 0.0
 
         print("=" * 72)
-        print("  METUAV DBF 2027 - TAM OTONOM UÇUŞ PROTOTİPİ VE SİMÜLASYONU")
+        print("  AIAA DBF 2027 - TAM OTONOM UÇUŞ PROTOTİPİ VE SİMÜLASYONU")
         print("=" * 72)
 
         while sim_time < max_time and phase != "TOUCHDOWN":

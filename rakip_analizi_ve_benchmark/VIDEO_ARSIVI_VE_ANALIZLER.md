@@ -24,19 +24,19 @@ Videolardan yapılan kare kare incelemeler sonucunda rakiplerin en sık elenme v
 
 ### ⚠️ 1. Dönüşlerde Kanat Ucu Perdövitesi (Tip Stall) ve Viril
 *   *Gözlenen Hata:* Yüksek kanat açıklığına sahip ($b > 2.5\text{ m}$) takımlar pylon etrafında sert dönüş ($>45^\circ$ bank angle) yaparken kanat ucundaki akış ayrılmış ve uçak aniden virile girerek piste çakılmıştır.
-*   *METUAV Önlemi:* Kanat ucuna doğru $-2.0^\circ$ geometrik burulma (aerodynamic washout) uygulanmış ve aileronlar kanat ucundan $\%15$ iç kısma ötelenerek firar kenarı akışı korunmuştur.
+*   *AIAA DBF Önlemi:* Kanat ucuna doğru $-2.0^\circ$ geometrik burulma (aerodynamic washout) uygulanmış ve aileronlar kanat ucundan $\%15$ iç kısma ötelenerek firar kenarı akışı korunmuştur.
 
 ### ⚠️ 2. Görev 3 Ani Yük Bırakmada Yunuslama ve Stall
 *   *Gözlenen Hata:* Faydalı yük serbest bırakıldığı anda ağırlık merkezinin hızla geriye kayması sebebiyle uçak burnunu aniden yukarı dikmiş (pitch-up), elevatör ters momenti yetişememiş ve uçak havada tutunamayarak düşmüştür.
-*   *METUAV Önlemi:* `ucus_kontrol` paketimizdeki `adaptive_pid_controller.cpp` servoya bırakma darbesi gittiği milisaniyede elevatöre $-3.5^\circ$ burun-aşağı trim uygulamakta ve integrali $\%75$ kırparak aşırı salınımı önlemektedir.
+*   *AIAA DBF Önlemi:* `ucus_kontrol` paketimizdeki `adaptive_pid_controller.cpp` servoya bırakma darbesi gittiği milisaniyede elevatöre $-3.5^\circ$ burun-aşağı trim uygulamakta ve integrali $\%75$ kırparak aşırı salınımı önlemektedir.
 
 ### ⚠️ 3. 55 lbs Sınırında İniş Takımı Kırılması
 *   *Gözlenen Hata:* 55 lbs maksimum ağırlıkta sert iniş yapan birçok takımın alüminyum veya 3D baskı iniş takımları bükülmüş veya gövdeyi yırtarak pervaneyi yere vurmuştur (Prop Strike DQ).
-*   *METUAV Önlemi:* Yay çeliği takviyeli tek parça otoklav kürlü 4 mm karbon iniş takımı bacakları ve $110\text{ mm}$ sünger çekirdekli rulmanlı tekerlekler kullanılmıştır.
+*   *AIAA DBF Önlemi:* Yay çeliği takviyeli tek parça otoklav kürlü 4 mm karbon iniş takımı bacakları ve $110\text{ mm}$ sünger çekirdekli rulmanlı tekerlekler kullanılmıştır.
 
 ### ⚠️ 4. 5 Dakika Kuralında Zaman Aşımı
 *   *Gözlenen Hata:* Kanat bağlantılarını alyan civatalarla vidalamaya çalışan takımlar soğukta veya el titremesiyle civatayı yuvaya oturtamamış ve 5 dakikalık süreyi aşarak uçuş hakkını kaybetmiştir.
-*   *METUAV Önlemi:* Aletsiz bilyeli kilit pimleri (quick-release ball lock pin) ve kör-geçme konektörlerle montaj süresi **3 dakika 5 saniyeye** indirilmiştir.
+*   *AIAA DBF Önlemi:* Aletsiz bilyeli kilit pimleri (quick-release ball lock pin) ve kör-geçme konektörlerle montaj süresi **3 dakika 5 saniyeye** indirilmiştir.
 
 ---
 

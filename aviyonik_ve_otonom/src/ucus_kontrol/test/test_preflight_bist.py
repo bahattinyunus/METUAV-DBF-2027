@@ -20,7 +20,7 @@ def test_nominal_bist_pass():
     assert cert.is_flight_authorized is True
     assert cert.failed_checks == 0
     assert cert.passed_checks == 6
-    assert cert.flight_readiness_code == "METUAV-AIR-GO-2027"
+    assert cert.flight_readiness_code == "DBF-AIR-GO-2027"
 
 def test_bist_rejection_on_servo_stall():
     engine = PreFlightBISTEngine()
@@ -40,4 +40,4 @@ def test_bist_rejection_on_servo_stall():
 
     assert cert.is_flight_authorized is False
     assert cert.failed_checks > 0
-    assert cert.flight_readiness_code == "METUAV-ABORT-BIST-FAIL"
+    assert cert.flight_readiness_code == "DBF-ABORT-BIST-FAIL"

@@ -6,7 +6,7 @@
 #include <array>
 #include <cstdint>
 
-namespace metuav
+namespace dbf
 {
 namespace calibration
 {
@@ -61,6 +61,6 @@ private:
 };
 
 }  // namespace calibration
-}  // namespace metuav
+}  // namespace dbf
 
 #endif  // UCUS_KONTROL__FAST_BOOT_CALIBRATOR_HPP_

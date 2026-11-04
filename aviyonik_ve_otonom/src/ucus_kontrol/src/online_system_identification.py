@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Online Real-Time Aerodynamic System Identification
+AIAA DBF 2027 - Online Real-Time Aerodynamic System Identification
 Implements Recursive Least Squares (RLS) with exponential forgetting factor (lambda)
 to identify longitudinal and lateral stability derivatives (Cm_alpha, Cm_q, Cm_delta_e, Cl_beta, Cl_p)
 directly from in-flight IMU, pitot-static, and servo telemetry streams.

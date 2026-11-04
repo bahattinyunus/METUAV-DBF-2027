@@ -1,6 +1,6 @@
 # 🛰️ Aviyonik ve Otonom Çalışma Alanı (ROS 2 Humble)
 
-Bu dizin, **METUAV DBF 2027** uçağının uçuş kontrolü, hedef tespiti ve yer istasyonu telemetri haberleşmesini yürüten ana ROS 2 Humble çalışma alanıdır (workspace).
+Bu dizin, **AIAA DBF 2027** uçağının uçuş kontrolü, hedef tespiti ve yer istasyonu telemetri haberleşmesini yürüten ana ROS 2 Humble çalışma alanıdır (workspace).
 
 ## 📦 Paket Mimarisi
 

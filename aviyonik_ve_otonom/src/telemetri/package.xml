@@ -3,7 +3,7 @@
 <package format="3">
   <name>telemetri</name>
   <version>1.0.0</version>
-  <description>METUAV DBF 2027 MAVLink GCS Yer İstasyonu ve Otopilot Telemetri Köprüsü</description>
+  <description>AIAA DBF 2027 MAVLink GCS Yer İstasyonu ve Otopilot Telemetri Köprüsü</description>
   <maintainer email="bahattinyunuscetin@hotmail.com">Bahattin Yunus ÇETİN</maintainer>
   <license>MIT</license>
 

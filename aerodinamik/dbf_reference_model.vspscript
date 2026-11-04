@@ -1,4 +1,4 @@
-// OpenVSP Parametric Model Generator for METUAV DBF 2027
+// OpenVSP Parametric Model Generator for AIAA DBF 2027 Reference Aircraft
 // AIAA Design/Build/Fly Competition Aircraft
 
 void main()
@@ -49,6 +49,6 @@ void main()
 
     // Update and Save Model
     Update();
-    WriteVSPFile("METUAV_DBF_2027_Geometry.vsp3");
-    Print("METUAV DBF 2027 OpenVSP modeli basariyla olusturuldu!");
+    WriteVSPFile("DBF_2027_Reference_Geometry.vsp3");
+    Print("AIAA DBF 2027 Referans OpenVSP modeli basariyla olusturuldu!");
 }

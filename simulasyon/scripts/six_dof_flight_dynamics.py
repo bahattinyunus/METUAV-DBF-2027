@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Full 6-DOF Nonlinear Flight Dynamics Simulator
+AIAA DBF 2027 - Full 6-DOF Nonlinear Flight Dynamics Simulator
 Rigid-body 12-state aircraft equations of motion with quaternion attitude representation,
 full aerodynamic stability & control derivatives, and trim solver.
 """
@@ -288,7 +288,7 @@ class Aircraft6DOF:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - 6-DOF NONLINEAR FLIGHT DYNAMICS SIMULATOR")
+    print("  AIAA DBF 2027 - 6-DOF NONLINEAR FLIGHT DYNAMICS SIMULATOR")
     print("=" * 72)
     uav = Aircraft6DOF(mass_kg=24.85)
 

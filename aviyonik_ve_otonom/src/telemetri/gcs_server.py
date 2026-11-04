@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Ground Control Station (GCS) Telemetry Hub & Web Server
+AIAA DBF 2027 - Ground Control Station (GCS) Telemetry Hub & Web Server
 Serves high-rate telemetry packets, PFD cockpit status, and FDIR health
 over HTTP/JSON for the mission flight-line operators.
 """
@@ -138,7 +138,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1].isdigit():
         port = int(sys.argv[1])
     print(f"============================================================")
-    print(f"  METUAV DBF 2027 - GCS Cockpit & Telemetry Hub Web Sunucusu")
+    print(f"  AIAA DBF 2027 - GCS Cockpit & Telemetry Hub Web Sunucusu")
     print(f"  Yer İstasyonu: http://localhost:{port}")
     print(f"============================================================")
     gcs = GCSServer(port=port)

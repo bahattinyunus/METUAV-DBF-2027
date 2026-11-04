@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Wind-Compensated Dubins Pylon Race-Track Path Planner
+AIAA DBF 2027 - Wind-Compensated Dubins Pylon Race-Track Path Planner
 Generates time-optimal race circuit trajectories around DBF pylons with
 dynamic bank angle limiting, G-load monitoring, and wind drift crab-angle compensation.
 """

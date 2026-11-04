@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Mission 3 Aero-Ballistic Dispersion & Dynamic Sightline Optimizer
+AIAA DBF 2027 - Mission 3 Aero-Ballistic Dispersion & Dynamic Sightline Optimizer
 Performs Monte Carlo stochastic release dispersion analysis and generates real-time
 HUD sightline lead angle tables:
 - Stochastic perturbations in airspeed, altitude, pitch, package tumbling drag (Cd*A),

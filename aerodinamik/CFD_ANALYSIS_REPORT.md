@@ -1,4 +1,4 @@
-# 🌪️ METUAV DBF 2027 Aerodinamik Tasarım ve CFD Analiz Raporu
+# 🌪️ AIAA DBF 2027 Aerodinamik Tasarım ve CFD Analiz Raporu (Referans Platform)
 
 Bu doküman, AIAA Design/Build/Fly 2027 yarışması kuralları ve tasarım raporu (Design Report) isterlerine uygun olarak hazırlanmış aerodinamik analiz bulgularını içerir.
 

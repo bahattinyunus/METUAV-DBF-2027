@@ -1,8 +1,8 @@
-# ⏱️ METUAV DBF 2027 5 Dakika Hızlı Montaj ve Uçuşa Hazırlık Kılavuzu
+# ⏱️ AIAA DBF 2027 5 Dakika Hızlı Montaj ve Uçuşa Hazırlık Kılavuzu
 
 AIAA DBF yarışma kuralı: *"Uçağın taşıma kutusundan çıkarılıp uçuş hattına hazır hale gelmesi ve tüm aviyonik kalibrasyonların tamamlanması maksimum 5 dakika (300 saniye) sürmelidir."*
 
-METUAV mühendislik ekibi, bu ister doğrultusunda **Aletsiz Hızlı Kilit (Tool-less Quick-Lock)** ve **Kör-Geçme Çok Kutuplu Konektör (Blind-Mate Multi-Pin Connectors)** mimarilerini tasarlamıştır.
+DBF mühendislik ekibi, bu ister doğrultusunda **Aletsiz Hızlı Kilit (Tool-less Quick-Lock)** ve **Kör-Geçme Çok Kutuplu Konektör (Blind-Mate Multi-Pin Connectors)** mimarilerini tasarlamıştır.
 
 ---
 

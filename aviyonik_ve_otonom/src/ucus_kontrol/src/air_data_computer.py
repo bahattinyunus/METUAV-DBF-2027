@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Air Data Computer (ADC) & Synthetic Aerodynamic Angle / Wind Estimator
+AIAA DBF 2027 - Air Data Computer (ADC) & Synthetic Aerodynamic Angle / Wind Estimator
 Computes calibrated/true airspeed, pressure & density altitude, synthetic Angle of Attack (AoA)
 and Sideslip (AoS) from inertial dynamics, and resolves 3D wind velocity vector relative to the aircraft.
 """

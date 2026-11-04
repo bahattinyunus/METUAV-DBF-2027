@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Stochastic Monte Carlo Drop Trajectory & CEP Analyzer
+AIAA DBF 2027 - Stochastic Monte Carlo Drop Trajectory & CEP Analyzer
 Runs 1000+ stochastic flight runs with random Dryden wind gusts, servo latency jitter,
 and camera tracking noise to quantify CEP-50 and CEP-95 accuracy for Mission 3.
 """

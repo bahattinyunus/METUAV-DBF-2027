@@ -4,18 +4,18 @@ from rakip_analizi_ve_benchmark.scripts.competitor_benchmark_matrix import build
 def test_benchmark_database_structure():
     db = build_benchmark_database()
     assert len(db) >= 6
-    metuav = db[0]
-    assert metuav.team == "METUAV Gokdogan"
-    assert metuav.togw_lbs <= 55.0
+    baseline = db[0]
+    assert baseline.team == "DBF Reference Model"
+    assert baseline.togw_lbs <= 55.0
 
-def test_metuav_competitiveness():
+def test_baseline_competitiveness():
     db = build_benchmark_database()
-    metuav = db[0]
+    baseline = db[0]
     competitors = db[1:]
 
     avg_payload = sum(c.payload_mass_kg for c in competitors) / len(competitors)
-    # METUAV payload must be competitive with top world champions
-    assert metuav.payload_mass_kg >= avg_payload
+    # DBF Baseline payload must be competitive with top world champions
+    assert baseline.payload_mass_kg >= avg_payload
 
     # All aircraft must adhere to 55 lbs TOGW limit
     for ac in db:

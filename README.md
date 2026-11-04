@@ -1,32 +1,32 @@
 <div align="center">
 
 <p align="center">
-  <img src="docs/images/gokdogan_aircraft_banner.jpg" alt="METUAV DBF 2027 GÖKDOĞAN İHA" width="100%" style="border-radius: 14px; box-shadow: 0 10px 35px rgba(0,0,0,0.65);" />
+  <img src="docs/images/gokdogan_aircraft_banner.jpg" alt="AIAA DBF Reference Aircraft" width="100%" style="border-radius: 14px; box-shadow: 0 10px 35px rgba(0,0,0,0.65);" />
   <br>
-  <em>Şekil 1: METUAV Gökdoğan İHA — 2.40m Açıklık, Yüksek Taşıyıcılı Karbon Kompozit Gövde ve Canlı Aviyonik HUD Telemetrisi.</em>
+  <em>Şekil 1: AIAA DBF Referans İHA Mimarisi — 2.40m Açıklık, Yüksek Taşıyıcılı Karbon Kompozit Gövde ve Canlı Aviyonik HUD Telemetrisi.</em>
 </p>
 
-# 🦅 METUAV DBF 2027 | GÖKDOĞAN
-### AIAA Design/Build/Fly Resmî İHA Geliştirme, Otonomi ve Mühendislik Deposu
+# ✈️ AIAA DBF (Design/Build/Fly) Open Engineering Framework & Toolkit
+### Üniversite ve Mühendislik Takımları için Kapsamlı DBF Hazırlık, Tasarım ve Otonomi Platformu
 
 [![Standart: C++20](https://img.shields.io/badge/C++-20-blue.svg?style=for-the-badge&logo=c%2B%2B)](https://isocpp.org/)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Framework: ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble_Hawksbill-22314E.svg?style=for-the-badge&logo=ros)](https://docs.ros.org/en/humble/index.html)
-[![AIAA DBF: 2027](https://img.shields.io/badge/AIAA_DBF-2027-red.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
+[![AIAA DBF: Universal](https://img.shields.io/badge/AIAA_DBF-Open_Framework-red.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
 [![CI/CD: Passing](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen.svg?style=for-the-badge&logo=github-actions)](https://github.com/bahattinyunus/METUAV-DBF-2027/actions)
-[![Takım: METU MECH](https://img.shields.io/badge/Team-METU_MECH-C8102E.svg?style=for-the-badge)](https://mech.metu.edu.tr/)
+[![Kapsam: Tüm Takımlar](https://img.shields.io/badge/Audience-All_DBF_Teams-darkgreen.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
 [![Lisans: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 ```text
-  __  __ _____ _____ _   _     ___     __   ____  ____  _____   ____   ___ ____ _____ 
- |  \/  | ____|_   _| | | |   / \ \   / /  |  _ \| __ )|  ___| |___ \ / _ \___ \___  |
- | |\/| |  _|   | | | | | |  / _ \ \ / /   | | | |  _ \| |_      __) | | | |__) | / / 
- | |  | | |___  | | | |_| | / ___ \ V /    | |_| | |_) |  _|    / __/| |_| / __/ / /  
- |_|  |_|_____| |_|  \___/ /_/   \_\_/     |____/|____/|_|     |_____|\___/_____/_/   
-                    🦅 O D T Ü   H A V A C I L I K   T A K I M I 🦅
+   _    ___    _       _       ____  ____  _____   _____                                           _    
+  / \  |_ _|  / \     / \     |  _ \| __ )|  ___| |  ___| __ __ _ _ __ ___   _____      _____  _ __| | __
+ / _ \  | |  / _ \   / _ \    | | | |  _ \| |_    | |_ | '__/ _` | '_ ` _ \ / _ \ \ /\ / / _ \| '__| |/ /
+/ ___ \ | | / ___ \ / ___ \   | |_| | |_) |  _|   |  _|| | | (_| | | | | | |  __/\ V  V / (_) | |  |   < 
+/_/   \_\___/_/   \_/_/   \_\  |____/|____/|_|     |_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\
+                    🌍 A I A A   D E S I G N / B U I L D / F L Y 🌍
 ```
 
-*Orta Doğu Teknik Üniversitesi (ODTÜ) Makina ve Havacılık & Uzay Mühendisliği bünyesindeki **METUAV** takımının AIAA DBF 2027 için geliştirdiği yüksek taşıma kapasiteli, Edge-AI vizyon destekli ve adaptif uçuş kontrol mimarisine sahip İnsansız Hava Aracı sistemi.*
+*Dünyanın en prestijli üniversiteler arası uçak tasarımı yarışması olan **AIAA Design/Build/Fly (DBF)** için hazırlanan tüm mühendislik takımlarına yönelik açık kaynaklı, modüler ve doğrulanmış aerodinamik analiz, kompozit yapısal FEA, elektrik itki optimizasyonu, 15-durumlu EKF aviyonik, Edge-AI hedefleme ve çok disiplinli optimizasyon (MDO) araç seti.*
 
 </div>
 
@@ -34,9 +34,9 @@
 
 ## 📑 İçindekiler
 1. [Proje Özeti ve Mühendislik Felsefesi](#-proje-özeti-ve-mühendislik-felsefesi)
-2. [Genel Uçak Özellikleri ve Performans Tablosu](#-genel-uçak-özellikleri-ve-performans-tablosu)
+2. [Genel Uçak Özellikleri ve Performans Tablosu (Referans Platform)](#-genel-uçak-özellikleri-ve-performans-tablosu-referans-platform)
 3. [Sistem Mimarisi ve Akış Diyagramları](#-sistem-mimarisi-ve-akış-diyagramları)
-4. [AIAA DBF 2027 Görev Profilleri ve Kurallar](#-aiaa-dbf-2027-görev-profilleri-ve-kurallar)
+4. [AIAA DBF Görev Profilleri ve Yarışma Kuralları](#-aiaa-dbf-görev-profilleri-ve-yarışma-kuralları)
 5. [Depo Klasör Yapısı](#-depo-klasör-yapısı)
 6. [Mühendislik Alt Sistemleri Derinlemesine İnceleme](#-mühendislik-alt-sistemleri-derinlemesine-inceleme)
    * [Aerodinamik & CFD Analizi](#1-aerodinamik-ve-sayısal-akışkanlar-dinamiği-cfd)
@@ -48,20 +48,22 @@
 7. [Uluslararası Rakipler ve Benchmark Matrisi](#-uluslararası-rakipler-ve-benchmark-matrisi)
 8. [Kurulum, Derleme ve Test Kılavuzu](#-kurulum-derleme-ve-test-kılavuzu)
 9. [Uçuş Öncesi Kontrol Listeleri ve Standart Operasyon (SOP)](#-uçuş-öncesi-kontrol-listeleri-ve-standart-operasyon-sop)
-10. [Katkıda Bulunma ve Takım İletişimi](#-katkıda-bulunma-ve-takım-iletişimi)
+10. [Katkıda Bulunma ve Takım Entegrasyonu](#-katkıda-bulunma-ve-takım-entegrasyonu)
 
 ---
 
 ## 📌 Proje Özeti ve Mühendislik Felsefesi
 
-**METUAV DBF 2027 | GÖKDOĞAN**, dünyanın en prestijli üniversiteler arası uçak tasarımı yarışması olan **AIAA Design/Build/Fly (DBF)** için geliştirilmiştir. 
+Bu açık kaynak deposu, **AIAA Design/Build/Fly (DBF)** yarışmasına katılan tüm üniversite takımları için uçtan uca bir hazırlık, simülasyon, aviyonik mimari ve hesaplama çatısı sunar. Her takım bu depoyu kendi uçak boyutlarına, batarya/motor seçimlerine ve faydalı yük gereksinimlerine göre konfigüre edip kullanabilir.
 
-Projemizin temel mühendislik felsefesi:
+Yarışma hazırlığındaki temel mühendislik felsefesi:
 > *"Sadece aerodinamik olarak verimli bir uçak üretmek yeterli değildir. Şampiyonluk; matematiksel skor fonksiyonunu (MDO) en üst düzeye çıkaran, $55\text{ lbs}$ kütle sınırını son gramına kadar kullanan, yük bırakma anındaki ani ağırlık merkezi (CG) şokunu **Edge-AI destekli adaptif kontrol algoritmalarıyla** sönümleyen ve 5 dakikalık montaj kuralını aletsiz kilit sistemleriyle aşan bütüncül bir sistem entegrasyonuyla kazanılır."*
 
 ---
 
-## 📊 Genel Uçak Özellikleri ve Performans Tablosu
+## 📊 Genel Uçak Özellikleri ve Performans Tablosu (Referans Platform)
+
+Aşağıdaki veriler, bu çerçevede hazır olarak sunulan şampiyona standartlarındaki **DBF Referans Platformu**'na aittir. Kendi takımınızın parametrelerini `optimizasyon_ve_mdo/` ve `mekanik_ve_yapisal/` modüllerinden güncelleyebilirsiniz:
 
 | Parametre | Metrik Birim (SI) | Havacılık / İngiliz Birimi | Notlar / Tasarım Gerekçesi |
 | :--- | :--- | :--- | :--- |
@@ -130,7 +132,7 @@ flowchart TD
 
 ---
 
-### 2. Görev 3 Otonom Hedef Tespiti ve Ani CG Kayması Kompanzasyon Döngüsü
+### 2. Otonom Hedef Tespiti ve Ani CG Kayması Kompanzasyon Döngüsü
 ```mermaid
 sequenceDiagram
     autonumber
@@ -141,13 +143,13 @@ sequenceDiagram
     participant Controller as C++20 Adaptif PID Kontrolcü
     participant Airframe as Uçak Dinamiği & Aerodinamik
 
-    Pilot->>Controller: Görev 3 Bırakma Hattı Onayı
+    Pilot->>Controller: Görev Bırakma Hattı Onayı
     loop 30 FPS Hedef Takibi
         Cam->>Ballistics: Zemin Hedef Koordinatı (X, Y)
         Ballistics->>Ballistics: RK4 İle Düşüş Yörüngesini Hesapla (Rüzgar & Sürükleme)
     end
     Note over Ballistics: Hata < 1.20m tolerans penceresine girdi!
-    Ballistics->>Actuator: /metuav/payload_drop_trigger (HIGH)
+    Ballistics->>Actuator: /dbf/payload_drop_trigger (HIGH)
     Ballistics->>Controller: Anlık CG Kayması Uyarısı (+44.1 mm Aft)
     Actuator->>Airframe: 8.35 kg Yük Serbest Bırakıldı (0.12 sn)
     Note over Airframe: Kütle düştü: 21.05 kg -> 12.70 kg! Burun dikme momenti oluştu!
@@ -180,24 +182,24 @@ stateDiagram-v2
 
 ---
 
-## ⚖️ AIAA DBF 2027 Görev Profilleri ve Kurallar
+## ⚖️ AIAA DBF Görev Profilleri ve Yarışma Kuralları
 
-Uçağımız, resmi AIAA kurallarına göre 4 aşamalı görev zincirini başarıyla icra edecek şekilde tasarlanmıştır:
+DBF yarışmaları tipik olarak 4 aşamalı standart bir görev zincirinden oluşur:
 
 1.  **Yer Görevi (Ground Mission):**
     *   Uçağın yapısal rijitliğini kanıtlamak amacıyla uygulanan kanat ucu $+3.5g$ statik yükleme testi.
-    *   Kutudan çıkarma, mekanik montaj, elektrik bağlantısı ve sistemlerin boot edilerek yeşil bayrak kaldırılması sürecinin **maksimum 5 dakika (300 saniye)** içinde tamamlanması kuralı (Takımımız: **185 saniye**).
+    *   Kutudan çıkarma, mekanik montaj, elektrik bağlantısı ve sistemlerin boot edilerek yeşil bayrak kaldırılması sürecinin **maksimum 5 dakika (300 saniye)** içinde tamamlanması kuralı (Referans platformumuz: **185 saniye**).
 2.  **Görev 1 (Staging Flight):**
-    *   Yüksüz konfigürasyonda, 5 dakika süre sınırı içinde $750\text{ m}$'lik pylon parkurunda **3 tam turun** en yüksek hızla tamamlanması (Hedeflenen süre: **99.8 saniye**, Ortalama hız: **$24.5\text{ m/s}$**).
+    *   Yüksüz konfigürasyonda, 5 dakika süre sınırı içinde $750\text{ m}$'lik pylon parkurunda **3 tam turun** en yüksek hızla tamamlanması (Referans süre: **99.8 saniye**, Ortalama hız: **$24.5\text{ m/s}$**).
 3.  **Görev 2 (Payload Flight):**
-    *   $11.20\text{ kg}$ ($24.69\text{ lbs}$) ağırlığındaki medikal yükün gövde içine yüklenmesi. Maksimum $55\text{ lbs}$ TOGW sınırında kalkış mesafesini $35\text{ m}$ altında tutarak 3 turun en az enerji tüketimiyle tamamlanması.
+    *   Ağır faydalı yükün gövde içine yüklenmesi. Maksimum $55\text{ lbs}$ TOGW sınırında kalkış mesafesini $35\text{ m}$ altında tutarak 3 turun en az enerji tüketimiyle tamamlanması.
 4.  **Görev 3 (Delivery & Precision Drop Flight):**
-    *   Hedef bölgesi üzerinde uçarken gövde altı kapakların açılarak $8.35\text{ kg}$ faydalı yükün bırakılması.
+    *   Hedef bölgesi üzerinde uçarken gövde altı kapakların açılarak faydalı yükün hassas bırakılması.
     *   Yük bırakıldığı andaki ani kütle düşüşü ve **$+44.1\text{ mm}$ ağırlık merkezi (CG) kaymasında** uçağın kontrolden çıkmasını önleyen aktif aerodinamik trim kompanzasyonu.
 
 <div align="center">
-  <img src="docs/images/gokdogan_mission_profiles.png" alt="AIAA DBF 2027 Görev Profilleri ve Performans Mimarisi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
-  <p><em>Şekil 2: AIAA DBF 2027 4 aşamalı yarışma görev profilleri, yer montaj süresi, kalkış mesafesi ve Görev 3 bırakma mimarisi.</em></p>
+  <img src="docs/images/gokdogan_mission_profiles.png" alt="AIAA DBF Görev Profilleri ve Performans Mimarisi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
+  <p><em>Şekil 2: AIAA DBF standart görev profilleri, yer montaj süresi, kalkış mesafesi ve hassas bırakma mimarisi.</em></p>
 </div>
 
 ---
@@ -205,11 +207,12 @@ Uçağımız, resmi AIAA kurallarına göre 4 aşamalı görev zincirini başar�
 ## 📂 Depo Klasör Yapısı
 
 ```text
-METUAV-DBF-2027/
+AIAA-DBF-Framework/
 │
 ├── 📁 aerodinamik/              # XFLR5, OpenVSP tasarımları, polar analizleri ve CFD analiz raporu
 │   ├── data/                   # Selig 1223 ve Clark Y polar veri setleri (.csv)
 │   ├── scripts/                # 3D kanat dönüşümü, 3D VLM çözücü, winglet optimizer, downwash ve trim analiz araçları
+│   ├── dbf_reference_model.vspscript # OpenVSP parametrik referans model scripti
 │   └── CFD_ANALYSIS_REPORT.md  # Kapsamlı AIAA DBF formatında aerodinamik rapor
 ├── 📁 mekanik_ve_yapisal/       # SolidWorks CAD dataları, kompozit katman analizleri (FEA)
 │   ├── scripts/                # Kütle/CG, gövde burkulması (buckling), spar gerilme, flutter ve iniş takımı simülatörü
@@ -241,11 +244,11 @@ METUAV-DBF-2027/
 ├── 📁 uretim_ve_test/           # Lazer kesim vektörleri, 3D baskı (STL/G-code) ve rüzgar tüneli verileri
 │   ├── dxf_outputs/            # CNC lazer kesim kanat nervür vektörleri (selig1223_root_rib_320mm.dxf)
 │   ├── scripts/                # generate_wing_rib_dxf.py (Parametrik DXF üretici)
-│   ├── specs/                  # Görev 3 faydalı yük bırakıcı mekanik şartnamesi
+│   ├── specs/                  # Görev faydalı yük bırakıcı mekanik şartnamesi
 │   ├── manufacturing_guide.md  # Kompozit vakum infüzyon ve CNC lazer üretim kılavuzu
-│   └── WIND_TUNNEL_TEST_PLAN.md # ODTÜ Rüzgar Tüneli test protokolü
+│   └── WIND_TUNNEL_TEST_PLAN.md # Rüzgar tüneli test protokolü
 ├── 📁 dokumantasyon/            # Resmî tasarım raporları ve standart operasyon listeleri
-│   ├── AIAA_DBF_2027_DESIGN_REPORT.md # 60 Sayfalık AIAA resmî tasarım raporu
+│   ├── AIAA_DBF_2027_DESIGN_REPORT.md # Kapsamlı AIAA resmî tasarım raporu şablonu
 │   └── FLIGHT_CHECKLISTS_AND_SOP.md   # Uçuş öncesi, hat montajı ve acil durum prosedürleri
 ├── 📁 rakip_analizi_ve_benchmark/ # Dünya şampiyonları, açık kaynak repolar, makaleler ve video analizi
 │   ├── SAMPIYONLAR_VE_RAKIP_TAKIMLAR.md # FH Joanneum, ERAU, RWTH Aachen, Georgia Tech, Ljubljana analizi
@@ -262,16 +265,16 @@ METUAV-DBF-2027/
 ## 🔬 Mühendislik Alt Sistemleri Derinlemesine İnceleme
 
 ### 1. Aerodinamik ve Sayısal Akışkanlar Dinamiği (CFD)
-*   **Kanat Profili:** Selig 1223 yüksek taşıyıcılı kamberli profil seçilmiştir. $Re = 3.5 \times 10^5$ akış şartlarında 2D $C_{l_{max}} = 2.23$ üretmektedir.
+*   **Kanat Profili:** Selig 1223 yüksek taşıyıcılı kamberli profil referans alınmıştır. $Re = 3.5 \times 10^5$ akış şartlarında 2D $C_{l_{max}} = 2.23$ üretmektedir.
 *   **3D Sonlu Kanat Dönüşümü & VLM Çözücü:** Prandtl lifting-line teorisi ve Helmbold formülasyonu ile sonlu kanat sirkülasyonu modellenmiştir. $AR = 8.19$ ve $\lambda = 0.812$ sivrilme oranıyla $C_{L_{max, 3D}} = 1.96$, indüklenmiş sürükleme verimi $e = 0.88$ bulunmuştur.
 *   **4-Aşama DBF Görev Statik Kararlılık, Trim ve Aeroelastik Kontrol Tersinmesi:** Uçağın 4 farklı kütle ve yükleme konfigürasyonunda (Ferry $\%26.5\text{ MAC}$, M2 Kargo $\%27.8\text{ MAC}$, M3 Yük Taşınması $\%28.2\text{ MAC}$ ve M3 Yük Bırakımı Sonrası $\%34.5\text{ MAC}$) nötr nokta ($x_{np} = \%55.97\text{ MAC}$) ve pozitif statik marjin ($K_n \ge \%21.47$) korunmuştur. Karbon D-box kanat kutusunun burulma rijitliği ($GJ = 4850\text{ N}\cdot\text{m}^2$) ile kanatçık aeroelastik tersinme hızı ($V_R \gg 35\text{ m/s}$, $SF > 2.0$) güvenceye alınmış; MIL-F-8785C Seviye 1 Dutch-roll sönüm oranı ($\zeta = 0.238 > 0.08$) doğrulanmıştır.
 *   **Yatay Kuyruk Downwash & Nötr Nokta Analizi:** Kanat girdabının yatay stabilize üzerindeki yıkama açısı ($\epsilon = 3.33^\circ$) ve gradyanı ($d\epsilon/d\alpha = 0.208$) hesaplanarak tam uçak nötr noktası $x_{np} = \%73.4\text{ MAC}$ ve statik marjin $+\%46.4\text{ MAC}$ (aerodinamik olarak son derece kararlı) olarak doğrulanmıştır.
 *   **Kıvrık Kanat Ucu (Blended Winglet) ve Burnham-Hallock Girdap Zayıflatma Optimizasyonu:** Whitcomb ve Kroo Trefftz düzlemi lifting-line teorisi ile non-planar kanat ucu geometrisi ($h_w = 0.18\text{ m}$, $\theta_{cant} = 75^\circ$, $\Lambda = 35^\circ$) modellenmiştir. Efektif en-boy oranı $\%7.3$ artırılarak ($AR_{eff} = 7.57$) indüklenmiş sürükleme $\%6.8$ azaltılmış, net seyir $L/D$ değeri $\%3.1$ iyileştirilmiştir. Kök eğilme momenti artışı $\%2.6$ seviyesinde tutulmuş; Burnham-Hallock wake vortex modeliyle kanat ucu tepe teğetsel girdap hızı $\%36.5$ sönümlenerek kanat ucu ayrılması minimize edilmiştir.
-*   **CFD Analizleri:** ANSYS Fluent 2024 ortamında $k-\omega\text{ SST}$ türbülans modeli ve 7.85 milyon polihedral hücreli ağ ile sınır katman laminar ayrılma balonları çözümlenmiştir. Seyir hücum açısında ($\alpha = 4.0^\circ$) maksimum süzülme oranı $(L/D)_{3D} = 19.31$ elde edilmiştir.
+*   **CFD Analizleri:** ANSYS Fluent ortamında $k-\omega\text{ SST}$ türbülans modeli ve 7.85 milyon polihedral hücreli ağ ile sınır katman laminar ayrılma balonları çözümlenmiştir. Seyir hücum açısında ($\alpha = 4.0^\circ$) maksimum süzülme oranı $(L/D)_{3D} = 19.31$ elde edilmiştir.
 
 <div align="center">
-  <img src="docs/images/gokdogan_wind_tunnel_test.png" alt="METUAV Gökdoğan Rüzgar Tüneli Akış ve Yüzey Basınç Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
-  <p><em>Şekil 3: ODTÜ Rüzgar Tüneli duman akış çizgileri, Selig 1223 yüzey basınç (Cp) dağılımı ve Trefftz düzlemi indüklenmiş hız analizi.</em></p>
+  <img src="docs/images/gokdogan_wind_tunnel_test.png" alt="AIAA DBF Rüzgar Tüneli Akış ve Yüzey Basınç Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
+  <p><em>Şekil 3: Rüzgar Tüneli duman akış çizgileri, Selig 1223 yüzey basınç (Cp) dağılımı ve Trefftz düzlemi indüklenmiş hız analizi.</em></p>
 </div>
 
 ### 2. Yapısal Tasarım ve Karbon Spar FEA
@@ -285,8 +288,8 @@ METUAV-DBF-2027/
 *   **Karbon Yaprak Yaylı İniş Takımı Dinamik Vuruntu Simülatörü:** $24.85\text{ kg}$ maksimum iniş kütlesi ve $1.0\text{ m/s}$ çökme hızında Hunt-Crossley kontak mekaniği ile çözülmüş; tepe ivme $2.21g \le 3.0g$, maksimum sehim $55.1\text{ mm} \le 60.0\text{ mm}$ ve pervane-zemin emniyet payı $59.9\text{ mm} > 50\text{ mm}$ olarak doğrulanmıştır.
 
 <div align="center">
-  <img src="docs/images/gokdogan_cad_exploded_view.png" alt="METUAV Gökdoğan 3D CAD ve Yapısal Mimari Planı" width="100%"/>
-  <p><em>Şekil 4: METUAV Gökdoğan 3D CAD geometrisi, Selig 1223 profil kesiti, kütle bütçesi ve anlık CG seyahati analizi.</em></p>
+  <img src="docs/images/gokdogan_cad_exploded_view.png" alt="AIAA DBF 3D CAD ve Yapısal Mimari Planı" width="100%"/>
+  <p><em>Şekil 4: DBF 3D CAD geometrisi, Selig 1223 profil kesiti, kütle bütçesi ve anlık CG seyahati analizi.</em></p>
 </div>
 
 ### 3. Elektrik İtki ve BEMT Pervane Optimizasyonu
@@ -336,16 +339,18 @@ METUAV-DBF-2027/
 
 ## 🏆 Uluslararası Rakipler ve Benchmark Matrisi
 
+Bu çerçeve, son 5 yılın AIAA DBF Dünya Şampiyonu uçaklarının metriklerini içeren kapsamlı bir benchmark matrisi barındırır. Takımınız kendi tasarım hedeflerini dünya şampiyonları ile kıyaslayabilir:
+
 | Takım / Üniversite | Ülke | Derece / Yıl | Açıklık | Boş Kütle | Faydalı Yük | TOGW | Montaj | DBF Skoru |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **METUAV Gökdoğan** | **Türkiye** | **2027 Tasarım** | **$2.40\text{ m}$** | **$12.70\text{ kg}$** | **$11.20\text{ kg}$** | **$52.69\text{ lbs}$** | **$185\text{ sn}$** | **$9.06$** |
+| **DBF Reference Model** | **AIAA DBF Open**| **Referans Tasarım** | **$2.40\text{ m}$** | **$12.70\text{ kg}$** | **$11.20\text{ kg}$** | **$52.69\text{ lbs}$** | **$185\text{ sn}$** | **$9.06$** |
 | FH Joanneum | Avusturya | 2025 Şampiyon | $2.30\text{ m}$ | $12.10\text{ kg}$ | $10.50\text{ kg}$ | $49.82\text{ lbs}$ | $135\text{ sn}$ | $8.92$ |
 | Embry-Riddle (ERAU) | ABD | 2024 Şampiyon | $2.50\text{ m}$ | $13.20\text{ kg}$ | $11.00\text{ kg}$ | $53.35\text{ lbs}$ | $210\text{ sn}$ | $9.01$ |
 | RWTH Aachen | Almanya | 2023 Şampiyon | $2.45\text{ m}$ | $11.80\text{ kg}$ | $9.80\text{ kg}$ | $47.62\text{ lbs}$ | $190\text{ sn}$ | $8.75$ |
 | Georgia Tech | ABD | 2022 Şampiyon | $2.35\text{ m}$ | $12.90\text{ kg}$ | $11.40\text{ kg}$ | $54.67\text{ lbs}$ | $245\text{ sn}$ | $8.98$ |
 | Univ. of Ljubljana | Slovenya | Çoklu Şampiyon| $2.40\text{ m}$ | $11.20\text{ kg}$ | $9.50\text{ kg}$ | $45.63\text{ lbs}$ | $160\text{ sn}$ | $8.84$ |
 
-> **METUAV Rekabet Üstünlüğü:** Rakiplerin ortalamasına göre **$\%+7.3$ daha yüksek faydalı yük**, **$\%+1.6$ daha hızlı montaj** ve ani CG kaymasını tolere eden **Edge-AI aktif kontrol mimarisi**.
+> **DBF Tasarım Rekabet Kriteri:** Rakiplerin ortalamasına göre **$\ge \%+7$ daha yüksek faydalı yük**, **$\le 185\text{ sn}$ montaj süresi** ve ani CG kaymasını tolere eden **aktif uçuş kontrol mimarisi**.
 
 ---
 
@@ -355,7 +360,7 @@ Telemetri düğümümüz terminalde ANSI formatında veya dahili web sunucusu ü
 
 ```text
 =================================================================
-  [METUAV DBF 2027] - YER ISTASYONU (GCS) CANLI TELEMETRI
+  [AIAA DBF] - YER ISTASYONU (GCS) CANLI TELEMETRI
 =================================================================
   GOREV MODU     : MISSION_3_DELIVERY     | TUR: 2/3
   IRTIFA (AGL)   :   25.0 m              | HAVA HIZI  :  24.5 m/s
@@ -371,7 +376,7 @@ Telemetri düğümümüz terminalde ANSI formatında veya dahili web sunucusu ü
 ```
 
 <div align="center">
-  <img src="docs/images/gokdogan_gcs_cockpit_dashboard.png" alt="METUAV DBF 2027 Canlı Web Yer İstasyonu ve PFD Ekranı" width="100%"/>
+  <img src="docs/images/gokdogan_gcs_cockpit_dashboard.png" alt="AIAA DBF Canlı Web Yer İstasyonu ve PFD Ekranı" width="100%"/>
   <p><em>Şekil 6: HTML5 Canvas PFD (Yapay Ufuk), taktik radar pylon haritası ve güç telemetrisi arayüzü.</em></p>
 </div>
 
@@ -398,14 +403,14 @@ source install/setup.bash
 
 ### 3. Gazebo & PX4 SITL Simülasyonunu Başlatma
 ```bash
-ros2 launch metuav_simulation dbf_mission3_sitl.launch.py
+ros2 launch dbf_simulation dbf_mission3_sitl.launch.py
 ```
 
 ### 4. Bütüncül Test ve Doğrulama Bataryası
-Tüm mühendislik alt sistemlerini ve otonom uçuş prototipini tek komutla test etmek için:
+Tüm mühendislik alt sistemlerini ve otonom uçuş prototipini test etmek için:
 ```bash
-# 1. 89 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
-pytest
+# 1. 123 Adet Tam Kapsamlı Otomatik Birim Testi (pytest)
+python -m pytest
 
 # 2. Uçtan Uca Tam Otonom Görev Simülasyonu (Fast-Boot, Pylon, Görsel Tespit, Bırakma, İniş)
 python aviyonik_ve_otonom/scripts/full_mission_sitl_runner.py
@@ -418,22 +423,22 @@ python aviyonik_ve_otonom/src/telemetri/flight_blackbox_recorder.py
 python aviyonik_ve_otonom/src/ucus_kontrol/src/preflight_bist_engine.py
 python aviyonik_ve_otonom/src/edge_ai_vision/edge_ai_vision/optical_flow_wind_estimator.py
 
-# 4. Arıza Toleranslı Kontrol Tahsisatı ve Çevrimiçi Sistem Tanımlama (RLS)
+# 5. Arıza Toleranslı Kontrol Tahsisatı ve Çevrimiçi Sistem Tanımlama (RLS)
 python aviyonik_ve_otonom/src/ucus_kontrol/src/control_allocation_reconfiguration.py
 python aviyonik_ve_otonom/src/ucus_kontrol/src/online_system_identification.py
 python aviyonik_ve_otonom/src/edge_ai_vision/cep_monte_carlo_analyzer.py
 
-# 5. Kompozit Kürleşme Simülatörü ve Aletsiz 5 Dakika Montaj Ergonomi Denetimi
+# 6. Kompozit Kürleşme Simülatörü ve Aletsiz 5 Dakika Montaj Ergonomi Denetimi
 python uretim_ve_test/scripts/composite_cure_cycle_simulator.py
 python uretim_ve_test/scripts/assembly_ergonomics_optimizer.py
 python uretim_ve_test/scripts/generate_wing_rib_dxf.py
 
-# 6. Rüzgar Kompanzasyonlu Pylon Parkuru ve Entegre Tahrik Eşleştiricisi
+# 7. Rüzgar Kompanzasyonlu Pylon Parkuru ve Entegre Tahrik Eşleştiricisi
 python aviyonik_ve_otonom/src/ucus_kontrol/src/pylon_path_planner.py
 python itki_ve_guc_sistemleri/scripts/powertrain_mission_simulator.py
 python aerodinamik/scripts/high_lift_ground_effect.py
 
-# 7. Sayısal analiz, aeroelastisite, 6-DOF, türbülans ve disiplinlerarası simülasyon araçları
+# 8. Sayısal analiz, aeroelastisite, 6-DOF, türbülans ve disiplinlerarası simülasyon araçları
 python aerodinamik/scripts/polar_analysis.py
 python aerodinamik/scripts/vlm_aerodynamics_solver.py
 python mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py
@@ -458,8 +463,8 @@ python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
 ## 📋 Uçuş Öncesi Kontrol Listeleri ve Standart Operasyon (SOP)
 
 <div align="center">
-  <img src="docs/images/gokdogan_flight_line.jpg" alt="METUAV Gökdoğan Uçuş Hattı ve Apron Hazırlığı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
-  <p><em>Şekil 7: Yarışma uçuş hattında (Flight Line) pitot emniyet flaması, üç tekerlekli iniş takımı ve yer istasyonu eşliğinde Gökdoğan İHA.</em></p>
+  <img src="docs/images/gokdogan_flight_line.jpg" alt="AIAA DBF Uçuş Hattı ve Apron Hazırlığı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
+  <p><em>Şekil 7: Yarışma uçuş hattında (Flight Line) pitot emniyet flaması, iniş takımı ve yer istasyonu eşliğinde apron kontrolü.</em></p>
 </div>
 
 Uçuş emniyeti kuralları gereği, piste çıkış öncesinde aşağıdaki kontroller zorunludur:
@@ -467,21 +472,22 @@ Uçuş emniyeti kuralları gereği, piste çıkış öncesinde aşağıdaki kont
 *   [x] **Elektrik Emniyeti:** $120\text{ A}$ ana eriyen sigorta takılı, dış gövde kırmızı Arming Plug kontrol altında.
 *   [x] **Batarya Durumu:** Hücre başı voltaj $4.20\text{ V} \pm 0.01\text{ V}$, iç direnç $\le 1.5\text{ m}\Omega/\text{hücre}$.
 *   [x] **Aviyonik Boot:** `fast_boot_calibrator` yeşil onay bayrağı, GPS 3D fix (Satellites $\ge 10$, $\text{HDOP} \le 1.2$).
-*   [x] **Görev 3 Bırakma:** Optokuplörlü güvenlik kilidi açık, servo 1000 µs kilitli konumda.
+*   [x] **Faydalı Yük Bırakma:** Optokuplörlü güvenlik kilidi açık, servo 1000 µs kilitli konumda.
 
 Detaylı kontrol listesi için: [FLIGHT_CHECKLISTS_AND_SOP.md](dokumantasyon/FLIGHT_CHECKLISTS_AND_SOP.md)
 
 ---
 
-## 🤝 Katkıda Bulunma ve Takım İletişimi
+## 🤝 Katkıda Bulunma ve Takım Entegrasyonu
 
-Bu depo, ODTÜ Makina ve Havacılık & Uzay Mühendisliği METUAV ekibinin ortak çalışma alanıdır:
-1.  Ana (`main`) dal üzerinde doğrudan çalışmak yasaktır; tüm geliştirmeler `feat/` veya `bugfix/` dalları üzerinden Pull Request (PR) açılarak birleştirilir.
-2.  Açılan her PR'da donanım ağırlık değişimi (gram) ve işlemci/RAM yükü belirtilmelidir.
-3.  Takım içi iletişim ve sorularınız için GitHub üzerinden `@arch-yunus` ile iletişime geçebilirsiniz.
+Bu depo, AIAA DBF yarışmasına hazırlanan tüm üniversite ve mühendislik takımlarının ortak kullanımına açıktır:
+1.  Kendi takımınızın uçak konfigürasyonunu `aerodinamik/data/`, `mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py` ve `optimizasyon_ve_mdo/scripts/dbf_scoring_mdo.py` üzerinden kolayca uyarlayabilirsiniz.
+2.  Geliştirmelerinizi ve yeni analiz araçlarını toplulukla paylaşmak için Pull Request (PR) açabilirsiniz.
+3.  Açılan her PR'da donanım ağırlık değişimi (gram) ve işlemci/RAM yükü belirtilmelidir.
+4.  Geri bildirim ve soru/önerileriniz için GitHub Issues üzerinden iletişime geçebilirsiniz.
 
 <div align="center">
 
-**Göklerde başarılar METUAV! Hedef AIAA DBF 2027 Şampiyonluğu! 🏆🌪️**
+**AIAA DBF yarışmasına hazırlanan tüm takımlara uçuşlarında ve yarışma sezonunda üstün başarılar dileriz! 🏆✈️🌪️**
 
 </div>

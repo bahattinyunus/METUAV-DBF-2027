@@ -1,6 +1,6 @@
 # 🏆 AIAA Design/Build/Fly Şampiyonlar ve Rakip Takım Analiz Dosyası
 
-Bu dosya, son yıllarda AIAA DBF yarışmasında şampiyonluk ve derece elde etmiş dünya çapındaki en güçlü üniversite takımlarının tasarım felsefelerini, yapısal ve aviyonik tercihlerini, uçuş stratejilerini ve METUAV takımının bu ekiplere karşı geliştirdiği rekabetçi üstünlükleri belgeler.
+Bu dosya, son yıllarda AIAA DBF yarışmasında şampiyonluk ve derece elde etmiş dünya çapındaki en güçlü üniversite takımlarının tasarım felsefelerini, yapısal ve aviyonik tercihlerini, uçuş stratejilerini ve DBF Referans Platformu takımının bu ekiplere karşı geliştirdiği rekabetçi üstünlükleri belgeler.
 
 ---
 
@@ -61,18 +61,18 @@ Bu dosya, son yıllarda AIAA DBF yarışmasında şampiyonluk ve derece elde etm
 ### 🔹 1. University of Ljubljana (Slovenya)
 *   **Güçlü Yönleri:** Dünyanın en iyi F3A / F3J model uçak imalat geleneğine sahiptirler. Kanat profillerini kendi geliştirdikleri XFLR5/XFOIL kodlarıyla modifiye ederler. $C_{D0}$ (sıfır taşıma sürüklemesi) değerleri rakiplerinden ortalama $\%25$ daha düşüktür.
 *   **Zayıf Yönleri:** Yazılım ve Edge-AI otonomiden ziyade geleneksel manuel pilotaj ve saf aerodinamiğe odaklanırlar. Karmaşık aviyonik ve sensör füzyonu görevlerinde zaman kaybedebilirler.
-*   **METUAV Karşı Hamlesi:** Geliştirdiğimiz C++20 adaptif PID ve 3-DOF RK4 balistik bilgisayarı ile hava şartlarına bağlı pilotaj hatalarını sıfıra indirip tam otonom avantajı sağlamak.
+*   **DBF Referans Platformu Karşı Hamlesi:** Geliştirdiğimiz C++20 adaptif PID ve 3-DOF RK4 balistik bilgisayarı ile hava şartlarına bağlı pilotaj hatalarını sıfıra indirip tam otonom avantajı sağlamak.
 
 ### 🔹 2. Georgia Institute of Technology (Georgia Tech - ABD)
 *   **Güçlü Yönleri:** Matematiksel MDO modellemesinde dünya lideridirler. Uçağı üretmeden önce binlerce simülasyonla puan formülünün türevini alarak en optimal geometride karar kılarlar.
 *   **Zayıf Yönleri:** Karmaşık mekanik alt sistemler sebebiyle 5 dakika montaj süresinde zaman zaman ceza puanı alabilmektedirler.
-*   **METUAV Karşı Hamlesi:** `dbf_scoring_mdo.py` motorumuz ile Georgia Tech düzeyinde MDO duyarlılık analizi yapmak ve `ASSEMBLY_5MIN_GUIDE.md` ile montaj süresini **3 dakika 5 saniyeye** indirerek montaj cezasından kaçınmak.
+*   **DBF Referans Platformu Karşı Hamlesi:** `dbf_scoring_mdo.py` motorumuz ile Georgia Tech düzeyinde MDO duyarlılık analizi yapmak ve `ASSEMBLY_5MIN_GUIDE.md` ile montaj süresini **3 dakika 5 saniyeye** indirerek montaj cezasından kaçınmak.
 
 ### 🔹 3. FH Joanneum (Avusturya)
 *   **Güçlü Yönleri:** Havacılık sınıfı otoklav/prepreg kompozit işleme kabiliyeti, mükemmel yüzey finişi ($y^+ < 1$ sınır katmanı için ayna parlaklığında kanatlar).
 *   **Zayıf Yönleri:** Çok yüksek maliyetli ve karmaşık kalıp altyapısı gerektirir; sahada yaşanabilecek kırımlarda hızlı onarım yapmakta zorlanırlar.
-*   **METUAV Karşı Hamlesi:** Modüler CNC lazer kesim ve PA12-CF 3D baskı parçalar ile sahada 10 dakikada değiştirilebilir yedek parça mimarisi.
+*   **DBF Referans Platformu Karşı Hamlesi:** Modüler CNC lazer kesim ve PA12-CF 3D baskı parçalar ile sahada 10 dakikada değiştirilebilir yedek parça mimarisi.
 
 ### 🔹 4. Yerli Rakipler ve Türkiye Ekosistemi (İTÜ ATA, YTÜ Lagari)
 *   **İTÜ ATA:** Geniş öğrenci kadrosu ve köklü kompozit atölyesiyle yarışmaya düzenli katılır. Genellikle yüksek kanatlı ve güvenli geleneksel tasarımları tercih ederler.
-*   **METUAV Üstünlüğü:** ODTÜ Rüzgar Tüneli kalibrasyonu, ROS 2 Humble tabanlı Edge-AI vizyon mimarisi ve $44\text{ mm}$ ani CG kaymasını kompanze eden aktif trim kontrolcüsü ile teknik raporda ve uçuş hattında belirgin üstünlük.
+*   **DBF Referans Platformu Üstünlüğü:** Rüzgar Tüneli kalibrasyonu, ROS 2 Humble tabanlı Edge-AI vizyon mimarisi ve $44\text{ mm}$ ani CG kaymasını kompanze eden aktif trim kontrolcüsü ile teknik raporda ve uçuş hattında belirgin üstünlük.

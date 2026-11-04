@@ -1,4 +1,4 @@
-name: METUAV DBF 2027 CI
+name: AIAA DBF Open Framework CI
 
 on:
   push:

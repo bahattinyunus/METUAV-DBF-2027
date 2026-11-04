@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - L1 Adaptive Nonlinear Guidance Logic (NLGL) Path Follower
+AIAA DBF 2027 - L1 Adaptive Nonlinear Guidance Logic (NLGL) Path Follower
 Implements the Park-Deyst-How nonlinear lateral guidance law for fixed-wing aircraft.
 Provides robust straight-line cross-track tracking and circular orbit pylon guidance
 with wind drift compensation and bank angle limitation.
@@ -158,7 +158,7 @@ class L1PathFollower:
 def main():
     follower = L1PathFollower(damping_ratio=0.707, period_sec=12.0)
     print("=" * 72)
-    print("  METUAV DBF 2027 - L1 NONLINEAR GUIDANCE LOGIC (NLGL) TEST")
+    print("  AIAA DBF 2027 - L1 NONLINEAR GUIDANCE LOGIC (NLGL) TEST")
     print("=" * 72)
 
     # 1. Test cross-track error convergence on North-bound runway (x=0 to 300, y=0)

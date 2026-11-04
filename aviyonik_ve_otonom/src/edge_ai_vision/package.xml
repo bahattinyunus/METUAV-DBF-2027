@@ -3,7 +3,7 @@
 <package format="3">
   <name>edge_ai_vision</name>
   <version>1.0.0</version>
-  <description>METUAV DBF 2027 Edge-AI Hedef Tespiti ve Hassas Bırakma Balistik Bilgisayarı</description>
+  <description>AIAA DBF 2027 Edge-AI Hedef Tespiti ve Hassas Bırakma Balistik Bilgisayarı</description>
   <maintainer email="bahattinyunuscetin@hotmail.com">Bahattin Yunus ÇETİN</maintainer>
   <license>MIT</license>
 

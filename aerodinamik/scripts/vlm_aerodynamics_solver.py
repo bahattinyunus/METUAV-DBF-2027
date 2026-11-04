@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - 3D Lifting-Line Aerodynamics & Longitudinal Stability Solver
+AIAA DBF 2027 - 3D Lifting-Line Aerodynamics & Longitudinal Stability Solver
 Uses Glauert's classical Fourier series lifting-line method to solve finite wing circulation,
 induced drag efficiency factor (e), tail downwash gradient (d_eps/d_alpha), and neutral point.
 """
@@ -140,7 +140,7 @@ class VLMAerodynamicsSolver:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - 3D VORTEX LATTICE (VLM) AERODYNAMICS SOLVER")
+    print("  AIAA DBF 2027 - 3D VORTEX LATTICE (VLM) AERODYNAMICS SOLVER")
     print("=" * 72)
     solver = VLMAerodynamicsSolver()
 

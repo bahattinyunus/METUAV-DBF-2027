@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - High-Rate Flight Blackbox Recorder & Post-Flight Diagnostics
+AIAA DBF 2027 - High-Rate Flight Blackbox Recorder & Post-Flight Diagnostics
 Records 50 Hz telemetric flight data packets, detects sensor clipping,
 analyzes airframe vibration spectrums, and produces AIAA DBF post-flight flight readiness reports.
 """

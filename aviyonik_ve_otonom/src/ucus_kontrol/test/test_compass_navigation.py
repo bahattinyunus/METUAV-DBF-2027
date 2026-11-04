@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Unit tests for Compass Navigation & Magnetometer Calibration Engine (Pusula Testleri)
+AIAA DBF 2027 - Unit tests for Compass Navigation & Magnetometer Calibration Engine (Pusula Testleri)
 """
 
 import math

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Drop Ballistics Computer
+AIAA DBF 2027 - Drop Ballistics Computer
 Computes 3-DOF aerodynamic trajectory of dropped payload during Mission 3.
 Determines exact release trigger time based on ground speed, wind, altitude and aerodynamic drag.
 """
@@ -112,11 +112,11 @@ if ROS2_AVAILABLE:
             self.target_dist_y = 999.0
             self.already_dropped = False
 
-            self.trigger_pub = self.create_publisher(Bool, 'metuav/payload_drop_trigger', 10)
-            self.error_pub = self.create_publisher(Float32, 'metuav/ballistics/miss_distance', 10)
+            self.trigger_pub = self.create_publisher(Bool, 'dbf/payload_drop_trigger', 10)
+            self.error_pub = self.create_publisher(Float32, 'dbf/ballistics/miss_distance', 10)
 
-            self.create_subscription(PointStamped, 'metuav/vision/target_ground_pos', self.target_cb, 10)
-            self.create_subscription(TwistStamped, 'metuav/ground_velocity', self.vel_cb, 10)
+            self.create_subscription(PointStamped, 'dbf/vision/target_ground_pos', self.target_cb, 10)
+            self.create_subscription(TwistStamped, 'dbf/ground_velocity', self.vel_cb, 10)
 
             # 50 Hz evaluation timer
             self.timer = self.create_timer(0.02, self.eval_drop_window)

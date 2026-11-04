@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Aeroelastic Stability, Trim & Control Reversal Analyzer
+AIAA DBF 2027 - Aeroelastic Stability, Trim & Control Reversal Analyzer
 Solves longitudinal static margins across all 4 DBF mission stages, computes trimmed
 elevator deflection and alpha across flight speed envelopes, verifies pitch control authority,
 calculates dynamic aeroelastic aileron reversal speed (V_R), and evaluates Dutch-roll damping.

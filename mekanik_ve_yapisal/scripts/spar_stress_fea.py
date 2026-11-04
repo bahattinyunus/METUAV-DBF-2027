@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Wing Spar Structural & Stress FEA Calculator
+AIAA DBF 2027 - Wing Spar Structural & Stress FEA Calculator
 Evaluates carbon fiber composite I-beam spar under AIAA DBF Ground Mission static wingtip load
 and +3.5g ultimate pull-up flight load. Computes bending stresses, shear, and tip deflection.
 """
@@ -125,7 +125,7 @@ def analyze_spar_structure() -> SparAnalysisResult:
     res = solver.analyze()
 
     print("=" * 72)
-    print("  METUAV DBF 2027 - Karbon Kompozit Ana Spar Yapisal ve Gerilme Analizi")
+    print("  AIAA DBF 2027 - Karbon Kompozit Ana Spar Yapisal ve Gerilme Analizi")
     print("=" * 72)
     print(f"Toplam Tasarim Yuku (+3.5g Ultimate + 1.25 SF): {res.design_load_n:.1f} N ({res.design_load_n / 9.80665:.1f} kgf)")
     print(f"Yari Aciklik (Semi-span): {solver.b_half:.2f} m | Kok Yuksekligi: {solver.h_root*1000:.1f} mm")

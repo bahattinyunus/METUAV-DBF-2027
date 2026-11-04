@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Rapid Toolless 5-Minute Aircraft Assembly & Ergonomics Optimizer
+AIAA DBF 2027 - Rapid Toolless 5-Minute Aircraft Assembly & Ergonomics Optimizer
 Models the critical 300-second staging countdown with 2-crew and 3-crew parallel workflow,
 component fastener tolerance budgets, and mistake-proofing (Poka-Yoke) verification.
 """

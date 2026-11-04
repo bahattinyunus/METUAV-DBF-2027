@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Propeller Aeroacoustics & In-Flight Windmilling Drag Engine
+AIAA DBF 2027 - Propeller Aeroacoustics & In-Flight Windmilling Drag Engine
 Calculates Farassat & Gutin-Deming rotational acoustic noise emissions (dB / dBA)
 and models in-flight windmilling propeller drag, locked brake drag, and active
 regenerative energy harvesting during descent.

@@ -1,4 +1,4 @@
-# 📋 METUAV DBF 2027 Uçuş Kontrol Listeleri ve Standart Operasyon Prosedürleri (SOP)
+# 📋 AIAA DBF 2027 Uçuş Kontrol Listeleri ve Standart Operasyon Prosedürleri (SOP)
 
 Bu doküman, yarışma sahasında ve antrenman uçuşlarında uçuş emniyetini en üst seviyede tutmak için pilot, yer kontrol operatörü ve mekanik ekibin harfiyen uygulayacağı resmî kontrol listelerini içerir.
 

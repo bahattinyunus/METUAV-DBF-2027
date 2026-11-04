@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Composite Sandwich Fuselage Buckling & Quick-Disconnect Joint Analyzer
+AIAA DBF 2027 - Composite Sandwich Fuselage Buckling & Quick-Disconnect Joint Analyzer
 Evaluates carbon/Rohacell sandwich fuselage monocoque structural integrity under AIAA DBF
 flight and landing maneuver loads:
 - Global sandwich panel buckling (Euler-Johnson wide-column with transverse shear compliance)

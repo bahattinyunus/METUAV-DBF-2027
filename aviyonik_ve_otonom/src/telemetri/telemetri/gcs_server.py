@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Web Ground Control Station (GCS) Server
+AIAA DBF 2027 - Web Ground Control Station (GCS) Server
 Serves the HTML5 Primary Flight Display (PFD) and streaming REST API
 for real-time flight telemetry monitoring, payload drop commands, and GPS tracking.
 """

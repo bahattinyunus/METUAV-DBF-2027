@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Downward Optical Flow & Visual Odometry Wind Estimator
+AIAA DBF 2027 - Downward Optical Flow & Visual Odometry Wind Estimator
 Fuses downward camera pixel motion vectors with gyro derotation (p, q) and altitude
 to derive accurate horizontal ground velocity and estimate in-flight wind vector (W_x, W_y).
 Provides synthetic airspeed backup during pitot tube blockage.

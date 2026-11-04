@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - MAVLink v2 Protocol Router & Micro-Telemetry Bridge
+AIAA DBF 2027 - MAVLink v2 Protocol Router & Micro-Telemetry Bridge
 Provides native, zero-external-dependency MAVLink v2 packet framing, encoding, decoding,
 X.25 CRC validation, and command routing compatible with QGroundControl, Mission Planner,
 and companion computers.

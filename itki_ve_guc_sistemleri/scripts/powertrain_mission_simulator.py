@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Integrated Powertrain & Energy Matcher
+AIAA DBF 2027 - Integrated Powertrain & Energy Matcher
 Unifies BEMT propeller aerodynamics, brushless motor electromechanics,
 dual-RC battery pack dynamics, and thermal heat transfer into a coherent simulation.
 """

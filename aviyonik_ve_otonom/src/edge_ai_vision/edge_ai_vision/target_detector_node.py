@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Target Detection Node
+AIAA DBF 2027 - Target Detection Node
 Edge-AI Vision node for detecting ground targets during Mission 3.
 Transforms pixel centroids into ground coordinates using camera pinhole model and aircraft attitude.
 """
@@ -123,9 +123,9 @@ if ROS2_AVAILABLE:
             self.detector = TargetDetectorNode()
             self.bridge = CvBridge()
 
-            self.target_pub = self.create_publisher(PointStamped, 'metuav/vision/target_ground_pos', 10)
+            self.target_pub = self.create_publisher(PointStamped, 'dbf/vision/target_ground_pos', 10)
             self.create_subscription(Image, 'camera/image_raw', self.image_callback, 10)
-            self.create_subscription(PoseStamped, 'metuav/pose', self.pose_callback, 10)
+            self.create_subscription(PoseStamped, 'dbf/pose', self.pose_callback, 10)
             self.get_logger().info("TargetDetectorNode initialized.")
 
         def pose_callback(self, msg: PoseStamped):

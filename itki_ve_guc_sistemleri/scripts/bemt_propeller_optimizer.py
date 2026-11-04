@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Blade Element Momentum Theory (BEMT) Propeller Analyzer
+AIAA DBF 2027 - Blade Element Momentum Theory (BEMT) Propeller Analyzer
 Computes thrust coefficient (CT), power coefficient (CP), and efficiency (eta)
 across flight speeds for optimal propeller sizing on the 6S electric powertrain.
 """
@@ -99,7 +99,7 @@ def compare_propeller_candidates():
     v_cruise = 24.5  # m/s
 
     print("=" * 72)
-    print("  METUAV DBF 2027 - Pervane BEMT Verimlilik ve Itki Karsilastirmasi")
+    print("  AIAA DBF 2027 - Pervane BEMT Verimlilik ve Itki Karsilastirmasi")
     print(f"  Motor Devri: {rpm:.0f} RPM | Seyir Hizi: {v_cruise:.1f} m/s (88.2 km/h)")
     print("=" * 72)
 

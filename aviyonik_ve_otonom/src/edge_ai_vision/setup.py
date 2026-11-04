@@ -17,7 +17,7 @@ setup(
     zip_safe=True,
     maintainer='Bahattin Yunus ÇETİN',
     maintainer_email='bahattinyunuscetin@hotmail.com',
-    description='METUAV DBF 2027 Edge-AI Hedef Tespiti ve Hassas Bırakma Balistik Bilgisayarı',
+    description='AIAA DBF 2027 Edge-AI Hedef Tespiti ve Hassas Bırakma Balistik Bilgisayarı',
     license='MIT',
     tests_require=['pytest'],
     entry_points={

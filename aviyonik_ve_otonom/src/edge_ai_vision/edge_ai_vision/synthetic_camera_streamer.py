@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Synthetic Vision Streamer & Perception Harness
+AIAA DBF 2027 - Synthetic Vision Streamer & Perception Harness
 Renders realistic aerial camera frames with concentric DBF bullseye targets
 based on aircraft 6-DOF position and camera optics to test perception without Gazebo.
 """
@@ -74,7 +74,7 @@ def main():
     import sys, os
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     print("=" * 68)
-    print("  METUAV DBF 2027 - Sentetik Vizyon Test Testi")
+    print("  AIAA DBF 2027 - Sentetik Vizyon Test Testi")
     print("=" * 68)
     streamer = SyntheticCameraStreamer()
 

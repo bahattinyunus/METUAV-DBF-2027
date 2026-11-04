@@ -1,4 +1,4 @@
-# Telemetry Dependencies for METUAV DBF 2027
+# Telemetry Dependencies for AIAA DBF 2027
 pymavlink>=2.4.37
 pyserial>=3.5
 pyyaml>=6.0

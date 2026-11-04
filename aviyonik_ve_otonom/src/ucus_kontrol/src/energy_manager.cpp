@@ -1,7 +1,7 @@
 #include "ucus_kontrol/energy_manager.hpp"
 #include <algorithm>
 
-namespace metuav
+namespace dbf
 {
 namespace power
 {
@@ -83,4 +83,4 @@ std::string EnergyManager::getAlertString() const
 }
 
 }  // namespace power
-}  // namespace metuav
+}  // namespace dbf

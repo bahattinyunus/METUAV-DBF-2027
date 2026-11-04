@@ -1,6 +1,6 @@
 #include "ucus_kontrol/adaptive_pid_controller.hpp"
 
-namespace metuav
+namespace dbf
 {
 namespace flight_control
 {
@@ -144,4 +144,4 @@ double AdaptivePIDController::compute(
 }
 
 }  // namespace flight_control
-}  // namespace metuav
+}  // namespace dbf

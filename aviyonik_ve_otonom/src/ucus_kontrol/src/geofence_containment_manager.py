@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - 3D Geofence & Boundary Containment Manager
+AIAA DBF 2027 - 3D Geofence & Boundary Containment Manager
 Implements AIAA DBF regulation airfield boundary containment:
 - 2D Point-in-Polygon ray casting for complex competition flight boxes
 - 3D altitude floor (min AGL) & ceiling (max AGL) checks

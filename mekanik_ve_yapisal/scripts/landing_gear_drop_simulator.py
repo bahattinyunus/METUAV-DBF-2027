@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Landing Gear Dynamic Drop Test & Touchdown Impact Simulator
+AIAA DBF 2027 - Landing Gear Dynamic Drop Test & Touchdown Impact Simulator
 Simulates dynamic shock absorption, carbon-fiber leaf spring deflection,
 and peak landing g-load under 25 kg maximum landing weight and hard sink rate (2.0 m/s).
 Verifies propeller ground clearance margin and structural airframe load limits.
@@ -113,7 +113,7 @@ class LandingGearDropSimulator:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - INIŞ TAKIMI DİNAMİK VURUNTU VE ÇÖKME SİMÜLATÖRÜ")
+    print("  AIAA DBF 2027 - INIŞ TAKIMI DİNAMİK VURUNTU VE ÇÖKME SİMÜLATÖRÜ")
     print("=" * 72)
     sim = LandingGearDropSimulator(aircraft_mass_kg=24.85)
 

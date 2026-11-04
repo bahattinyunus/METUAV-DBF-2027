@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Advanced Compass Navigation & Magnetometer Calibration Engine (Pusula Sistemi)
+AIAA DBF 2027 - Advanced Compass Navigation & Magnetometer Calibration Engine (Pusula Sistemi)
 Provides 3D ellipsoid hard-iron / soft-iron calibration, ESC motor-current interference compensation,
 dual-compass voting & failover, tilt-compensated heading estimation, and magnetic anomaly rejection.
 """

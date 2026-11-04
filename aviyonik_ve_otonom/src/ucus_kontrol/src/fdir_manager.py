@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Sensor Failure Detection, Isolation and Recovery (FDIR) Manager
+AIAA DBF 2027 - Sensor Failure Detection, Isolation and Recovery (FDIR) Manager
 Monitors multi-sensor health, detects pitot icing/blockage, baro drift, geofence breach,
 and triggers autonomous recovery / Return-To-Land (RTL) procedures.
 """
@@ -174,7 +174,7 @@ class FDIRManager:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - SENSOR FDIR & FAILSAFE RECOVERY MANAGER")
+    print("  AIAA DBF 2027 - SENSOR FDIR & FAILSAFE RECOVERY MANAGER")
     print("=" * 72)
     fdir = FDIRManager()
 

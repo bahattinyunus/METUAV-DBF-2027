@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Micro XRCE-DDS & PX4 uORB Telemetry Bridge
+AIAA DBF 2027 - Micro XRCE-DDS & PX4 uORB Telemetry Bridge
 Maps ROS 2 DDS messages directly to PX4 Autopilot uORB middleware
 for low-latency offboard control, attitude streaming, and payload drop commands.
 """
@@ -82,7 +82,7 @@ class MicroXRCEBridge:
 def main():
     bridge = MicroXRCEBridge()
     print("=" * 68)
-    print("  METUAV DBF 2027 - Micro XRCE-DDS & PX4 uORB Koprusu")
+    print("  AIAA DBF 2027 - Micro XRCE-DDS & PX4 uORB Koprusu")
     print("=" * 68)
 
     # Test encoding an arming command

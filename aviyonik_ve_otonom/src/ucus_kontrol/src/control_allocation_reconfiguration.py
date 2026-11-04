@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Fault-Tolerant Control Allocation & Actuator Reconfiguration
+AIAA DBF 2027 - Fault-Tolerant Control Allocation & Actuator Reconfiguration
 Distributes desired 3-axis aerodynamic moments (Roll, Pitch, Yaw) across redundant control surfaces:
 [Left Outboard Aileron, Left Inboard Aileron, Right Inboard Aileron, Right Outboard Aileron,
  Left Elevator, Right Elevator, Rudder].

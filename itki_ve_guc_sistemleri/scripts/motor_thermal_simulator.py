@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Brushless Motor & Battery Thermal Dynamics Simulator
+AIAA DBF 2027 - Brushless Motor & Battery Thermal Dynamics Simulator
 Simulates stator winding temperature and LiPo internal temperature
 during the intense 5-minute AIAA DBF mission flight profile.
 """
@@ -92,7 +92,7 @@ class PropulsionThermalSimulator:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - Motor ve Batarya 5 Dakikalik Termal Dinamik Analizi")
+    print("  AIAA DBF 2027 - Motor ve Batarya 5 Dakikalik Termal Dinamik Analizi")
     print("=" * 72)
 
     sim = PropulsionThermalSimulator()

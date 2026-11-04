@@ -5,7 +5,7 @@
 #include <cmath>
 #include <algorithm>
 
-namespace metuav
+namespace dbf
 {
 namespace navigation
 {
@@ -73,6 +73,6 @@ private:
 };
 
 }  // namespace navigation
-}  // namespace metuav
+}  // namespace dbf
 
 #endif  // UCUS_KONTROL__EXTENDED_KALMAN_FILTER_HPP_

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - OpenVSP Script Generator
+AIAA DBF 2027 - OpenVSP Reference Model Script Generator
 Generates an OpenVSP VSPScript file (*.vspscript) to parametrically model the DBF aircraft.
 Creates fuselage, main wing, horizontal stabilizer, vertical stabilizer, and payload bay geometry.
 """
@@ -8,7 +8,7 @@ Creates fuselage, main wing, horizontal stabilizer, vertical stabilizer, and pay
 import os
 
 def generate_vsp_script(output_path: str):
-    script_content = """// OpenVSP Parametric Model Generator for METUAV DBF 2027
+    script_content = """// OpenVSP Parametric Model Generator for AIAA DBF 2027 Reference Aircraft
 // AIAA Design/Build/Fly Competition Aircraft
 
 void main()
@@ -59,8 +59,8 @@ void main()
 
     // Update and Save Model
     Update();
-    WriteVSPFile("METUAV_DBF_2027_Geometry.vsp3");
-    Print("METUAV DBF 2027 OpenVSP modeli basariyla olusturuldu!");
+    WriteVSPFile("DBF_2027_Reference_Geometry.vsp3");
+    Print("AIAA DBF 2027 Referans OpenVSP modeli basariyla olusturuldu!");
 }
 """
     with open(output_path, 'w', encoding='utf-8') as f:
@@ -68,5 +68,5 @@ void main()
     print(f"OpenVSP betiği yazıldı: {output_path}")
 
 if __name__ == '__main__':
-    target = os.path.join(os.path.dirname(__file__), '..', 'metuav_dbf_2027_model.vspscript')
+    target = os.path.join(os.path.dirname(__file__), '..', 'dbf_reference_model.vspscript')
     generate_vsp_script(target)

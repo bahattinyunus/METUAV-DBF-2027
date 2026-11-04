@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Mass and Center of Gravity (CG) Budget Calculator
+AIAA DBF 2027 - Mass and Center of Gravity (CG) Budget Calculator
 Tracks mass properties, CG location (X, Y, Z), and mass moments of inertia
 across all AIAA DBF mission configurations to ensure strict compliance with 55 lbs limit.
 """
@@ -114,7 +114,7 @@ def calculate_mass_budget():
     reports = budget.evaluate_all()
 
     print("=" * 72)
-    print("  METUAV DBF 2027 - Kutle ve Agirlik Merkezi (CG) Butce Analizi")
+    print("  AIAA DBF 2027 - Kutle ve Agirlik Merkezi (CG) Butce Analizi")
     print("=" * 72)
 
     for name, r in reports.items():

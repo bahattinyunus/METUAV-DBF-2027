@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <string>
 
-namespace metuav
+namespace dbf
 {
 namespace power
 {
@@ -50,6 +50,6 @@ private:
 };
 
 }  // namespace power
-}  // namespace metuav
+}  // namespace dbf
 
 #endif  // UCUS_KONTROL__ENERGY_MANAGER_HPP_

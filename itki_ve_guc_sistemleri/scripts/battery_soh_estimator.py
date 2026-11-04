@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - 6S LiPo Dual-RC Thevenin Battery Model & SOH / R0 Estimator
+AIAA DBF 2027 - 6S LiPo Dual-RC Thevenin Battery Model & SOH / R0 Estimator
 Estimates dynamic internal resistance (R0), polarization voltages (V1, V2),
 and predicts maximum throttle voltage sag to prevent in-flight ESC low-voltage cut-off.
 """
@@ -93,7 +93,7 @@ class BatteryTheveninModel:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - 6S LiPo DUAL-RC THEVENIN BATTERY SOH MODEL")
+    print("  AIAA DBF 2027 - 6S LiPo DUAL-RC THEVENIN BATTERY SOH MODEL")
     print("=" * 72)
     battery = BatteryTheveninModel()
 

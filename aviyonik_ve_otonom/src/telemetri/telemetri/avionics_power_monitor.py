@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Smart Avionics PDB & CAN-Bus Telemetry Monitor
+AIAA DBF 2027 - Smart Avionics PDB & CAN-Bus Telemetry Monitor
 Monitors dual BEC rails (5V/12V), 6S propulsion power, servo bus current spikes
 (detecting aerodynamic hinge stalls / mechanical jams), and UAVCAN bus health.
 """
@@ -134,7 +134,7 @@ class AvionicsPowerMonitor:
 
 def main():
     print("=" * 72)
-    print("  METUAV DBF 2027 - AKILLI PDB VE UAVCAN TELEMETRI MONITORU")
+    print("  AIAA DBF 2027 - AKILLI PDB VE UAVCAN TELEMETRI MONITORU")
     print("=" * 72)
     pdb = AvionicsPowerMonitor()
 

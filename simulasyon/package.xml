@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>metuav_simulation</name>
+  <name>dbf_simulation</name>
   <version>1.0.0</version>
-  <description>METUAV DBF 2027 Gazebo ve PX4 SITL Simülasyon Paketi</description>
+  <description>AIAA DBF 2027 Gazebo ve PX4 SITL Simülasyon Paketi</description>
   <maintainer email="bahattinyunuscetin@hotmail.com">Bahattin Yunus ÇETİN</maintainer>
   <license>MIT</license>
 

@@ -15,9 +15,9 @@ def generate_launch_description():
             output='screen',
             parameters=[config_file],
             remappings=[
-                ('metuav/imu/data', '/imu/data'),
-                ('metuav/gps/fix', '/gps/fix'),
-                ('metuav/airspeed', '/airspeed'),
+                ('dbf/imu/data', '/imu/data'),
+                ('dbf/gps/fix', '/gps/fix'),
+                ('dbf/airspeed', '/airspeed'),
             ]
         )
     ])

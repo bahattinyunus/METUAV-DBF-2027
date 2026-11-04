@@ -4,7 +4,7 @@
 #include <cmath>
 #include <algorithm>
 
-namespace metuav
+namespace dbf
 {
 namespace flight_control
 {
@@ -69,6 +69,6 @@ private:
 };
 
 }  // namespace flight_control
-}  // namespace metuav
+}  // namespace dbf
 
 #endif  // UCUS_KONTROL__ADAPTIVE_TECS_HPP_

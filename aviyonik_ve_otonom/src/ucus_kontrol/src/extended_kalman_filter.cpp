@@ -1,6 +1,6 @@
 #include "ucus_kontrol/extended_kalman_filter.hpp"
 
-namespace metuav
+namespace dbf
 {
 namespace navigation
 {
@@ -198,4 +198,4 @@ bool ExtendedKalmanFilter::updateCompass(
 }
 
 }  // namespace navigation
-}  // namespace metuav
+}  // namespace dbf

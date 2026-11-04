@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Competitor Benchmark Matrix & Comparative Gap Analyzer
-Compares METUAV DBF-2027 aircraft metrics against recent AIAA DBF champions:
+AIAA DBF 2027 - Competitor Benchmark Matrix & Comparative Gap Analyzer
+Compares AIAA DBF reference baseline aircraft metrics against recent AIAA DBF champions:
 - FH Joanneum (2025 Champion)
 - Embry-Riddle ERAU (2024 Champion)
 - RWTH Aachen (2023 Champion)
@@ -31,8 +31,8 @@ class AircraftBenchmark:
 def build_benchmark_database() -> List[AircraftBenchmark]:
     return [
         AircraftBenchmark(
-            team="METUAV Gokdogan",
-            country="Turkiye",
+            team="DBF Reference Model",
+            country="AIAA DBF Open",
             year_rank="2027 Tasarim",
             wingspan_m=2.40,
             wing_area_m2=0.7032,
@@ -125,11 +125,11 @@ def build_benchmark_database() -> List[AircraftBenchmark]:
 
 def run_benchmark_analysis():
     db = build_benchmark_database()
-    metuav = db[0]
+    ref_model = db[0]
     competitors = db[1:]
 
     print("=" * 88)
-    print("  METUAV DBF 2027 - ULUSLARARASI SAMPIYONLAR BENCHMARK VE RAKIP ANALIZ MATRISI")
+    print("  AIAA DBF 2027 - ULUSLARARASI SAMPIYONLAR BENCHMARK VE RAKIP ANALIZ MATRISI")
     print("=" * 88)
 
     # Header
@@ -146,15 +146,15 @@ def run_benchmark_analysis():
     avg_assembly = sum(c.assembly_time_sec for c in competitors) / len(competitors)
     avg_score = sum(c.predicted_score for c in competitors) / len(competitors)
 
-    payload_advantage_pct = ((metuav.payload_mass_kg - avg_payload) / avg_payload) * 100.0
-    assembly_advantage_pct = ((avg_assembly - metuav.assembly_time_sec) / avg_assembly) * 100.0
-    score_advantage_pct = ((metuav.predicted_score - avg_score) / avg_score) * 100.0
+    payload_advantage_pct = ((ref_model.payload_mass_kg - avg_payload) / avg_payload) * 100.0
+    assembly_advantage_pct = ((avg_assembly - ref_model.assembly_time_sec) / avg_assembly) * 100.0
+    score_advantage_pct = ((ref_model.predicted_score - avg_score) / avg_score) * 100.0
 
-    print("\n[METUAV REKABETCI USTUNLUKLERI VE FARK ANALIZI (GAP ANALYSIS)]")
-    print(f"1. Faydali Yuk Kapasitesi : {metuav.payload_mass_kg:.2f} kg (Rakip Ortalamasi: {avg_payload:.2f} kg) -> %{payload_advantage_pct:+.1f} USTUNLUK")
-    print(f"2. Hizli Montaj Suresi    : {metuav.assembly_time_sec} sn (Rakip Ortalamasi: {avg_assembly:.0f} sn) -> %{assembly_advantage_pct:+.1f} DAHA HIZLI")
-    print(f"3. Tahmini DBF Toplam Skor: {metuav.predicted_score:.2f} (Rakip Ortalamasi: {avg_score:.2f}) -> %{score_advantage_pct:+.1f} DAHA YUKSEK")
-    print(f"4. Aviyonik ve Otonomi    : Rakipler standart PX4 veya manuel kullanirken METUAV,")
+    print("\n[DBF REFERANS MODEL REKABETCILIK VE FARK ANALIZI (GAP ANALYSIS)]")
+    print(f"1. Faydali Yuk Kapasitesi : {ref_model.payload_mass_kg:.2f} kg (Rakip Ortalamasi: {avg_payload:.2f} kg) -> %{payload_advantage_pct:+.1f} USTUNLUK")
+    print(f"2. Hizli Montaj Suresi    : {ref_model.assembly_time_sec} sn (Rakip Ortalamasi: {avg_assembly:.0f} sn) -> %{assembly_advantage_pct:+.1f} DAHA HIZLI")
+    print(f"3. Tahmini DBF Toplam Skor: {ref_model.predicted_score:.2f} (Rakip Ortalamasi: {avg_score:.2f}) -> %{score_advantage_pct:+.1f} DAHA YUKSEK")
+    print(f"4. Aviyonik ve Otonomi    : Rakipler standart PX4 veya manuel kullanirken DBF Referans Mimarisi,")
     print(f"   anlik 44mm CG kaymasini tolere eden C++20 Adaptif PID ve Edge-AI gorsel hedefleme kullanmaktadir.")
     print("=" * 88)
 

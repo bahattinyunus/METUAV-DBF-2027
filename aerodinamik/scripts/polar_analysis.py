@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Aerodynamic Polar and Sizing Analyzer
+AIAA DBF 2027 - Aerodynamic Polar and Sizing Analyzer
 Performs 3D wing transformation using Prandtl lifting-line theory on Selig 1223 airfoil data.
 Computes stall speeds, maximum L/D, drag polar and flight envelopes across DBF payload configurations.
 """
@@ -49,7 +49,7 @@ def analyze_aerodynamics():
 
     results = []
     print("=" * 70)
-    print("  METUAV DBF 2027 - Aerodinamik Polar ve Performans Analizi")
+    print("  AIAA DBF 2027 - Aerodinamik Polar ve Performans Analizi")
     print(f"  Kanat Acikligi: {wingspan_b:.2f} m | Kanat Alani: {wing_area_s:.4f} m^2 | AR: {aspect_ratio_ar:.2f}")
     print(f"  Profil: Selig 1223 (Yuksek Tasiyici) | CL_max (3D): {cl_max_3d:.2f}")
     print("=" * 70)

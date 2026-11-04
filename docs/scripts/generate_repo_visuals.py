@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - High-Resolution Repository Visuals Generator
+AIAA DBF 2027 - High-Resolution Repository Visuals Generator
 Generates publication-quality technical infographics, HUD overlays,
 CAD architectural layouts, and Mission 3 trajectory visualizations.
 """
@@ -40,8 +40,8 @@ def generate_enhanced_banner():
     draw.line([(0, 48), (W, 48)], fill=(0, 210, 255, 230), width=2)
 
     # Title & Metadata
-    draw.text((30, 14), "METUAV GOKDOGAN // AIAA DBF 2027", fill=(255, 255, 255, 255))
-    draw.text((420, 14), "|  SYS-ID: ODTU-TR-01  |  FREQ: 868 MHz  |  EKF: NOMINAL (50Hz)", fill=(0, 210, 255, 220))
+    draw.text((30, 14), "AIAA DBF BASELINE AIRCRAFT // AIAA DBF 2027", fill=(255, 255, 255, 255))
+    draw.text((420, 14), "|  SYS-ID: DBF-UAV-01  |  FREQ: 868 MHz  |  EKF: NOMINAL (50Hz)", fill=(0, 210, 255, 220))
     draw.text((W - 320, 14), "STATUS: MISSION 3 APPROACH [ARMED]", fill=(50, 255, 120, 255))
 
     # 2. Bottom Telemetry Bar
@@ -121,7 +121,7 @@ def generate_mission3_drop_visual():
                   left=0.07, right=0.95, top=0.91, bottom=0.08)
 
     # Global Title
-    fig.suptitle('METUAV GÖKDOĞAN — AIAA DBF 2027 GÖREV 3 BALİSTİK BIRAKMA VE HEDEF İSABET ANALİZİ',
+    fig.suptitle('AIAA DBF REFERENCE — AIAA DBF 2027 GÖREV 3 BALİSTİK BIRAKMA VE HEDEF İSABET ANALİZİ',
                  fontsize=16, fontweight='bold', color='#38BDF8', y=0.96)
 
     # --------------------------------------------------------------------------
@@ -225,11 +225,11 @@ def generate_mission3_drop_visual():
     t_ctrl = np.linspace(-1.0, 4.0, 300)
     # Without compensation: pitch explodes to 22 degrees
     pitch_uncomp = np.where(t_ctrl < 0, 2.4, 2.4 + 19.5 * (1.0 - np.exp(-t_ctrl * 1.5)))
-    # With METUAV Adaptive Trim: sharp clamp and stabilization
+    # With AIAA DBF Adaptive Trim: sharp clamp and stabilization
     pitch_comp = np.where(t_ctrl < 0, 2.4, 2.4 + 2.8 * np.sin(t_ctrl * 3.0) * np.exp(-t_ctrl * 1.8))
 
     ax4.plot(t_ctrl, pitch_uncomp, color='#EF4444', lw=2.5, ls=':', label='Kompanzasyonsuz (Kritik Stall > 20°)')
-    ax4.plot(t_ctrl, pitch_comp, color='#10B981', lw=3.0, label='METUAV Adaptif Trim (-3.5° Elevatör)')
+    ax4.plot(t_ctrl, pitch_comp, color='#10B981', lw=3.0, label='AIAA DBF Adaptif Trim (-3.5° Elevatör)')
     ax4.axvline(0, color='#FBBF24', lw=2.0, ls='--', label='Yük Ayrılma Anı (t=0 sn)')
     ax4.axhline(14.0, color='#DC2626', lw=1.5, ls='-.', label='Stall Açısı Limiti (14.0°)')
 
@@ -259,7 +259,7 @@ def generate_cad_architecture_visual():
     gs = GridSpec(2, 2, figure=fig, hspace=0.28, wspace=0.24,
                   left=0.07, right=0.95, top=0.91, bottom=0.08)
 
-    fig.suptitle('METUAV GÖKDOĞAN — YASAL VE YAPISAL 3D CAD MİMARİSİ VE TEKNİK DÜZENİ',
+    fig.suptitle('AIAA DBF REFERENCE — YASAL VE YAPISAL 3D CAD MİMARİSİ VE TEKNİK DÜZENİ',
                  fontsize=16, fontweight='bold', color='#38BDF8', y=0.96)
 
     # --------------------------------------------------------------------------
@@ -428,7 +428,7 @@ def generate_gcs_cockpit_visual():
     gs = GridSpec(2, 2, figure=fig, hspace=0.28, wspace=0.24,
                   left=0.07, right=0.95, top=0.91, bottom=0.08)
 
-    fig.suptitle('METUAV GÖKDOĞAN — CANLI YER İSTASYONU (GCS) VE BİRİNCİL UÇUŞ EKRANI (PFD)',
+    fig.suptitle('AIAA DBF REFERENCE — CANLI YER İSTASYONU (GCS) VE BİRİNCİL UÇUŞ EKRANI (PFD)',
                  fontsize=16, fontweight='bold', color='#38BDF8', y=0.96)
 
     # --------------------------------------------------------------------------
@@ -563,7 +563,7 @@ def generate_gcs_cockpit_visual():
 
 
 # ==============================================================================
-# 5. VISUAL 4: ODTU WIND TUNNEL AERO & CFD LASER STREAMLINE VISUALIZATION
+# 5. VISUAL 4: WIND TUNNEL AERO & CFD LASER STREAMLINE VISUALIZATION
 # ==============================================================================
 def generate_wind_tunnel_visual():
     out_path = os.path.join(output_dir, 'gokdogan_wind_tunnel_test.png')
@@ -575,7 +575,7 @@ def generate_wind_tunnel_visual():
     gs = GridSpec(2, 2, figure=fig, hspace=0.28, wspace=0.24,
                   left=0.07, right=0.95, top=0.91, bottom=0.08)
 
-    fig.suptitle('METUAV GÖKDOĞAN — RÜZGAR TÜNELİ TESTİ VE CFD AERODİNAMİK AKIŞ ANALİZİ',
+    fig.suptitle('AIAA DBF REFERENCE — RÜZGAR TÜNELİ TESTİ VE CFD AERODİNAMİK AKIŞ ANALİZİ',
                  fontsize=16, fontweight='bold', color='#10B981', y=0.96)
 
     # --------------------------------------------------------------------------
@@ -658,7 +658,7 @@ def generate_wind_tunnel_visual():
     gamma_actual = (1.0 - 0.188 * eta_span) * np.sqrt(np.maximum(0.0, 1.0 - eta_span**2)) * 1.04
 
     ax3.plot(y_span, gamma_elliptic, color='#94A3B8', lw=2.0, ls='--', label='İdeal Eliptik Yükleme (e = 1.00)')
-    ax3.plot(y_span, gamma_actual, color='#10B981', lw=3.0, label='GÖKDOĞAN Açıklık Boyu Taşıma (e = 0.88)')
+    ax3.plot(y_span, gamma_actual, color='#10B981', lw=3.0, label='AIAA DBF Referans Açıklık Boyu Taşıma (e = 0.88)')
     ax3.fill_between(y_span, 0, gamma_actual, color='#10B981', alpha=0.18)
 
     ax3.set_xlim(0, 1.25)
@@ -712,7 +712,7 @@ def generate_mission_profiles_visual():
     gs = GridSpec(2, 2, figure=fig, hspace=0.28, wspace=0.24,
                   left=0.07, right=0.95, top=0.91, bottom=0.08)
 
-    fig.suptitle('METUAV GÖKDOĞAN — AIAA DBF 2027 YARIŞMA GÖREV PROFİLLERİ VE MİMARİSİ',
+    fig.suptitle('AIAA DBF REFERENCE — AIAA DBF 2027 YARIŞMA GÖREV PROFİLLERİ VE MİMARİSİ',
                  fontsize=16, fontweight='bold', color='#38BDF8', y=0.96)
 
     # --------------------------------------------------------------------------
@@ -728,7 +728,7 @@ def generate_mission_profiles_visual():
 
     ax1.barh(stages, durations, color=colors, height=0.6, edgecolor='#FFFFFF', lw=0.5)
     ax1.axvline(300, color='#EF4444', lw=2.5, ls='--', label='AIAA 5 Dakika Üst Sınırı (300 sn)')
-    ax1.axvline(185, color='#10B981', lw=2.5, ls='-', label='METUAV Rekoru (185 sn)')
+    ax1.axvline(185, color='#10B981', lw=2.5, ls='-', label='AIAA DBF Rekoru (185 sn)')
 
     for i, (d, ct) in enumerate(zip(durations, cum_time)):
         ax1.text(d + 4, i, f"+{d} sn ({ct}. sn)", va='center', color='#F8FAFC', fontweight='bold', fontsize=9.5)
@@ -819,7 +819,7 @@ def generate_mission_profiles_visual():
 
 def main():
     print("=" * 68)
-    print("  METUAV DBF 2027 - Repository Görsel Üretim Aracı")
+    print("  AIAA DBF 2027 - Repository Görsel Üretim Aracı")
     print("=" * 68)
     generate_enhanced_banner()
     generate_mission3_drop_visual()

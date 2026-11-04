@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Ground Control Station (GCS) Telemetry Dashboard
+AIAA DBF 2027 - Ground Control Station (GCS) Telemetry Dashboard
 Provides real-time telemetry streaming, Primary Flight Display (PFD) metrics,
 battery power monitoring, and Mission 3 payload drop tracking.
 Runs in Terminal UI mode or as an embedded HTTP/WebSocket JSON streaming server.
@@ -76,7 +76,7 @@ class GCSRequestHandler(BaseHTTPRequestHandler):
             html = f"""<!DOCTYPE html>
 <html>
 <head>
-    <title>METUAV DBF 2027 - Yer Istasyonu (GCS)</title>
+    <title>AIAA DBF 2027 - Yer Istasyonu (GCS)</title>
     <meta http-equiv="refresh" content="1">
     <style>
         body {{ font-family: monospace; background: #121826; color: #00ffcc; padding: 20px; }}
@@ -86,7 +86,7 @@ class GCSRequestHandler(BaseHTTPRequestHandler):
     </style>
 </head>
 <body>
-    <h1>🦅 METUAV DBF 2027 GCS Canli Telemetri</h1>
+    <h1>🦅 AIAA DBF 2027 GCS Canli Telemetri</h1>
     <div class="grid">
         <div class="card">
             <h3>✈️ Ucus Durumu</h3>
@@ -116,7 +116,7 @@ def print_terminal_dashboard():
     """Renders ANSI Terminal dashboard."""
     d = telemetry_data.to_dict()
     print("\n" + "=" * 65)
-    print("  [METUAV DBF 2027] - YER ISTASYONU (GCS) CANLI TELEMETRI")
+    print("  [AIAA DBF 2027] - YER ISTASYONU (GCS) CANLI TELEMETRI")
     print("=" * 65)
     print(f"  GOREV MODU     : {d['active_mission']:22s} | TUR: {d['lap_count']}/3")
     print(f"  IRTISA (AGL)   : {d['altitude_m']:6.1f} m              | HAVA HIZI  : {d['airspeed_ms']:5.1f} m/s")

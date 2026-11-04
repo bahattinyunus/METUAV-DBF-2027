@@ -18,7 +18,7 @@ setup(
     zip_safe=True,
     maintainer='Bahattin Yunus ÇETİN',
     maintainer_email='bahattinyunuscetin@hotmail.com',
-    description='METUAV DBF 2027 MAVLink GCS Yer İstasyonu ve Otopilot Telemetri Köprüsü',
+    description='AIAA DBF 2027 MAVLink GCS Yer İstasyonu ve Otopilot Telemetri Köprüsü',
     license='MIT',
     entry_points={
         'console_scripts': [

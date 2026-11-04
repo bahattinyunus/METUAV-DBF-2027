@@ -1,12 +1,12 @@
-# 💨 METU Rüzgar Tüneli Test Planı ve Doğrulama Protokolü
+# 💨 AIAA DBF Rüzgar Tüneli Test Planı ve Doğrulama Protokolü
 
-Bu protokol, ODTÜ Havacılık ve Uzay Mühendisliği Bölümü Rüzgar Tüneli tesislerinde METUAV DBF 2027 ölçekli kanat modelinin ve gövde-kanat entegrasyonunun aerodinamik karakteristiklerini doğrulamak için hazırlanmıştır.
+Bu protokol, Üniversite Havacılık ve Uzay Mühendisliği Rüzgar Tüneli tesislerinde AIAA DBF 2027 ölçekli kanat modelinin ve gövde-kanat entegrasyonunun aerodinamik karakteristiklerini doğrulamak için hazırlanmıştır.
 
 ---
 
 ## 1. Test Düzeneği ve Model Özellikleri
 
-*   **Test Tesisi:** ODTÜ Rüzgar Tüneli (Kapalı çevrim, 1.0m x 1.0m test odası).
+*   **Test Tesisi:** Üniversite Rüzgar Tüneli (Kapalı çevrim, 1.0m x 1.0m test odası).
 *   **Model Ölçeği:** 1:2 Yarı-Açıklık (Semi-span) Kanat Modeli (Açıklık: 1.20 m, Kord: 0.32 m).
 *   **Ölçüm Ekipmanları:**
     *   6-Bileşenli Dahili Yük Hücresi (Strain-gauge balance)

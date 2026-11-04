@@ -2,7 +2,7 @@
 #include <numeric>
 #include <cmath>
 
-namespace metuav
+namespace dbf
 {
 namespace calibration
 {
@@ -93,4 +93,4 @@ void FastBootCalibrator::step(double dt)
 }
 
 }  // namespace calibration
-}  // namespace metuav
+}  // namespace dbf

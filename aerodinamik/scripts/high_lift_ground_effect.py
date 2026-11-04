@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - High-Lift Flap Deflection & Ground Effect Aerodynamics Analyzer
+AIAA DBF 2027 - High-Lift Flap Deflection & Ground Effect Aerodynamics Analyzer
 Calculates 3D wing lift increment (Delta CL), induced drag reduction near runway ground (h/b < 0.5),
 and stall speed margin under heavy takeoff payloads.
 """

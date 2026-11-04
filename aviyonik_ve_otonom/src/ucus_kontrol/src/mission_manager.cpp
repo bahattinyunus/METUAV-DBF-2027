@@ -1,6 +1,6 @@
 #include "ucus_kontrol/mission_manager.hpp"
 
-namespace metuav
+namespace dbf
 {
 namespace mission
 {
@@ -148,4 +148,4 @@ std::string MissionManager::getStateString() const
 }
 
 }  // namespace mission
-}  // namespace metuav
+}  // namespace dbf

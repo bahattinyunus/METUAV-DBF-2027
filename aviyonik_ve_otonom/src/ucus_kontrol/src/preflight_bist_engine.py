@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Pre-Flight Built-In Self-Test (BIST) Engine
+AIAA DBF 2027 - Pre-Flight Built-In Self-Test (BIST) Engine
 Performs rapid, autonomous pre-arm verification across sensors, power rails,
 actuator sweep envelopes, GPS geometry, and Mission 3 payload release locks in < 10 seconds.
 """
@@ -165,7 +165,7 @@ class PreFlightBISTEngine:
         failed = total - passed
 
         is_authorized = (failed == 0)
-        code = "METUAV-AIR-GO-2027" if is_authorized else "METUAV-ABORT-BIST-FAIL"
+        code = "DBF-AIR-GO-2027" if is_authorized else "DBF-ABORT-BIST-FAIL"
 
         return BISTCertificate(
             total_checks=total,

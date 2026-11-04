@@ -17,7 +17,7 @@
 
 using namespace std::chrono_literals;
 
-namespace metuav
+namespace dbf
 {
 
 class FlightControlNode : public rclcpp::Node
@@ -26,7 +26,7 @@ public:
   FlightControlNode()
   : Node("flight_control_node")
   {
-    RCLCPP_INFO(this->get_logger(), "METUAV DBF 2027 Uçuş Kontrolcüsü Başlatılıyor...");
+    RCLCPP_INFO(this->get_logger(), "AIAA DBF 2027 Uçuş Kontrolcüsü Başlatılıyor...");
 
     // Declare parameters
     this->declare_parameter("roll_kp", 1.8);
@@ -62,25 +62,25 @@ public:
     aircraft_state_.nominal_mass = aircraft_state_.current_mass;
 
     // Publishers
-    actuator_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("metuav/actuator_controls", 10);
-    mission_status_pub_ = this->create_publisher<std_msgs::msg::String>("metuav/mission_state", 10);
-    fast_boot_pub_ = this->create_publisher<std_msgs::msg::String>("metuav/boot_diagnostic", 10);
+    actuator_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("dbf/actuator_controls", 10);
+    mission_status_pub_ = this->create_publisher<std_msgs::msg::String>("dbf/mission_state", 10);
+    fast_boot_pub_ = this->create_publisher<std_msgs::msg::String>("dbf/boot_diagnostic", 10);
 
     // Subscribers
     imu_sub_ = this->create_subscription<sensor_msgs::msg::Imu>(
-      "metuav/imu/data", 20,
+      "dbf/imu/data", 20,
       std::bind(&FlightControlNode::imuCallback, this, std::placeholders::_1));
 
     gps_sub_ = this->create_subscription<sensor_msgs::msg::NavSatFix>(
-      "metuav/gps/fix", 10,
+      "dbf/gps/fix", 10,
       std::bind(&FlightControlNode::gpsCallback, this, std::placeholders::_1));
 
     airspeed_sub_ = this->create_subscription<std_msgs::msg::Float32>(
-      "metuav/airspeed", 10,
+      "dbf/airspeed", 10,
       std::bind(&FlightControlNode::airspeedCallback, this, std::placeholders::_1));
 
     drop_cmd_sub_ = this->create_subscription<std_msgs::msg::Bool>(
-      "metuav/payload_drop_trigger", 10,
+      "dbf/payload_drop_trigger", 10,
       std::bind(&FlightControlNode::dropTriggerCallback, this, std::placeholders::_1));
 
     // Fast 50 Hz control loop timer
@@ -197,12 +197,12 @@ private:
   rclcpp::TimerBase::SharedPtr diagnostic_timer_;
 };
 
-}  // namespace metuav
+}  // namespace dbf
 
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
-  auto node = std::make_shared<metuav::FlightControlNode>();
+  auto node = std::make_shared<dbf::FlightControlNode>();
   rclcpp::spin(node);
   rclcpp::shutdown();
   return 0;

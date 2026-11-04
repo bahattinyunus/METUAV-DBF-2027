@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace metuav
+namespace dbf
 {
 namespace navigation
 {
@@ -91,6 +91,6 @@ private:
 };
 
 }  // namespace navigation
-}  // namespace metuav
+}  // namespace dbf
 
 #endif  // UCUS_KONTROL__COMPASS_NAVIGATION_CALIBRATOR_HPP_

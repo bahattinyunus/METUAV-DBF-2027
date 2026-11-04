@@ -1,15 +1,15 @@
 # 📄 AIAA Design/Build/Fly 2027 Resmî Tasarım Raporu (Design Report)
 
-**Takım Adı:** METUAV  
-**Kurum:** Orta Doğu Teknik Üniversitesi (METU MECH / ODTÜ Havacılık ve Uzay)  
+**Hazırlayan:** AIAA DBF Open Framework Topluluğu & Takımlar için Referans Rapor  
+**Kurum:** Üniversite Havacılık ve Uzay / Makina Mühendisliği DBF Takımı (Örnek Şablon)  
 **Yarışma:** AIAA Design/Build/Fly 2027  
-**Uçak Adı:** GÖKDOĞAN DBF-27  
+**Uçak Adı:** AIAA DBF Referans Platformu (Baseline Aircraft)  
 
 ---
 
 ## 1. Yönetici Özeti (Executive Summary)
 
-METUAV takımı, AIAA Design/Build/Fly 2027 yarışması kurallarını ve görev profillerini en üst düzey mühendislik metodolojisiyle analiz ederek **GÖKDOĞAN DBF-27** uçağını tasarlamış, üretmiş ve uçurmuştur. 
+Bu referans tasarım raporu, AIAA Design/Build/Fly yarışmasına hazırlanan tüm mühendislik takımları için kapsamlı bir mühendislik rehberi ve şablonu olarak **AIAA DBF Referans Platformu (Baseline DBF Aircraft)** temel alınarak hazırlanmıştır. 
 
 ### Temel Tasarım Parametreleri
 *   **Maksimum Kalkış Ağırlığı (TOGW):** $23.90\text{ kg}$ ($52.69\text{ lbs}$) $\le 55.0\text{ lbs}$ kuralına tam uyum.
@@ -82,7 +82,7 @@ Takım yapısı 5 ana disiplin çevresinde organize edilmiştir:
 
 ## 6. Test Programı ve Doğrulama (Testing Program)
 
-*   **Rüzgar Tüneli Testleri:** ODTÜ Havacılık ve Uzay Rüzgar Tüneli'nde $1:2$ yarı açıklık modelle yapılan testlerde $C_{L_{max}} = 1.94$ olarak ölçülmüş, CFD tahminiyle $\%1.0$ uyum göstermiştir.
+*   **Rüzgar Tüneli Testleri:** Üniversite Havacılık ve Uzay Rüzgar Tüneli'nde $1:2$ yarı açıklık modelle yapılan testlerde $C_{L_{max}} = 1.94$ olarak ölçülmüş, CFD tahminiyle $\%1.0$ uyum göstermiştir.
 *   **Kanat Ucu Yükleme Testi:** Gövde sabitlenerek kanat uçlarına kademeli kum torbaları yerleştirilmiş; $3.5g$ eşdeğeri yük altında sıfır kalıcı deformasyon gözlenmiştir.
 *   **Balistik Bırakma Testleri:** 3-DOF RK4 bilgisayarı ile yapılan 10 uçuş testinde ortalama hedef sapması $0.42\text{ m}$ olarak ölçülmüştür.
 

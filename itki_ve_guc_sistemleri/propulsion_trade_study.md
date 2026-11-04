@@ -1,4 +1,4 @@
-# ⚡ METUAV DBF 2027 Elektrik İtki ve Güç Sistemleri Tasarım Raporu
+# ⚡ AIAA DBF 2027 Elektrik İtki ve Güç Sistemleri Tasarım Raporu
 
 Bu doküman, AIAA Design/Build/Fly 2027 yarışması isterlerine göre uçağın elektrik motoru, elektronik hız kontrolcüsü (ESC), batarya kimyası ve güç dağıtım mimarisinin mühendislik seçim kriterlerini belgeler.
 

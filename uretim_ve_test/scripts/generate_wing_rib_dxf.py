@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - CNC Laser Cutting DXF Rib Generator
+AIAA DBF 2027 - CNC Laser Cutting DXF Rib Generator
 Generates standard AutoCAD ASCII DXF files for Selig 1223 wing ribs.
 Includes automated carbon spar cutouts, rear joiner holes, and weight-relief lightening cutouts.
 """

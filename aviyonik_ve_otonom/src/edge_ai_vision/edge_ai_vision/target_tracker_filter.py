@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-METUAV DBF 2027 - Ground Target Kalman Tracking Filter
+AIAA DBF 2027 - Ground Target Kalman Tracking Filter
 Filters noisy camera ground projections, gates false positive detections,
 and maintains robust target coordinates even during high-bank turns and temporary dropouts.
 """
@@ -94,7 +94,7 @@ class TargetKalmanTracker:
 
 def main():
     print("=" * 68)
-    print("  METUAV DBF 2027 - Hedef Takip Kalman Filtresi Testi")
+    print("  AIAA DBF 2027 - Hedef Takip Kalman Filtresi Testi")
     print("=" * 68)
 
     tracker = TargetKalmanTracker()

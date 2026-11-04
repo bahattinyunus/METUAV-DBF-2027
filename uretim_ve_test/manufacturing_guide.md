@@ -1,6 +1,6 @@
-# 🏭 METUAV DBF 2027 Kompozit Üretim ve İmalat Kılavuzu
+# 🏭 AIAA DBF 2027 Kompozit Üretim ve İmalat Kılavuzu
 
-Bu kılavuz, METUAV DBF 2027 uçağının gövde, kanat ve faydalı yük bileşenlerinin hafif, rijit ve tekrarlanabilir kalitede üretilmesi için METU MECH atölyesinde uygulanan imalat prosedürlerini tanımlar.
+Bu kılavuz, AIAA DBF 2027 uçağının gövde, kanat ve faydalı yük bileşenlerinin hafif, rijit ve tekrarlanabilir kalitede üretilmesi için Kompozit atölyesinde uygulanan imalat prosedürlerini tanımlar.
 
 ---
 
