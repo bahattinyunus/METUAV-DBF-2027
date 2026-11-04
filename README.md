@@ -1,7 +1,7 @@
 <div align="center">
 
 <p align="center">
-  <img src="docs/images/gokdogan_aircraft_banner.jpg" alt="AIAA DBF Reference Aircraft" width="100%" style="border-radius: 14px; box-shadow: 0 10px 35px rgba(0,0,0,0.65);" />
+  <img src="docs/images/dbf_aircraft_banner.png" alt="AIAA DBF Reference Aircraft" width="100%" style="border-radius: 14px; box-shadow: 0 10px 35px rgba(0,0,0,0.65);" />
   <br>
   <em>Şekil 1: AIAA DBF Referans İHA Mimarisi — 2.40m Açıklık, Yüksek Taşıyıcılı Karbon Kompozit Gövde ve Canlı Aviyonik HUD Telemetrisi.</em>
 </p>
@@ -198,7 +198,7 @@ DBF yarışmaları tipik olarak 4 aşamalı standart bir görev zincirinden olu�
     *   Yük bırakıldığı andaki ani kütle düşüşü ve **$+44.1\text{ mm}$ ağırlık merkezi (CG) kaymasında** uçağın kontrolden çıkmasını önleyen aktif aerodinamik trim kompanzasyonu.
 
 <div align="center">
-  <img src="docs/images/gokdogan_mission_profiles.png" alt="AIAA DBF Görev Profilleri ve Performans Mimarisi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
+  <img src="docs/images/dbf_mission_profiles.png" alt="AIAA DBF Görev Profilleri ve Performans Mimarisi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
   <p><em>Şekil 2: AIAA DBF standart görev profilleri, yer montaj süresi, kalkış mesafesi ve hassas bırakma mimarisi.</em></p>
 </div>
 
@@ -273,7 +273,7 @@ AIAA-DBF-Framework/
 *   **CFD Analizleri:** ANSYS Fluent ortamında $k-\omega\text{ SST}$ türbülans modeli ve 7.85 milyon polihedral hücreli ağ ile sınır katman laminar ayrılma balonları çözümlenmiştir. Seyir hücum açısında ($\alpha = 4.0^\circ$) maksimum süzülme oranı $(L/D)_{3D} = 19.31$ elde edilmiştir.
 
 <div align="center">
-  <img src="docs/images/gokdogan_wind_tunnel_test.png" alt="AIAA DBF Rüzgar Tüneli Akış ve Yüzey Basınç Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
+  <img src="docs/images/dbf_wind_tunnel_test.png" alt="AIAA DBF Rüzgar Tüneli Akış ve Yüzey Basınç Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
   <p><em>Şekil 3: Rüzgar Tüneli duman akış çizgileri, Selig 1223 yüzey basınç (Cp) dağılımı ve Trefftz düzlemi indüklenmiş hız analizi.</em></p>
 </div>
 
@@ -288,7 +288,7 @@ AIAA-DBF-Framework/
 *   **Karbon Yaprak Yaylı İniş Takımı Dinamik Vuruntu Simülatörü:** $24.85\text{ kg}$ maksimum iniş kütlesi ve $1.0\text{ m/s}$ çökme hızında Hunt-Crossley kontak mekaniği ile çözülmüş; tepe ivme $2.21g \le 3.0g$, maksimum sehim $55.1\text{ mm} \le 60.0\text{ mm}$ ve pervane-zemin emniyet payı $59.9\text{ mm} > 50\text{ mm}$ olarak doğrulanmıştır.
 
 <div align="center">
-  <img src="docs/images/gokdogan_cad_exploded_view.png" alt="AIAA DBF 3D CAD ve Yapısal Mimari Planı" width="100%"/>
+  <img src="docs/images/dbf_cad_exploded_view.png" alt="AIAA DBF 3D CAD ve Yapısal Mimari Planı" width="100%"/>
   <p><em>Şekil 4: DBF 3D CAD geometrisi, Selig 1223 profil kesiti, kütle bütçesi ve anlık CG seyahati analizi.</em></p>
 </div>
 
@@ -319,7 +319,7 @@ AIAA-DBF-Framework/
 *   **Monte Carlo Balistik Saçılma Çözücüsü ve Dinamik HUD Nişangah Açısı (CEP Analizi):** 500 döngülü stokastik simülasyonda rüzgar, irtifa ($\pm 0.5\text{ m}$), hava hızı ($\pm 0.8\text{ m/s}$), kargo takla sürtünmesi ($C_d A \pm \%15$) ve servo gecikmesi ($35\pm 6\text{ ms}$) modellenmiştir. Kapalı çevrim optik akış rüzgar kompanzasyonuyla $CEP_{50} = 1.06\text{ m}$ ve $CEP_{95} = 2.68\text{ m}$ elde edilmiş; PFD için dinamik nişangah açısı ($\theta_{sight} = \arctan(h / D_{lead}) \approx 26.3^\circ$) gerçek zamanlı hesaplanarak $\%55.2$ boğa gözü ($< 1.20\text{ m}$) tam isabet oranı yakalanmıştır.
 
 <div align="center">
-  <img src="docs/images/gokdogan_mission3_drop.png" alt="AIAA DBF Görev 3 Balistik Bırakma ve Hedef İsabet Analizi" width="100%"/>
+  <img src="docs/images/dbf_mission3_drop.png" alt="AIAA DBF Görev 3 Balistik Bırakma ve Hedef İsabet Analizi" width="100%"/>
   <p><em>Şekil 5: Görev 3 3-DOF RK4 balistik düşüş yörüngesi, konsantrik hedef Monte Carlo dağılımı ve adaptif trim cevabı.</em></p>
 </div>
 
@@ -376,7 +376,7 @@ Telemetri düğümümüz terminalde ANSI formatında veya dahili web sunucusu ü
 ```
 
 <div align="center">
-  <img src="docs/images/gokdogan_gcs_cockpit_dashboard.png" alt="AIAA DBF Canlı Web Yer İstasyonu ve PFD Ekranı" width="100%"/>
+  <img src="docs/images/dbf_gcs_cockpit_dashboard.png" alt="AIAA DBF Canlı Web Yer İstasyonu ve PFD Ekranı" width="100%"/>
   <p><em>Şekil 6: HTML5 Canvas PFD (Yapay Ufuk), taktik radar pylon haritası ve güç telemetrisi arayüzü.</em></p>
 </div>
 
@@ -463,7 +463,7 @@ python rakip_analizi_ve_benchmark/scripts/competitor_benchmark_matrix.py
 ## 📋 Uçuş Öncesi Kontrol Listeleri ve Standart Operasyon (SOP)
 
 <div align="center">
-  <img src="docs/images/gokdogan_flight_line.jpg" alt="AIAA DBF Uçuş Hattı ve Apron Hazırlığı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
+  <img src="docs/images/dbf_flight_line.jpg" alt="AIAA DBF Uçuş Hattı ve Apron Hazırlığı" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.55);"/>
   <p><em>Şekil 7: Yarışma uçuş hattında (Flight Line) pitot emniyet flaması, iniş takımı ve yer istasyonu eşliğinde apron kontrolü.</em></p>
 </div>
 
