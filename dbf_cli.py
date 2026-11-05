@@ -4,9 +4,9 @@
 =============================================================================
 Usage:
     python dbf_cli.py info                 # Show aircraft specifications & compliance
-    python dbf_cli.py test                 # Run all 136+ automated verification tests
-    python dbf_cli.py analyze --all        # Execute complete aero, FEA, BEMT & MDO pipeline
-    python dbf_cli.py visuals              # Regenerate all 10 high-resolution infographics
+    python dbf_cli.py test                 # Run all 147+ automated verification tests
+    python dbf_cli.py analyze --all        # Execute complete aero, FEA, flutter, BEMT, thermal & MDO pipeline
+    python dbf_cli.py visuals              # Regenerate all 13 high-resolution infographics
     python dbf_cli.py gcs                  # Launch real-time HTML5 Web GCS Server
 """
 
@@ -66,10 +66,14 @@ def cmd_analyze(target):
         scripts.append(("Uçuş Zarfı & V-n Manevra", "aerodinamik/scripts/flight_envelope_vn_diagram.py"))
     if target in ["struct", "all"]:
         scripts.append(("Karbon Spar FEA", "mekanik_ve_yapisal/scripts/spar_stress_fea.py"))
+        scripts.append(("Aeroelastik Flutter & Diverjans (P-K)", "mekanik_ve_yapisal/scripts/aeroelastic_pk_flutter_solver.py"))
         scripts.append(("Kütle & CG Bütçesi", "mekanik_ve_yapisal/scripts/mass_and_cg_calculator.py"))
     if target in ["prop", "all"]:
         scripts.append(("BEMT Pervane Optimizasyonu", "itki_ve_guc_sistemleri/scripts/bemt_propeller_optimizer.py"))
+        scripts.append(("Batarya Termal Paket & Soğutma Kanalı", "itki_ve_guc_sistemleri/scripts/battery_thermal_pack_optimizer.py"))
         scripts.append(("Pervane Aeroakustik Gürültüsü", "itki_ve_guc_sistemleri/scripts/propeller_noise_mapper.py"))
+    if target in ["avionics", "all"]:
+        scripts.append(("Sensör Füzyonu & İnovasyon Teşhisi", "aviyonik_ve_otonom/scripts/sensor_fusion_innovation_monitor.py"))
     if target in ["mdo", "all"]:
         scripts.append(("MDO Çok Amaçlı Pareto", "optimizasyon_ve_mdo/scripts/dbf_pareto_optimizer.py"))
     if target in ["sim", "all"]:
@@ -82,7 +86,7 @@ def cmd_analyze(target):
 
 def cmd_visuals():
     print_banner()
-    print("  [10 ADET YÜKSEK ÇÖZÜNÜRLÜKLÜ TEKNİK İNFOGRAFİK VE BANNER YENİLENİYOR...]")
+    print("  [13 ADET YÜKSEK ÇÖZÜNÜRLÜKLÜ TEKNİK İNFOGRAFİK VE BANNER YENİLENİYOR...]")
     subprocess.run([sys.executable, "docs/scripts/generate_repo_visuals.py"])
 
 

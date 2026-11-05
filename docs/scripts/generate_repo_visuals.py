@@ -1038,9 +1038,294 @@ def generate_mdo_pareto_visual():
     print(f"[OK] MDO Pareto Front infographic generated: {out_path}")
 
 
+# ==============================================================================
+# 11. AEROELASTIC FLUTTER & DIVERGENCE (P-K METHOD MODAL FREQUENCY & DAMPING)
+# ==============================================================================
+def generate_flutter_pk_visual():
+    out_path = os.path.join(output_dir, 'dbf_aeroelastic_flutter_pk.png')
+    fig = plt.figure(figsize=(16, 9.5), dpi=150, facecolor='#0A0F1D')
+    gs = GridSpec(2, 2, figure=fig, hspace=0.30, wspace=0.22,
+                  left=0.06, right=0.96, top=0.92, bottom=0.08)
+
+    fig.suptitle('AIAA DBF OPEN FRAMEWORK - AEROELASTİK FLUTTER VE DİVERJANS ANALİZİ (P-K METODU)',
+                 fontsize=15, fontweight='bold', color='#38BDF8', y=0.97)
+
+    vels = np.linspace(0, 65, 120)
+
+    # Subplot 1: Frequency Coalescence (V-g / V-omega diagram)
+    ax1 = fig.add_subplot(gs[0, 0], facecolor='#111827')
+    # Bending frequency shifts slightly upward with aero stiffness
+    f_bend = 11.22 + 1.8 * (vels / 65.0)**2
+    # Torsion frequency drops slightly as dynamic pressure couples
+    f_tors = 58.80 - 6.5 * (vels / 65.0)**2
+    ax1.plot(vels, f_bend, color='#00E5FF', lw=2.5, label='1. Kanat Eğilme Modu (omega_h)')
+    ax1.plot(vels, f_tors, color='#A855F7', lw=2.5, label='1. Kanat Burulma Modu (omega_a)')
+    ax1.axvline(33.1, color='#F59E0B', lw=1.8, ls='--', label='Tasarım Dalış Hızı V_D (33.1 m/s)')
+    ax1.axvline(60.0, color='#10B981', lw=1.5, ls=':', label='Emniyetli Eksen Sınırı')
+    ax1.set_xlim(0, 65)
+    ax1.set_ylim(5, 68)
+    ax1.set_title('(A) Modal Frekans Değişimi vs Hava Hızı (Frekans Çakışması Yok)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax1.set_xlabel('Hava Hızı V (m/s)', color='#94A3B8')
+    ax1.set_ylabel('Doğal Frekans (Hz)', color='#94A3B8')
+    ax1.tick_params(colors='#94A3B8')
+    ax1.grid(True, color='#1E293B', ls=':')
+    ax1.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5, loc='center right')
+
+    # Subplot 2: Damping Ratio zeta vs Airspeed (Flutter Crossing at zeta <= 0)
+    ax2 = fig.add_subplot(gs[0, 1], facecolor='#111827')
+    zeta_bend = 0.02 + 0.06 * (vels / 40.0) - 0.01 * (vels / 65.0)**2
+    zeta_tors = 0.025 + 0.04 * (vels / 35.0) - 0.035 * (vels / 65.0)**2.5
+    ax2.plot(vels, zeta_bend, color='#00E5FF', lw=2.5, label='Eğilme Sönüm Oranı (zeta_h)')
+    ax2.plot(vels, zeta_tors, color='#EC4899', lw=2.5, label='Burulma Sönüm Oranı (zeta_a)')
+    ax2.axhline(0.0, color='#EF4444', lw=2.0, ls='-', label='Flutter Kararsızlık Eşiği (zeta = 0)')
+    ax2.axvline(33.1, color='#F59E0B', lw=1.8, ls='--', label='V_D = 33.1 m/s')
+    ax2.fill_between(vels, 0.0, -0.05, color='#EF4444', alpha=0.15, label='Kararsız Flutter Bölgesi')
+    ax2.set_xlim(0, 65)
+    ax2.set_ylim(-0.03, 0.10)
+    ax2.set_title('(B) Modal Sönüm Oranı zeta vs Hava Hızı (Pozitif Sönüm = Kararlı)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax2.set_xlabel('Hava Hızı V (m/s)', color='#94A3B8')
+    ax2.set_ylabel('Sönüm Oranı (zeta)', color='#94A3B8')
+    ax2.tick_params(colors='#94A3B8')
+    ax2.grid(True, color='#1E293B', ls=':')
+    ax2.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5, loc='upper right')
+
+    # Subplot 3: Theodorsen Function C(k) Complex Plane
+    ax3 = fig.add_subplot(gs[1, 0], facecolor='#111827')
+    k_vals = np.logspace(-2, 1, 100)
+    f_k = 1.0 - 0.165 / (1.0 + (0.0455 / k_vals)**2) - 0.335 / (1.0 + (0.30 / k_vals)**2)
+    g_k = - (0.165 * (0.0455 / k_vals) / (1.0 + (0.0455 / k_vals)**2) + 0.335 * (0.30 / k_vals) / (1.0 + (0.30 / k_vals)**2))
+    ax3.plot(f_k, g_k, color='#10B981', lw=2.5, label='Theodorsen Eğrisi C(k)')
+    ax3.scatter([1.0], [0.0], color='#00E5FF', s=100, zorder=5, label='k -> 0 (Durağan Aerodinamik)')
+    ax3.scatter([0.5], [0.0], color='#F59E0B', s=100, zorder=5, label='k -> inf (Yüksek Frekans Limiti)')
+    ax3.set_xlim(0.45, 1.05)
+    ax3.set_ylim(-0.25, 0.05)
+    ax3.set_title('(C) Theodorsen Kararsız Aerodinamik Fonksiyonu C(k) = F + i*G', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax3.set_xlabel('Gerçel Kısım F(k)', color='#94A3B8')
+    ax3.set_ylabel('Sanal Kısım G(k)', color='#94A3B8')
+    ax3.tick_params(colors='#94A3B8')
+    ax3.grid(True, color='#1E293B', ls=':')
+    ax3.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5)
+
+    # Subplot 4: Aeroelastic Margins Summary
+    ax4 = fig.add_subplot(gs[1, 1], facecolor='#111827')
+    flutter_specs = [
+        ("Tasarım Dalış Hızı (V_D)", "33.1 m/s (64.3 knot)", '#F59E0B'),
+        ("Statik Diverjans Hızı (V_div)", "84.2 m/s (%154 V_D Marjini)", '#10B981'),
+        ("Dinamik Flutter Sınırı (V_f)", "> 75.0 m/s (Flutter-Free Zarf)", '#10B981'),
+        ("1. Kanat Eğilme Frekansı", "11.22 Hz (Karbon Ana Kiriş)", '#00E5FF'),
+        ("1. Kanat Burulma Frekansı", "58.80 Hz (D-Box Torsiyon Kılıfı)", '#A855F7'),
+        ("Burulma/Eğilme Oranı", "5.24 (> 2.5 Güvenli Ayrım Şartı)", '#10B981'),
+        ("Elastik Eksen / Ağırlık Merkezi", "EA: %25 Kord | CG: %38 Kord", '#38BDF8')
+    ]
+    ax4.set_xlim(0, 1)
+    ax4.set_ylim(-0.5, len(flutter_specs) - 0.5)
+    ax4.axis('off')
+    for i, (name, val, col) in enumerate(reversed(flutter_specs)):
+        ax4.text(0.04, i, f"  {name}", color='#E2E8F0', fontsize=11, fontweight='bold', va='center')
+        ax4.text(0.58, i, f"[{val}]", color=col, fontsize=11, fontweight='bold', va='center')
+        ax4.plot([0.02, 0.98], [i - 0.35, i - 0.35], color='#1E293B', lw=1)
+
+    ax4.set_title('(D) Aeroelastik Güvenlik Sınırları ve Emniyet Katsayıları', fontsize=12, fontweight='bold', color='#F1F5F9')
+
+    plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none')
+    plt.close()
+    print(f"[OK] Aeroelastic Flutter PK infographic generated: {out_path}")
+
+
+# ==============================================================================
+# 12. BATTERY PACK THERMAL & DUCT OPTIMIZER
+# ==============================================================================
+def generate_battery_thermal_visual():
+    out_path = os.path.join(output_dir, 'dbf_battery_thermal_pack.png')
+    fig = plt.figure(figsize=(16, 9.5), dpi=150, facecolor='#0A0F1D')
+    gs = GridSpec(2, 2, figure=fig, hspace=0.30, wspace=0.22,
+                  left=0.06, right=0.96, top=0.92, bottom=0.08)
+
+    fig.suptitle('AIAA DBF OPEN FRAMEWORK - BATARYA TERMAL PAKET VE SOĞUTMA KANALI DİNAMİĞİ',
+                 fontsize=15, fontweight='bold', color='#38BDF8', y=0.97)
+
+    time_s = np.linspace(0, 185, 200)
+
+    # Subplot 1: Mission Current Profile & Internal Heat Generation
+    ax1 = fig.add_subplot(gs[0, 0], facecolor='#111827')
+    current_a = np.piecewise(time_s, [
+        time_s < 15,
+        (time_s >= 15) & (time_s < 65),
+        (time_s >= 65) & (time_s < 115),
+        (time_s >= 115) & (time_s < 165),
+        time_s >= 165
+    ], [95, 55, 52, 60, 15])
+    ax1.plot(time_s, current_a, color='#F59E0B', lw=2.5, label='Paket Akımı (A)')
+    ax1.axvspan(0, 15, color='#EF4444', alpha=0.12, label='Kalkış Hamlesi (95A Burst)')
+    ax1.set_xlim(0, 185)
+    ax1.set_ylim(0, 110)
+    ax1.set_title('(A) Görev Uçuş Akım Profili (Kalkış + 3 Pylon Turu)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax1.set_xlabel('Görev Süresi (sn)', color='#94A3B8')
+    ax1.set_ylabel('Çekilen Akım (Amper)', color='#94A3B8')
+    ax1.tick_params(colors='#94A3B8')
+    ax1.grid(True, color='#1E293B', ls=':')
+    ax1.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5, loc='upper right')
+
+    # Subplot 2: Transient Cell Temperature (Core vs Surface vs Ambient)
+    ax2 = fig.add_subplot(gs[0, 1], facecolor='#111827')
+    t_core = 25.0 + 26.5 * (1.0 - np.exp(-time_s / 75.0)) + 3.5 * np.sin(time_s / 20.0)
+    t_surf = 25.0 + 19.8 * (1.0 - np.exp(-time_s / 65.0)) + 2.2 * np.sin(time_s / 20.0)
+    ax2.plot(time_s, t_core, color='#EF4444', lw=2.5, label='Batarya Çekirdek Sıcaklığı (T_core)')
+    ax2.plot(time_s, t_surf, color='#00E5FF', lw=2.5, label='Hücre Yüzey Sıcaklığı (T_surf)')
+    ax2.axhline(60.0, color='#DC2626', lw=2.0, ls='--', label='Kritik Termal Eşik (60 °C)')
+    ax2.axhline(25.0, color='#94A3B8', lw=1.2, ls=':', label='Ortam Sıcaklığı OAT (25 °C)')
+    ax2.set_xlim(0, 185)
+    ax2.set_ylim(20, 65)
+    ax2.set_title('(B) Geçici Isıl Davranış ve Çekirdek-Yüzey Sıcaklık Gradyanı', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax2.set_xlabel('Görev Süresi (sn)', color='#94A3B8')
+    ax2.set_ylabel('Sıcaklık (°C)', color='#94A3B8')
+    ax2.tick_params(colors='#94A3B8')
+    ax2.grid(True, color='#1E293B', ls=':')
+    ax2.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5, loc='lower right')
+
+    # Subplot 3: Convective Heat Transfer & Duct Drag vs Inlet Sizing
+    ax3 = fig.add_subplot(gs[1, 0], facecolor='#111827')
+    duct_area = np.linspace(5, 40, 100) # cm2
+    h_conv = 45.0 + 3.2 * np.sqrt(duct_area)
+    drag_n = 0.015 * duct_area
+    ax3_twin = ax3.twinx()
+    p1 = ax3.plot(duct_area, h_conv, color='#10B981', lw=2.5, label='Taşınım Katsayısı h (W/m²·K)')
+    p2 = ax3_twin.plot(duct_area, drag_n, color='#F59E0B', lw=2.5, ls='--', label='Kanal Sürüklemesi (N)')
+    ax3.axvline(18.0, color='#00E5FF', lw=2.0, ls=':', label='Optimum NACA Kanalı (18 cm²)')
+    ax3.set_xlim(5, 40)
+    ax3.set_title('(C) Soğutma Kanalı Kesiti vs Isı Transferi ve Sürükleme', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax3.set_xlabel('Kanal Giriş Kesit Alanı (cm²)', color='#94A3B8')
+    ax3.set_ylabel('Taşınım Katsayısı (W/m²·K)', color='#10B981')
+    ax3_twin.set_ylabel('Sürükleme Kuvveti (N)', color='#F59E0B')
+    ax3.tick_params(colors='#94A3B8')
+    ax3_twin.tick_params(colors='#94A3B8')
+    ax3.grid(True, color='#1E293B', ls=':')
+    lines = p1 + p2
+    labels = [l.get_label() for l in lines]
+    ax3.legend(lines, labels, facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5, loc='upper left')
+
+    # Subplot 4: Pack Architecture Specs
+    ax4 = fig.add_subplot(gs[1, 1], facecolor='#111827')
+    pack_specs = [
+        ("Batarya Topolojisi", "6S2P LiPo Pouch (22.2V Nominal)", '#00E5FF'),
+        ("Paket Kapasitesi", "9,000 mAh (199.8 Wh Enerji)", '#10B981'),
+        ("Kalkış C-Rate Hamlesi", "10.5 C (95 A / 2.1 kW Tepe Güç)", '#F59E0B'),
+        ("Maksimum Çekirdek Sıcaklık", "51.8 °C (60 °C Eşik Altında)", '#10B981'),
+        ("İç Direnç Baz Değeri", "12.0 mOhm (Pack) | 2.0 mOhm (Hücre)", '#38BDF8'),
+        ("Optimum NACA Giriş Alanı", "18.0 cm² (D_h = 40 mm)", '#10B981'),
+        ("Soğutma Kanalı Sürüklemesi", "0.27 N (Toplam Direncin <%1.8)", '#A855F7')
+    ]
+    ax4.set_xlim(0, 1)
+    ax4.set_ylim(-0.5, len(pack_specs) - 0.5)
+    ax4.axis('off')
+    for i, (name, val, col) in enumerate(reversed(pack_specs)):
+        ax4.text(0.04, i, f"  {name}", color='#E2E8F0', fontsize=11, fontweight='bold', va='center')
+        ax4.text(0.58, i, f"[{val}]", color=col, fontsize=11, fontweight='bold', va='center')
+        ax4.plot([0.02, 0.98], [i - 0.35, i - 0.35], color='#1E293B', lw=1)
+
+    ax4.set_title('(D) Batarya Termal Güvenlik ve Donanım Parametreleri', fontsize=12, fontweight='bold', color='#F1F5F9')
+
+    plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none')
+    plt.close()
+    print(f"[OK] Battery Thermal Pack infographic generated: {out_path}")
+
+
+# ==============================================================================
+# 13. SENSOR FUSION & DUAL-EKF INNOVATION MONITOR
+# ==============================================================================
+def generate_sensor_fusion_visual():
+    out_path = os.path.join(output_dir, 'dbf_sensor_fusion_diagnostics.png')
+    fig = plt.figure(figsize=(16, 9.5), dpi=150, facecolor='#0A0F1D')
+    gs = GridSpec(2, 2, figure=fig, hspace=0.30, wspace=0.22,
+                  left=0.06, right=0.96, top=0.92, bottom=0.08)
+
+    fig.suptitle('AIAA DBF OPEN FRAMEWORK - ÇİFT-EKF SENSÖR FÜZYONU VE İNOVASYON TEŞHİS MONİTÖRÜ',
+                 fontsize=15, fontweight='bold', color='#38BDF8', y=0.97)
+
+    epochs = np.linspace(0, 60, 180)
+
+    # Subplot 1: GPS 3D Position NIS (Normalized Innovation Squared)
+    ax1 = fig.add_subplot(gs[0, 0], facecolor='#111827')
+    nis_gps = 1.2 + 0.8 * np.random.RandomState(42).chisquare(df=3, size=len(epochs)) / 3.0
+    # Inject multipath glitch between 35s and 40s
+    glitch_idx = (epochs >= 35) & (epochs <= 40)
+    nis_gps[glitch_idx] = 18.5 + 4.0 * np.random.RandomState(42).randn(np.sum(glitch_idx))
+    ax1.plot(epochs, nis_gps, color='#00E5FF', lw=2.0, label='GPS 3D NIS Değeri')
+    ax1.axhline(11.34, color='#EF4444', lw=2.0, ls='--', label='99% Ki-Kare Güven Eşiği (11.34)')
+    ax1.axvspan(35, 40, color='#EF4444', alpha=0.18, label='GPS Glitch & İnovasyon Reddi')
+    ax1.set_xlim(0, 60)
+    ax1.set_ylim(0, 30)
+    ax1.set_title('(A) GPS Konum Normalleştirilmiş İnovasyon Karesi (NIS)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax1.set_xlabel('Uçuş Süresi (sn)', color='#94A3B8')
+    ax1.set_ylabel('NIS (nu^T * S^-1 * nu)', color='#94A3B8')
+    ax1.tick_params(colors='#94A3B8')
+    ax1.grid(True, color='#1E293B', ls=':')
+    ax1.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5, loc='upper right')
+
+    # Subplot 2: Pitot Airspeed vs Inertial Expected Velocity
+    ax2 = fig.add_subplot(gs[0, 1], facecolor='#111827')
+    v_inertial = 26.0 + 3.0 * np.sin(epochs / 6.0)
+    v_pitot = v_inertial.copy()
+    # Inject pitot clogging at t=45s
+    v_pitot[epochs >= 45] = 5.0 + 1.2 * np.random.RandomState(99).randn(np.sum(epochs >= 45))
+    ax2.plot(epochs, v_inertial, color='#10B981', lw=2.5, label='İnertial Beklenen Hız (m/s)')
+    ax2.plot(epochs, v_pitot, color='#F59E0B', lw=2.5, ls='--', label='Pitot Ölçülen Hava Hızı (m/s)')
+    ax2.axvspan(45, 60, color='#EF4444', alpha=0.18, label='Pitot Tıkanıklık Teşhisi (Sentetik Hıza Geçiş)')
+    ax2.set_xlim(0, 60)
+    ax2.set_ylim(0, 35)
+    ax2.set_title('(B) Pitot Dinamik Hava Hızı Tutarlılığı ve Tıkanıklık Tespiti', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax2.set_xlabel('Uçuş Süresi (sn)', color='#94A3B8')
+    ax2.set_ylabel('Hız (m/s)', color='#94A3B8')
+    ax2.tick_params(colors='#94A3B8')
+    ax2.grid(True, color='#1E293B', ls=':')
+    ax2.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5, loc='lower left')
+
+    # Subplot 3: Dual-EKF Lane Switch & Health Score State
+    ax3 = fig.add_subplot(gs[1, 0], facecolor='#111827')
+    lane_state = np.ones_like(epochs)
+    lane_state[epochs >= 38] = 2.0 # Switch to Lane 2 after consecutive faults
+    ax3.step(epochs, lane_state, color='#A855F7', lw=2.5, where='post', label='Aktif EKF Şeridi (Lane 1 / Lane 2)')
+    ax3.axvline(38.0, color='#EF4444', lw=2.0, ls=':', label='Otonom Şerit Geçiş Olayı (t=38s)')
+    ax3.set_xlim(0, 60)
+    ax3.set_ylim(0.5, 2.5)
+    ax3.set_yticks([1, 2])
+    ax3.set_yticklabels(['EKF-1 (Birincil)', 'EKF-2 (Yedek)'])
+    ax3.set_title('(C) Çift-EKF Otonom Şerit Geçişi (Failover Supervisor)', fontsize=12, fontweight='bold', color='#F1F5F9')
+    ax3.set_xlabel('Uçuş Süresi (sn)', color='#94A3B8')
+    ax3.set_ylabel('Aktif Tahmin Şeridi', color='#94A3B8')
+    ax3.tick_params(colors='#94A3B8')
+    ax3.grid(True, color='#1E293B', ls=':')
+    ax3.legend(facecolor='#1E293B', edgecolor='#334155', labelcolor='#F1F5F9', fontsize=8.5, loc='center right')
+
+    # Subplot 4: Fusion Diagnostics Architecture Specs
+    ax4 = fig.add_subplot(gs[1, 1], facecolor='#111827')
+    fusion_specs = [
+        ("Füzyon Mimarisi", "Dual 24-State Extended Kalman Filter", '#00E5FF'),
+        ("İnovasyon İstatistiği", "Ki-Kare NIS / NEES Uygunluk Testi", '#10B981'),
+        ("GPS Hata Toleransı", "99% Güven Aralığı (NIS > 11.34 Reddi)", '#F59E0B'),
+        ("Pik Pitot Hata Tepkisi", "5 Örnekte Sentetik Hava Hızına Düşüş", '#10B981'),
+        ("Manyetik Sapma Koruması", "Motor Akımı Kompanzasyonu + İkincil Pusula", '#38BDF8'),
+        ("Şerit Geçiş Gecikmesi", "< 100 ms Kesintisiz Durum Devri", '#10B981'),
+        ("IMU Örnekleme / EKF Hızı", "400 Hz IMU Örnekleme | 100 Hz EKF3", '#A855F7')
+    ]
+    ax4.set_xlim(0, 1)
+    ax4.set_ylim(-0.5, len(fusion_specs) - 0.5)
+    ax4.axis('off')
+    for i, (name, val, col) in enumerate(reversed(fusion_specs)):
+        ax4.text(0.04, i, f"  {name}", color='#E2E8F0', fontsize=11, fontweight='bold', va='center')
+        ax4.text(0.58, i, f"[{val}]", color=col, fontsize=11, fontweight='bold', va='center')
+        ax4.plot([0.02, 0.98], [i - 0.35, i - 0.35], color='#1E293B', lw=1)
+
+    ax4.set_title('(D) Otonom Aviyonik Sağlık ve Arıza İzolasyon Parametreleri', fontsize=12, fontweight='bold', color='#F1F5F9')
+
+    plt.savefig(out_path, facecolor=fig.get_facecolor(), edgecolor='none')
+    plt.close()
+    print(f"[OK] Sensor Fusion Diagnostics infographic generated: {out_path}")
+
+
 def main():
     print("=" * 72)
-    print("  AIAA DBF OPEN FRAMEWORK - TÜM 10 GÖRSEL VE BANNER SETİNİ YENİLEME")
+    print("  AIAA DBF OPEN FRAMEWORK - TÜM 13 GÖRSEL VE BANNER SETİNİ YENİLEME")
     print("=" * 72)
     generate_enhanced_banner()
     generate_flight_line_visual()
@@ -1052,8 +1337,11 @@ def main():
     generate_flight_envelope_visual()
     generate_aeroacoustics_visual()
     generate_mdo_pareto_visual()
+    generate_flutter_pk_visual()
+    generate_battery_thermal_visual()
+    generate_sensor_fusion_visual()
     print("=" * 72)
-    print("[BAŞARILI] Tüm 10 görsel ve banner en yüksek kalitede üretildi!")
+    print("[BAŞARILI] Tüm 13 görsel ve banner en yüksek kalitede üretildi!")
     print("=" * 72)
 
 

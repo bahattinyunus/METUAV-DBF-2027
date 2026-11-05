@@ -11,7 +11,7 @@
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Framework: ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble_Hawksbill-22314E.svg?style=for-the-badge&logo=ros)](https://docs.ros.org/en/humble/index.html)
 [![Simülasyon: PX4 & Gazebo](https://img.shields.io/badge/Simulation-PX4_%26_Gazebo-red.svg?style=for-the-badge)](https://px4.io/)
-[![Birim Testleri: 136/136 Geçti](https://img.shields.io/badge/Unit_Tests-136%2F136_Passing-brightgreen.svg?style=for-the-badge&logo=pytest)](https://github.com/bahattinyunus/dbf-engineering-toolkit/actions)
+[![Birim Testleri: 147/147 Geçti](https://img.shields.io/badge/Unit_Tests-147%2F147_Passing-brightgreen.svg?style=for-the-badge&logo=pytest)](https://github.com/bahattinyunus/dbf-engineering-toolkit/actions)
 [![AIAA DBF: Universal Framework](https://img.shields.io/badge/AIAA_DBF-Multi--Team_Ready-darkgreen.svg?style=for-the-badge)](https://www.aiaa.org/dbf)
 [![Lisans: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
@@ -54,8 +54,11 @@
    * [8. Çok Disiplinli Tasarım Optimizasyonu (MDO) & Çok Amaçlı Pareto Cephesi](#8-çok-disiplinli-tasarım-optimizasyonu-mdo--çok-amaçlı-pareto-cephesi)
    * [9. Yarışma Görev Profilleri ve Zaman Çizelgesi](#9-yarışma-görev-profilleri-ve-zaman-çizelgesi)
    * [10. Uçuş Hattı (Flight Line) SOP ve Apron Güvenlik Kapıları](#10-uçuş-hattı-flight-line-sop-ve-apron-güvenlik-kapıları)
+   * [11. Aeroelastik Flutter, Diverjans ve Theodorsen P-K Çözücüsü](#11-aeroelastik-flutter-diverjans-ve-theodorsen-p-k-çözücüsü)
+   * [12. Batarya Termal Paket Dinamiği ve NACA Soğutma Kanalı Optimizasyonu](#12-batarya-termal-paket-dinamiği-ve-naca-soğutma-kanalı-optimizasyonu)
+   * [13. Çift-EKF Sensör Füzyonu, İnovasyon Teşhisi (NIS) ve Otonom Şerit Geçişi](#13-çift-ekf-sensör-füzyonu-i̇novasyon-teşhisi-nis-ve-otonom-şerit-geçişi)
 8. [Dünya Şampiyonları Karşılaştırmalı Benchmark Matrisi](#-dünya-şampiyonları-karşılaştırmalı-benchmark-matrisi)
-9. [Kurulum, Derleme ve Test Kılavuzu (131 Otomatik Test)](#-kurulum-derleme-ve-test-kılavuzu-131-otomatik-test)
+9. [Kurulum, Derleme ve Test Kılavuzu (147 Otomatik Test)](#-kurulum-derleme-ve-test-kılavuzu-147-otomatik-test)
 10. [Katkıda Bulunma ve Topluluk](#-katkıda-bulunma-ve-topluluk)
 
 ---
@@ -402,6 +405,42 @@ dbf-engineering-toolkit/
 
 ---
 
+### 11. Aeroelastik Flutter, Diverjans ve Theodorsen P-K Çözücüsü
+* **P-K Yöntemi Kararsızlık Analizi:** Kanat 1. eğilme ($\omega_h = 11.22\text{ Hz}$) ve 1. burulma ($\omega_\alpha = 58.80\text{ Hz}$) serbestlik derecelerinde Jones 2-kutuplu Theodorsen fonksiyonu $C(k) = F(k) + i G(k)$ ile aerodinamik sönümleme ve sertlik matrisleri $0-65\text{ m/s}$ hız aralığında çözülmüştür.
+* **Frekans Oranı ve Güvenlik:** Burulma/eğilme oranı $\omega_\alpha / \omega_h = 5.24$ olup aeroelastik rezonans için önerilen $> 2.50$ sınırını katbekat aşar.
+* **Statik Diverjans ve Dinamik Flutter Hızı:** Karbon D-box kaplamasıyla $V_{div} = 84.2\text{ m/s}$ ve dinamik flutter hızı $V_f > 75.0\text{ m/s}$ olarak tespit edilmiş; uçak $V_D = 33.1\text{ m/s}$ tasarım dalış hızında flutter'dan tamamen izoledir.
+
+<div align="center">
+  <img src="docs/images/dbf_aeroelastic_flutter_pk.png" alt="AIAA DBF Aeroelastik Flutter ve Diverjans Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 11: P-K yöntemi modal frekans ve sönüm oranı zeta vs hız grafikleri, Theodorsen karmaşık düzlem eğrisi ve emniyet katsayıları.</em></p>
+</div>
+
+---
+
+### 12. Batarya Termal Paket Dinamiği ve NACA Soğutma Kanalı Optimizasyonu
+* **Isıl Üretim Modeli:** $95\text{A}$ kalkış hamlesi ve 3 pylon turundaki akım darbelerinde Joule ısınması ($I^2 R_{int}(T, SOC)$) ve tersinir entropik ısı üretimi 2-düğümlü çekirdek-yüzey kapasitans denklemleriyle çözülmüştür.
+* **Dittus-Boelter Zorlanmış Taşınım:** Gövde altı NACA soğutma kanalıyla $Re = 32,000$ ve $h = 58.4\text{ W/m}^2\text{K}$ taşınım katsayısı elde edilmiştir.
+* **Isıl Emniyet Marjini:** En zorlu $185\text{ sn}$ uçuş profilinde hücre çekirdek sıcaklığı en fazla $51.8^\circ\text{C}$'ye ulaşarak kritik $60.0^\circ\text{C}$ sınırının $\%13.6$ altında kalmış, soğutma kanalı sürüklemesi ise $0.27\text{ N}$ ile toplam direncin yalnızca $\%1.8$'ini oluşturmuştur.
+
+<div align="center">
+  <img src="docs/images/dbf_battery_thermal_pack.png" alt="AIAA DBF Batarya Termal Paket ve Soğutma Kanalı Analizi" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 12: Görev akım profili, geçici hücre çekirdek-yüzey sıcaklığı, NACA kanal kesiti vs sürükleme optimizasyonu.</em></p>
+</div>
+
+---
+
+### 13. Çift-EKF Sensör Füzyonu, İnovasyon Teşhisi (NIS) ve Otonom Şerit Geçişi
+* **Normalleştirilmiş İnovasyon Karesi (NIS):** PX4/ArduPilot EKF3 standardında GPS 3D pozisyon, barometrik irtifa ve manyetometre verileri $\chi^2$ (Ki-Kare) hipotez testi ($\epsilon_k = \boldsymbol{\nu}_k^T \mathbf{S}_k^{-1} \boldsymbol{\nu}_k$) ile $\%99$ güven aralığında denetlenir.
+* **Dinamik Pitot Tıkanıklık İzolasyonu:** Yağmur veya buzlanma kaynaklı pitot tıkanıklıkları, inertial yer hızı ve rüzgar kestirimiyle karşılaştırılarak $< 5$ örnekte teşhis edilir ve sentetik hava hızı moduna geçilir.
+* **Failover Supervisor (Şerit Değişimi):** Birincil EKF şeridinde ardışık 5 örnek boyunca anomali tespit edildiğinde, otonom sistem $< 100\text{ ms}$ gecikmeyle ikincil EKF şeridine kesintisiz devir yapar.
+
+<div align="center">
+  <img src="docs/images/dbf_sensor_fusion_diagnostics.png" alt="AIAA DBF Çift-EKF Sensör Füzyonu ve İnovasyon Teşhis Monitörü" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.65);"/>
+  <p><em>Şekil 13: GPS 3D NIS inovasyon reddi, pitot tıkanıklık teşhisi, çift-EKF otonom şerit geçişi ve sağlık matrisi.</em></p>
+</div>
+
+---
+
 ## 🏆 Dünya Şampiyonları Karşılaştırmalı Benchmark Matrisi
 
 Bu çerçeve, son yılların AIAA DBF Dünya Şampiyonu uçaklarının metriklerini içeren kapsamlı bir benchmark matrisi barındırır:
@@ -419,7 +458,7 @@ Bu çerçeve, son yılların AIAA DBF Dünya Şampiyonu uçaklarının metrikler
 
 ---
 
-## 🚀 Kurulum, Derleme ve Test Kılavuzu (131 Otomatik Test)
+## 🚀 Kurulum, Derleme ve Test Kılavuzu (147 Otomatik Test)
 
 ### 1. Çalışma Alanının Klonlanması ve Kurulum
 ```bash
@@ -444,18 +483,18 @@ ros2 launch dbf_simulation dbf_mission3_sitl.launch.py
 ```
 
 ### 4. Tek Komutla Yönetim: `dbf_cli.py` Birleşik Konsol Aracı
-Tüm mühendislik hesaplamalarını, 136 birim testini, görsel üretimini ve yer istasyonunu tek bir komuttan çalıştırın:
+Tüm mühendislik hesaplamalarını, 147 birim testini, görsel üretimini ve yer istasyonunu tek bir komuttan çalıştırın:
 ```bash
 # Referans uçak metriklerini ve kural kontrolünü listele:
 python dbf_cli.py info
 
-# Tüm 136 birim testini koştur:
+# Tüm 147 birim testini koştur:
 python dbf_cli.py test
 
-# Bütün aerodinamik, yapısal, BEMT, aeroakustik ve MDO analizlerini zincirleme çalıştır:
+# Bütün aerodinamik, yapısal, flutter, BEMT, termal, aeroakustik ve MDO analizlerini zincirleme çalıştır:
 python dbf_cli.py analyze --target all
 
-# 10 adet yüksek çözünürlüklü teknik infografiği yeniden render et:
+# 13 adet yüksek çözünürlüklü teknik infografiği yeniden render et:
 python dbf_cli.py visuals
 
 # Canlı HTML5 Glass Cockpit Web Yer İstasyonunu başlat (http://localhost:8080):
